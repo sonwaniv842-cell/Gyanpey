@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GyanPay Quiz Platform</title>
+    <title>GyanPay - Admin Panel</title>
     <style>
         :root {
             --primary: #4f46e5;
             --success: #10b981;
-            --warning: #f59e0b;
             --danger: #ef4444;
+            --warning: #f59e0b;
             --bg: #0f172a;
             --card-bg: #1e293b;
             --text: #f8fafc;
@@ -17,232 +17,173 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; }
         
-        header { width: 100%; max-width: 600px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 10px; background: var(--card-bg); border-radius: 10px; }
+        header { width: 100%; max-width: 900px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px; background: var(--card-bg); border-radius: 10px; }
         h1 { font-size: 1.5rem; color: #38bdf8; }
-        .admin-btn { background: var(--danger); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; text-decoration: none; font-size: 0.9rem; }
+        .home-btn { background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; text-decoration: none; font-size: 0.9rem; }
 
-        .container { width: 100%; max-width: 600px; background: var(--card-bg); padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-bottom: 20px; }
+        .container { width: 100%; max-width: 900px; background: var(--card-bg); padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-bottom: 20px; }
         .hidden { display: none !important; }
 
-        input, select { width: 100%; padding: 12px; margin: 10px 0; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 6px; font-size: 1rem; }
+        input, textarea, select { width: 100%; padding: 10px; margin: 8px 0; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 6px; font-size: 0.95rem; }
         button.primary-btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
         button.primary-btn:hover { opacity: 0.9; }
 
-        .status-box { padding: 15px; border-radius: 8px; text-align: center; margin: 15px 0; font-weight: bold; }
-        .status-pending { background: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid var(--warning); }
-        .status-approved { background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
-
-        .timer-display { font-size: 2rem; font-weight: bold; color: #34d399; text-align: center; margin: 15px 0; }
-        .question-card { margin-top: 15px; }
-        .option-btn { display: block; width: 100%; padding: 10px; margin: 8px 0; background: #334155; color: white; border: none; border-radius: 5px; text-align: left; cursor: pointer; }
-        .option-btn:hover { background: #475569; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #334155; padding: 10px; text-align: left; font-size: 0.9rem; }
+        th { background: #0f172a; color: #38bdf8; }
+        
+        .approve-btn { background: var(--success); color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .reject-btn { background: var(--danger); color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-left: 5px; }
+        .screenshot-thumb { width: 50px; height: 50px; object-fit: cover; cursor: pointer; border-radius: 4px; border: 1px solid #38bdf8; }
+        
+        .section-title { font-size: 1.2rem; color: #38bdf8; margin-bottom: 10px; border-bottom: 1px solid #334155; padding-bottom: 5px; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>GyanPay</h1>
-        <a href="admin.html" class="admin-btn">Admin Portal</a>
+        <h1>GyanPay Admin Control</h1>
+        <a href="index.html" class="home-btn">User Home</a>
     </header>
 
-    <!-- 1. Authentication Section (Register / Login) -->
-    <div id="auth-section" class="container">
-        <h2>खाता बनाएँ या लॉगिन करें</h2>
-        <div id="reg-form">
-            <input type="text" id="username" placeholder="पूरा नाम दर्ज करें">
-            <input type="text" id="phone" placeholder="मोबाइल नंबर दर्ज करें">
-            <button class="primary-btn" onclick="handleAuth()">रजिस्टर / लॉगिन करें</button>
-        </div>
+    <!-- Admin Login Section -->
+    <div id="admin-login-container" class="container">
+        <h2>एडमिन लॉगिन</h2>
+        <input type="password" id="admin-pass" placeholder="एडमिन पिन/पासवर्ड दर्ज करें (डिफ़ॉल्ट: admin123)">
+        <button class="primary-btn" onclick="loginAdmin()">लॉगिन करें</button>
     </div>
 
-    <!-- 2. Dashboard & Entry Fee Section -->
-    <div id="dashboard-section" class="container hidden">
-        <h2>स्वागत है, <span id="user-display-name"></span>!</h2>
-        <div id="fee-panel" style="margin-top: 20px;">
-            <p>क्विज़ में भाग लेने और एंट्री पाने के लिए कृपया <b>₹20</b> का भुगतान नीचे दिए गए QR पर करें और स्क्रीनशॉट अपलोड करें:</p>
-            <div style="background: #0f172a; padding: 15px; text-align: center; margin: 10px 0; border-radius: 6px;">
-                <p style="color: #38bdf8; font-size: 1.1rem; margin-bottom: 5px;">UPI ID: <b>gyanpay@upi</b></p>
-                <p style="font-size: 0.85rem; color: #94a3b8;">(या स्कैनर पर पेमेंट करें)</p>
+    <!-- Admin Dashboard Section -->
+    <div id="admin-dashboard" class="container hidden">
+        
+        <!-- Quiz Control Panel (10 Questions & Timer Settings) -->
+        <div style="margin-bottom: 30px;">
+            <div class="section-title">⏱️ क्विज़ और टाइमर सेटिंग्स (10 सवाल प्रति क्विज़)</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div>
+                    <label>प्रत्येक सवाल का टाइमर (सेकंड में):</label>
+                    <input type="number" id="quiz-timer-limit" value="10">
+                </div>
+                <div>
+                    <label>क्विज़ लाइव शुरू होने का समय (मिनट बाद):</label>
+                    <input type="number" id="quiz-start-delay" value="5">
+                </div>
             </div>
-            <label>पेमेंट का स्क्रीनशॉट अपलोड करें:</label>
-            <input type="file" id="payment-screenshot" accept="image/*">
-            <button class="primary-btn" onclick="submitPayment()">पेमेंट प्रूफ सबमिट करें</button>
+            <button class="primary-btn" onclick="saveQuizSettings()">क्विज़ सेटिंग्स सेव करें</button>
         </div>
 
-        <div id="status-container"></div>
-    </div>
+        <!-- User Approvals & Screenshots Table -->
+        <div style="margin-bottom: 30px;">
+            <div class="section-title">👥 यूज़र अप्रूवल और पेमेंट स्क्रीनशॉट वेरिफिकेशन</div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>नाम</th>
+                            <th>मोबाइल</th>
+                            <th>पेमेंट स्क्रीनशॉट</th>
+                            <th>स्टेटस</th>
+                            <th>स्कोर / टियर</th>
+                            <th>कार्रवाई</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-body">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-    <!-- 3. Quiz Section -->
-    <div id="quiz-section" class="container hidden">
-        <h2>GyanPay लाइव क्विज़</h2>
-        <div class="timer-display" id="time-left">10</div>
-        <div id="quiz-content" class="question-card"></div>
+        <!-- Security / Password Change -->
+        <div>
+            <div class="section-title">🔒 एडमिन सुरक्षा सेटिंग्स</div>
+            <input type="password" id="new-admin-pass" placeholder="नया एडमिन पासवर्ड/पिन दर्ज करें">
+            <button class="primary-btn" style="background: var(--warning); color: #000;" onclick="updatePassword()">एडमिन पिन बदलें</button>
+        </div>
     </div>
 
     <script>
-        let currentUser = JSON.parse(localStorage.getItem('gyan_current_user')) || null;
+        function loginAdmin() {
+            let pass = document.getElementById('admin-pass').value;
+            let savedPass = localStorage.getItem('gyan_admin_pass') || 'admin123';
 
-        window.onload = function() {
-            checkUserState();
-        };
-
-        function handleAuth() {
-            let name = document.getElementById('username').value.trim();
-            let phone = document.getElementById('phone').value.trim();
-            if(!name || !phone) {
-                alert('कृपया नाम और मोबाइल नंबर दोनों भरें!');
-                return;
+            if(pass === savedPass) {
+                document.getElementById('admin-login-container').classList.add('hidden');
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                loadAdminData();
+            } else {
+                alert('गलत पासवर्ड! कृपया पुनः प्रयास करें।');
             }
+        }
 
+        function loadAdminData() {
             let users = JSON.parse(localStorage.getItem('gyan_users')) || [];
-            let user = users.find(u => u.phone === phone);
+            let tbody = document.getElementById('user-table-body');
+            tbody.innerHTML = '';
 
-            if(!user) {
-                user = { name, phone, status: 'Unpaid', screenshot: '', score: 0, tier: '' };
-                users.push(user);
-                localStorage.setItem('gyan_users', JSON.stringify(users));
-            }
-
-            localStorage.setItem('gyan_current_user', JSON.stringify(user));
-            currentUser = user;
-            checkUserState();
-        }
-
-        function checkUserState() {
-            if(!currentUser) {
-                document.getElementById('auth-section').classList.remove('hidden');
-                document.getElementById('dashboard-section').classList.add('hidden');
-                document.getElementById('quiz-section').classList.add('hidden');
+            if(users.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">कोई यूज़र रजिस्टर्ड नहीं है।</td></tr>`;
                 return;
             }
 
-            document.getElementById('auth-section').classList.add('hidden');
-            document.getElementById('dashboard-section').classList.remove('hidden');
-            document.getElementById('user-display-name').innerText = currentUser.name;
-
-            // Sync with latest storage data
-            let users = JSON.parse(localStorage.getItem('gyan_users')) || [];
-            currentUser = users.find(u => u.phone === currentUser.phone) || currentUser;
-
-            let statusContainer = document.getElementById('status-container');
-            let feePanel = document.getElementById('fee-panel');
-
-            if(currentUser.status === 'Unpaid') {
-                feePanel.classList.remove('hidden');
-                statusContainer.innerHTML = '';
-            } else if(currentUser.status === 'Pending') {
-                feePanel.classList.add('hidden');
-                statusContainer.innerHTML = `<div class="status-box status-pending">स्टेटस: पेंडिंग (एडमिन द्वारा सत्यापन का इंतज़ार है)</div>`;
-            } else if(currentUser.status === 'Approved') {
-                feePanel.classList.add('hidden');
-                statusContainer.innerHTML = `<div class="status-box status-approved">स्टेटस: अप्रूव्ड! क्विज़ शुरू होने जा रही है...</div>`;
-                setTimeout(startQuiz, 2000);
-            }
-        }
-
-        function submitPayment() {
-            let fileInput = document.getElementById('payment-screenshot');
-            if(fileInput.files.length === 0) {
-                alert('कृपया पेमेंट का स्क्रीनशॉट अपलोड करें!');
-                return;
-            }
-
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                let base64Image = e.target.result;
-                let users = JSON.parse(localStorage.getItem('gyan_users')) || [];
-                users = users.map(u => {
-                    if(u.phone === currentUser.phone) {
-                        u.status = 'Pending';
-                        u.screenshot = base64Image;
-                        currentUser = u;
-                    }
-                    return u;
-                });
-                localStorage.setItem('gyan_users', JSON.stringify(users));
-                localStorage.setItem('gyan_current_user', JSON.stringify(currentUser));
-                alert('स्क्रीनशॉट सफलतापूर्वक सबमिट हो गया है!');
-                checkUserState();
-            };
-            reader.readAsDataURL(fileInput.files[0]);
-        }
-
-        // Quiz Engine with 10 seconds timer
-        let currentQIndex = 0;
-        let score = 0;
-        let timer;
-        const questions = [
-            { q: "भारत की राजधानी क्या है?", options: ["मुंबई", "दिल्ली", "कोलकाता", "चेन्नई"], ans: 1 },
-            { q: "राष्ट्रीय पक्षी कौन सा है?", options: ["मोर", "कबूतर", "तोता", "कोयल"], ans: 0 },
-            { q: "पृथ्वी के सबसे नज़दीकी ग्रह कौन सा है?", options: ["मंगल", "बुध", "शुक्र", "बृहस्पति"], ans: 2 },
-            { q: "भारत का राष्ट्रीय खेल क्या माना जाता है?", options: ["क्रिकेट", "हॉकी", "कबड्डी", "फुटबॉल"], ans: 1 },
-            { q: "कंप्यूटर का दिमाग किसे कहा जाता है?", options: ["RAM", "CPU", "Hard Disk", "Monitor"], ans: 1 },
-            { q: "भारत के प्रथम प्रधानमंत्री कौन थे?", options: ["महात्मा गांधी", "राजेंद्र प्रसाद", "जवाहरलाल नेहरू", "वल्लभभाई पटेल"], ans: 2 },
-            { q: "सौरमंडल में कुल कितने ग्रह हैं?", options: ["7", "8", "9", "10"], ans: 1 },
-            { q: "ताजमहल कहाँ स्थित है?", options: ["दिल्ली", "आगरा", "जयपुर", "लखनऊ"], ans: 1 },
-            { q: "क्रिकेट में एक ओवर में कितनी गेंदें होती हैं?", options: ["4", "5", "6", "8"], ans: 2 },
-            { q: "जल का रासायनिक सूत्र क्या है?", options: ["CO2", "H2O", "O2", "NaCl"], ans: 1 }
-        ];
-
-        function startQuiz() {
-            document.getElementById('dashboard-section').classList.add('hidden');
-            document.getElementById('quiz-section').classList.remove('hidden');
-            loadQuestion();
-        }
-
-        function loadQuestion() {
-            if(currentQIndex >= questions.length) {
-                endQuiz();
-                return;
-            }
-
-            let qData = questions[currentQIndex];
-            let contentHTML = `<h3>प्रश्न ${currentQIndex + 1}/10: ${qData.q}</h3>`;
-            qData.options.forEach((opt, idx) => {
-                contentHTML += `<button class="option-btn" onclick="selectAnswer(${idx})">${idx + 1}. ${opt}</button>`;
-            });
-            document.getElementById('quiz-content').innerHTML = contentHTML;
-
-            let timeLeft = 10;
-            document.getElementById('time-left').innerText = timeLeft;
-            clearInterval(timer);
-            timer = setInterval(() => {
-                timeLeft--;
-                document.getElementById('time-left').innerText = timeLeft;
-                if(timeLeft <= 0) {
-                    clearInterval(timer);
-                    currentQIndex++;
-                    loadQuestion();
+            users.forEach((user, index) => {
+                let screenshotHTML = user.screenshot ? `<img src="${user.screenshot}" class="screenshot-thumb" onclick="window.open('${user.screenshot}')" title="बड़ा देखने के लिए क्लिक करें">` : 'स्क्रीनशॉट नहीं';
+                let actionHTML = '';
+                
+                if(user.status === 'Pending') {
+                    actionHTML = `
+                        <button class="approve-btn" onclick="updateUserStatus(${index}, 'Approved')">Approve</button>
+                        <button class="reject-btn" onclick="updateUserStatus(${index}, 'Rejected')">Reject</button>
+                    `;
+                } else {
+                    actionHTML = `<b>${user.status}</b>`;
                 }
-            }, 1000);
-        }
 
-        function selectAnswer(selectedIdx) {
-            clearInterval(timer);
-            if(selectedIdx === questions[currentQIndex].ans) {
-                score++;
-            }
-            currentQIndex++;
-            loadQuestion();
-        }
-
-        function endQuiz() {
-            let tier = score >= 8 ? "VIP 1 (50% रिवार्ड)" : (score >= 5 ? "VIP 2 (20% रिवार्ड)" : "VIP 3 (10% रिवार्ड)");
-            let users = JSON.parse(localStorage.getItem('gyan_users')) || [];
-            users = users.map(u => {
-                if(u.phone === currentUser.phone) {
-                    u.score = score;
-                    u.tier = tier;
-                }
-                return u;
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${user.name}</td>
+                        <td>${user.phone}</td>
+                        <td>${screenshotHTML}</td>
+                        <td><b>${user.status}</b></td>
+                        <td>${user.score !== undefined ? user.score + '/10 (' + user.tier + ')' : 'खेला नहीं'}</td>
+                        <td>${actionHTML}</td>
+                    </tr>
+                `;
             });
+
+            // Load saved settings if any
+            let savedTimer = localStorage.getItem('gyan_timer_limit') || 10;
+            let savedDelay = localStorage.getItem('gyan_start_delay') || 5;
+            document.getElementById('quiz-timer-limit').value = savedTimer;
+            document.getElementById('quiz-start-delay').value = savedDelay;
+        }
+
+        function updateUserStatus(index, newStatus) {
+            let users = JSON.parse(localStorage.getItem('gyan_users')) || [];
+            users[index].status = newStatus;
             localStorage.setItem('gyan_users', JSON.stringify(users));
+            alert(`यूज़र का स्टेटस '${newStatus}' कर दिया गया है!`);
+            loadAdminData();
+        }
 
-            document.getElementById('quiz-section').innerHTML = `
-                <h2>क्विज़ समाप्त! 🎉</h2>
-                <p style="font-size: 1.2rem; margin: 15px 0;">आपका स्कोर: <b>${score}/10</b></p>
-                <p style="font-size: 1.1rem; color: #38bdf8;">आवंटित टियर: <b>${tier}</b></p>
-            `;
+        function saveQuizSettings() {
+            let timerLimit = document.getElementById('quiz-timer-limit').value;
+            let startDelay = document.getElementById('quiz-start-delay').value;
+            
+            localStorage.setItem('gyan_timer_limit', timerLimit);
+            localStorage.setItem('gyan_start_delay', startDelay);
+            alert('क्विज़ टाइमर और सेटिंग्स सफलतापूर्वक सेव हो गई हैं!');
+        }
+
+        function updatePassword() {
+            let newPass = document.getElementById('new-admin-pass').value.trim();
+            if(!newPass) {
+                alert('कृपया नया पासवर्ड दर्ज करें!');
+                return;
+            }
+            localStorage.setItem('gyan_admin_pass', newPass);
+            alert('एडमिन पासवर्ड सफलतापूर्वक बदल दिया गया है!');
+            document.getElementById('new-admin-pass').value = '';
         }
     </script>
 </body>
