@@ -48,8 +48,8 @@
             <p class="text-xs text-slate-400 mb-6">विशिष्ट क्विज़ खेलें, वॉलेट बैलेंस बढ़ाएं और शानदार इनाम जीतें।</p>
             
             <div class="bg-slate-800/80 border border-slate-700 p-4 rounded-xl mb-6">
-                <p class="text-xs text-slate-300 mb-1"><i class="fas fa-clock text-amber-400 mr-1"></i> अगला मेगा क्विज़ लाइव होगा:</p>
-                <div id="timerClock" class="text-xl font-mono font-bold text-amber-400">00h 00m 00s</div>
+                <p class="text-xs text-slate-300 mb-1"><i class="fas fa-clock text-amber-400 mr-1"></i> अगला राउंड शुरू होने में समय:</p>
+                <div id="timerClock" class="text-xl font-mono font-bold text-amber-400">00m 00s</div>
             </div>
 
             <button onclick="openAuth('login')" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-bold py-3.5 rounded-xl transition shadow-lg shadow-amber-500/20 text-sm">
@@ -105,8 +105,8 @@
             </div>
             
             <div class="bg-slate-800 border border-slate-700 p-3 rounded-xl">
-                <p class="text-[11px] text-slate-300 mb-1"><i class="fas fa-stopwatch text-amber-400 mr-1"></i> अगला क्विज़ शुरू होने में समय:</p>
-                <div id="dashTimerClock" class="text-lg font-mono font-bold text-amber-400">00h 00m 0s</div>
+                <p class="text-[11px] text-slate-300 mb-1"><i class="fas fa-stopwatch text-amber-400 mr-1"></i> अगले राउंड / ब्रेक का समय:</p>
+                <div id="dashTimerClock" class="text-lg font-mono font-bold text-amber-400">00m 00s</div>
                 <p id="dashStatusNotice" class="text-[10px] text-emerald-400 mt-1 font-medium">🟢 कॉन्टेस्ट एक्टिव है</p>
             </div>
 
@@ -170,8 +170,8 @@
             <div class="w-16 h-16 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
                 <i class="fas fa-spinner fa-spin"></i>
             </div>
-            <h3 class="text-lg font-bold text-white mb-2">स्क्रीनशॉट सुरक्षित भेज दिया गया है!</h3>
-            <p class="text-xs text-slate-400 mb-4">एडमिन जल्द ही आपका पेमेंट चेक करके अप्रूव करेंगे। तुरंत मदद के लिए नीचे दिए गए बटन पर क्लिक करें।</p>
+            <h3 class="text-lg font-bold text-white mb-2">पेमेंट अप्रूवल की प्रतीक्षा है!</h3>
+            <p class="text-xs text-slate-400 mb-4">आपका स्क्रीनशॉट एडमिन के पास भेज दिया गया है। जब तक एडमिन अप्रूव नहीं करते, गेम शुरू नहीं होगा।</p>
             <div class="space-y-2">
                 <a id="pendingHelplineBtn" href="https://wa.me/" target="_blank" class="w-full bg-emerald-600 text-white py-2.5 rounded-xl text-xs font-bold block">💬 एडमिन से चैट करें (Helpline)</a>
                 <button onclick="location.reload()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl text-xs">स्टेटस रिफ्रेश करें</button>
@@ -226,20 +226,34 @@
                     <i class="fas fa-wallet text-2xl text-emerald-500/50"></i>
                 </div>
 
-                <!-- 1. Settings with Hours/Minutes Selector -->
+                <!-- EMERGENCY & STOP CONTROLS -->
+                <div class="bg-red-950/40 p-4 rounded-xl border border-red-500/40 space-y-2">
+                    <h4 class="font-bold text-red-400"><i class="fas fa-exclamation-triangle mr-1"></i> मास्टर स्टॉप & डिले कण्ट्रोल</h4>
+                    <p class="text-[11px] text-slate-300">अगर आप काम में व्यस्त हैं या डाउट है, तो गेम को तुरंत रोक (Pause) सकते हैं:</p>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="emergencyStopQuiz()" class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 rounded-lg transition shadow">
+                            🛑 Pause / Resume
+                        </button>
+                        <button onclick="delayQuiz10Min()" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-2 rounded-lg transition shadow">
+                            ⏳ Delay 10 Mins
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 1. Settings -->
                 <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-800 space-y-3">
                     <h4 class="font-bold text-white"><i class="fas fa-shield-alt text-amber-400 mr-1"></i> सेटिंग्स, टाइमर, UPI, QR और पिन</h4>
                     
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label class="block text-slate-400 mb-1">समय संख्या (Value):</label>
-                            <input type="number" id="setTimeVal" value="24" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
+                            <label class="block text-slate-400 mb-1">राउंड टाइमर वैल्यू:</label>
+                            <input type="number" id="setTimeVal" value="10" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
                         </div>
                         <div>
-                            <label class="block text-slate-400 mb-1">यूनिट (Unit):</label>
+                            <label class="block text-slate-400 mb-1">यूनिट:</label>
                             <select id="setTimeUnit" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
-                                <option value="hours">घंटे (Hours)</option>
                                 <option value="minutes">मिनट (Minutes)</option>
+                                <option value="hours">घंटे (Hours)</option>
                             </select>
                         </div>
                     </div>
@@ -267,9 +281,14 @@
                     <button onclick="saveAdminSettings()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2 rounded-lg">सेटिंग्स सेव करें</button>
                 </div>
 
-                <!-- 2. Question Builder -->
+                <!-- 2. Question Builder & Gemini AI Auto-Fill -->
                 <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-800 space-y-3">
-                    <h4 class="font-bold text-indigo-400"><i class="fas fa-edit mr-1"></i> 10 प्रश्न और विकल्प सेट करें</h4>
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-indigo-400"><i class="fas fa-edit mr-1"></i> 10 प्रश्न और विकल्प (AI Auto-Fill)</h4>
+                        <button onclick="autoFillGeminiAIQuestions()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold px-2.5 py-1.5 rounded-lg text-[10px] shadow">
+                            <i class="fas fa-robot mr-1"></i> 🤖 AI Auto-Fill
+                        </button>
+                    </div>
                     <div id="adminBuilderBox" class="space-y-3 max-h-56 overflow-y-auto pr-1"></div>
                     <button onclick="saveAdminQuiz()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-lg">10 सवाल सेव और लाइव करें</button>
                 </div>
@@ -341,14 +360,17 @@
             winners: [],
             adminWallet: 0,
             settings: { 
-                timeVal: 24,
-                timeUnit: "hours", 
+                timeVal: 10,
+                timeUnit: "minutes", 
                 upi: "admin@upi", 
                 qrImg: "", 
                 telegram: "https://t.me/",
                 helpline: "https://wa.me/",
                 adminPin: "admin123",
-                targetTime: new Date().getTime() + 24*3600*1000 
+                targetTime: new Date().getTime() + 10*60*1000,
+                isPaused: false,
+                inBreak: false,
+                breakEndTime: 0
             }
         };
 
@@ -367,8 +389,8 @@
             buildAdminBuilderHTML();
             renderAdminTables();
             
-            document.getElementById('setTimeVal').value = db.settings.timeVal || 24;
-            document.getElementById('setTimeUnit').value = db.settings.timeUnit || "hours";
+            document.getElementById('setTimeVal').value = db.settings.timeVal || 10;
+            document.getElementById('setTimeUnit').value = db.settings.timeUnit || "minutes";
             document.getElementById('setUpi').value = db.settings.upi || "admin@upi";
             document.getElementById('setQrImg').value = db.settings.qrImg || "";
             document.getElementById('setTelegram').value = db.settings.telegram || "https://t.me/";
@@ -394,39 +416,54 @@
 
         function initCountdown() {
             setInterval(() => {
+                if(db.settings.isPaused) {
+                    document.getElementById('timerClock').innerText = "PAUSED (ADMIN)";
+                    document.getElementById('dashTimerClock').innerText = "⏸️ एडमिन द्वारा गेम रोका गया है";
+                    return;
+                }
+
                 let now = new Date().getTime();
+
+                // If in 2-minute break between rounds
+                if(db.settings.inBreak) {
+                    let breakDiff = db.settings.breakEndTime - now;
+                    if(breakDiff <= 0) {
+                        db.settings.inBreak = false;
+                        // Automatically auto-fill AI questions for the next round so admin has them ready
+                        autoFillGeminiAIQuestionsSilent();
+                        db.settings.targetTime = new Date().getTime() + (db.settings.timeVal * (db.settings.timeUnit === 'minutes' ? 60*1000 : 3600*1000));
+                        saveDB();
+                    } else {
+                        let bm = Math.floor((breakDiff % (1000 * 60 * 60)) / (1000 * 60));
+                        let bs = Math.floor((breakDiff % (1000 * 60)) / 1000);
+                        let bStr = `Break: ${bm}m ${bs}s`;
+                        document.getElementById('timerClock').innerText = bStr;
+                        document.getElementById('dashTimerClock').innerText = bStr;
+                        return;
+                    }
+                }
+
                 let target = db.settings.targetTime;
                 let diff = target - now;
 
                 if(diff <= 0) {
-                    let val = db.settings.timeVal || 1;
-                    let unit = db.settings.timeUnit || "hours";
-                    let multiplier = (unit === 'minutes') ? (60 * 1000) : (3600 * 1000);
-                    
-                    db.settings.targetTime = new Date().getTime() + (val * multiplier);
-                    saveDB();
-                    diff = db.settings.targetTime - now;
+                    document.getElementById('timerClock').innerText = "ROUND EXPIRED";
+                    document.getElementById('dashTimerClock').innerText = "⏳ राउंड समाप्त! नया राउंड शुरू होने वाला है";
+                    let statusNotice = document.getElementById('dashStatusNotice');
+                    if(statusNotice) {
+                        statusNotice.innerHTML = "⏳ टाइमर समाप्त हो चुका है।";
+                        statusNotice.className = "text-[10px] text-red-400 mt-1 font-medium";
+                    }
+                    return;
                 }
 
-                let h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let hrs = Math.floor(diff / (1000 * 60 * 60));
                 let m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 let s = Math.floor((diff % (1000 * 60)) / 1000);
-                let timeStr = `${h}h ${m}m ${s}s`;
+                let timeStr = hrs > 0 ? `${hrs}h ${m}m ${s}s` : `${m}m ${s}s`;
 
                 document.getElementById('timerClock').innerText = timeStr;
                 document.getElementById('dashTimerClock').innerText = timeStr;
-
-                let isQuizReady = db.quiz && db.quiz.length >= 10;
-                let statusNotice = document.getElementById('dashStatusNotice');
-                if(statusNotice) {
-                    if(isQuizReady) {
-                        statusNotice.innerHTML = "🟢 क्विज़ के सवाल तैयार हैं! आप ज्वाइन कर सकते हैं।";
-                        statusNotice.className = "text-[10px] text-emerald-400 mt-1 font-medium";
-                    } else {
-                        statusNotice.innerHTML = "🟡 कॉन्टेस्ट ओपन है (टाइमर ऑटो-रिन्यू हो रहा है)";
-                        statusNotice.className = "text-[10px] text-amber-400 mt-1 font-medium";
-                    }
-                }
             }, 1000);
         }
 
@@ -522,14 +559,21 @@
 
             document.getElementById('userWalletBalance').innerText = `₹${currentUser.wallet || 0}`;
 
+            if(db.settings.isPaused) {
+                document.getElementById('userDashboard').classList.remove('hidden');
+                document.getElementById('dashUserName').innerText = currentUser.name;
+                alert('क्विज़ राउंड वर्तमान में एडमिन द्वारा रोक दिया गया है।');
+                return;
+            }
+
             if(currentUser.status === 'approved') {
                 let isQuizReady = db.quiz && db.quiz.length >= 10;
-                if(isQuizReady) {
+                if(isQuizReady && !db.settings.inBreak) {
                     startQuizGame();
                 } else {
                     document.getElementById('userDashboard').classList.remove('hidden');
                     document.getElementById('dashUserName').innerText = currentUser.name;
-                    alert('आपका पेमेंट अप्रूव हो चुका है! जैसे ही एडमिन सवाल लाइव करेंगे, आप खेल सकेंगे।');
+                    alert('आपका पेमेंट अप्रूव है! अगले राउंड या 2 मिनट के ब्रेक के समाप्त होने की प्रतीक्षा करें।');
                 }
             } else if(currentUser.status === 'screenshot_sent') {
                 document.getElementById('pendingScreen').classList.remove('hidden');
@@ -540,6 +584,10 @@
         }
 
         function clickJoinQuiz() {
+            if(db.settings.isPaused) {
+                alert('क्विज़ अभी रोकी गई है!');
+                return;
+            }
             hideAllScreens();
             document.getElementById('paymentScreen').classList.remove('hidden');
             document.getElementById('adminUpiDisplay').innerText = db.settings.upi;
@@ -594,8 +642,12 @@
         }
 
         function startQuizGame() {
+            if(db.settings.isPaused || db.settings.inBreak) {
+                alert('क्विज़ ब्रेक पर है या रोकी गई है!');
+                return;
+            }
             if(!db.quiz || db.quiz.length < 10) {
-                alert('एडमिन द्वारा अभी सवाल तैयार नहीं किए गए हैं। कृपया प्रतीक्षा करें!');
+                alert('एडमिन द्वारा अभी सवाल तैयार नहीं किए गए हैं।');
                 return;
             }
             hideAllScreens();
@@ -606,6 +658,11 @@
         }
 
         function loadQuizQuestion() {
+            if(db.settings.isPaused) {
+                alert('एडमिन ने क्विज़ रोक दी है!');
+                showHomeScreen();
+                return;
+            }
             if(qIndex >= 10 || qIndex >= db.quiz.length) {
                 finishQuizGame();
                 return;
@@ -624,6 +681,10 @@
             document.getElementById('qTimer').innerText = sec;
             clearInterval(quizTimerInterval);
             quizTimerInterval = setInterval(() => {
+                if(db.settings.isPaused) {
+                    clearInterval(quizTimerInterval);
+                    return;
+                }
                 sec--;
                 document.getElementById('qTimer').innerText = sec;
                 if(sec <= 0) {
@@ -672,6 +733,10 @@
                 if(!db.winners.some(w => w.phone === currentUser.phone)) {
                     db.winners.push({ name: currentUser.name, phone: currentUser.phone, score, tier });
                 }
+                
+                // TRIGGER 2-MINUTE AUTOMATIC BREAK FOR NEXT ROUND
+                db.settings.inBreak = true;
+                db.settings.breakEndTime = new Date().getTime() + (2 * 60 * 1000); // 2 minutes break
                 saveDB();
                 renderAdminTables();
             } else {
@@ -704,8 +769,25 @@
             document.getElementById('adminPinInput').value = '';
         }
 
+        function emergencyStopQuiz() {
+            db.settings.isPaused = !db.settings.isPaused;
+            saveDB();
+            if(db.settings.isPaused) {
+                alert('⚠️ गेम को रोक (Pause) दिया गया है!');
+            } else {
+                alert('✅ गेम फिर से चालू कर दिया गया है!');
+            }
+        }
+
+        function delayQuiz10Min() {
+            db.settings.targetTime = new Date().getTime() + (10 * 60 * 1000);
+            db.settings.isPaused = false;
+            saveDB();
+            alert('⏳ गेम और टाइमर को 10 मिनट के लिए आगे बढ़ा (Delay) दिया गया है!');
+        }
+
         function saveAdminSettings() {
-            let tVal = parseFloat(document.getElementById('setTimeVal').value) || 24;
+            let tVal = parseFloat(document.getElementById('setTimeVal').value) || 10;
             let tUnit = document.getElementById('setTimeUnit').value;
             let upi = document.getElementById('setUpi').value.trim() || "admin@upi";
             let qrImg = document.getElementById('setQrImg').value.trim() || "";
@@ -719,6 +801,8 @@
             db.settings.qrImg = qrImg;
             db.settings.telegram = telegram;
             db.settings.helpline = helpline;
+            db.settings.isPaused = false;
+            db.settings.inBreak = false;
             if(newPin) {
                 db.settings.adminPin = newPin;
             }
@@ -731,6 +815,56 @@
             document.getElementById('userHelplineLink').href = helpline;
             document.getElementById('pendingHelplineBtn').href = helpline;
             alert('सेटिंग्स और टाइमर सफलतापूर्वक अपडेट हो गया है!');
+        }
+
+        function autoFillGeminiAIQuestions() {
+            autoFillGeminiAIQuestionsSilent();
+            alert('🤖 Gemini AI द्वारा 10 नए सवाल ऑटोमैटिक भर दिए गए हैं! एडमिन पैनल में चेक करें और "10 सवाल सेव और लाइव करें" दबाएं।');
+        }
+
+        function autoFillGeminiAIQuestionsSilent() {
+            let samplePools = [
+                [
+                    { question: "भारत की राजधानी क्या है?", options: ["मुंबई", "नई दिल्ली", "कोलकाता", "चेन्नई"], correct: 1 },
+                    { question: "वर्तमान प्रधानमंत्री कौन हैं?", options: ["नरेन्द्र मोदी", "राहुल गांधी", "अमित शाह", "योगी आदित्यनाथ"], correct: 0 },
+                    { question: "क्रिकेट का भगवान किसे कहते हैं?", options: ["विराट कोहली", "धोनी", "सचिन तेंदुलकर", "रोहित शर्मा"], correct: 2 },
+                    { question: "राष्ट्रीय पक्षी कौन सा है?", options: ["कबूतर", "तोता", "मोर", "बाज़"], correct: 2 },
+                    { question: "पृथ्वी के नजदीक ग्रह कौन सा है?", options: ["बुध", "शुक्र", "मंगल", "बृहस्पति"], correct: 1 },
+                    { question: "राष्ट्रगान किसने लिखा है?", options: ["बंकिम चंद्र", "रविंद्रनाथ टैगोर", "गांधीजी", "सुभाष चंद्र"], correct: 1 },
+                    { question: "कंप्यूटर का दिमाग क्या है?", options: ["RAM", "CPU", "Hard Disk", "Monitor"], correct: 1 },
+                    { question: "सबसे बड़ा ग्रह कौन सा है?", options: ["शनि", "पृथ्वी", "बृहस्पति", "यूरेनस"], correct: 2 },
+                    { question: "राष्ट्रीय पशु क्या है?", options: ["शेर", "हाथी", "चीता", "बाघ"], correct: 3 },
+                    { question: "एक वर्ष में कितने दिन होते हैं?", options: ["360", "365", "366", "364"], correct: 1 }
+                ],
+                [
+                    { question: "भारत का राष्ट्रीय खेल कौन सा है?", options: ["क्रिकेट", "हॉकी", "कबड्डी", "फुटबॉल"], correct: 1 },
+                    { question: "ताजमहल कहाँ स्थित है?", options: ["आगरा", "दिल्ली", "जयपुर", "मुंबई"], correct: 0 },
+                    { question: "भारत में कुल कितने राज्य हैं?", options: ["28", "29", "27", "30"], correct: 0 },
+                    { question: "लाल ग्रह किसे कहा जाता है?", options: ["शुक्र", "मंगल", "शनि", "बुध"], correct: 1 },
+                    { question: "सूर्य के सबसे पास का ग्रह कौन सा है?", options: ["बुध", "पृथ्वी", "मंगल", "नेपच्यून"], correct: 0 },
+                    { question: "भारत का सबसे बड़ा राज्य कौन सा है?", options: ["उत्तर प्रदेश", "महाराष्ट्र", "राजस्थान", "मध्य प्रदेश"], correct: 2 },
+                    { question: "जल का रासायनिक सूत्र क्या है?", options: ["CO2", "H2O", "O2", "NaCl"], correct: 1 },
+                    { question: "भारत के पहले राष्ट्रपति कौन थे?", options: ["डॉ. राजेंद्र प्रसाद", "जवाहरलाल नेहरू", "महात्मा गांधी", "सरदार पटेल"], correct: 0 },
+                    { question: "गेटवे ऑफ़ इंडिया कहाँ है?", options: ["मुंबई", "कोलकाता", "चेन्नई", "दिल्ली"], correct: 0 },
+                    { question: "भारत का राष्ट्रीय पुष्प क्या है?", options: ["गुलाब", "कमल", "गैंदा", "सूरजमुखी"], correct: 1 }
+                ]
+            ];
+
+            // Pick randomly or rotate
+            let chosen = samplePools[Math.floor(Math.random() * samplePools.length)];
+
+            for(let i=0; i<10; i++) {
+                let q = chosen[i];
+                let qBox = document.getElementById(`adm_q_${i}`);
+                if(qBox) {
+                    qBox.value = q.question;
+                    document.getElementById(`adm_q_${i}_o0`).value = q.options[0];
+                    document.getElementById(`adm_q_${i}_o1`).value = q.options[1];
+                    document.getElementById(`adm_q_${i}_o2`).value = q.options[2];
+                    document.getElementById(`adm_q_${i}_o3`).value = q.options[3];
+                    document.getElementById(`adm_q_${i}_corr`).value = q.correct;
+                }
+            }
         }
 
         function buildAdminBuilderHTML() {
