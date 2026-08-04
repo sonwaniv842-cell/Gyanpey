@@ -129,12 +129,12 @@
                 </div>
             </div>
 
-            <!-- Telegram Channel & Direct Helpline Chat Buttons -->
+            <!-- Telegram & Helpline Buttons -->
             <div class="space-y-2">
                 <a id="userTelegramLink" href="https://t.me/" target="_blank" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center transition text-xs shadow-lg shadow-sky-600/30">
                     <i class="fab fa-telegram-plane mr-2 text-sm"></i> Join Official Telegram Channel
                 </a>
-                <a id="userHelplineLink" href="https://wa.me/?text=Hello%20Admin,%20I%20have%20paid%20for%20GyanPay%20Quiz.%20Please%20help%20me%20with%20game/refund/withdrawal." target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center transition text-xs shadow-lg shadow-emerald-600/30">
+                <a id="userHelplineLink" href="https://wa.me/" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center transition text-xs shadow-lg shadow-emerald-600/30">
                     <i class="fab fa-whatsapp mr-2 text-sm"></i> 💬 Helpline Chat (Direct Admin Support)
                 </a>
             </div>
@@ -144,7 +144,7 @@
             </button>
         </div>
 
-        <!-- PAYMENT & ENTRY FEE SCREEN -->
+        <!-- PAYMENT SCREEN -->
         <div id="paymentScreen" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl text-center">
             <h3 class="text-base font-bold text-white mb-2"><i class="fas fa-wallet text-amber-400 mr-1"></i> Entry Fee & Payment</h3>
             <p class="text-xs text-slate-400 mb-4">क्विज़ में भाग लेने के लिए ₹20 का भुगतान करें और स्क्रीनशॉट भेजें:</p>
@@ -171,9 +171,9 @@
                 <i class="fas fa-spinner fa-spin"></i>
             </div>
             <h3 class="text-lg font-bold text-white mb-2">स्क्रीनशॉट सुरक्षित भेज दिया गया है!</h3>
-            <p class="text-xs text-slate-400 mb-4">एडमिन जल्द ही आपका पेमेंट चेक करके अप्रूव करेंगे। अगर तुरंत खेलना हो या रिफंड चाहिए, तो नीचे दिए गए <b>Helpline Chat</b> पर क्लिक करके सीधे एडमिन से बात कर सकते हैं।</p>
+            <p class="text-xs text-slate-400 mb-4">एडमिन जल्द ही आपका पेमेंट चेक करके अप्रूव करेंगे। तुरंत मदद के लिए नीचे दिए गए बटन पर क्लिक करें।</p>
             <div class="space-y-2">
-                <a href="https://wa.me/?text=Hello%20Admin,%20I%20submitted%20my%20payment%20screenshot%20for%20GyanPay.%20Please%20approve%20or%20help!" target="_blank" class="w-full bg-emerald-600 text-white py-2.5 rounded-xl text-xs font-bold block">💬 एडमिन से चैट करें (WhatsApp Helpline)</a>
+                <a id="pendingHelplineBtn" href="https://wa.me/" target="_blank" class="w-full bg-emerald-600 text-white py-2.5 rounded-xl text-xs font-bold block">💬 एडमिन से चैट करें (Helpline)</a>
                 <button onclick="location.reload()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl text-xs">स्टेटस रिफ्रेश करें</button>
             </div>
         </div>
@@ -226,13 +226,24 @@
                     <i class="fas fa-wallet text-2xl text-emerald-500/50"></i>
                 </div>
 
-                <!-- 1. Settings -->
+                <!-- 1. Settings with Hours/Minutes Selector -->
                 <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-800 space-y-3">
-                    <h4 class="font-bold text-white"><i class="fas fa-shield-alt text-amber-400 mr-1"></i> सेटिंग्स, UPI, QR, हेल्पलाइन और पिन</h4>
-                    <div>
-                        <label class="block text-slate-400 mb-1">क्विज़ लाइव होने का समय (घंटे बाद):</label>
-                        <input type="number" id="setHours" value="24" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
+                    <h4 class="font-bold text-white"><i class="fas fa-shield-alt text-amber-400 mr-1"></i> सेटिंग्स, टाइमर, UPI, QR और पिन</h4>
+                    
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-slate-400 mb-1">समय संख्या (Value):</label>
+                            <input type="number" id="setTimeVal" value="24" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">यूनिट (Unit):</label>
+                            <select id="setTimeUnit" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
+                                <option value="hours">घंटे (Hours)</option>
+                                <option value="minutes">मिनट (Minutes)</option>
+                            </select>
+                        </div>
                     </div>
+
                     <div>
                         <label class="block text-slate-400 mb-1">एडमिन UPI ID:</label>
                         <input type="text" id="setUpi" value="admin@upi" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
@@ -330,7 +341,8 @@
             winners: [],
             adminWallet: 0,
             settings: { 
-                hours: 24, 
+                timeVal: 24,
+                timeUnit: "hours", 
                 upi: "admin@upi", 
                 qrImg: "", 
                 telegram: "https://t.me/",
@@ -354,7 +366,9 @@
             initCountdown();
             buildAdminBuilderHTML();
             renderAdminTables();
-            document.getElementById('setHours').value = db.settings.hours || 24;
+            
+            document.getElementById('setTimeVal').value = db.settings.timeVal || 24;
+            document.getElementById('setTimeUnit').value = db.settings.timeUnit || "hours";
             document.getElementById('setUpi').value = db.settings.upi || "admin@upi";
             document.getElementById('setQrImg').value = db.settings.qrImg || "";
             document.getElementById('setTelegram').value = db.settings.telegram || "https://t.me/";
@@ -367,6 +381,7 @@
             }
             if(db.settings.helpline) {
                 document.getElementById('userHelplineLink').href = db.settings.helpline;
+                document.getElementById('pendingHelplineBtn').href = db.settings.helpline;
             }
 
             if(currentUser) {
@@ -384,8 +399,11 @@
                 let diff = target - now;
 
                 if(diff <= 0) {
-                    let loopHours = db.settings.hours || 1;
-                    db.settings.targetTime = new Date().getTime() + (loopHours * 3600 * 1000);
+                    let val = db.settings.timeVal || 1;
+                    let unit = db.settings.timeUnit || "hours";
+                    let multiplier = (unit === 'minutes') ? (60 * 1000) : (3600 * 1000);
+                    
+                    db.settings.targetTime = new Date().getTime() + (val * multiplier);
                     saveDB();
                     diff = db.settings.targetTime - now;
                 }
@@ -538,7 +556,6 @@
             checkUserDashboardFlow();
         }
 
-        // Compressed Image Reader for smooth submission without lagging
         function sendPaymentProof() {
             let fileInput = document.getElementById('payScreenshot');
             if(fileInput.files.length === 0) {
@@ -568,7 +585,7 @@
                         db.users[idx].status = 'screenshot_sent';
                         saveDB();
                         currentUser = db.users[idx];
-                        alert('स्क्रीनशॉट सफलतापूर्वक सबमिट हो गया है! एडमिन जल्द जाँच करेंगे।');
+                        alert('स्क्रीनशॉट सफलतापूर्वक सबमिट हो गया है!');
                         checkUserDashboardFlow();
                         renderAdminTables();
                     }
@@ -688,14 +705,16 @@
         }
 
         function saveAdminSettings() {
-            let hrs = parseFloat(document.getElementById('setHours').value) || 24;
+            let tVal = parseFloat(document.getElementById('setTimeVal').value) || 24;
+            let tUnit = document.getElementById('setTimeUnit').value;
             let upi = document.getElementById('setUpi').value.trim() || "admin@upi";
             let qrImg = document.getElementById('setQrImg').value.trim() || "";
             let telegram = document.getElementById('setTelegram').value.trim() || "https://t.me/";
             let helpline = document.getElementById('setHelpline').value.trim() || "https://wa.me/";
             let newPin = document.getElementById('setAdminPin').value.trim();
             
-            db.settings.hours = hrs;
+            db.settings.timeVal = tVal;
+            db.settings.timeUnit = tUnit;
             db.settings.upi = upi;
             db.settings.qrImg = qrImg;
             db.settings.telegram = telegram;
@@ -703,12 +722,15 @@
             if(newPin) {
                 db.settings.adminPin = newPin;
             }
-            db.settings.targetTime = new Date().getTime() + (hrs * 3600 * 1000);
+
+            let multiplier = (tUnit === 'minutes') ? (60 * 1000) : (3600 * 1000);
+            db.settings.targetTime = new Date().getTime() + (tVal * multiplier);
             saveDB();
 
             document.getElementById('userTelegramLink').href = telegram;
             document.getElementById('userHelplineLink').href = helpline;
-            alert('सेटिंग्स सफलतापूर्वक अपडेट हो गई है!');
+            document.getElementById('pendingHelplineBtn').href = helpline;
+            alert('सेटिंग्स और टाइमर सफलतापूर्वक अपडेट हो गया है!');
         }
 
         function buildAdminBuilderHTML() {
@@ -823,7 +845,7 @@
 
         function approveUser(idx) {
             db.users[idx].status = 'approved';
-            db.adminWallet = (db.adminWallet || 0) + 20; // 20 rs entry fee added to admin wallet
+            db.adminWallet = (db.adminWallet || 0) + 20;
             saveDB();
             renderAdminTables();
             document.getElementById('adminWalletDisplay').innerText = `₹${db.adminWallet}`;
@@ -835,7 +857,7 @@
             db.users[idx].screenshot = '';
             saveDB();
             renderAdminTables();
-            alert('यूज़र का पेमेंट रिजेक्ट कर दिया गया है। (आप चाहें तो हेल्पलाइन चैट के जरिए उनका रिफंड प्रोसेस कर सकते हैं)');
+            alert('यूज़र का पेमेंट रिजेक्ट कर दिया गया है।');
         }
     </script>
 </body>
