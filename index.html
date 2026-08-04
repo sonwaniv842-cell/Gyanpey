@@ -70,7 +70,7 @@
             border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
-            cursor: pointer;
+-           cursor: pointer;
             transition: background 0.3s;
         }
         .btn:hover {
@@ -87,10 +87,17 @@
     <div class="container">
         <h1>GyanPay</h1>
         <p>Secure & Fast Transaction</p>
+        
+        <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input type="tel" id="mobile" placeholder="Enter your mobile number" maxlength="10">
+        </div>
+
         <div class="form-group">
             <label for="upi-pin">UPI PIN</label>
             <input type="password" id="upi-pin" placeholder="Enter your UPI PIN" maxlength="6">
         </div>
+
         <button class="btn">Proceed</button>
         <div class="footer-text">Protected by 256-bit Encryption</div>
     </div>
