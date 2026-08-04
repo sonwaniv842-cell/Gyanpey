@@ -27,7 +27,7 @@
         <div id="headerAuthButtons" class="flex space-x-2">
             <button onclick="openAuth('login')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-lg border border-amber-500/30 font-medium">Login</button>
             <button onclick="openAuth('register')" class="text-xs bg-amber-500 hover:bg-amber-400 text-slate-950 px-3 py-1.5 rounded-lg font-bold">Register</button>
-            <button onclick="toggleAdminModal()" class="text-xs bg-red-600 hover:bg-red-500 text-white px-3 py-1.5 rounded-lg font-medium shadow-lg shadow-red-600/30">Admin Portal</button>
+            <button onclick="toggleAdminModal()" class="text-xs bg-red-600 hover:bg-red-500 text-white px-3 py-1.5 rounded-lg font-medium shadow-lg shadow-red-600/30">Admin</button>
         </div>
         <div id="headerUserLogout" class="hidden flex items-center space-x-2">
             <span id="topUserName" class="text-xs text-amber-400 font-bold"></span>
@@ -39,13 +39,13 @@
     <!-- Main Container -->
     <main class="w-full max-w-md my-auto py-4">
 
-        <!-- HOME SCREEN (Before Login) -->
+        <!-- HOME SCREEN -->
         <div id="homeScreen" class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl text-center backdrop-blur-md">
             <div class="w-16 h-16 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
                 <i class="fas fa-trophy"></i>
             </div>
             <h2 class="text-2xl font-bold text-white mb-2">Play Quiz & Win Real Rewards</h2>
-            <p class="text-xs text-slate-400 mb-6">विशिष्ट क्विज़ खेलें, अपनी ज्ञान क्षमता बढ़ाएं और शानदार इनाम जीतें।</p>
+            <p class="text-xs text-slate-400 mb-6">विशिष्ट क्विज़ खेलें, वॉलेट बैलेंस बढ़ाएं और शानदार इनाम जीतें।</p>
             
             <div class="bg-slate-800/80 border border-slate-700 p-4 rounded-xl mb-6">
                 <p class="text-xs text-slate-300 mb-1"><i class="fas fa-clock text-amber-400 mr-1"></i> अगला मेगा क्विज़ लाइव होगा:</p>
@@ -57,7 +57,7 @@
             </button>
         </div>
 
-        <!-- AUTH SCREEN (Login / Register) -->
+        <!-- AUTH SCREEN -->
         <div id="authScreen" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl">
             <div class="flex justify-between items-center mb-4">
                 <h3 id="authHeading" class="text-lg font-bold text-white">खाता बनाएँ</h3>
@@ -84,65 +84,70 @@
         </div>
 
         <!-- USER DASHBOARD -->
-        <div id="userDashboard" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl text-center space-y-4">
-            <div class="w-14 h-14 bg-gradient-to-tr from-amber-500 to-orange-500 text-slate-950 rounded-full flex items-center justify-center mx-auto text-2xl shadow-lg">
+        <div id="userDashboard" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl text-center space-y-3.5">
+            <!-- Wallet Balance Card -->
+            <div class="bg-gradient-to-r from-slate-800 to-slate-900 border border-slate-700 p-3 rounded-xl flex justify-between items-center shadow">
+                <div class="text-left">
+                    <p class="text-[10px] text-slate-400">मेरा वॉलेट बैलेंस (Winning / Refund)</p>
+                    <p id="userWalletBalance" class="text-lg font-bold text-emerald-400">₹0</p>
+                </div>
+                <button onclick="clickJoinQuiz()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-2 rounded-lg text-xs shadow">
+                    <i class="fas fa-wallet mr-1"></i> एंट्री फीस / ऐड करें
+                </button>
+            </div>
+
+            <div class="w-12 h-12 bg-gradient-to-tr from-amber-500 to-orange-500 text-slate-950 rounded-full flex items-center justify-center mx-auto text-xl shadow-lg">
                 <i class="fas fa-gamepad"></i>
             </div>
             <div>
-                <h3 class="text-lg font-bold text-white mb-1">स्वागत है, <span id="dashUserName" class="text-amber-400"></span>!</h3>
-                <p class="text-[11px] text-slate-400">मेगा क्विज़ कॉन्टेस्ट लाइव है। अपनी एंट्री सुनिश्चित करें।</p>
+                <h3 class="text-base font-bold text-white mb-0.5">स्वागत है, <span id="dashUserName" class="text-amber-400"></span>!</h3>
+                <p class="text-[11px] text-slate-400">मेगा क्विज़ कॉन्टेस्ट लाइव है।</p>
             </div>
             
             <div class="bg-slate-800 border border-slate-700 p-3 rounded-xl">
                 <p class="text-[11px] text-slate-300 mb-1"><i class="fas fa-stopwatch text-amber-400 mr-1"></i> अगला क्विज़ शुरू होने में समय:</p>
-                <div id="dashTimerClock" class="text-xl font-mono font-bold text-amber-400">00h 00m 00s</div>
+                <div id="dashTimerClock" class="text-lg font-mono font-bold text-amber-400">00h 00m 0s</div>
                 <p id="dashStatusNotice" class="text-[10px] text-emerald-400 mt-1 font-medium">🟢 कॉन्टेस्ट एक्टिव है</p>
             </div>
 
-            <!-- PRO & ATTRACTIVE REWARDS & LEVEL INCOME BANNER (Designed by AI) -->
-            <div class="reward-banner bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-amber-600/20 border border-amber-500/50 p-3.5 rounded-xl text-left space-y-2.5 shadow-lg">
+            <!-- REWARDS BANNER -->
+            <div class="reward-banner bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-amber-600/20 border border-amber-500/50 p-3 rounded-xl text-left space-y-2 shadow-lg">
                 <div class="flex items-center space-x-2 text-amber-400 font-bold text-xs">
                     <i class="fas fa-crown text-sm"></i>
                     <span>मेगा क्लब रिवॉर्ड्स & लेवल इनकम बोनान्ज़ा 🚀</span>
                 </div>
-                <p class="text-[11px] text-slate-300 leading-relaxed">
-                    लेवल-बाय-लेवल (Level 1, Level 2...) टीम बनाएं और छोटे से लेकर बड़े शानदार इनाम जीतें:
-                </p>
-                <div class="space-y-1.5 text-[11px] font-semibold text-white">
-                    <div class="flex items-center justify-between bg-slate-900/60 px-2.5 py-1.5 rounded-lg border border-slate-700">
-                        <span>🎁 50 एक्टिव यूज़र टीम:</span>
-                        <span class="text-cyan-400 font-bold">₹500 कैश / स्मार्टवॉच</span>
+                <div class="space-y-1 text-[10px] font-semibold text-white">
+                    <div class="flex justify-between bg-slate-900/60 px-2 py-1 rounded border border-slate-700">
+                        <span>🎁 50 एक्टिव यूज़र:</span> <span class="text-cyan-400">स्मार्टवॉच</span>
                     </div>
-                    <div class="flex items-center justify-between bg-slate-900/60 px-2.5 py-1.5 rounded-lg border border-slate-700">
-                        <span>📱 200 एक्टिव यूज़र टीम:</span>
-                        <span class="text-amber-400 font-bold">5G स्मार्टफोन (Mobile)</span>
+                    <div class="flex justify-between bg-slate-900/60 px-2 py-1 rounded border border-slate-700">
+                        <span>📱 200 एक्टिव यूज़र:</span> <span class="text-amber-400">5G स्मार्टफोन</span>
                     </div>
-                    <div class="flex items-center justify-between bg-slate-900/60 px-2.5 py-1.5 rounded-lg border border-slate-700">
-                        <span>💻 500 एक्टिव यूज़र टीम:</span>
-                        <span class="text-emerald-400 font-bold">लैपटॉप (Laptop)</span>
-                    </div>
-                    <div class="flex items-center justify-between bg-slate-900/60 px-2.5 py-1.5 rounded-lg border border-slate-700">
-                        <span>🏍️ 1000 एक्टिव यूज़र टीम:</span>
-                        <span class="text-orange-400 font-bold">स्पोर्ट्स बाइक (Bike)</span>
+                    <div class="flex justify-between bg-slate-900/60 px-2 py-1 rounded border border-slate-700">
+                        <span>🏍️ 1000 एक्टिव यूज़र:</span> <span class="text-orange-400">स्पोर्ट्स बाइक</span>
                     </div>
                 </div>
-                <p class="text-[10px] text-amber-300 text-center italic mt-1">✨ जितनी लंबी चेन (Level 2, Level 3...), उतनी तगड़ी पैसिव इनकम और इनाम!</p>
             </div>
 
-            <!-- Telegram Channel Join Button -->
-            <a id="userTelegramLink" href="https://t.me/" target="_blank" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center transition text-xs shadow-lg shadow-sky-600/30">
-                <i class="fab fa-telegram-plane mr-2 text-sm"></i> Join Official Telegram Channel
-            </a>
+            <!-- Telegram Channel & Direct Helpline Chat Buttons -->
+            <div class="space-y-2">
+                <a id="userTelegramLink" href="https://t.me/" target="_blank" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center transition text-xs shadow-lg shadow-sky-600/30">
+                    <i class="fab fa-telegram-plane mr-2 text-sm"></i> Join Official Telegram Channel
+                </a>
+                <a id="userHelplineLink" href="https://wa.me/?text=Hello%20Admin,%20I%20have%20paid%20for%20GyanPay%20Quiz.%20Please%20help%20me%20with%20game/refund/withdrawal." target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center transition text-xs shadow-lg shadow-emerald-600/30">
+                    <i class="fab fa-whatsapp mr-2 text-sm"></i> 💬 Helpline Chat (Direct Admin Support)
+                </a>
+            </div>
 
-            <button onclick="clickJoinQuiz()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-bold py-3.5 rounded-xl transition shadow-lg shadow-amber-500/20 text-sm">
+            <button onclick="clickJoinQuiz()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg text-xs">
                 <i class="fas fa-play-circle mr-1"></i> Join Quiz (₹20 Entry Fee)
             </button>
         </div>
 
         <!-- PAYMENT & ENTRY FEE SCREEN -->
         <div id="paymentScreen" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl text-center">
-            <h3 class="text-base font-bold text-white mb-2"><i class="fas fa-wallet text-amber-400 mr-1"></i> Entry Fee Payment Info</h3>
-            <p class="text-xs text-slate-400 mb-4">क्विज़ में भाग लेने के लिए ₹20 एंट्री फीस का भुगतान करें:</p>
+            <h3 class="text-base font-bold text-white mb-2"><i class="fas fa-wallet text-amber-400 mr-1"></i> Entry Fee & Payment</h3>
+            <p class="text-xs text-slate-400 mb-4">क्विज़ में भाग लेने के लिए ₹20 का भुगतान करें और स्क्रीनशॉट भेजें:</p>
             
             <div class="bg-slate-800 p-4 rounded-xl mb-4 border border-slate-700 inline-block w-full">
                 <p class="text-xs text-slate-300 mb-2">स्कैन करके ₹20 भेजें:</p>
@@ -152,26 +157,25 @@
                 <p id="adminUpiDisplay" class="text-xs text-emerald-400 font-mono font-bold">admin@upi</p>
             </div>
 
-            <div class="bg-amber-500/10 border border-amber-500/30 p-3 rounded-xl mb-4 text-left">
-                <p class="text-[11px] text-amber-300"><i class="fas fa-info-circle mr-1"></i> <b>नियम:</b> भुगतान के बाद स्क्रीनशॉट अपलोड करें। टेलीग्राम चैनल से जुड़े रहें ताकि मैच से पहले आपको नोटिफिकेशन मिल सके। हेल्पलाइन: <span class="font-bold">9876543210</span></p>
-            </div>
-
             <div class="space-y-3 text-left">
                 <label class="block text-xs font-medium text-slate-300">पेमेंट का स्क्रीनशॉट अपलोड करें:</label>
                 <input type="file" id="payScreenshot" accept="image/*" class="w-full text-xs text-slate-400 file:mr-2 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950">
-                <button onclick="sendPaymentProof()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition text-xs shadow-lg shadow-emerald-600/30">स्क्रीनशॉट एडमिन को भेजें</button>
+                <button onclick="sendPaymentProof()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition text-xs shadow-lg">स्क्रीनशॉट एडमिन को सबमिट करें</button>
             </div>
             <button onclick="backToDashboard()" class="mt-3 text-xs text-slate-400 hover:text-white"><i class="fas fa-arrow-left mr-1"></i> वापस डैशबोर्ड पर जाएं</button>
         </div>
 
-        <!-- WAITING / PENDING APPROVAL SCREEN -->
+        <!-- PENDING SCREEN -->
         <div id="pendingScreen" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl text-center">
             <div class="w-16 h-16 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
                 <i class="fas fa-spinner fa-spin"></i>
             </div>
-            <h3 class="text-lg font-bold text-white mb-2">स्क्रीनशॉट प्राप्त हुआ!</h3>
-            <p class="text-xs text-slate-400 mb-4">एडमिन आपके पेमेंट स्क्रीनशॉट की जाँच कर रहे हैं। टेलीग्राम चैनल पर एक्टिव रहें ताकि गेम शुरू होने की सूचना तुरंत मिल सके।</p>
-            <button onclick="location.reload()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl text-xs">स्टेटस रिफ्रेश करें</button>
+            <h3 class="text-lg font-bold text-white mb-2">स्क्रीनशॉट सुरक्षित भेज दिया गया है!</h3>
+            <p class="text-xs text-slate-400 mb-4">एडमिन जल्द ही आपका पेमेंट चेक करके अप्रूव करेंगे। अगर तुरंत खेलना हो या रिफंड चाहिए, तो नीचे दिए गए <b>Helpline Chat</b> पर क्लिक करके सीधे एडमिन से बात कर सकते हैं।</p>
+            <div class="space-y-2">
+                <a href="https://wa.me/?text=Hello%20Admin,%20I%20submitted%20my%20payment%20screenshot%20for%20GyanPay.%20Please%20approve%20or%20help!" target="_blank" class="w-full bg-emerald-600 text-white py-2.5 rounded-xl text-xs font-bold block">💬 एडमिन से चैट करें (WhatsApp Helpline)</a>
+                <button onclick="location.reload()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl text-xs">स्टेटस रिफ्रेश करें</button>
+            </div>
         </div>
 
         <!-- QUIZ INTERFACE -->
@@ -213,9 +217,18 @@
                     <button onclick="logoutAdmin()" class="bg-red-500/20 text-red-400 px-2.5 py-1 rounded-lg">लॉग आउट</button>
                 </div>
 
-                <!-- 1. Settings & Telegram Link -->
+                <!-- Admin Earnings Wallet Display -->
+                <div class="bg-gradient-to-r from-emerald-900/40 to-slate-800 p-4 rounded-xl border border-emerald-500/30 flex justify-between items-center">
+                    <div>
+                        <p class="text-[11px] text-slate-300">एडमिन कमाई वॉलेट (Platform Revenue)</p>
+                        <p id="adminWalletDisplay" class="text-xl font-bold text-emerald-400">₹0</p>
+                    </div>
+                    <i class="fas fa-wallet text-2xl text-emerald-500/50"></i>
+                </div>
+
+                <!-- 1. Settings -->
                 <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-800 space-y-3">
-                    <h4 class="font-bold text-white"><i class="fas fa-shield-alt text-amber-400 mr-1"></i> सेटिंग्स, UPI, QR, टेलीग्राम और पिन</h4>
+                    <h4 class="font-bold text-white"><i class="fas fa-shield-alt text-amber-400 mr-1"></i> सेटिंग्स, UPI, QR, हेल्पलाइन और पिन</h4>
                     <div>
                         <label class="block text-slate-400 mb-1">क्विज़ लाइव होने का समय (घंटे बाद):</label>
                         <input type="number" id="setHours" value="24" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
@@ -233,6 +246,10 @@
                         <input type="text" id="setTelegram" placeholder="https://t.me/your_channel" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
                     </div>
                     <div>
+                        <label class="block text-slate-400 mb-1">हेल्पलाइन WhatsApp नंबर / लिंक:</label>
+                        <input type="text" id="setHelpline" placeholder="https://wa.me/919876543210" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
+                    </div>
+                    <div>
                         <label class="block text-slate-400 mb-1">नया एडमिन पिन (Admin PIN):</label>
                         <input type="text" id="setAdminPin" placeholder="नया पिन दर्ज करें" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
                     </div>
@@ -248,7 +265,7 @@
 
                 <!-- 3. User Approvals -->
                 <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-800 space-y-3">
-                    <h4 class="font-bold text-cyan-400"><i class="fas fa-users mr-1"></i> यूज़र पेमेंट वेरिफिकेशन</h4>
+                    <h4 class="font-bold text-cyan-400"><i class="fas fa-users mr-1"></i> यूज़र पेमेंट वेरिफिकेशन & रिफंड</h4>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left">
                             <thead>
@@ -267,7 +284,7 @@
 
                 <!-- 4. Winners -->
                 <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-800 space-y-3">
-                    <h4 class="font-bold text-amber-400"><i class="fas fa-trophy mr-1"></i> विनर्स लिस्ट (VIP 1, VIP 2, VIP 3)</h4>
+                    <h4 class="font-bold text-amber-400"><i class="fas fa-trophy mr-1"></i> विनर्स लिस्ट</h4>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left">
                             <thead>
@@ -311,11 +328,13 @@
             users: [],
             quiz: [],
             winners: [],
+            adminWallet: 0,
             settings: { 
                 hours: 24, 
                 upi: "admin@upi", 
                 qrImg: "", 
                 telegram: "https://t.me/",
+                helpline: "https://wa.me/",
                 adminPin: "admin123",
                 targetTime: new Date().getTime() + 24*3600*1000 
             }
@@ -339,10 +358,15 @@
             document.getElementById('setUpi').value = db.settings.upi || "admin@upi";
             document.getElementById('setQrImg').value = db.settings.qrImg || "";
             document.getElementById('setTelegram').value = db.settings.telegram || "https://t.me/";
+            document.getElementById('setHelpline').value = db.settings.helpline || "https://wa.me/";
             document.getElementById('setAdminPin').value = db.settings.adminPin || "admin123";
+            document.getElementById('adminWalletDisplay').innerText = `₹${db.adminWallet || 0}`;
 
             if(db.settings.telegram) {
                 document.getElementById('userTelegramLink').href = db.settings.telegram;
+            }
+            if(db.settings.helpline) {
+                document.getElementById('userHelplineLink').href = db.settings.helpline;
             }
 
             if(currentUser) {
@@ -455,12 +479,12 @@
                     alert('यह मोबाइल नंबर पहले से रजिस्टर्ड है! कृपया लॉगिन करें।');
                     return;
                 }
-                let newUser = { name, phone, pass, status: 'registered', screenshot: '' };
+                let newUser = { name, phone, pass, status: 'registered', screenshot: '', wallet: 0 };
                 db.users.push(newUser);
                 saveDB();
                 currentUser = newUser;
                 sessionStorage.setItem('gyanpay_curr_user', JSON.stringify(currentUser));
-                alert('रजिस्ट्रेशन सफल रहा! अब आप लॉगिन हो गए हैं।');
+                alert('रजिस्ट्रेशन सफल रहा!');
                 renderUserNavigationState();
                 checkUserDashboardFlow();
             }
@@ -477,6 +501,8 @@
             hideAllScreens();
             let u = db.users.find(x => x.phone === currentUser.phone) || currentUser;
             currentUser = u;
+
+            document.getElementById('userWalletBalance').innerText = `₹${currentUser.wallet || 0}`;
 
             if(currentUser.status === 'approved') {
                 let isQuizReady = db.quiz && db.quiz.length >= 10;
@@ -512,6 +538,7 @@
             checkUserDashboardFlow();
         }
 
+        // Compressed Image Reader for smooth submission without lagging
         function sendPaymentProof() {
             let fileInput = document.getElementById('payScreenshot');
             if(fileInput.files.length === 0) {
@@ -519,22 +546,36 @@
                 return;
             }
             
+            let file = fileInput.files[0];
             let reader = new FileReader();
-            reader.readAsDataURL(fileInput.files[0]);
-            reader.onload = function () {
-                let idx = db.users.findIndex(x => x.phone === currentUser.phone);
-                if(idx !== -1) {
-                    db.users[idx].screenshot = reader.result;
-                    db.users[idx].status = 'screenshot_sent';
-                    saveDB();
-                    alert('स्क्रीनशॉट सफलतापूर्वक एडमिन को भेज दिया गया है!');
-                    checkUserDashboardFlow();
-                    renderAdminTables();
+            reader.readAsDataURL(file);
+            reader.onload = function (e) {
+                let img = new Image();
+                img.src = e.target.result;
+                img.onload = function () {
+                    let canvas = document.createElement('canvas');
+                    let ctx = canvas.getContext('2d');
+                    let width = 300;
+                    let height = (img.height * width) / img.width;
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+                    let compressedDataUrl = canvas.toDataURL('image/jpeg', 0.6);
+
+                    let idx = db.users.findIndex(x => x.phone === currentUser.phone);
+                    if(idx !== -1) {
+                        db.users[idx].screenshot = compressedDataUrl;
+                        db.users[idx].status = 'screenshot_sent';
+                        saveDB();
+                        currentUser = db.users[idx];
+                        alert('स्क्रीनशॉट सफलतापूर्वक सबमिट हो गया है! एडमिन जल्द जाँच करेंगे।');
+                        checkUserDashboardFlow();
+                        renderAdminTables();
+                    }
                 }
             };
         }
 
-        // QUIZ LOGIC
         function startQuizGame() {
             if(!db.quiz || db.quiz.length < 10) {
                 alert('एडमिन द्वारा अभी सवाल तैयार नहीं किए गए हैं। कृपया प्रतीक्षा करें!');
@@ -548,7 +589,7 @@
         }
 
         function loadQuizQuestion() {
-            if(qIndex >= db.quiz.length) {
+            if(qIndex >= 10 || qIndex >= db.quiz.length) {
                 finishQuizGame();
                 return;
             }
@@ -584,29 +625,38 @@
         }
 
         function finishQuizGame() {
+            clearInterval(quizTimerInterval);
             hideAllScreens();
             document.getElementById('resultScreen').classList.remove('hidden');
             
             let tier = "कोई टियर नहीं";
-            if(score >= 9) tier = "VIP 1 (Gold Winner)";
-            else if(score >= 7) tier = "VIP 2 (Silver Winner)";
-            else if(score >= 5) tier = "VIP 3 (Bronze Winner)";
+            let rewardMoney = 0;
+            if(score >= 9) { tier = "VIP 1 (Gold Winner)"; rewardMoney = 50; }
+            else if(score >= 7) { tier = "VIP 2 (Silver Winner)"; rewardMoney = 35; }
+            else if(score >= 5) { tier = "VIP 3 (Bronze Winner)"; rewardMoney = 20; }
 
             let icon = document.getElementById('resIcon');
             let title = document.getElementById('resTitle');
             let desc = document.getElementById('resDesc');
 
+            let idx = db.users.findIndex(x => x.phone === currentUser.phone);
+
             if(score >= 5) {
                 icon.className = "w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl";
                 icon.innerHTML = '<i class="fas fa-trophy"></i>';
                 title.innerText = "बधाई हो! आप जीत गए हैं";
-                desc.innerHTML = `स्कोर: <b>${score}/10</b><br>प्रदर्शन श्रेणी: <span class="text-amber-400 font-bold">${tier}</span>`;
+                desc.innerHTML = `स्कोर: <b>${score}/10</b><br>इनाम राशि आपके वॉलेट में जोड़ दी गई है: <span class="text-emerald-400 font-bold">+₹${rewardMoney}</span>`;
                 
+                if(idx !== -1) {
+                    db.users[idx].wallet = (db.users[idx].wallet || 0) + rewardMoney;
+                    currentUser = db.users[idx];
+                }
+
                 if(!db.winners.some(w => w.phone === currentUser.phone)) {
                     db.winners.push({ name: currentUser.name, phone: currentUser.phone, score, tier });
-                    saveDB();
-                    renderAdminTables();
                 }
+                saveDB();
+                renderAdminTables();
             } else {
                 icon.className = "w-16 h-16 bg-red-500/20 text-red-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl";
                 icon.innerHTML = '<i class="fas fa-times-circle"></i>';
@@ -642,12 +692,14 @@
             let upi = document.getElementById('setUpi').value.trim() || "admin@upi";
             let qrImg = document.getElementById('setQrImg').value.trim() || "";
             let telegram = document.getElementById('setTelegram').value.trim() || "https://t.me/";
+            let helpline = document.getElementById('setHelpline').value.trim() || "https://wa.me/";
             let newPin = document.getElementById('setAdminPin').value.trim();
             
             db.settings.hours = hrs;
             db.settings.upi = upi;
             db.settings.qrImg = qrImg;
             db.settings.telegram = telegram;
+            db.settings.helpline = helpline;
             if(newPin) {
                 db.settings.adminPin = newPin;
             }
@@ -655,7 +707,8 @@
             saveDB();
 
             document.getElementById('userTelegramLink').href = telegram;
-            alert('सेटिंग्स, UPI, QR, टेलीग्राम लिंक और पिन सफलतापूर्वक अपडेट हो गया है!');
+            document.getElementById('userHelplineLink').href = helpline;
+            alert('सेटिंग्स सफलतापूर्वक अपडेट हो गई है!');
         }
 
         function buildAdminBuilderHTML() {
@@ -770,9 +823,11 @@
 
         function approveUser(idx) {
             db.users[idx].status = 'approved';
+            db.adminWallet = (db.adminWallet || 0) + 20; // 20 rs entry fee added to admin wallet
             saveDB();
             renderAdminTables();
-            alert('यूज़र को सफलतापूर्वक अप्रूव कर दिया गया है!');
+            document.getElementById('adminWalletDisplay').innerText = `₹${db.adminWallet}`;
+            alert('यूज़र अप्रूव हो गया है और ₹20 एडमिन वॉलेट में जोड़ दिए गए हैं!');
         }
 
         function rejectUser(idx) {
@@ -780,7 +835,7 @@
             db.users[idx].screenshot = '';
             saveDB();
             renderAdminTables();
-            alert('यूज़र का पेमेंट अनुरोध रिजेक्ट कर दिया गया है (कृपया ₹20 का रिफंड प्रोसेस करें)।');
+            alert('यूज़र का पेमेंट रिजेक्ट कर दिया गया है। (आप चाहें तो हेल्पलाइन चैट के जरिए उनका रिफंड प्रोसेस कर सकते हैं)');
         }
     </script>
 </body>
