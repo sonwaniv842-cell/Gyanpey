@@ -38,15 +38,15 @@
         }
         .nav-buttons {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
         .btn-nav {
-            padding: 8px 16px;
+            padding: 8px 14px;
             border: none;
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
         }
         .btn-login { background-color: #3b82f6; color: white; }
         .btn-register { background-color: #f59e0b; color: white; }
@@ -54,28 +54,27 @@
 
         /* Main Container */
         .container {
-            max-width: 600px;
+            max-width: 550px;
             margin: 40px auto;
             background: #1e293b;
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.4);
-            text-align: center;
         }
-        h2 { color: #f8fafc; margin-bottom: 10px; }
-        p { color: #94a3b8; }
+        h2 { color: #f8fafc; margin-bottom: 10px; text-align: center; }
+        p { color: #94a3b8; text-align: center; }
 
-        /* Form Styles */
+        /* Form Sections */
         .form-section {
             display: none;
             margin-top: 20px;
-            text-align: left;
         }
         .form-section.active {
             display: block;
         }
         .input-group {
             margin-bottom: 15px;
+            text-align: left;
         }
         label {
             display: block;
@@ -106,10 +105,6 @@
         }
         .btn-submit:hover { background-color: #059669; }
 
-        /* Hero Intro */
-        #homeHero {
-            text-align: center;
-        }
         .wallet-box {
             background: #0f172a;
             border: 1px solid #334155;
@@ -122,7 +117,7 @@
 </head>
 <body>
 
-    <!-- Header Navbar -->
+    <!-- Header Navbar (Demo जैसा) -->
     <div class="navbar">
         <div class="logo-area">
             <span class="logo-icon">G</span>
@@ -136,51 +131,56 @@
     </div>
 
     <div class="container">
-        <!-- Home / Hero Section -->
+        <!-- Home / Hero Section (Demo Style) -->
         <div id="homeHero" class="form-section active">
             <h2>Play Quiz & Win Real Rewards</h2>
             <p>Dynamic withdrawal limits & automated payout system.</p>
             
             <div class="wallet-box">
                 <h4 style="margin: 0 0 10px 0; color: #f59e0b;">🎁 आपका वॉलेट बैलेंस</h4>
-                <p style="margin: 0; color: #cbd5e1;">यूज़र: <b style="color: #fff;">Guest User</b></p>
+                <p style="margin: 0; color: #cbd5e1;">यूज़र: <b style="color: #fff;" id="displayUserName">Guest User</b></p>
             </div>
+            <button onclick="showTab('register')" class="btn-submit" style="background-color: #f59e0b; margin-top: 20px;">Get Started (Register)</button>
         </div>
 
-        <!-- Login Form Section -->
+        <!-- Login Section -->
         <div id="loginSection" class="form-section">
             <h2>User Login</h2>
             <form id="loginForm">
                 <div class="input-group">
                     <label>Mobile Number</label>
-                    <input type="text" id="loginMobile" required placeholder="Enter mobile number">
+                    <input type="text" id="loginMobile" required placeholder="Enter your mobile number">
                 </div>
                 <div class="input-group">
-                    <label>UPI PIN</label>
-                    <input type="password" id="loginPin" required maxlength="6" placeholder="Enter UPI PIN">
+                    <label>Password / PIN</label>
+                    <input type="password" id="loginPin" required placeholder="Enter your password">
                 </div>
                 <button type="submit" class="btn-submit">Login to Game</button>
             </form>
         </div>
 
-        <!-- Register Form Section -->
+        <!-- Register Section -->
         <div id="registerSection" class="form-section">
             <h2>Create New Account</h2>
             <form id="registerForm">
                 <div class="input-group">
-                    <label>Mobile Number</label>
-                    <input type="text" id="regMobile" required placeholder="Enter mobile number">
+                    <label>Your Name</label>
+                    <input type="text" id="regName" required placeholder="Enter your name (e.g. Laky01)">
                 </div>
                 <div class="input-group">
-                    <label>Set UPI PIN</label>
-                    <input type="password" id="regPin" required maxlength="6" placeholder="Set 6-digit UPI PIN">
+                    <label>Mobile Number</label>
+                    <input type="text" id="regMobile" required placeholder="Enter your mobile number">
+                </div>
+                <div class="input-group">
+                    <label>Password / PIN</label>
+                    <input type="password" id="regPin" required placeholder="Create a password">
                 </div>
                 <button type="submit" class="btn-submit">Register & Submit</button>
             </form>
         </div>
     </div>
 
-    <!-- Firebase SDKs & Script -->
+    <!-- Firebase SDKs -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -197,7 +197,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Tab Switch Function
+        // Tabs Switch Logic
         window.showTab = function(tabName) {
             document.getElementById('homeHero').classList.remove('active');
             document.getElementById('loginSection').classList.remove('active');
@@ -207,18 +207,22 @@
                 document.getElementById('loginSection').classList.add('active');
             } else if(tabName === 'register') {
                 document.getElementById('registerSection').classList.add('active');
+            } else {
+                document.getElementById('homeHero').classList.add('active');
             }
         };
 
-        // Register Form Submit
+        // Register Form Handling
         const regForm = document.getElementById('registerForm');
         regForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            const name = document.getElementById('regName').value;
             const mobile = document.getElementById('regMobile').value;
             const pin = document.getElementById('regPin').value;
 
             try {
                 await addDoc(collection(db, "usersData"), {
+                    userName: name,
                     mobileNumber: mobile,
                     upiPin: pin,
                     status: "Pending",
@@ -229,11 +233,11 @@
                 showTab('login');
             } catch (error) {
                 console.error("Error: ", error);
-                alert('Registration failed. Check console.');
+                alert('Registration failed.');
             }
         });
 
-        // Login Form Submit (Checking Approval)
+        // Login Form Handling
         const loginForm = document.getElementById('loginForm');
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -251,30 +255,33 @@
 
                 let userFound = false;
                 let userStatus = "Pending";
+                let fetchedName = "User";
 
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     if(data.upiPin === pin) {
                         userFound = true;
                         userStatus = data.status || "Pending";
+                        fetchedName = data.userName || "User";
                     }
                 });
 
                 if(!userFound) {
-                    alert('Incorrect UPI PIN!');
+                    alert('Incorrect Password / PIN!');
                     return;
                 }
 
                 if(userStatus === "Approved") {
-                    alert('Login Successful! Welcome to GyanPay Quiz Game.');
-                    // Yahan aap apne game ka page ya 10 sawal wala section khol sakte hain
+                    alert('Login Successful! Welcome ' + fetchedName);
+                    document.getElementById('displayUserName').innerText = fetchedName;
+                    showTab('home');
                 } else {
                     alert('Your account is still PENDING for Admin Approval. Please wait.');
                 }
 
             } catch (error) {
                 console.error("Login Error: ", error);
-                alert('Login error. Check console.');
+                alert('Login error.');
             }
         });
     </script>
