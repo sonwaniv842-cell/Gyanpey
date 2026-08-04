@@ -19,17 +19,22 @@
             <span class="bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-lg text-sm">G</span>
             <h1 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">GyanPay</h1>
         </div>
-        <div class="flex space-x-2">
+        <div id="headerAuthButtons" class="flex space-x-2">
             <button onclick="openAuth('login')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-lg border border-amber-500/30 font-medium">Login</button>
             <button onclick="openAuth('register')" class="text-xs bg-amber-500 hover:bg-amber-400 text-slate-950 px-3 py-1.5 rounded-lg font-bold">Register</button>
             <button onclick="toggleAdminModal()" class="text-xs bg-red-600 hover:bg-red-500 text-white px-3 py-1.5 rounded-lg font-medium shadow-lg shadow-red-600/30">Admin Portal</button>
+        </div>
+        <div id="headerUserLogout" class="hidden flex items-center space-x-2">
+            <span id="topUserName" class="text-xs text-amber-400 font-bold"></span>
+            <button onclick="logoutUser()" class="text-xs bg-slate-800 text-red-400 px-2.5 py-1 rounded-lg border border-red-500/30">लॉग आउट</button>
+            <button onclick="toggleAdminModal()" class="text-xs bg-red-600 text-white px-2 py-1 rounded-lg font-medium">Admin</button>
         </div>
     </header>
 
     <!-- Main Container -->
     <main class="w-full max-w-md my-auto py-4">
 
-        <!-- HOME / WELCOME BANNER -->
+        <!-- HOME SCREEN (Before Login) -->
         <div id="homeScreen" class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl text-center backdrop-blur-md">
             <div class="w-16 h-16 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
                 <i class="fas fa-trophy"></i>
@@ -37,18 +42,17 @@
             <h2 class="text-2xl font-bold text-white mb-2">Play Quiz & Win Real Rewards</h2>
             <p class="text-xs text-slate-400 mb-6">विशिष्ट क्विज़ खेलें, अपनी ज्ञान क्षमता बढ़ाएं और नकद पुरस्कार जीतें।</p>
             
-            <!-- Quiz Timer Countdown Banner -->
-            <div id="countdownBox" class="bg-slate-800/80 border border-slate-700 p-4 rounded-xl mb-6">
+            <div class="bg-slate-800/80 border border-slate-700 p-4 rounded-xl mb-6">
                 <p class="text-xs text-slate-300 mb-1"><i class="fas fa-clock text-amber-400 mr-1"></i> अगला क्विज़ लाइव होगा:</p>
                 <div id="timerClock" class="text-xl font-mono font-bold text-amber-400">00h 00m 00s</div>
             </div>
 
-            <button onclick="openAuth('register')" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-bold py-3.5 rounded-xl transition shadow-lg shadow-amber-500/20 text-sm">
-                अभी हिस्सा लें (Join Quiz)
+            <button onclick="openAuth('login')" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-bold py-3.5 rounded-xl transition shadow-lg shadow-amber-500/20 text-sm">
+                लॉगिन करके खेलें (Login to Play)
             </button>
         </div>
 
-        <!-- AUTH SCREEN -->
+        <!-- AUTH SCREEN (Login / Register) -->
         <div id="authScreen" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl">
             <div class="flex justify-between items-center mb-4">
                 <h3 id="authHeading" class="text-lg font-bold text-white">खाता बनाएँ</h3>
@@ -68,7 +72,30 @@
                     <input type="password" id="inputPass" placeholder="पासवर्ड दर्ज करें" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-amber-500 text-xs">
                 </div>
                 <button onclick="submitAuth()" id="authSubmitBtn" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition text-xs mt-2">रजिस्टर करें</button>
+                <div class="text-center pt-2">
+                    <a href="#" onclick="toggleAuthMode()" id="authSwitchText" class="text-amber-400 hover:underline">पहले से खाता है? लॉगिन करें</a>
+                </div>
             </div>
+        </div>
+
+        <!-- USER DASHBOARD (After Login - Fantasy App Style Banner & Timer) -->
+        <div id="userDashboard" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl text-center">
+            <div class="w-16 h-16 bg-gradient-to-tr from-amber-500 to-orange-500 text-slate-950 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl shadow-lg">
+                <i class="fas fa-gamepad"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-1">स्वागत है, <span id="dashUserName" class="text-amber-400"></span>!</h3>
+            <p class="text-xs text-slate-400 mb-4">अपनी टीम/दिमाग तैयार रखें, क्विज़ शुरू होने वाला है।</p>
+            
+            <!-- Live Timer Banner -->
+            <div class="bg-slate-800 border border-slate-700 p-4 rounded-xl mb-6">
+                <p class="text-xs text-slate-300 mb-1"><i class="fas fa-stopwatch text-amber-400 mr-1"></i> मेगा क्विज़ काउंटडाउन:</p>
+                <div id="dashTimerClock" class="text-2xl font-mono font-bold text-amber-400">00h 00m 00s</div>
+            </div>
+
+            <!-- Join / Play Button (Triggers Payment or Quiz) -->
+            <button onclick="clickJoinQuiz()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-bold py-3.5 rounded-xl transition shadow-lg shadow-amber-500/20 text-sm">
+                <i class="fas fa-play-circle mr-1"></i> Join Quiz (₹20 Entry Fee)
+            </button>
         </div>
 
         <!-- PAYMENT & ENTRY FEE SCREEN -->
@@ -94,6 +121,7 @@
                 <input type="file" id="payScreenshot" accept="image/*" class="w-full text-xs text-slate-400 file:mr-2 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950">
                 <button onclick="sendPaymentProof()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition text-xs">स्क्रीनशॉट एडमिन को भेजें</button>
             </div>
+            <button onclick="backToDashboard()" class="mt-3 text-xs text-slate-400 hover:text-white"><i class="fas fa-arrow-left mr-1"></i> वापस डैशबोर्ड पर जाएं</button>
         </div>
 
         <!-- WAITING / PENDING APPROVAL SCREEN -->
@@ -102,20 +130,8 @@
                 <i class="fas fa-spinner fa-spin"></i>
             </div>
             <h3 class="text-lg font-bold text-white mb-2">वेरिफिकेशन पेंडिंग है</h3>
-            <p class="text-xs text-slate-400 mb-4">एडमिन आपके पेमेंट स्क्रीनशॉट की जाँच कर रहे हैं। अप्रूव होने के बाद आप क्विज़ खेल सकेंगे।</p>
+            <p class="text-xs text-slate-400 mb-4">एडमिन आपके पेमेंट स्क्रीनशॉट की जाँच कर रहे हैं। अप्रूव होने के बाद आप गेम खेल सकेंगे।</p>
             <button onclick="location.reload()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl text-xs">रिफ्रेश करें</button>
-        </div>
-
-        <!-- DASHBOARD / START QUIZ -->
-        <div id="dashboardScreen" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl text-center">
-            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-1">स्वागत है, <span id="userNameDisp" class="text-amber-400"></span>!</h3>
-            <p class="text-xs text-slate-400 mb-6">आपका पेमेंट वेरीफाई हो गया है। आप गेम खेलने के लिए एलिजिबल हैं।</p>
-            <button onclick="startQuizGame()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-emerald-600/30 text-sm">
-                <i class="fas fa-play mr-2"></i> Start Playing Now
-            </button>
         </div>
 
         <!-- QUIZ INTERFACE -->
@@ -171,7 +187,6 @@
                     <div>
                         <label class="block text-slate-400 mb-1">QR Code Image Link (URL):</label>
                         <input type="text" id="setQrImg" placeholder="https://example.com/my-qr.jpg" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
-                        <p class="text-[10px] text-slate-500 mt-1">आप अपने QR कोड का डायरेक्ट इमेज लिंक यहाँ डाल सकते हैं। खाली छोड़ने पर ऑटो-जेनरेटेड QR दिखेगा।</p>
                     </div>
                     <button onclick="saveAdminSettings()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2 rounded-lg">सेटिंग्स सेव करें</button>
                 </div>
@@ -247,7 +262,7 @@
         }
 
         let currentUser = JSON.parse(sessionStorage.getItem('gyanpay_curr_user')) || null;
-        let isLogin = false;
+        let isLoginMode = true;
         let qIndex = 0;
         let score = 0;
         let quizTimerInterval = null;
@@ -256,13 +271,15 @@
             initCountdown();
             buildAdminBuilderHTML();
             renderAdminTables();
-            // Load admin settings values into admin inputs
             document.getElementById('setHours').value = db.settings.hours || 24;
             document.getElementById('setUpi').value = db.settings.upi || "admin@upi";
             document.getElementById('setQrImg').value = db.settings.qrImg || "";
 
             if(currentUser) {
-                checkUserFlow();
+                renderUserNavigationState();
+                checkUserDashboardFlow();
+            } else {
+                showHomeScreen();
             }
         }
 
@@ -273,30 +290,58 @@
                 let diff = target - now;
                 if(diff <= 0) {
                     document.getElementById('timerClock').innerText = "LIVE NOW!";
+                    document.getElementById('dashTimerClock').innerText = "LIVE NOW!";
                     return;
                 }
                 let h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 let m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 let s = Math.floor((diff % (1000 * 60)) / 1000);
-                document.getElementById('timerClock').innerText = `${h}h ${m}m ${s}s`;
+                let timeStr = `${h}h ${m}m ${s}s`;
+                document.getElementById('timerClock').innerText = timeStr;
+                document.getElementById('dashTimerClock').innerText = timeStr;
             }, 1000);
         }
 
-        function showHomeScreen() {
-            document.getElementById('homeScreen').classList.remove('hidden');
+        function hideAllScreens() {
+            document.getElementById('homeScreen').classList.add('hidden');
             document.getElementById('authScreen').classList.add('hidden');
+            document.getElementById('userDashboard').classList.add('hidden');
             document.getElementById('paymentScreen').classList.add('hidden');
             document.getElementById('pendingScreen').classList.add('hidden');
-            document.getElementById('dashboardScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('resultScreen').classList.add('hidden');
+        }
+
+        function showHomeScreen() {
+            hideAllScreens();
+            document.getElementById('homeScreen').classList.remove('hidden');
+            document.getElementById('headerAuthButtons').classList.remove('hidden');
+            document.getElementById('headerUserLogout').classList.add('hidden');
+        }
+
+        function renderUserNavigationState() {
+            document.getElementById('headerAuthButtons').classList.add('hidden');
+            document.getElementById('headerUserLogout').classList.remove('hidden');
+            document.getElementById('topUserName').innerText = currentUser.name;
         }
 
         function openAuth(mode) {
-            isLogin = (mode === 'login');
-            document.getElementById('homeScreen').classList.add('hidden');
+            hideAllScreens();
             document.getElementById('authScreen').classList.remove('hidden');
-            document.getElementById('authHeading').innerText = isLogin ? "लॉगिन करें" : "खाता बनाएँ (Register)";
-            document.getElementById('authSubmitBtn').innerText = isLogin ? "लॉगिन" : "रजिस्टर करें";
-            document.getElementById('regNameDiv').style.display = isLogin ? "none" : "block";
+            isLoginMode = (mode === 'login');
+            updateAuthFormUI();
+        }
+
+        function toggleAuthMode() {
+            isLoginMode = !isLoginMode;
+            updateAuthFormUI();
+        }
+
+        function updateAuthFormUI() {
+            document.getElementById('authHeading').innerText = isLoginMode ? "लॉगिन करें" : "खाता बनाएँ (Register)";
+            document.getElementById('authSubmitBtn').innerText = isLoginMode ? "लॉगिन" : "रजिस्टर करें";
+            document.getElementById('regNameDiv').style.display = isLoginMode ? "none" : "block";
+            document.getElementById('authSwitchText').innerText = isLoginMode ? "नया खाता बनाएँ? रजिस्टर करें" : "पहले से खाता है? लॉगिन करें";
         }
 
         function submitAuth() {
@@ -304,64 +349,84 @@
             let pass = document.getElementById('inputPass').value.trim();
             let name = document.getElementById('inputName').value.trim();
 
-            if(!phone || !pass || (!isLogin && !name)) {
-                alert('कृपया सभी फील्ड भरें!');
+            if(!phone || !pass || (!isLoginMode && !name)) {
+                alert('कृपया सभी आवश्यक फील्ड भरें!');
                 return;
             }
 
-            if(isLogin) {
+            if(isLoginMode) {
                 let found = db.users.find(u => u.phone === phone && u.pass === pass);
                 if(found) {
                     currentUser = found;
                     sessionStorage.setItem('gyanpay_curr_user', JSON.stringify(currentUser));
-                    checkUserFlow();
+                    renderUserNavigationState();
+                    checkUserDashboardFlow();
                 } else {
                     alert('गलत फोन नंबर या पासवर्ड!');
                 }
             } else {
                 if(db.users.some(u => u.phone === phone)) {
-                    alert('यह नंबर पहले से रजिस्टर्ड है!');
+                    alert('यह मोबाइल नंबर पहले से रजिस्टर्ड है! कृपया लॉगिन करें।');
                     return;
                 }
-                let newUser = { name, phone, pass, status: 'pending_payment' };
+                // Register successfully without demanding payment instantly
+                let newUser = { name, phone, pass, status: 'registered' };
                 db.users.push(newUser);
                 saveDB();
                 currentUser = newUser;
                 sessionStorage.setItem('gyanpay_curr_user', JSON.stringify(currentUser));
-                checkUserFlow();
+                alert('रजिस्ट्रेशन सफल रहा! अब आप लॉगिन हो गए हैं।');
+                renderUserNavigationState();
+                checkUserDashboardFlow();
             }
             renderAdminTables();
         }
 
-        function checkUserFlow() {
-            document.getElementById('homeScreen').classList.add('hidden');
-            document.getElementById('authScreen').classList.add('hidden');
+        function logoutUser() {
+            currentUser = null;
+            sessionStorage.removeItem('gyanpay_curr_user');
+            showHomeScreen();
+        }
+
+        function checkUserDashboardFlow() {
+            hideAllScreens();
             let u = db.users.find(x => x.phone === currentUser.phone) || currentUser;
             currentUser = u;
 
             if(currentUser.status === 'approved') {
-                document.getElementById('dashboardScreen').classList.remove('hidden');
-                document.getElementById('userNameDisp').innerText = currentUser.name;
+                // If already approved, directly start quiz or show ready dashboard
+                startQuizGame();
             } else if(currentUser.status === 'screenshot_sent') {
                 document.getElementById('pendingScreen').classList.remove('hidden');
             } else {
-                document.getElementById('paymentScreen').classList.remove('hidden');
-                document.getElementById('adminUpiDisplay').innerText = db.settings.upi;
-                
-                // Set QR code (custom link or default generated)
-                let qrImgTag = document.getElementById('userQrImg');
-                if(db.settings.qrImg && db.settings.qrImg.trim() !== "") {
-                    qrImgTag.src = db.settings.qrImg;
-                } else {
-                    qrImgTag.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=${encodeURIComponent(db.settings.upi)}&pn=GyanPay&am=20&cu=INR`;
-                }
+                // Show standard fantasy-style dashboard after login
+                document.getElementById('userDashboard').classList.remove('hidden');
+                document.getElementById('dashUserName').innerText = currentUser.name;
             }
         }
 
+        // When user clicks 'Join Quiz' banner button from dashboard
+        function clickJoinQuiz() {
+            hideAllScreens();
+            document.getElementById('paymentScreen').classList.remove('hidden');
+            document.getElementById('adminUpiDisplay').innerText = db.settings.upi;
+            
+            let qrImgTag = document.getElementById('userQrImg');
+            if(db.settings.qrImg && db.settings.qrImg.trim() !== "") {
+                qrImgTag.src = db.settings.qrImg;
+            } else {
+                qrImgTag.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=${encodeURIComponent(db.settings.upi)}&pn=GyanPay&am=20&cu=INR`;
+            }
+        }
+
+        function backToDashboard() {
+            checkUserDashboardFlow();
+        }
+
         function sendPaymentProof() {
-            let file = document.getElementById('payScreenshot').files.length;
-            if(file === 0) {
-                alert('कृपया पेमेंट स्क्रीनशॉट अपलोड करें!');
+            let fileCount = document.getElementById('payScreenshot').files.length;
+            if(fileCount === 0) {
+                alert('कृपया पेमेंट का स्क्रीनशॉट अपलोड करें!');
                 return;
             }
             let idx = db.users.findIndex(x => x.phone === currentUser.phone);
@@ -369,7 +434,7 @@
                 db.users[idx].status = 'screenshot_sent';
                 saveDB();
                 alert('स्क्रीनशॉट सफलतापूर्वक भेज दिया गया है! एडमिन द्वारा अप्रूवल की प्रतीक्षा करें।');
-                checkUserFlow();
+                checkUserDashboardFlow();
                 renderAdminTables();
             }
         }
@@ -380,7 +445,7 @@
                 alert('एडमिन ने अभी तक 10 सवाल लाइव नहीं किए हैं!');
                 return;
             }
-            document.getElementById('dashboardScreen').classList.add('hidden');
+            hideAllScreens();
             document.getElementById('quizScreen').classList.remove('hidden');
             qIndex = 0;
             score = 0;
@@ -424,7 +489,7 @@
         }
 
         function finishQuizGame() {
-            document.getElementById('quizScreen').classList.add('hidden');
+            hideAllScreens();
             document.getElementById('resultScreen').classList.remove('hidden');
             
             let tier = "कोई टियर नहीं";
@@ -486,7 +551,7 @@
             db.settings.qrImg = qrImg;
             db.settings.targetTime = new Date().getTime() + (hrs * 3600 * 1000);
             saveDB();
-            alert('सेटिंग्स, UPI और QR कोड सफलतापूर्वक अपडेट हो गया है!');
+            alert('सेटिंग्स, UPI और टाइमर सफलतापूर्वक अपडेट हो गया है!');
         }
 
         function buildAdminBuilderHTML() {
@@ -573,7 +638,7 @@
             db.users[idx].status = 'approved';
             saveDB();
             renderAdminTables();
-            alert('यूज़र को सफलतापर्वक अप्रूव कर दिया गया है!');
+            alert('यूज़र को सफलतापूर्वक अप्रूव कर दिया गया है!');
         }
     </script>
 </body>
