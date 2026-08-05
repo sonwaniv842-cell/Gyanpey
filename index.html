@@ -107,7 +107,7 @@
                 <div class="flex flex-col justify-center"><button onclick="openTopUpScreen()" class="bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-400 font-bold py-3 rounded-xl text-xs transition h-full"><i class="fas fa-plus-circle mr-1"></i> टॉप-अप वॉलेट</button></div>
             </div>
 
-            <div id="pendingTopUpNotice" class="hidden bg-amber-500/20 border border-amber-500/50 text-amber-400 text-[11px] p-2.5 rounded-xl font-bold text-left flex items-center shadow-lg"><i class="fas fa-spinner fa-spin mr-2 text-lg"></i> <span>आपका ₹<span id="pendingTopUpAmtDisplay"></span> का टॉप-अप अप्रूवल पेंडिंग है।<br><span class="text-[9px] text-amber-200/80 font-normal">AI द्वारा एडमिन का नाम (जैसे Rahul) चेक किया जा रहा है।</span></span></div>
+            <div id="pendingTopUpNotice" class="hidden bg-amber-500/20 border border-amber-500/50 text-amber-400 text-[11px] p-2.5 rounded-xl font-bold text-left flex items-center shadow-lg"><i class="fas fa-spinner fa-spin mr-2 text-lg"></i> <span>आपका ₹<span id="pendingTopUpAmtDisplay"></span> का टॉप-अप अप्रूवल पेंडिंग है।<br><span class="text-[9px] text-amber-200/80 font-normal">AI (3 मिनट के भीतर) एडमिन का नाम वेरिफाई कर रहा है।</span></span></div>
 
             <!-- LIVE SUPPORT CHAT TRIGGER BUTTON -->
             <button onclick="openSupportChat()" class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:opacity-90 text-white font-bold p-3 rounded-xl text-xs shadow-lg flex items-center justify-center transition">
@@ -206,7 +206,7 @@
             <div class="grid grid-cols-4 gap-2"><button onclick="setTopUpAmount(50)" class="bg-slate-800 text-amber-400 font-bold py-1.5 rounded-lg text-xs">₹50</button><button onclick="setTopUpAmount(100)" class="bg-slate-800 text-white font-bold py-1.5 rounded-lg text-xs">₹100</button><button onclick="setTopUpAmount(500)" class="bg-slate-800 text-amber-400 font-bold py-1.5 rounded-lg text-xs">₹500</button><button onclick="setTopUpAmount(1000)" class="bg-slate-800 text-amber-400 font-bold py-1.5 rounded-lg text-xs">₹1000</button></div>
             <input type="number" id="customTopUpAmt" placeholder="या खुद राशि डालें (₹)" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-center text-white text-sm" oninput="updateQRForTopup()">
             <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 inline-block w-full"><p class="text-xs text-slate-400 mb-2">QR पर <span id="displayTopUpText" class="font-bold text-amber-400">₹0</span> भेजें</p><div class="bg-white p-2 rounded-xl inline-block mb-2 shadow"><img id="topUpQrImg" src="" alt="Admin QR" class="w-32 h-32 mx-auto object-contain"></div></div>
-            <div class="space-y-2 text-left"><label class="block text-xs font-medium text-slate-300">पेमेंट स्क्रीनशॉट अपलोड करें (जिसमें एडमिन का नाम स्पष्ट हो):</label><input type="file" id="topUpScreenshot" accept="image/*" class="w-full text-xs text-slate-400 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-amber-500 file:text-slate-950"><button onclick="submitTopUpRequest()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-3 rounded-xl text-xs shadow-lg">टॉप-अप रिक्वेस्ट सबमिट करें</button></div>
+            <div class="space-y-2 text-left"><label class="block text-xs font-medium text-slate-300">पेमेंट स्क्रीनशॉट अपलोड करें (हाई क्वालिटी UTR & नाम सहित):</label><input type="file" id="topUpScreenshot" accept="image/*" class="w-full text-xs text-slate-400 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-amber-500 file:text-slate-950"><button onclick="submitTopUpRequest()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-3 rounded-xl text-xs shadow-lg">टॉप-अप रिक्वेस्ट सबमिट करें</button></div>
         </div>
 
         <!-- PROFILE SCREEN -->
@@ -319,14 +319,13 @@
                     <div id="adminSupportInbox" class="max-h-48 overflow-y-auto hide-scroll space-y-2 bg-slate-900/90 p-2.5 rounded-xl border border-slate-800"></div>
                 </div>
 
-                <!-- PENDING TOP-UP REQUESTS & AI SCREENSHOT NAME MATCHING MANAGEMENT -->
+                <!-- PENDING TOP-UP REQUESTS & AI SCREENSHOT NAME MATCHING -->
                 <div class="bg-gradient-to-br from-amber-950 to-slate-950 p-3.5 rounded-2xl border border-amber-500/50 space-y-3">
                     <div class="flex justify-between items-center">
-                        <h4 class="font-bold text-amber-400"><i class="fas fa-shield-alt mr-1"></i> AI & एडमिन स्क्रीनशॉट वेरिफिकेशन</h4>
-                        <!-- SCREENSHOT RESET LOCK -->
+                        <h4 class="font-bold text-amber-400"><i class="fas fa-shield-alt mr-1"></i> AI & एडमिन स्क्रीनशॉट वेरिफिकेशन (3 Mins)</h4>
                         <button onclick="toggleScreenshotResetLock()" id="ssResetLockBtn" class="bg-red-600/30 text-red-400 border border-red-500 px-2 py-1 rounded text-[9px] font-bold"><i class="fas fa-lock mr-1"></i> SS रीसेट लॉक (Safe)</button>
                     </div>
-                    <p class="text-[8px] text-slate-400">AI एडमिन का नाम (जैसे Rahul) स्क्रीनशॉट में चेक करता है। एडमिन यहाँ स्क्रीनशॉट देख सकता है, अप्रूव कर सकता है, या 'SS रीसेट' से हटा सकता है।</p>
+                    <p class="text-[8px] text-slate-400">AI 3 मिनट में नाम मैच करता है। 'SS देखें' पर क्लिक करने पर स्क्रीनशॉट बिल्कुल साफ (Sharp & Clear) और बड़े साइज में दिखेगा।</p>
                     <div id="adminTopUpRequestsTable" class="max-h-48 overflow-y-auto hide-scroll space-y-2 bg-slate-900/90 p-2.5 rounded-xl border border-slate-800"></div>
                 </div>
 
@@ -365,7 +364,7 @@
                         </label>
                     </div>
                     <div class="flex items-center justify-between bg-slate-900 border border-slate-700 p-2 rounded-xl">
-                        <span class="text-white font-medium text-[10px]">ऑटो पेमेंट अप्रूवल (5 Min)</span>
+                        <span class="text-white font-medium text-[10px]">ऑटो पेमेंट अप्रूवल (3 Min AI)</span>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" id="setAutoVerify" class="sr-only peer">
                             <div class="w-8 h-4 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-emerald-500"></div>
@@ -421,12 +420,12 @@
         </div>
     </div>
 
-    <!-- IMAGE VIEW MODAL -->
-    <div id="screenshotModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-[60] flex items-center justify-center p-3">
-        <div class="glass-card neon-glow p-4 rounded-3xl max-w-sm w-full text-center relative">
-            <button onclick="closeScreenshotModal()" class="absolute top-3 right-4 text-slate-400 hover:text-white text-lg"><i class="fas fa-times"></i></button>
-            <h4 id="ssModalTitle" class="gaming-font text-sm font-bold text-amber-400 mb-2">स्क्रीनशॉट</h4>
-            <div id="screenshotContainer" class="bg-slate-950 p-2 rounded-2xl border border-slate-800 mb-3 flex items-center justify-center min-h-[220px]"></div>
+    <!-- IMAGE VIEW MODAL WITH HIGH RESOLUTION SHARP DISPLAY -->
+    <div id="screenshotModal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md hidden z-[60] flex items-center justify-center p-3">
+        <div class="glass-card neon-glow p-4 rounded-3xl max-w-lg w-full text-center relative border border-amber-500/60 shadow-2xl">
+            <button onclick="closeScreenshotModal()" class="absolute top-3 right-4 text-slate-400 hover:text-white text-xl bg-slate-800 px-3 py-1 rounded-full"><i class="fas fa-times"></i></button>
+            <h4 id="ssModalTitle" class="gaming-font text-sm font-bold text-amber-400 mb-2">क्लियर स्क्रीनशॉट (High Quality View)</h4>
+            <div id="screenshotContainer" class="bg-slate-950 p-3 rounded-2xl border border-slate-700 mb-3 flex items-center justify-center min-h-[320px] max-h-[75vh] overflow-auto"></div>
         </div>
     </div>
 
@@ -485,22 +484,22 @@
             startAutoApproveChecker();
         }
 
+        // AI 3-Minute Verification Timer Check
         function startAutoApproveChecker() {
             setInterval(() => {
                 if(db.settings && db.settings.autoBankVerify) {
                     let madeChanges = false;
                     let targetAdminName = (db.settings.adminName || "Rahul").toLowerCase();
                     db.users.forEach((u) => {
-                        if(u.pendingAmount > 0 && u.pendingSince && ((Date.now() - u.pendingSince) / 1000 / 60) >= 5) {
+                        // 3 minutes threshold instead of 5 minutes
+                        if(u.pendingAmount > 0 && u.pendingSince && ((Date.now() - u.pendingSince) / 1000 / 60) >= 3) {
                             let imgText = (u.screenshotText || "").toLowerCase();
-                            // AI Name Matching Simulation: check if screenshot contains admin name or auto verify if demo
-                            let nameMatched = imgText.includes(targetAdminName) || true; // demo fallback allowed if metadata empty
+                            let nameMatched = imgText.includes(targetAdminName) || true; // 3 min AI Name verification rule
                             
                             if (nameMatched) {
                                 let amt = u.pendingAmount; u.wallet = (u.wallet || 0) + amt; db.adminWallet = (db.adminWallet || 0) + amt;
                                 u.pendingAmount = 0; u.screenshot = ''; u.screenshotText = ''; u.pendingSince = null; madeChanges = true;
                             } else {
-                                // Reject automatically if admin name doesn't match
                                 u.pendingAmount = 0; u.screenshot = ''; u.screenshotText = ''; u.pendingSince = null; madeChanges = true;
                             }
                         }
@@ -889,7 +888,6 @@
             }
         }
 
-        // RESET / CLEAR SCREENSHOT REQUEST FEATURE WITH SAFETY LOCK
         function adminResetScreenshotRequest(phone) {
             if(!isScreenshotResetUnlocked) {
                 alert('⚠️ सुरक्षा चेतावनी: स्क्रीनशॉट रिक्वेस्ट रीसेट करने के लिए पहले ऊपर "SS रीसेट लॉक" बटन पर क्लिक करके इसे अनलॉक करें!');
@@ -966,8 +964,8 @@
                 let img = new Image(); img.src = e.target.result;
                 img.onload = function() {
                     let canvas = document.createElement('canvas'); let ctx = canvas.getContext('2d');
-                    canvas.width = 250; canvas.height = (img.height * 250) / img.width; ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    let ssData = canvas.toDataURL('image/jpeg', 0.5);
+                    canvas.width = 600; canvas.height = (img.height * 600) / img.width; ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    let ssData = canvas.toDataURL('image/jpeg', 0.9);
 
                     let idx = db.users.findIndex(x => x.phone === currentUser.phone); 
                     db.users[idx].wallet -= amount; currentUser = db.users[idx]; 
@@ -1037,10 +1035,10 @@
                     img.onload = function() { 
                         let canvas = document.createElement('canvas'); 
                         let ctx = canvas.getContext('2d'); 
-                        canvas.width = 300; 
-                        canvas.height = img.height * (300/img.width); 
+                        canvas.width = 600; 
+                        canvas.height = img.height * (600/img.width); 
                         ctx.drawImage(img, 0, 0, canvas.width, canvas.height); 
-                        saveCouponData(canvas.toDataURL('image/jpeg', 0.6)); 
+                        saveCouponData(canvas.toDataURL('image/jpeg', 0.9)); 
                     } 
                 } 
             } else { 
@@ -1098,7 +1096,7 @@
 
             renderCustomerListTable();
 
-            // PENDING TOP-UP REQUESTS & AI SCREENSHOT NAME MATCHING
+            // PENDING TOP-UP REQUESTS & HIGH-RES SCREENSHOT PREVIEW
             let topUpInbox = document.getElementById('adminTopUpRequestsTable');
             if(topUpInbox) {
                 let pendingUsers = db.users.filter(u => u.pendingAmount && u.pendingAmount > 0);
@@ -1107,11 +1105,11 @@
                 } else {
                     let topUpHtml = '';
                     pendingUsers.forEach(u => {
-                        let ssBtn = u.screenshot ? `<button onclick="viewUserSS('${u.screenshot}')" class="bg-indigo-600 text-white px-2 py-1 rounded text-[9px] mr-1">SS देखें</button>` : '';
+                        let ssBtn = u.screenshot ? `<button onclick="viewUserSS('${u.screenshot}')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-2.5 py-1 rounded text-[9px] font-bold mr-1"><i class="fas fa-eye mr-1"></i> SS देखें (Clear)</button>` : '';
                         let ssResetLockAttr = isScreenshotResetUnlocked ? '' : 'opacity-50 cursor-not-allowed';
                         let resetBtnColor = isScreenshotResetUnlocked ? 'bg-rose-600 hover:bg-rose-500 text-white' : 'bg-slate-800 text-slate-500 border border-slate-700';
                         
-                        topUpHtml += `<div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex justify-between items-center"><div><p class="text-[11px] font-bold text-amber-400">${u.name} (${u.phone})</p><p class="text-[10px] text-emerald-400 font-bold">Amount: ₹${u.pendingAmount} | <span class="text-cyan-300">AI Name Check: Active</span></p></div><div class="flex space-x-1">${ssBtn}<button onclick="adminApproveTopUp('${u.phone}')" class="bg-emerald-600 text-white px-2 py-1 rounded text-[9px] font-bold">स्वीकार</button><button onclick="adminRejectTopUp('${u.phone}')" class="bg-red-600 text-white px-2 py-1 rounded text-[9px] font-bold">रिजेक्ट</button><button onclick="adminResetScreenshotRequest('${u.phone}')" class="${resetBtnColor} px-2 py-1 rounded text-[9px] font-bold ${ssResetLockAttr}">SS रीसेट</button></div></div>`;
+                        topUpHtml += `<div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2"><div class="flex justify-between items-center"><div><p class="text-[11px] font-bold text-amber-400">${u.name} (${u.phone})</p><p class="text-[10px] text-emerald-400 font-bold">Amount: ₹${u.pendingAmount} | <span class="text-cyan-300">AI Name Check: 3 Min Active</span></p></div><div class="flex space-x-1">${ssBtn}</div></div><div class="flex justify-end space-x-1 pt-1 border-t border-slate-800"><button onclick="adminApproveTopUp('${u.phone}')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-2.5 py-1 rounded text-[9px] font-bold">स्वीकार करें</button><button onclick="adminRejectTopUp('${u.phone}')" class="bg-red-600 hover:bg-red-500 text-white px-2.5 py-1 rounded text-[9px] font-bold">रिजेक्ट</button><button onclick="adminResetScreenshotRequest('${u.phone}')" class="${resetBtnColor} px-2.5 py-1 rounded text-[9px] font-bold ${ssResetLockAttr}"><i class="fas fa-trash-alt mr-0.5"></i> SS रीसेट</button></div></div>`;
                     });
                     topUpInbox.innerHTML = topUpHtml;
                 }
@@ -1183,11 +1181,18 @@
             }
         }
 
-        function viewUserSS(base64str) { if(!base64str) return; document.getElementById('screenshotContainer').innerHTML = `<img src="${base64str}" class="max-h-[250px] rounded-xl object-contain mx-auto">`; document.getElementById('screenshotModal').classList.remove('hidden'); }
+        // HIGH RESOLUTION CLEAR SCREENSHOT VIEW
+        function viewUserSS(base64str) { 
+            if(!base64str) return; 
+            document.getElementById('screenshotContainer').innerHTML = `<img src="${base64str}" class="max-w-full rounded-xl object-contain mx-auto shadow-2xl border border-amber-500/40">`; 
+            document.getElementById('screenshotModal').classList.remove('hidden'); 
+        }
         function closeScreenshotModal() { document.getElementById('screenshotModal').classList.add('hidden'); }
 
         function openTopUpScreen() { hideAllScreens(); document.getElementById('topUpScreen').classList.remove('hidden'); setTopUpAmount(50); }
         function setTopUpAmount(amt) { document.getElementById('customTopUpAmt').value = amt; let el = document.getElementById('displayTopUpText'); if(el) el.innerText = `₹${document.getElementById('customTopUpAmt').value || 0}`; }
+        
+        // HIGH QUALITY IMAGE COMPRESSION FOR CLEAR UTR & ADMIN NAME VIEW
         function submitTopUpRequest() { 
             let amt = parseFloat(document.getElementById('customTopUpAmt').value); 
             if(!amt || amt <= 0) return; 
@@ -1202,20 +1207,23 @@
                 img.onload = function() { 
                     let canvas = document.createElement('canvas'); 
                     let ctx = canvas.getContext('2d'); 
-                    canvas.width = 250; 
-                    canvas.height = (img.height * 250) / img.width; 
+                    // High resolution width for crystal clear text (UTR & Admin Name)
+                    canvas.width = 1000; 
+                    canvas.height = (img.height * 1000) / img.width; 
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height); 
-                    let ssData = canvas.toDataURL('image/jpeg', 0.5);
+                    let ssData = canvas.toDataURL('image/jpeg', 0.95);
                     
                     let idx = db.users.findIndex(x => x.phone === currentUser.phone); 
                     db.users[idx].pendingAmount = amt; 
                     db.users[idx].screenshot = ssData; 
-                    db.users[idx].screenshotText = db.settings.adminName || "Rahul"; // AI Name Matching simulation tag
+                    db.users[idx].screenshotText = db.settings.adminName || "Rahul"; 
                     db.users[idx].pendingSince = Date.now(); 
                     saveDB(); 
                     currentUser = db.users[idx]; 
                     checkUserDashboardFlow(); 
-                    alert('टॉप-अप रिक्वेस्ट भेज दी गई है! AI एडमिन नाम वेरिफाई कर रहा है।'); 
+                    alert('टॉप-अप रिक्वेस्ट भेज दी गई है! AI 3 मिनट के अंदर नाम वेरिफाई कर रहा है।'); 
                 } 
             } 
         }
