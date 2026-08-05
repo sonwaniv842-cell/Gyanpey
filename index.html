@@ -18,20 +18,11 @@
         .animate-pulse-fast { animation: pulse-fast 2s infinite; }
         .hide-scroll::-webkit-scrollbar { display: none; }
         
-        .marquee-container {
-            width: 100%; overflow: hidden; white-space: nowrap; background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 12px; padding: 8px 0;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5); position: relative;
-        }
-        .marquee-text {
-            display: inline-block; padding-left: 100%;
-            animation: marquee 25s linear infinite; font-size: 11px;
-            color: #fbbf24; font-weight: 600; letter-spacing: 0.5px;
-        }
-        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
-        
         @keyframes radar-spin { 100% { transform: rotate(360deg); } }
         .radar-sweep { background: conic-gradient(from 0deg, transparent 70%, rgba(99, 102, 241, 0.8) 100%); animation: radar-spin 2s linear infinite; border-radius: 50%; }
+        
+        /* Note style custom scroll for small screens if needed */
+        .note-paper { background: #0f172a; border-left: 5px solid #f59e0b; border-radius: 8px; position: relative; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between p-3">
@@ -66,8 +57,8 @@
     <main class="w-full max-w-md my-auto py-2 relative z-0">
 
         <!-- HOME SCREEN -->
-        <div id="homeScreen" class="glass-card neon-glow rounded-3xl p-5 shadow-2xl text-center space-y-4">
-            <div class="w-16 h-16 bg-gradient-to-tr from-amber-500/20 to-orange-500/20 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-3xl neon-btn animate-pulse-fast border border-amber-500/40">
+        <div id="homeScreen" class="glass-card neon-glow rounded-3xl p-4 shadow-2xl text-center space-y-4">
+            <div class="w-16 h-16 bg-gradient-to-tr from-amber-500/20 to-orange-500/20 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-3xl neon-btn animate-pulse-fast border border-amber-500/40 mt-2">
                 <i class="fas fa-gamepad"></i>
             </div>
             <div>
@@ -75,14 +66,33 @@
                 <p class="text-[10px] text-slate-400 mt-1">₹20 की 1-Click एंट्री से बैटल खेलें और अनलिमिटेड इनाम जीतें!</p>
             </div>
 
-            <div class="marquee-container shadow-lg">
-                <div class="marquee-text">
-                    🔥 <span class="text-white">MEGA PRIZE POOL:</span> गेम में जितने ज्यादा लोग जुड़ेंगे, आपका इनाम उतना ही बड़ा होगा! 💸 अगर <span class="text-emerald-400">100 लोग खेलते हैं</span> तो VIP-1 को <span class="text-emerald-400">₹1,000+</span> मिलेगा। 🚀 सोचिये! अगर <span class="text-cyan-400">1 लाख (1,00,000) लोग खेलते हैं</span>, तो VIP-1 का इनाम <span class="text-amber-500">₹10,000 से ₹50,000+</span> तक जा सकता है! 🏆 तुरंत एंट्री लें और अपना लक आज़माएं!
-                </div>
+            <!-- NEW: STATIC NOTEBOOK BUSINESS PLAN -->
+            <div class="note-paper p-4 text-left shadow-lg mt-3">
+                <div class="absolute top-2 right-3 opacity-20 text-4xl"><i class="fas fa-clipboard-list text-amber-500"></i></div>
+                <h3 class="gaming-font text-[13px] font-bold text-amber-400 mb-3 border-b border-slate-700 pb-2 relative z-10"><i class="fas fa-book-open mr-1"></i> GYANPAY मास्टर प्लान (नोट)</h3>
+                
+                <ul class="space-y-3 text-[11px] text-slate-300 relative z-10 font-medium leading-snug">
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-emerald-500 mt-0.5 mr-2 text-sm"></i> 
+                        <span>हमारा सिस्टम पूरी तरह पारदर्शी है। <b>गेम में जितने ज्यादा लोग जुड़ेंगे, आपका इनाम उतना ही बड़ा होगा!</b></span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-users text-cyan-400 mt-0.5 mr-2 text-sm"></i> 
+                        <span>अगर <b>100 लोग</b> खेलते हैं, तो VIP-1 को <b>₹1,000+</b> मिलेगा।</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-users-cog text-indigo-400 mt-0.5 mr-2 text-sm"></i> 
+                        <span>अगर <b>10,000 लोग</b> खेलते हैं, तो VIP-1 को <b>₹10,000+</b> मिलेगा।</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-globe text-amber-400 mt-0.5 mr-2 text-sm"></i> 
+                        <span>अगर <b>1 लाख (1,00,000) लोग</b> खेलते हैं, तो VIP-1 का इनाम <b class="text-amber-400 text-[12px]">₹10,000 से ₹50,000+</b> तक जा सकता है! 🏆</span>
+                    </li>
+                </ul>
             </div>
 
             <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-amber-500/30 rounded-2xl p-3.5 text-left shadow-lg">
-                <h3 class="gaming-font text-[11px] font-bold text-amber-400 mb-2 border-b border-amber-500/20 pb-1.5"><i class="fas fa-bolt mr-1"></i> लाइव प्राइज पूल गणित</h3>
+                <h3 class="gaming-font text-[11px] font-bold text-amber-400 mb-2 border-b border-amber-500/20 pb-1.5"><i class="fas fa-calculator mr-1"></i> लाइव प्राइज पूल गणित</h3>
                 <div class="space-y-2">
                     <div class="bg-slate-950 border border-slate-800 p-2.5 rounded-xl flex items-center justify-between">
                         <div><p class="text-[10px] text-cyan-400 font-bold"><i class="fas fa-users mr-1"></i> 100 गेमर्स</p><p class="text-[8px] text-slate-500">पूल: ₹2000</p></div>
@@ -91,7 +101,7 @@
                     <div class="bg-slate-950 border border-amber-500/40 p-2.5 rounded-xl flex items-center justify-between relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-8 h-8 bg-amber-500/20 rounded-full blur-xl"></div>
                         <div><p class="text-[10px] text-amber-400 font-bold"><i class="fas fa-globe mr-1"></i> 1,00,000 गेमर्स</p><p class="text-[8px] text-slate-400">महा-पूल: ₹20,00,000+</p></div>
-                        <div class="text-right relative z-10"><p class="text-[10px] text-white font-bold">VIP 1: <span class="text-amber-400 animate-pulse drop-shadow-[0_0_5px_rgba(245,158,11,0.8)]">₹10,000 - ₹50,000+</span></p></div>
+                        <div class="text-right relative z-10"><p class="text-[10px] text-white font-bold">VIP 1: <span class="text-amber-400 drop-shadow-[0_0_5px_rgba(245,158,11,0.8)]">₹10K - ₹50K+</span></p></div>
                     </div>
                 </div>
             </div>
@@ -168,15 +178,25 @@
                 </div>
             </div>
 
+            <div class="bg-slate-950/80 border border-slate-800 p-3.5 rounded-2xl text-left space-y-2">
+                <p class="gaming-font font-bold text-white text-[11px]"><i class="fas fa-university text-amber-400 mr-1"></i> इंस्टेंट बैंक विड्रॉल</p>
+                <div class="flex space-x-2">
+                    <input type="text" id="userWithdrawUpi" placeholder="UPI ID (myupi@ybl)" class="w-3/5 bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-xs focus:outline-none focus:border-amber-500">
+                    <input type="number" id="userWithdrawAmount" placeholder="अमाउंट (₹)" class="w-2/5 bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-xs focus:outline-none focus:border-amber-500">
+                </div>
+                <button onclick="requestWithdrawal()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-90 text-white font-bold py-2 rounded-xl text-xs shadow">
+                    <i class="fas fa-paper-plane mr-1"></i> विड्रॉल रिक्वेस्ट एडमिन को भेजें
+                </button>
+            </div>
+
             <button onclick="clickPlayGame()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:opacity-95 text-slate-950 gaming-font font-black py-4 rounded-2xl transition shadow-lg text-sm tracking-wider neon-btn">
                 <i class="fas fa-play mr-2"></i> PLAY NOW (PAY ₹20)
             </button>
         </div>
 
-        <!-- NEW: WAITING LOBBY SCREEN -->
+        <!-- WAITING LOBBY SCREEN -->
         <div id="waitingScreen" class="hidden glass-card neon-glow rounded-3xl p-8 shadow-2xl text-center space-y-6">
             <h3 class="gaming-font text-lg font-black text-amber-400 animate-pulse">MATCHMAKING...</h3>
-            
             <div class="relative w-36 h-36 mx-auto flex items-center justify-center">
                 <div class="absolute inset-0 radar-sweep opacity-50"></div>
                 <div class="absolute inset-0 border border-indigo-500/30 rounded-full"></div>
@@ -186,9 +206,7 @@
                     <i class="fas fa-satellite-dish text-2xl text-indigo-400 animate-pulse"></i>
                 </div>
             </div>
-            
             <p class="text-[11px] text-slate-300 leading-relaxed">अन्य गेमर्स का इंतज़ार किया जा रहा है...<br><span class="text-rose-400 font-bold">कृपया वापस न जाएं या स्क्रीन बंद न करें!</span></p>
-            
             <div class="bg-slate-900 border border-slate-700 p-3.5 rounded-xl shadow-inner inline-block min-w-[120px]">
                 <p class="text-[10px] text-slate-400">लॉबी में गेमर्स</p>
                 <p class="text-3xl gaming-font font-bold text-white mt-1" id="waitingPlayerCount">1</p>
@@ -198,13 +216,14 @@
         <!-- QUIZ INTERFACE -->
         <div id="quizScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl">
             <div class="flex justify-between items-center mb-4">
-                <span id="qCounter" class="gaming-font text-xs font-bold text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">ROUND 1/10</span>
+                <span id="qCounter" class="gaming-font text-xs font-bold text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">ROUND 1/5</span>
                 <span class="gaming-font text-xs font-bold text-red-400 bg-red-500/10 px-3 py-1 rounded-full border border-red-500/30"><i class="fas fa-stopwatch mr-1"></i> <span id="qTimer">15</span>s</span>
             </div>
             <h3 id="qText" class="text-sm font-bold text-white mb-4 min-h-[45px] leading-relaxed">सवाल यहाँ लोड हो रहा है...</h3>
             <div id="optionsList" class="space-y-2.5"></div>
         </div>
 
+        <!-- RESULT SCREEN -->
         <div id="resultScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl text-center space-y-4">
             <div id="resIcon" class="w-16 h-16 rounded-full flex items-center justify-center mx-auto text-3xl"></div>
             <h3 id="resTitle" class="gaming-font text-lg font-bold text-white"></h3>
@@ -237,7 +256,46 @@
                 <button onclick="submitTopUpRequest()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-3 rounded-xl text-xs shadow-lg">टॉप-अप रिक्वेस्ट सबमिट करें</button>
             </div>
         </div>
+
+        <!-- PROFILE SCREEN -->
+        <div id="profileScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                <h3 class="gaming-font text-base font-bold text-emerald-400"><i class="fas fa-user-edit mr-2"></i> EDIT PROFILE</h3>
+                <button onclick="checkUserDashboardFlow()" class="text-slate-400 hover:text-white text-sm"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="space-y-3">
+                <label class="block text-slate-300 text-xs font-medium">नया गेमर नाम:</label>
+                <input type="text" id="editProfileName" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-sm">
+                <button onclick="saveProfileData()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs">सेव करें</button>
+            </div>
+        </div>
     </main>
+
+    <!-- CUSTOMER "MY COUPONS" MODAL -->
+    <div id="myCouponsModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-[75] flex items-center justify-center p-4">
+        <div class="glass-card neon-glow p-5 rounded-3xl max-w-sm w-full relative">
+            <button onclick="closeMyCoupons()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg"><i class="fas fa-times"></i></button>
+            <h4 class="gaming-font text-sm font-bold text-indigo-400 mb-2 flex items-center border-b border-slate-700 pb-2"><i class="fas fa-ticket-alt mr-2"></i> मेरे कूपन की हिस्ट्री</h4>
+            <p class="text-[9px] text-slate-400 mb-3 leading-tight">एडमिन द्वारा भेजे गए सभी कूपन यहाँ दिखेंगे। इसे कॉपी करें या इस पर क्लिक करें!</p>
+            <div id="myCouponsList" class="max-h-60 overflow-y-auto hide-scroll space-y-2 pr-1 mt-2"></div>
+            <button onclick="closeMyCoupons()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl text-xs font-bold mt-4 shadow-lg border border-slate-700">बंद करें</button>
+        </div>
+    </div>
+
+    <!-- MEGA REWARDS LIST MODAL -->
+    <div id="megaRewardsModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-[70] flex items-center justify-center p-4">
+        <div class="glass-card neon-glow p-5 rounded-3xl max-w-sm w-full relative">
+            <button onclick="closeMegaRewardsList()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg"><i class="fas fa-times"></i></button>
+            <h4 class="gaming-font text-sm font-bold text-amber-400 mb-2 flex items-center border-b border-slate-700 pb-2"><i class="fas fa-box-open mr-2"></i> बंपर मेगा कूपन इनाम लिस्ट</h4>
+            <div class="max-h-[60vh] overflow-y-auto hide-scroll space-y-2.5 pr-1 mt-4">
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800"><img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover"><span class="text-xs text-amber-400 font-bold ml-3">Sports Bike</span></div>
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800"><img src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover"><span class="text-xs text-white font-medium ml-3">Apple iPhone 15 Pro</span></div>
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800"><img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover"><span class="text-xs text-white font-medium ml-3">55-inch 4K Smart TV</span></div>
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800"><img src="https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover"><span class="text-xs text-white font-medium ml-3">Double Door Fridge</span></div>
+            </div>
+            <button onclick="closeMegaRewardsList()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-3 rounded-xl text-xs font-bold mt-4 shadow-lg border border-slate-700">बंद करें</button>
+        </div>
+    </div>
 
     <!-- MASTER ADMIN PANEL -->
     <div id="adminModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-2 overflow-y-auto">
@@ -267,7 +325,6 @@
                     </div>
                 </div>
 
-                <!-- NEW: LIVE ARENA CONTROLS (MATCHMAKING) -->
                 <div class="bg-gradient-to-br from-indigo-950 to-slate-950 p-3.5 rounded-2xl border border-indigo-500/40 space-y-2">
                     <h4 class="font-bold text-indigo-400"><i class="fas fa-satellite-dish mr-1"></i> लाइव एरीना (Matchmaking)</h4>
                     <p class="text-[8px] text-indigo-200/70">अगर कम लोग हैं और वे इंतज़ार कर रहे हैं, तो आप यहाँ से मैनुअली उनका गेम चालू कर सकते हैं। वे बिना वापस जाए गेम खेल पाएंगे।</p>
@@ -303,6 +360,33 @@
                             <div class="w-8 h-4 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-emerald-500"></div>
                         </label>
                     </div>
+                    <button onclick="saveAdminSettings()" class="w-full bg-amber-500 text-slate-950 font-bold py-2 rounded-xl">सेटिंग्स सेव करें</button>
+                </div>
+
+                <!-- ADVANCED COUPON GENERATOR -->
+                <div class="bg-gradient-to-br from-indigo-950 to-slate-950 p-3.5 rounded-2xl border border-indigo-500/40 space-y-2">
+                    <h4 class="font-bold text-indigo-400"><i class="fas fa-ticket-alt mr-1"></i> नया कूपन जनरेट करें</h4>
+                    <p class="text-[8px] text-indigo-200/70">₹20, ₹50 या कोई भी इनाम डालें। फोटो/लिंक ऑप्शनल है। कूपन नीचे इन्वेंटरी में सेव होगा।</p>
+                    
+                    <div class="grid grid-cols-2 gap-2 pt-1">
+                        <input type="text" id="couponCodeNew" placeholder="कूपन कोड (GIFT50)" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white uppercase text-[10px]">
+                        <select id="couponTypeNew" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px] outline-none">
+                            <option value="money">कैश (Wallet Money)</option>
+                            <option value="mega">गैजेट/सामान (Photo/Link)</option>
+                            <option value="empty">खाली (Better Luck)</option>
+                        </select>
+                        <input type="text" id="couponValueNew" placeholder="अमाउंट या इनाम का नाम (Earbuds)" class="w-full col-span-2 bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
+                        <input type="text" id="couponLinkNew" placeholder="प्रोडक्ट लिंक (URL) - Optional" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
+                        <input type="file" id="couponImageNew" accept="image/*" class="w-full bg-slate-900 border border-indigo-500/50 p-1.5 rounded-xl text-white text-[10px] file:mr-2 file:py-0.5 file:px-2 file:rounded-lg file:border-0 file:bg-indigo-600 file:text-white cursor-pointer" title="इनाम की फोटो (Optional)">
+                        <button onclick="createNewCouponAdvanced()" class="w-full col-span-2 bg-indigo-600 text-white font-bold py-2 rounded-xl shadow-lg mt-1">कूपन बनाकर इन्वेंटरी में डालें</button>
+                    </div>
+                </div>
+
+                <!-- COUPON INVENTORY & SENDER -->
+                <div class="bg-slate-950 p-3.5 rounded-2xl border border-amber-500/40 space-y-2 mt-2">
+                    <h4 class="font-bold text-amber-400"><i class="fas fa-box-open mr-1"></i> कूपन इन्वेंटरी (Lock / Send / Auto)</h4>
+                    <p class="text-[8px] text-slate-400">यहाँ से कूपन को लॉक करें, किसी खास नंबर पर भेजें या Auto दबाकर किसी रैंडम यूजर को गिफ्ट करें।</p>
+                    <div id="adminCouponInventory" class="max-h-56 overflow-y-auto hide-scroll space-y-2"></div>
                 </div>
 
                 <!-- WITHDRAWAL & TOPUP TABLES -->
@@ -314,12 +398,20 @@
         </div>
     </div>
 
-    <!-- Modals (Coupons, Images, etc. skipped for brevity, keeping script logic robust) -->
-    
+    <!-- IMAGE VIEW MODAL -->
+    <div id="screenshotModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-[60] flex items-center justify-center p-3">
+        <div class="glass-card neon-glow p-4 rounded-3xl max-w-sm w-full text-center relative">
+            <button onclick="closeScreenshotModal()" class="absolute top-3 right-4 text-slate-400 hover:text-white text-lg"><i class="fas fa-times"></i></button>
+            <h4 id="ssModalTitle" class="gaming-font text-sm font-bold text-amber-400 mb-2">स्क्रीनशॉट</h4>
+            <div id="screenshotContainer" class="bg-slate-950 p-2 rounded-2xl border border-slate-800 mb-3 flex items-center justify-center min-h-[220px]"></div>
+            <button onclick="closeScreenshotModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl text-xs font-bold">बंद करें</button>
+        </div>
+    </div>
+
     <script>
         let db = JSON.parse(localStorage.getItem('gyanpay_master_db')) || {
             users: [], quiz: [], actionLogs: [], adminWallet: 0, withdrawals: [], 
-            arena: { status: 'waiting', players: [] }, // NEW ARENA DB OBJECT
+            arena: { status: 'waiting', players: [] },
             coupons: { "WELCOME20": { type: 'money', val: 20, locked: false, img: '', link: '' } },
             settings: { upi: "admin@upi", adminPin: "admin123", isLive: false, autoBankVerify: true }
         };
@@ -328,50 +420,53 @@
 
         let currentUser = JSON.parse(sessionStorage.getItem('gyanpay_curr_user')) || null;
         let isLoginMode = true; let qIndex = 0; let score = 0; let quizTimerInterval = null;
-        let arenaPollInterval = null; // NEW POLLING VARIABLE
+        let arenaPollInterval = null;
 
         window.onload = function() {
             if(!db.arena) { db.arena = { status: 'waiting', players: [] }; saveDB(); }
-            
             renderAdminTables();
-            document.getElementById('setAutoVerify').checked = db.settings.autoBankVerify;
+            let autoVerifyBox = document.getElementById('setAutoVerify');
+            if(autoVerifyBox && db.settings) autoVerifyBox.checked = db.settings.autoBankVerify || false;
+            
             if(currentUser) { 
                 renderUserNavigationState(); 
-                
-                // If user refreshed while in waiting lobby
                 let inLobby = db.arena.players.find(p => p.phone === currentUser.phone);
                 if(inLobby) {
                     if(db.arena.status === 'waiting') {
                         hideAllScreens(); document.getElementById('waitingScreen').classList.remove('hidden');
                         startArenaPolling();
                     } else if(db.arena.status === 'live') {
-                        // Match already started while they refreshed
                         hideAllScreens(); document.getElementById('quizScreen').classList.remove('hidden');
                         qIndex = 0; score = 0; loadQuizQuestion();
                     }
-                } else {
-                    checkUserDashboardFlow(); 
-                }
+                } else { checkUserDashboardFlow(); }
             } else { showHomeScreen(); }
             startAutoApproveChecker();
         }
 
         function startAutoApproveChecker() {
             setInterval(() => {
-                if(db.settings.autoBankVerify) {
+                if(db.settings && db.settings.autoBankVerify) {
                     let madeChanges = false;
                     db.users.forEach((u) => {
-                        if(u.pendingAmount > 0 && u.pendingSince && ((Date.now() - u.pendingSince) / 1000 / 60) >= 5) {
-                            let amt = u.pendingAmount; u.wallet = (u.wallet || 0) + amt; db.adminWallet = (db.adminWallet || 0) + amt;
-                            u.pendingAmount = 0; u.screenshot = ''; u.pendingSince = null; madeChanges = true;
+                        if(u.pendingAmount > 0 && u.pendingSince) {
+                            if(((Date.now() - u.pendingSince) / 1000 / 60) >= 5) {
+                                let amt = u.pendingAmount; u.wallet = (u.wallet || 0) + amt; db.adminWallet = (db.adminWallet || 0) + amt;
+                                u.pendingAmount = 0; u.screenshot = ''; u.pendingSince = null; madeChanges = true;
+                            }
                         }
                     });
-                    if(madeChanges) { saveDB(); if(currentUser && !document.getElementById('waitingScreen').classList.contains('hidden')==false) checkUserDashboardFlow(); renderAdminTables(); }
+                    if(madeChanges) { 
+                        saveDB(); 
+                        let waitingScr = document.getElementById('waitingScreen');
+                        if(currentUser && waitingScr && waitingScr.classList.contains('hidden')) { checkUserDashboardFlow(); } 
+                        renderAdminTables(); 
+                    }
                 }
             }, 10000); 
         }
 
-        function hideAllScreens() { ['homeScreen', 'authScreen', 'userDashboard', 'profileScreen', 'topUpScreen', 'quizScreen', 'resultScreen', 'waitingScreen'].forEach(id => { document.getElementById(id).classList.add('hidden'); }); }
+        function hideAllScreens() { ['homeScreen', 'authScreen', 'userDashboard', 'profileScreen', 'topUpScreen', 'quizScreen', 'resultScreen', 'waitingScreen'].forEach(id => { let el = document.getElementById(id); if(el) el.classList.add('hidden'); }); }
         function showHomeScreen() { hideAllScreens(); document.getElementById('homeScreen').classList.remove('hidden'); document.getElementById('headerAuthButtons').classList.remove('hidden'); document.getElementById('headerUserLogout').classList.add('hidden'); }
 
         function renderUserNavigationState() {
@@ -429,7 +524,6 @@
             let uWallet = parseFloat(currentUser.wallet) || 0;
             if(uWallet < 20) { alert('वॉलेट में ₹20 नहीं हैं। कृपया टॉप-अप (Add Money) करें!'); openTopUpScreen(); return; }
             
-            // Check if already in arena to prevent double fee
             if(!db.arena) db.arena = { status: 'waiting', players: [] };
             let alreadyIn = db.arena.players.find(p => p.phone === currentUser.phone);
             
@@ -444,8 +538,6 @@
             }
             
             saveDB(); renderUserNavigationState();
-            
-            // Show Waiting Screen instead of playing immediately
             hideAllScreens(); 
             document.getElementById('waitingScreen').classList.remove('hidden');
             startArenaPolling();
@@ -459,33 +551,34 @@
                 db = JSON.parse(localStorage.getItem('gyanpay_master_db')); // Refresh DB
                 updateWaitingScreenUI();
                 
-                // If admin clicked Start
                 if(db.arena && db.arena.status === 'live') {
                     clearInterval(arenaPollInterval);
                     hideAllScreens();
                     document.getElementById('quizScreen').classList.remove('hidden');
                     qIndex = 0; score = 0; loadQuizQuestion();
                 }
-            }, 1500); // Check every 1.5s
+            }, 1500); 
         }
 
         function updateWaitingScreenUI() {
             if(!db.arena) return;
-            document.getElementById('waitingPlayerCount').innerText = db.arena.players.length;
+            let countLabel = document.getElementById('waitingPlayerCount');
+            if(countLabel) countLabel.innerText = db.arena.players.length;
             
-            // Also update admin panel if open
-            if(document.getElementById('adminModal').classList.contains('hidden') === false) {
-                document.getElementById('adminArenaWaitCount').innerText = db.arena.players.length;
+            if(document.getElementById('adminModal') && document.getElementById('adminModal').classList.contains('hidden') === false) {
+                let adminWait = document.getElementById('adminArenaWaitCount');
+                if(adminWait) adminWait.innerText = db.arena.players.length;
                 let statSpan = document.getElementById('adminArenaStatusText');
-                if(db.arena.status === 'live') {
-                    statSpan.innerText = '🟢 LIVE RUNNING'; statSpan.className = 'text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30';
-                } else {
-                    statSpan.innerText = '⏳ WAITING LOBBY'; statSpan.className = 'text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30';
+                if(statSpan) {
+                    if(db.arena.status === 'live') {
+                        statSpan.innerText = '🟢 LIVE RUNNING'; statSpan.className = 'text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30';
+                    } else {
+                        statSpan.innerText = '⏳ WAITING LOBBY'; statSpan.className = 'text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30';
+                    }
                 }
             }
         }
 
-        // ADMIN CONTROLS FOR ARENA
         function startLiveArenaMatch() {
             if(!db.arena || db.arena.players.length === 0) { alert('लॉबी में अभी कोई गेमर नहीं है!'); return; }
             if(db.arena.status === 'live') { alert('गेम पहले से ही लाइव चल रहा है!'); return; }
@@ -503,9 +596,6 @@
             }
         }
 
-        // ============================================
-        // QUIZ LOGIC
-        // ============================================
         function loadQuizQuestion() {
             if(qIndex >= 5 || qIndex >= db.quiz.length) { finishQuizGame(); return; }
             let q = db.quiz[qIndex];
@@ -526,7 +616,6 @@
             let idx = db.users.findIndex(x => x.phone === currentUser.phone);
             if(rewardMoney > 0) { db.users[idx].wallet = (db.users[idx].wallet || 0) + rewardMoney; db.users[idx].gamesWon = (db.users[idx].gamesWon || 0) + 1; }
             
-            // Remove user from active arena players since they finished
             if(db.arena && db.arena.players) {
                 db.arena.players = db.arena.players.filter(p => p.phone !== currentUser.phone);
             }
@@ -546,28 +635,239 @@
         }
 
         // ============================================
-        // ADMIN PANEL LOGIC 
+        // COUPONS
+        // ============================================
+        function openMyCoupons() {
+            document.getElementById('myCouponsModal').classList.remove('hidden');
+            let listDiv = document.getElementById('myCouponsList');
+            if(!currentUser.myCoupons) currentUser.myCoupons = [];
+            
+            if(currentUser.myCoupons.length === 0) {
+                listDiv.innerHTML = `<div class="bg-slate-900 p-3 rounded-lg text-center border border-slate-800"><p class="text-[10px] text-slate-500">अभी आपको कोई कूपन नहीं मिला है।</p></div>`;
+            } else {
+                let html = '';
+                currentUser.myCoupons.forEach((c) => {
+                    let statusColor = c.status === 'Used' ? 'text-slate-500 line-through' : 'text-emerald-400 font-bold';
+                    let clickAct = c.status !== 'Used' ? `onclick="fillCoupon('${c.code}')"` : '';
+                    let pointerCls = c.status !== 'Used' ? 'cursor-pointer hover:bg-slate-800' : 'opacity-60';
+                    
+                    html += `
+                    <div ${clickAct} class="bg-slate-900 p-2.5 rounded-lg flex justify-between items-center border border-slate-800 ${pointerCls} transition">
+                        <div>
+                            <p class="text-xs text-white gaming-font tracking-widest ${statusColor}">${c.code}</p>
+                            <p class="text-[8px] text-slate-400">Date: ${c.date}</p>
+                        </div>
+                        <div class="text-[10px]">
+                            ${c.status === 'Used' ? '<span class="text-red-400">Used</span>' : '<span class="text-indigo-400"><i class="fas fa-hand-pointer"></i> Use</span>'}
+                        </div>
+                    </div>`;
+                });
+                listDiv.innerHTML = html;
+            }
+        }
+        function fillCoupon(code) { document.getElementById('couponInput').value = code; closeMyCoupons(); }
+        function closeMyCoupons() { document.getElementById('myCouponsModal').classList.add('hidden'); }
+
+        function openMegaRewardsList() { document.getElementById('megaRewardsModal').classList.remove('hidden'); }
+        function closeMegaRewardsList() { document.getElementById('megaRewardsModal').classList.add('hidden'); }
+
+        function applyCoupon() {
+            let code = document.getElementById('couponInput').value.trim().toUpperCase();
+            if(!code) return;
+            
+            if(db.coupons && db.coupons[code]) {
+                let cp = db.coupons[code];
+                if(cp.locked) { alert('यह कूपन अभी एडमिन द्वारा लॉक (Lock) किया गया है। कृपया बाद में प्रयास करें!'); return; }
+
+                let idx = db.users.findIndex(x => x.phone === currentUser.phone);
+
+                if(cp.type === 'empty') {
+                    alert('Better Luck Next Time! इस कूपन में कुछ नहीं निकला। 😅');
+                } else if(cp.type === 'mega') {
+                    showMegaWinPopup(cp.val, cp.img, cp.link);
+                } else {
+                    db.users[idx].wallet = (db.users[idx].wallet || 0) + parseFloat(cp.val);
+                    alert(`कूपन सफल! ₹${cp.val} वॉलेट में जुड़ गए।`);
+                }
+                
+                if(db.users[idx].myCoupons) {
+                    let myC = db.users[idx].myCoupons.find(c => c.code === code);
+                    if(myC) myC.status = 'Used';
+                }
+                
+                delete db.coupons[code]; 
+                currentUser = db.users[idx]; saveDB(); checkUserDashboardFlow();
+                document.getElementById('couponInput').value = '';
+            } else { alert('अमान्य या इस्तेमाल हो चुका कूपन!'); }
+        }
+
+        function showMegaWinPopup(reward, imgStr, linkStr) {
+            hideAllScreens(); let resScreen = document.getElementById('resultScreen'); resScreen.classList.remove('hidden');
+            let resIcon = document.getElementById('resIcon'); 
+            
+            if(imgStr) {
+                resIcon.innerHTML = `<img src="${imgStr}" class="w-full h-full object-cover rounded-full">`;
+                resIcon.className = "w-28 h-28 rounded-full flex items-center justify-center mx-auto border-4 border-amber-400 neon-btn animate-bounce shadow-xl";
+            } else {
+                resIcon.innerHTML = '<i class="fas fa-gift text-white"></i>'; 
+                resIcon.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto text-5xl bg-gradient-to-r from-amber-500 to-orange-600 border-4 border-amber-400 neon-btn animate-bounce";
+            }
+
+            document.getElementById('resTitle').innerText = `BUMPER JACKPOT!`; document.getElementById('resTitle').className = "gaming-font text-3xl font-black text-amber-400";
+            
+            let descHtml = `बधाई हो! आपने <b>${reward}</b> जीता है!<br>हमारी टीम डिलीवरी के लिए संपर्क करेगी।`;
+            if(linkStr) {
+                descHtml += `<br><a href="${linkStr}" target="_blank" class="inline-block mt-3 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-xs font-bold animate-pulse-fast border border-indigo-400 shadow-lg"><i class="fas fa-external-link-alt mr-1"></i> इनाम की डिटेल देखें</a>`;
+            }
+            document.getElementById('resDesc').innerHTML = descHtml;
+        }
+
+        // ============================================
+        // ADMIN PANEL
         // ============================================
         function toggleAdminModal() { document.getElementById('adminModal').classList.toggle('hidden'); if(!document.getElementById('adminModal').classList.contains('hidden')) { renderAdminTables(); updateWaitingScreenUI(); } }
         function verifyAdminPin() { if(document.getElementById('adminPinInput').value.trim() === (db.settings.adminPin || 'admin123') || document.getElementById('adminPinInput').value === 'admin') { document.getElementById('adminLoginView').classList.add('hidden'); document.getElementById('adminDashboardView').classList.remove('hidden'); } else alert('गलत पिन!'); }
         function logoutAdmin() { document.getElementById('adminLoginView').classList.remove('hidden'); document.getElementById('adminDashboardView').classList.add('hidden'); }
         function saveAdminSettings() { db.settings.autoBankVerify = document.getElementById('setAutoVerify').checked; saveDB(); alert('सेटिंग्स सेव हो गई!'); }
 
+        function createNewCouponAdvanced() {
+            let code = document.getElementById('couponCodeNew').value.trim().toUpperCase();
+            let type = document.getElementById('couponTypeNew').value;
+            let val = document.getElementById('couponValueNew').value.trim();
+            let link = document.getElementById('couponLinkNew').value.trim();
+            let fileInput = document.getElementById('couponImageNew');
+
+            if(!code) { alert('कूपन कोड लिखें!'); return; }
+
+            let saveCouponData = (imgBase64) => {
+                if(!db.coupons) db.coupons = {};
+                db.coupons[code] = { type: type, val: (type==='money' ? parseFloat(val) : val), img: imgBase64, link: link, locked: false };
+                
+                saveDB(); renderAdminTables();
+                alert(`कूपन '${code}' सफलतापूर्वक जनरेट होकर इन्वेंटरी में आ गया है!`);
+                
+                document.getElementById('couponCodeNew').value = ''; document.getElementById('couponValueNew').value = ''; 
+                document.getElementById('couponLinkNew').value = ''; document.getElementById('couponImageNew').value = '';
+            };
+
+            if(fileInput.files.length > 0) {
+                let reader = new FileReader(); reader.readAsDataURL(fileInput.files[0]);
+                reader.onload = function(e) {
+                    let img = new Image(); img.src = e.target.result;
+                    img.onload = function() {
+                        let canvas = document.createElement('canvas'); let ctx = canvas.getContext('2d');
+                        let maxWidth = 300; let scale = maxWidth / img.width;
+                        canvas.width = maxWidth; canvas.height = img.height * scale;
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        saveCouponData(canvas.toDataURL('image/jpeg', 0.6));
+                    }
+                }
+            } else { saveCouponData(''); }
+        }
+
+        function toggleCouponLock(code) {
+            if(db.coupons[code]) {
+                db.coupons[code].locked = !db.coupons[code].locked;
+                saveDB(); renderAdminTables();
+            }
+        }
+
+        function sendCouponManual(code) {
+            let phone = document.getElementById(`sendPhone_${code}`).value.trim();
+            if(!phone) { alert('गेमर का नंबर डालें!'); return; }
+            let uIdx = db.users.findIndex(u => u.phone === phone);
+            if(uIdx === -1) { alert('यह नंबर रजिस्टर्ड नहीं है!'); return; }
+            
+            if(!db.users[uIdx].myCoupons) db.users[uIdx].myCoupons = [];
+            db.users[uIdx].myCoupons.unshift({ code: code, date: new Date().toLocaleDateString(), status: 'Available' });
+            
+            if(db.coupons[code]) db.coupons[code].locked = false; 
+
+            saveDB(); renderAdminTables();
+            alert(`सक्सेस! कूपन ${code} सफलता से ${db.users[uIdx].name} को भेज दिया गया।`);
+            document.getElementById(`sendPhone_${code}`).value = '';
+        }
+
+        function sendCouponAuto(code) {
+            if(!db.users || db.users.length === 0) { alert('अभी सिस्टम में कोई यूजर नहीं है!'); return; }
+            
+            let randomIdx = Math.floor(Math.random() * db.users.length);
+            let luckyUser = db.users[randomIdx];
+            
+            if(!luckyUser.myCoupons) luckyUser.myCoupons = [];
+            luckyUser.myCoupons.unshift({ code: code, date: new Date().toLocaleDateString(), status: 'Available' });
+            
+            if(db.coupons[code]) db.coupons[code].locked = false;
+
+            saveDB(); renderAdminTables();
+            alert(`🎉 ऑटोमैटिक सरप्राइज! कूपन ${code} को रैंडमली '${luckyUser.name} (${luckyUser.phone})' को दे दिया गया है!`);
+        }
+
         function renderAdminTables() {
-            document.getElementById('adminTotalRevenue').innerText = `₹${db.adminWallet || 0}`;
-            document.getElementById('adminTotalUsers').innerText = db.users.length;
-            document.getElementById('adminOnlineUsers').innerText = db.users.filter(u => u.lastLogin && (Date.now() - u.lastLogin) < 15*60*1000).length || 1;
+            let revLabel = document.getElementById('adminTotalRevenue');
+            if(revLabel) revLabel.innerText = `₹${db.adminWallet || 0}`;
+            
+            let usrLabel = document.getElementById('adminTotalUsers');
+            if(usrLabel) usrLabel.innerText = db.users.length;
+            
+            let onlLabel = document.getElementById('adminOnlineUsers');
+            if(onlLabel) onlLabel.innerText = db.users.filter(u => u.lastLogin && (Date.now() - u.lastLogin) < 15*60*1000).length || 1;
+
+            let cBody = document.getElementById('adminCouponInventory');
+            if(cBody) {
+                if(!db.coupons || Object.keys(db.coupons).length === 0) {
+                    cBody.innerHTML = `<p class="text-xs text-slate-500 text-center py-2">इन्वेंटरी में कोई कूपन नहीं है। नया बनाएं!</p>`;
+                } else {
+                    let cHtml = '';
+                    Object.keys(db.coupons).forEach(code => {
+                        let c = db.coupons[code];
+                        let lockBtn = c.locked 
+                            ? `<button onclick="toggleCouponLock('${code}')" class="bg-red-500/20 text-red-400 border border-red-500 px-2 py-1 rounded-lg text-[9px] font-bold"><i class="fas fa-lock mr-1"></i> Locked</button>` 
+                            : `<button onclick="toggleCouponLock('${code}')" class="bg-emerald-500/20 text-emerald-400 border border-emerald-500 px-2 py-1 rounded-lg text-[9px] font-bold"><i class="fas fa-unlock mr-1"></i> Unlocked</button>`;
+                        
+                        let valDisplay = c.type === 'money' ? `₹${c.val} Cash` : `${c.val} (Gadget)`;
+
+                        cHtml += `
+                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-700">
+                            <div class="flex justify-between items-center mb-2">
+                                <div>
+                                    <span class="text-[11px] font-bold text-amber-400 tracking-wider">${code}</span><br>
+                                    <span class="text-[9px] text-slate-400">${valDisplay}</span>
+                                </div>
+                                ${lockBtn}
+                            </div>
+                            <div class="flex space-x-1.5 mt-1 border-t border-slate-800 pt-2">
+                                <input type="text" id="sendPhone_${code}" placeholder="नंबर" class="w-[45%] bg-slate-950 border border-slate-800 rounded-lg p-1.5 text-[9px] text-white focus:outline-none">
+                                <button onclick="sendCouponManual('${code}')" class="w-[25%] bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-[9px] font-bold transition"><i class="fas fa-paper-plane mr-1"></i> Send</button>
+                                <button onclick="sendCouponAuto('${code}')" class="w-[30%] bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 rounded-lg text-[9px] font-black transition"><i class="fas fa-dice mr-1"></i> Auto</button>
+                            </div>
+                        </div>`;
+                    });
+                    cBody.innerHTML = cHtml;
+                }
+            }
 
             let wBody = document.getElementById('adminWithdrawTable');
-            if(!db.withdrawals || db.withdrawals.length === 0) wBody.innerHTML = `<tr><td class="py-2 text-center text-slate-500 text-[10px]">कोई रिक्वेस्ट नहीं</td></tr>`;
-            else {
-                let wHtml = '';
-                db.withdrawals.forEach((w, i) => { wHtml += `<tr class="border-b border-rose-900/30"><td class="py-1"><b>${w.name}</b> <span class="text-[8px] text-slate-400">(${w.phone})</span><br><span class="text-[9px] text-rose-400">UPI: ${w.upi}</span><br><span class="text-[9px] font-bold text-white">₹${w.amount}</span></td><td class="text-right align-middle"><button onclick="approveWithdrawal(${i})" class="bg-emerald-600 text-white px-2 py-1 rounded text-[9px]">Paid</button></td></tr>`; });
-                wBody.innerHTML = wHtml;
+            if(wBody) {
+                if(!db.withdrawals || db.withdrawals.length === 0) wBody.innerHTML = `<tr><td class="py-2 text-center text-slate-500 text-[10px]">कोई रिक्वेस्ट नहीं</td></tr>`;
+                else {
+                    let wHtml = '';
+                    db.withdrawals.forEach((w, i) => { wHtml += `<tr class="border-b border-rose-900/30"><td class="py-1"><b>${w.name}</b> <span class="text-[8px] text-slate-400">(${w.phone})</span><br><span class="text-[9px] text-rose-400">UPI: ${w.upi}</span><br><span class="text-[9px] font-bold text-white">₹${w.amount}</span></td><td class="text-right align-middle"><button onclick="approveWithdrawal(${i})" class="bg-emerald-600 text-white px-2 py-1 rounded text-[9px]">Paid</button></td></tr>`; });
+                    wBody.innerHTML = wHtml;
+                }
             }
         }
 
         function approveWithdrawal(idx) { let w = db.withdrawals[idx]; db.withdrawals.splice(idx, 1); saveDB(); renderAdminTables(); alert('विड्रॉल अप्रूव हो गया!'); }
+        
+        // Other Helpers
+        function requestWithdrawal() { let upiId = document.getElementById('userWithdrawUpi').value.trim(); let amount = parseFloat(document.getElementById('userWithdrawAmount').value) || 0; if(!upiId || amount <= 0) { alert('कृपया सही अमाउंट दर्ज करें!'); return; } if(amount > (currentUser.wallet || 0)) { alert('अपर्याप्त वॉलेट बैलेंस!'); return; } let idx = db.users.findIndex(x => x.phone === currentUser.phone); db.users[idx].wallet -= amount; currentUser = db.users[idx]; if(!db.withdrawals) db.withdrawals = []; db.withdrawals.unshift({ phone: currentUser.phone, name: currentUser.name, upi: upiId, amount: amount, time: new Date().getTime() }); saveDB(); checkUserDashboardFlow(); alert('विड्रॉल रिक्वेस्ट भेज दी गई है!'); }
+        function openTopUpScreen() { hideAllScreens(); document.getElementById('topUpScreen').classList.remove('hidden'); setTopUpAmount(100); }
+        function setTopUpAmount(amt) { document.getElementById('customTopUpAmt').value = amt; updateQRForTopup(); }
+        function updateQRForTopup() { let el = document.getElementById('displayTopUpText'); if(el) el.innerText = `₹${document.getElementById('customTopUpAmt').value || 0}`; }
+        function submitTopUpRequest() { let amt = parseFloat(document.getElementById('customTopUpAmt').value); if(!amt || amt <= 0) return; let fileInput = document.getElementById('topUpScreenshot'); if(fileInput.files.length === 0) { alert('स्क्रीनशॉट अपलोड करें!'); return; } let reader = new FileReader(); reader.readAsDataURL(fileInput.files[0]); reader.onload = function(e) { let img = new Image(); img.src = e.target.result; img.onload = function() { let canvas = document.createElement('canvas'); let ctx = canvas.getContext('2d'); canvas.width = 200; canvas.height = (img.height * 200) / img.width; ctx.drawImage(img, 0, 0, canvas.width, canvas.height); let idx = db.users.findIndex(x => x.phone === currentUser.phone); db.users[idx].pendingAmount = amt; db.users[idx].screenshot = canvas.toDataURL('image/jpeg', 0.5); db.users[idx].pendingSince = Date.now(); saveDB(); currentUser = db.users[idx]; checkUserDashboardFlow(); alert('रिक्वेस्ट भेज दी गई है!'); } } }
+        function openProfileScreen() { hideAllScreens(); document.getElementById('profileScreen').classList.remove('hidden'); document.getElementById('editProfileName').value = currentUser.name; }
+        function saveProfileData() { let newName = document.getElementById('editProfileName').value.trim(); if(newName) { db.users.find(x => x.phone === currentUser.phone).name = newName; saveDB(); checkUserDashboardFlow(); alert('नाम अपडेट हो गया!'); } }
     </script>
 </body>
 </html>
