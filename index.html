@@ -139,7 +139,7 @@
             </div>
         </div>
 
-        <!-- USER DASHBOARD / GAMING HUB -->
+        <!-- USER DASHBOARD -->
         <div id="userDashboard" class="hidden glass-card neon-glow rounded-3xl p-5 shadow-2xl text-center space-y-4">
             
             <div class="flex items-center space-x-3 bg-gradient-to-br from-slate-900 to-slate-950 p-3.5 rounded-2xl border border-slate-800 shadow-md relative overflow-hidden">
@@ -217,7 +217,7 @@
             </button>
         </div>
 
-        <!-- TOP-UP SCREEN (ADD MONEY) -->
+        <!-- TOP-UP SCREEN -->
         <div id="topUpScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl text-center space-y-4">
             <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                 <h3 class="gaming-font text-sm font-bold text-amber-400"><i class="fas fa-coins mr-1"></i> WALLET TOP-UP</h3>
@@ -268,6 +268,7 @@
             <div id="optionsList" class="space-y-2.5"></div>
         </div>
 
+        <!-- RESULT SCREEN -->
         <div id="resultScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl text-center space-y-4">
             <div id="resIcon" class="w-16 h-16 rounded-full flex items-center justify-center mx-auto text-3xl"></div>
             <h3 id="resTitle" class="gaming-font text-lg font-bold text-white"></h3>
@@ -291,24 +292,68 @@
         </div>
     </div>
 
-    <!-- MEGA REWARDS LIST MODAL -->
+    <!-- MEGA REWARDS LIST MODAL (NOW WITH REAL IMAGES) -->
     <div id="megaRewardsModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-[70] flex items-center justify-center p-4">
         <div class="glass-card neon-glow p-5 rounded-3xl max-w-sm w-full relative">
             <button onclick="closeMegaRewardsList()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg"><i class="fas fa-times"></i></button>
             <h4 class="gaming-font text-sm font-bold text-amber-400 mb-2 flex items-center border-b border-slate-700 pb-2"><i class="fas fa-box-open mr-2"></i> बंपर मेगा कूपन इनाम लिस्ट</h4>
-            <div class="max-h-[55vh] overflow-y-auto hide-scroll space-y-2 pr-1 mt-3">
-                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-motorcycle text-amber-400 w-6 text-center text-lg"></i> <span class="text-xs text-amber-400 font-bold ml-2">Sports Bike (Bumper Prize)</span></div>
-                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-mobile-alt text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Apple iPhone 15 Pro / 5G Mobile</span></div>
-                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-tv text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">55-inch 4K Smart TV</span></div>
-                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-snowflake text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Double Door Fridge (फ्रिज)</span></div>
-                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-sink text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Washing Machine</span></div>
-                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-fan text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Air Cooler (कूलर)</span></div>
-                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-clock text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Smartwatch & Premium Watch</span></div>
-                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-blender text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Juicer Mixer Grinder</span></div>
-                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-fire text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Induction Cooktop & Heater</span></div>
-                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-burn text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Gas Stove & Cylinder</span></div>
+            
+            <!-- List with Real Images -->
+            <div class="max-h-[60vh] overflow-y-auto hide-scroll space-y-2.5 pr-1 mt-4">
+                
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800 hover:border-amber-500/50 transition">
+                    <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover border border-slate-700 shadow-md">
+                    <span class="text-xs text-amber-400 font-bold ml-3">Sports Bike (Bumper Prize)</span>
+                </div>
+                
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800 hover:border-amber-500/50 transition">
+                    <img src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover border border-slate-700 shadow-md">
+                    <span class="text-xs text-white font-medium ml-3">Apple iPhone 15 Pro / 5G Mobile</span>
+                </div>
+                
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800 hover:border-amber-500/50 transition">
+                    <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover border border-slate-700 shadow-md">
+                    <span class="text-xs text-white font-medium ml-3">55-inch 4K Smart TV</span>
+                </div>
+                
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800 hover:border-amber-500/50 transition">
+                    <img src="https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover border border-slate-700 shadow-md">
+                    <span class="text-xs text-white font-medium ml-3">Double Door Fridge (फ्रिज)</span>
+                </div>
+                
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800 hover:border-amber-500/50 transition">
+                    <img src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover border border-slate-700 shadow-md">
+                    <span class="text-xs text-white font-medium ml-3">Washing Machine</span>
+                </div>
+                
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800 hover:border-amber-500/50 transition">
+                    <img src="https://images.unsplash.com/photo-1522771930-78848d9293e8?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover border border-slate-700 shadow-md">
+                    <span class="text-xs text-white font-medium ml-3">Air Cooler (कूलर / AC)</span>
+                </div>
+                
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800 hover:border-amber-500/50 transition">
+                    <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover border border-slate-700 shadow-md">
+                    <span class="text-xs text-white font-medium ml-3">Smartwatch & Premium Watch</span>
+                </div>
+                
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800 hover:border-amber-500/50 transition">
+                    <img src="https://images.unsplash.com/photo-1585515320310-259814833e62?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover border border-slate-700 shadow-md">
+                    <span class="text-xs text-white font-medium ml-3">Juicer Mixer Grinder</span>
+                </div>
+                
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800 hover:border-amber-500/50 transition">
+                    <img src="https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover border border-slate-700 shadow-md">
+                    <span class="text-xs text-white font-medium ml-3">Induction Cooktop & Heater</span>
+                </div>
+                
+                <div class="bg-slate-900 p-2 rounded-xl flex items-center border border-slate-800 hover:border-amber-500/50 transition">
+                    <img src="https://images.unsplash.com/photo-1590756254933-2873d72a83b6?w=150&h=150&fit=crop" class="w-14 h-14 rounded-lg object-cover border border-slate-700 shadow-md">
+                    <span class="text-xs text-white font-medium ml-3">Gas Stove & Cylinder</span>
+                </div>
+                
             </div>
-            <button onclick="closeMegaRewardsList()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl text-xs font-bold mt-4">बंद करें</button>
+            
+            <button onclick="closeMegaRewardsList()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-3 rounded-xl text-xs font-bold mt-4 shadow-lg border border-slate-700">बंद करें</button>
         </div>
     </div>
 
@@ -357,7 +402,7 @@
                     <button onclick="saveAdminSettings()" class="w-full bg-amber-500 text-slate-950 font-bold py-2 rounded-xl">सेटिंग्स सेव करें</button>
                 </div>
 
-                <!-- COUPON CREATOR (NOW WITH IMAGE & LINK UPLOAD) -->
+                <!-- COUPON CREATOR (IMAGE & LINK UPLOAD) -->
                 <div class="bg-gradient-to-br from-indigo-950 to-slate-950 p-3.5 rounded-2xl border border-indigo-500/40 space-y-2">
                     <h4 class="font-bold text-indigo-400"><i class="fas fa-ticket-alt mr-1"></i> एडवांस कूपन सेंडर (Image + Link)</h4>
                     <p class="text-[8px] text-indigo-200/70">कूपन के साथ आप प्रोडक्ट की फोटो और लिंक भी डाल सकते हैं, जो कस्टमर को जीतने पर दिखेगा।</p>
@@ -371,7 +416,7 @@
                         </select>
                         <input type="text" id="couponValueNew" placeholder="अमाउंट या इनाम का नाम (Bike)" class="w-full col-span-2 bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
                         
-                        <!-- New Fields for Image & Link -->
+                        <!-- Fields for Image & Link -->
                         <input type="text" id="couponLinkNew" placeholder="प्रोडक्ट लिंक (URL) - Optional" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
                         <input type="file" id="couponImageNew" accept="image/*" class="w-full bg-slate-900 border border-indigo-500/50 p-1.5 rounded-xl text-white text-[10px] file:mr-2 file:py-0.5 file:px-2 file:rounded-lg file:border-0 file:bg-indigo-600 file:text-white cursor-pointer" title="इनाम की फोटो अपलोड करें">
                         
@@ -380,7 +425,7 @@
                     </div>
                 </div>
 
-                <!-- WITHDRAWAL & TOPUP TABLES (Minified for display) -->
+                <!-- WITHDRAWAL & TOPUP TABLES -->
                 <div class="bg-slate-950 p-3.5 rounded-2xl border border-rose-500/30 space-y-2">
                     <h4 class="font-bold text-rose-400"><i class="fas fa-hand-holding-usd mr-1"></i> विड्रॉल रिक्वेस्ट्स</h4>
                     <div class="overflow-x-auto hide-scroll"><table class="w-full text-left"><tbody id="adminWithdrawTable"></tbody></table></div>
@@ -512,7 +557,6 @@
             } else { notice.classList.add('hidden'); }
         }
 
-        // CUSTOMER "MY COUPONS"
         function openMyCoupons() {
             document.getElementById('myCouponsModal').classList.remove('hidden');
             let listDiv = document.getElementById('myCouponsList');
@@ -557,7 +601,6 @@
                 if(cp.type === 'empty') {
                     alert('Better Luck Next Time! इस कूपन में कुछ नहीं निकला। 😅');
                 } else if(cp.type === 'mega') {
-                    // Send Image and Link dynamically to popup
                     showMegaWinPopup(cp.val, cp.img, cp.link);
                 } else {
                     db.users[idx].wallet = (db.users[idx].wallet || 0) + parseFloat(cp.val);
@@ -575,7 +618,6 @@
             } else { alert('अमान्य या एक्सपायर्ड कूपन!'); }
         }
 
-        // UPDATED: Dynamic Image & Link handling
         function showMegaWinPopup(reward, imgStr, linkStr) {
             hideAllScreens(); let resScreen = document.getElementById('resultScreen'); resScreen.classList.remove('hidden');
             let resIcon = document.getElementById('resIcon'); 
@@ -679,9 +721,6 @@
             }
         }
 
-        // ============================================
-        // ADMIN PANEL COUPON GENERATOR (UPDATED FOR IMAGE & LINK)
-        // ============================================
         function toggleAdminModal() { document.getElementById('adminModal').classList.toggle('hidden'); if(!document.getElementById('adminModal').classList.contains('hidden')) renderAdminTables(); }
         function verifyAdminPin() { if(document.getElementById('adminPinInput').value.trim() === (db.settings.adminPin || 'admin123') || document.getElementById('adminPinInput').value === 'admin') { document.getElementById('adminLoginView').classList.add('hidden'); document.getElementById('adminDashboardView').classList.remove('hidden'); } else alert('गलत पिन!'); }
         function logoutAdmin() { document.getElementById('adminLoginView').classList.remove('hidden'); document.getElementById('adminDashboardView').classList.add('hidden'); }
@@ -693,16 +732,13 @@
             let val = document.getElementById('couponValueNew').value.trim();
             let targetPhone = document.getElementById('couponAssignUser').value.trim();
             
-            // Get Image File and Link Text
             let link = document.getElementById('couponLinkNew').value.trim();
             let fileInput = document.getElementById('couponImageNew');
 
             if(!code) { alert('कूपन कोड लिखें!'); return; }
 
-            // Helper function to save coupon to DB once image is read (or empty)
             let saveCouponData = (imgBase64) => {
                 if(!db.coupons) db.coupons = {};
-                // Storing image and link into the coupon object
                 db.coupons[code] = { type: type, val: (type==='money' ? parseFloat(val) : val), img: imgBase64, link: link };
                 
                 if(targetPhone) {
@@ -719,13 +755,11 @@
                 }
                 
                 saveDB();
-                // Clear inputs
                 document.getElementById('couponCodeNew').value = ''; document.getElementById('couponValueNew').value = ''; 
                 document.getElementById('couponAssignUser').value = ''; document.getElementById('couponLinkNew').value = '';
                 document.getElementById('couponImageNew').value = '';
             };
 
-            // If admin uploaded an image, process it first
             if(fileInput.files.length > 0) {
                 let reader = new FileReader();
                 reader.readAsDataURL(fileInput.files[0]);
@@ -733,7 +767,6 @@
                     let img = new Image(); img.src = e.target.result;
                     img.onload = function() {
                         let canvas = document.createElement('canvas'); let ctx = canvas.getContext('2d');
-                        // Compress image so localstorage doesn't fill up
                         let maxWidth = 300; let scale = maxWidth / img.width;
                         canvas.width = maxWidth; canvas.height = img.height * scale;
                         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
@@ -741,7 +774,6 @@
                     }
                 }
             } else {
-                // Save without image
                 saveCouponData('');
             }
         }
