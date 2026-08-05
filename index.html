@@ -65,7 +65,7 @@
                 <p class="text-[10px] text-slate-400 mt-1">₹20 की 1-Click एंट्री से बैटल खेलें और अनलिमिटेड इनाम जीतें!</p>
             </div>
 
-            <!-- STATIC NOTEBOOK BUSINESS PLAN (UPDATED WITH CLEAR ₹20 ENTRY & PRIZES) -->
+            <!-- STATIC NOTEBOOK BUSINESS PLAN -->
             <div class="note-paper p-4 text-left shadow-lg mt-3">
                 <div class="absolute top-2 right-3 opacity-20 text-4xl"><i class="fas fa-clipboard-list text-amber-500"></i></div>
                 <h3 class="gaming-font text-[13px] font-bold text-amber-400 mb-3 border-b border-slate-700 pb-2 relative z-10"><i class="fas fa-book-open mr-1"></i> GYANPAY मास्टर प्लान (नोट)</h3>
@@ -154,7 +154,7 @@
                 </div>
                 <div class="flex flex-col space-y-2">
                     <button onclick="openTopUpScreen()" class="bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-400 font-bold py-2 rounded-lg text-xs transition"><i class="fas fa-plus-circle mr-1"></i> टॉप-अप वॉलेट</button>
-                    <button onclick="openProfileScreen()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2 rounded-lg text-xs transition"><i class="fas fa-user-edit mr-1"></i> एडिट प्रोफाइल</button>
+                    <button onclick="openProfileScreen()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2 rounded-lg text-xs transition"><i class="fas fa-user-edit mr-1"></i> एडिट प्रोफाइल / UPI</button>
                 </div>
             </div>
 
@@ -177,10 +177,11 @@
                 </div>
             </div>
 
+            <!-- WITHDRAWAL SECTION (NOW PREFILLS SAVED UPI) -->
             <div class="bg-slate-950/80 border border-slate-800 p-3.5 rounded-2xl text-left space-y-2">
                 <p class="gaming-font font-bold text-white text-[11px]"><i class="fas fa-university text-amber-400 mr-1"></i> इंस्टेंट बैंक विड्रॉल</p>
                 <div class="flex space-x-2">
-                    <input type="text" id="userWithdrawUpi" placeholder="UPI ID (myupi@ybl)" class="w-3/5 bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-xs focus:outline-none focus:border-amber-500">
+                    <input type="text" id="userWithdrawUpi" placeholder="UPI ID (अपना या दोस्त का)" class="w-3/5 bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-xs focus:outline-none focus:border-amber-500">
                     <input type="number" id="userWithdrawAmount" placeholder="अमाउंट (₹)" class="w-2/5 bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-xs focus:outline-none focus:border-amber-500">
                 </div>
                 <button onclick="requestWithdrawal()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-90 text-white font-bold py-2 rounded-xl text-xs shadow">
@@ -256,16 +257,25 @@
             </div>
         </div>
 
-        <!-- PROFILE SCREEN -->
+        <!-- PROFILE SCREEN (UPDATED FOR UPI) -->
         <div id="profileScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl space-y-4">
             <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                 <h3 class="gaming-font text-base font-bold text-emerald-400"><i class="fas fa-user-edit mr-2"></i> EDIT PROFILE</h3>
                 <button onclick="checkUserDashboardFlow()" class="text-slate-400 hover:text-white text-sm"><i class="fas fa-times"></i></button>
             </div>
             <div class="space-y-3">
-                <label class="block text-slate-300 text-xs font-medium">नया गेमर नाम:</label>
-                <input type="text" id="editProfileName" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-sm">
-                <button onclick="saveProfileData()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs">सेव करें</button>
+                <div>
+                    <label class="block text-slate-300 text-xs font-medium">गेमर का नाम:</label>
+                    <input type="text" id="editProfileName" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-sm mt-1">
+                </div>
+                <!-- NEW UPI SAVE/CHANGE FIELD -->
+                <div>
+                    <label class="block text-slate-300 text-xs font-medium">डिफ़ॉल्ट UPI ID (पैसे निकालने के लिए):</label>
+                    <input type="text" id="editProfileUpi" placeholder="friend@ybl या खुद का UPI" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-sm mt-1">
+                    <p class="text-[9px] text-slate-400 mt-1">आप इसे कभी भी बदलकर अपना नया UPI सेव कर सकते हैं।</p>
+                </div>
+                
+                <button onclick="saveProfileData()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs mt-2 shadow-lg">सेव करें</button>
             </div>
         </div>
     </main>
@@ -495,7 +505,8 @@
                 if(found) { currentUser = found; sessionStorage.setItem('gyanpay_curr_user', JSON.stringify(currentUser)); checkUserDashboardFlow(); } else { alert('गलत फोन नंबर या पासवर्ड!'); }
             } else {
                 if(db.users.some(u => u.phone === phone)) { alert('यह नंबर पहले से रजिस्टर्ड है!'); return; }
-                let newUser = { name, phone, pass, status: 'active', wallet: 0, pendingAmount: 0, gamesPlayed: 0, gamesWon: 0, myCoupons: [], lastLogin: Date.now() };
+                // Added default empty savedUpi field upon registration
+                let newUser = { name, phone, pass, status: 'active', wallet: 0, pendingAmount: 0, gamesPlayed: 0, gamesWon: 0, myCoupons: [], savedUpi: '', lastLogin: Date.now() };
                 db.users.push(newUser); saveDB(); currentUser = newUser; sessionStorage.setItem('gyanpay_curr_user', JSON.stringify(currentUser)); checkUserDashboardFlow();
             }
         }
@@ -506,6 +517,11 @@
             let u = db.users.find(x => x.phone === currentUser.phone) || currentUser;
             u.lastLogin = Date.now(); currentUser = u; saveDB(); 
             document.getElementById('userWalletBalance').innerText = `₹${currentUser.wallet || 0}`;
+            
+            // PREFILL SAVED UPI
+            let wUpiInput = document.getElementById('userWithdrawUpi');
+            if(wUpiInput) wUpiInput.value = currentUser.savedUpi || '';
+
             renderUserNavigationState(); document.getElementById('userDashboard').classList.remove('hidden');
             let notice = document.getElementById('pendingTopUpNotice');
             if(currentUser.pendingAmount && currentUser.pendingAmount > 0) { notice.classList.remove('hidden'); document.getElementById('pendingTopUpAmtDisplay').innerText = currentUser.pendingAmount; } else { notice.classList.add('hidden'); }
@@ -865,8 +881,32 @@
         function setTopUpAmount(amt) { document.getElementById('customTopUpAmt').value = amt; updateQRForTopup(); }
         function updateQRForTopup() { let el = document.getElementById('displayTopUpText'); if(el) el.innerText = `₹${document.getElementById('customTopUpAmt').value || 0}`; }
         function submitTopUpRequest() { let amt = parseFloat(document.getElementById('customTopUpAmt').value); if(!amt || amt <= 0) return; let fileInput = document.getElementById('topUpScreenshot'); if(fileInput.files.length === 0) { alert('स्क्रीनशॉट अपलोड करें!'); return; } let reader = new FileReader(); reader.readAsDataURL(fileInput.files[0]); reader.onload = function(e) { let img = new Image(); img.src = e.target.result; img.onload = function() { let canvas = document.createElement('canvas'); let ctx = canvas.getContext('2d'); canvas.width = 200; canvas.height = (img.height * 200) / img.width; ctx.drawImage(img, 0, 0, canvas.width, canvas.height); let idx = db.users.findIndex(x => x.phone === currentUser.phone); db.users[idx].pendingAmount = amt; db.users[idx].screenshot = canvas.toDataURL('image/jpeg', 0.5); db.users[idx].pendingSince = Date.now(); saveDB(); currentUser = db.users[idx]; checkUserDashboardFlow(); alert('रिक्वेस्ट भेज दी गई है!'); } } }
-        function openProfileScreen() { hideAllScreens(); document.getElementById('profileScreen').classList.remove('hidden'); document.getElementById('editProfileName').value = currentUser.name; }
-        function saveProfileData() { let newName = document.getElementById('editProfileName').value.trim(); if(newName) { db.users.find(x => x.phone === currentUser.phone).name = newName; saveDB(); checkUserDashboardFlow(); alert('नाम अपडेट हो गया!'); } }
+        
+        // PROFILE UPDATE LOGIC (NOW SAVES UPI)
+        function openProfileScreen() { 
+            hideAllScreens(); 
+            document.getElementById('profileScreen').classList.remove('hidden'); 
+            document.getElementById('editProfileName').value = currentUser.name || ''; 
+            document.getElementById('editProfileUpi').value = currentUser.savedUpi || '';
+        }
+        function saveProfileData() { 
+            let newName = document.getElementById('editProfileName').value.trim(); 
+            let newUpi = document.getElementById('editProfileUpi').value.trim();
+            let changed = false;
+            
+            let idx = db.users.findIndex(x => x.phone === currentUser.phone);
+            if(idx !== -1) {
+                if(newName) { db.users[idx].name = newName; changed = true; }
+                db.users[idx].savedUpi = newUpi; changed = true;
+                
+                if(changed) { 
+                    saveDB(); 
+                    currentUser = db.users[idx]; // Update local cache
+                    checkUserDashboardFlow(); 
+                    alert('प्रोफाइल और UPI सफलतापूर्वक सेव हो गया!'); 
+                }
+            }
+        }
     </script>
 </body>
 </html>
