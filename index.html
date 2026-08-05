@@ -180,7 +180,7 @@
                 </span>
             </div>
 
-            <!-- COUPON SHOP (UPDATED WITH MY COUPONS BUTTON) -->
+            <!-- COUPON SHOP -->
             <div class="bg-gradient-to-r from-slate-950/90 via-slate-900/90 to-slate-950/90 border border-amber-500/40 p-3.5 rounded-2xl text-left space-y-2 shadow-xl">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-2 text-amber-400 gaming-font font-bold text-xs"><i class="fas fa-gift"></i><span>स्पेशल कूपन 🎁</span></div>
@@ -357,21 +357,26 @@
                     <button onclick="saveAdminSettings()" class="w-full bg-amber-500 text-slate-950 font-bold py-2 rounded-xl">सेटिंग्स सेव करें</button>
                 </div>
 
-                <!-- COUPON CREATOR (NOW WITH ASSIGN TO USER FEATURE) -->
+                <!-- COUPON CREATOR (NOW WITH IMAGE & LINK UPLOAD) -->
                 <div class="bg-gradient-to-br from-indigo-950 to-slate-950 p-3.5 rounded-2xl border border-indigo-500/40 space-y-2">
-                    <h4 class="font-bold text-indigo-400"><i class="fas fa-ticket-alt mr-1"></i> कूपन सेंडर (Send to Customer)</h4>
-                    <p class="text-[8px] text-indigo-200/70">आप किसी खास नंबर को चुनकर कूपन उसके अकाउंट की हिस्ट्री में भेज सकते हैं।</p>
+                    <h4 class="font-bold text-indigo-400"><i class="fas fa-ticket-alt mr-1"></i> एडवांस कूपन सेंडर (Image + Link)</h4>
+                    <p class="text-[8px] text-indigo-200/70">कूपन के साथ आप प्रोडक्ट की फोटो और लिंक भी डाल सकते हैं, जो कस्टमर को जीतने पर दिखेगा।</p>
                     
                     <div class="grid grid-cols-2 gap-2 pt-1">
                         <input type="text" id="couponCodeNew" placeholder="कूपन कोड (FREE20)" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white uppercase text-[10px]">
                         <select id="couponTypeNew" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px] outline-none">
                             <option value="money">कैश (Wallet Money)</option>
-                            <option value="mega">बंपर इनाम (Bike/TV)</option>
+                            <option value="mega">बंपर इनाम (Image/Link)</option>
                             <option value="empty">खाली (Better Luck)</option>
                         </select>
-                        <input type="text" id="couponValueNew" placeholder="अमाउंट या इनाम का नाम" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
-                        <input type="text" id="couponAssignUser" placeholder="गेमर का मोबाइल नंबर" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
-                        <button onclick="createNewCouponAdvanced()" class="w-full col-span-2 bg-indigo-600 text-white font-bold py-2 rounded-xl shadow-lg">कूपन जनरेट करें और भेजें</button>
+                        <input type="text" id="couponValueNew" placeholder="अमाउंट या इनाम का नाम (Bike)" class="w-full col-span-2 bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
+                        
+                        <!-- New Fields for Image & Link -->
+                        <input type="text" id="couponLinkNew" placeholder="प्रोडक्ट लिंक (URL) - Optional" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
+                        <input type="file" id="couponImageNew" accept="image/*" class="w-full bg-slate-900 border border-indigo-500/50 p-1.5 rounded-xl text-white text-[10px] file:mr-2 file:py-0.5 file:px-2 file:rounded-lg file:border-0 file:bg-indigo-600 file:text-white cursor-pointer" title="इनाम की फोटो अपलोड करें">
+                        
+                        <input type="text" id="couponAssignUser" placeholder="गेमर का मोबाइल नंबर" class="w-full col-span-2 bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
+                        <button onclick="createNewCouponAdvanced()" class="w-full col-span-2 bg-indigo-600 text-white font-bold py-2 rounded-xl shadow-lg mt-1">कूपन जनरेट करें और भेजें</button>
                     </div>
                 </div>
 
@@ -428,7 +433,6 @@
             startAutoApproveChecker();
         }
 
-        // ... (Auto Approve, Authentication and Game Flow logic remains perfectly the same)
         function startAutoApproveChecker() {
             setInterval(() => {
                 if(db.settings.autoBankVerify) {
@@ -508,14 +512,10 @@
             } else { notice.classList.add('hidden'); }
         }
 
-        // ============================================
-        // MY COUPONS HISTORY SYSTEM (CUSTOMER SIDE)
-        // ============================================
+        // CUSTOMER "MY COUPONS"
         function openMyCoupons() {
             document.getElementById('myCouponsModal').classList.remove('hidden');
             let listDiv = document.getElementById('myCouponsList');
-            
-            // Ensure array exists
             if(!currentUser.myCoupons) currentUser.myCoupons = [];
             
             if(currentUser.myCoupons.length === 0) {
@@ -541,12 +541,7 @@
                 listDiv.innerHTML = html;
             }
         }
-        
-        function fillCoupon(code) {
-            document.getElementById('couponInput').value = code;
-            closeMyCoupons();
-        }
-
+        function fillCoupon(code) { document.getElementById('couponInput').value = code; closeMyCoupons(); }
         function closeMyCoupons() { document.getElementById('myCouponsModal').classList.add('hidden'); }
 
         function openMegaRewardsList() { document.getElementById('megaRewardsModal').classList.remove('hidden'); }
@@ -562,13 +557,13 @@
                 if(cp.type === 'empty') {
                     alert('Better Luck Next Time! इस कूपन में कुछ नहीं निकला। 😅');
                 } else if(cp.type === 'mega') {
-                    showMegaWinPopup(cp.val);
+                    // Send Image and Link dynamically to popup
+                    showMegaWinPopup(cp.val, cp.img, cp.link);
                 } else {
                     db.users[idx].wallet = (db.users[idx].wallet || 0) + parseFloat(cp.val);
                     alert(`कूपन सफल! ₹${cp.val} वॉलेट में जुड़ गए।`);
                 }
                 
-                // Mark in My Coupons as Used if it exists
                 if(db.users[idx].myCoupons) {
                     let myC = db.users[idx].myCoupons.find(c => c.code === code);
                     if(myC) myC.status = 'Used';
@@ -580,14 +575,28 @@
             } else { alert('अमान्य या एक्सपायर्ड कूपन!'); }
         }
 
-        function showMegaWinPopup(reward) {
+        // UPDATED: Dynamic Image & Link handling
+        function showMegaWinPopup(reward, imgStr, linkStr) {
             hideAllScreens(); let resScreen = document.getElementById('resultScreen'); resScreen.classList.remove('hidden');
-            let resIcon = document.getElementById('resIcon'); resIcon.innerHTML = '<i class="fas fa-gift text-white"></i>'; resIcon.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto text-5xl bg-gradient-to-r from-amber-500 to-orange-600 border-4 border-amber-400 neon-btn animate-bounce";
+            let resIcon = document.getElementById('resIcon'); 
+            
+            if(imgStr) {
+                resIcon.innerHTML = `<img src="${imgStr}" class="w-full h-full object-cover rounded-full">`;
+                resIcon.className = "w-28 h-28 rounded-full flex items-center justify-center mx-auto border-4 border-amber-400 neon-btn animate-bounce shadow-xl";
+            } else {
+                resIcon.innerHTML = '<i class="fas fa-gift text-white"></i>'; 
+                resIcon.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto text-5xl bg-gradient-to-r from-amber-500 to-orange-600 border-4 border-amber-400 neon-btn animate-bounce";
+            }
+
             document.getElementById('resTitle').innerText = `BUMPER JACKPOT!`; document.getElementById('resTitle').className = "gaming-font text-3xl font-black text-amber-400";
-            document.getElementById('resDesc').innerHTML = `बधाई हो! आपने <b>${reward}</b> जीता है!<br>हमारी टीम डिलीवरी के लिए संपर्क करेगी।`;
+            
+            let descHtml = `बधाई हो! आपने <b>${reward}</b> जीता है!<br>हमारी टीम डिलीवरी के लिए संपर्क करेगी।`;
+            if(linkStr) {
+                descHtml += `<br><a href="${linkStr}" target="_blank" class="inline-block mt-3 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-xs font-bold animate-pulse-fast border border-indigo-400 shadow-lg"><i class="fas fa-external-link-alt mr-1"></i> इनाम की डिटेल देखें</a>`;
+            }
+            document.getElementById('resDesc').innerHTML = descHtml;
         }
 
-        // Rest of standard functions...
         function requestWithdrawal() {
             let upiId = document.getElementById('userWithdrawUpi').value.trim();
             let amount = parseFloat(document.getElementById('userWithdrawAmount').value) || 0;
@@ -671,7 +680,7 @@
         }
 
         // ============================================
-        // ADMIN PANEL COUPON GENERATOR & ASSIGNMENT
+        // ADMIN PANEL COUPON GENERATOR (UPDATED FOR IMAGE & LINK)
         // ============================================
         function toggleAdminModal() { document.getElementById('adminModal').classList.toggle('hidden'); if(!document.getElementById('adminModal').classList.contains('hidden')) renderAdminTables(); }
         function verifyAdminPin() { if(document.getElementById('adminPinInput').value.trim() === (db.settings.adminPin || 'admin123') || document.getElementById('adminPinInput').value === 'admin') { document.getElementById('adminLoginView').classList.add('hidden'); document.getElementById('adminDashboardView').classList.remove('hidden'); } else alert('गलत पिन!'); }
@@ -683,25 +692,58 @@
             let type = document.getElementById('couponTypeNew').value;
             let val = document.getElementById('couponValueNew').value.trim();
             let targetPhone = document.getElementById('couponAssignUser').value.trim();
+            
+            // Get Image File and Link Text
+            let link = document.getElementById('couponLinkNew').value.trim();
+            let fileInput = document.getElementById('couponImageNew');
 
             if(!code) { alert('कूपन कोड लिखें!'); return; }
-            if(!db.coupons) db.coupons = {};
-            db.coupons[code] = { type: type, val: (type==='money' ? parseFloat(val) : val) };
-            
-            if(targetPhone) {
-                let uIdx = db.users.findIndex(x => x.phone === targetPhone);
-                if(uIdx !== -1) {
-                    if(!db.users[uIdx].myCoupons) db.users[uIdx].myCoupons = [];
-                    db.users[uIdx].myCoupons.unshift({ code: code, date: new Date().toLocaleDateString(), status: 'Available' });
-                    alert(`कूपन '${code}' जनरेट हो गया और ${db.users[uIdx].name} के "मेरे कूपन" में भेज दिया गया!`);
+
+            // Helper function to save coupon to DB once image is read (or empty)
+            let saveCouponData = (imgBase64) => {
+                if(!db.coupons) db.coupons = {};
+                // Storing image and link into the coupon object
+                db.coupons[code] = { type: type, val: (type==='money' ? parseFloat(val) : val), img: imgBase64, link: link };
+                
+                if(targetPhone) {
+                    let uIdx = db.users.findIndex(x => x.phone === targetPhone);
+                    if(uIdx !== -1) {
+                        if(!db.users[uIdx].myCoupons) db.users[uIdx].myCoupons = [];
+                        db.users[uIdx].myCoupons.unshift({ code: code, date: new Date().toLocaleDateString(), status: 'Available' });
+                        alert(`कूपन '${code}' जनरेट हो गया और ${db.users[uIdx].name} के "मेरे कूपन" में भेज दिया गया!`);
+                    } else {
+                        alert(`गेमर का नंबर नहीं मिला! कूपन '${code}' जनरल पब्लिक के लिए जनरेट हो गया है।`);
+                    }
                 } else {
-                    alert(`गेमर का नंबर नहीं मिला! कूपन '${code}' जनरल पब्लिक के लिए जनरेट हो गया है।`);
+                    alert(`कूपन '${code}' जनरेट हो गया! (यह किसी को भेजा नहीं गया है, पब्लिक है)`);
+                }
+                
+                saveDB();
+                // Clear inputs
+                document.getElementById('couponCodeNew').value = ''; document.getElementById('couponValueNew').value = ''; 
+                document.getElementById('couponAssignUser').value = ''; document.getElementById('couponLinkNew').value = '';
+                document.getElementById('couponImageNew').value = '';
+            };
+
+            // If admin uploaded an image, process it first
+            if(fileInput.files.length > 0) {
+                let reader = new FileReader();
+                reader.readAsDataURL(fileInput.files[0]);
+                reader.onload = function(e) {
+                    let img = new Image(); img.src = e.target.result;
+                    img.onload = function() {
+                        let canvas = document.createElement('canvas'); let ctx = canvas.getContext('2d');
+                        // Compress image so localstorage doesn't fill up
+                        let maxWidth = 300; let scale = maxWidth / img.width;
+                        canvas.width = maxWidth; canvas.height = img.height * scale;
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        saveCouponData(canvas.toDataURL('image/jpeg', 0.6));
+                    }
                 }
             } else {
-                alert(`कूपन '${code}' जनरेट हो गया! (यह किसी को भेजा नहीं गया है, पब्लिक है)`);
+                // Save without image
+                saveCouponData('');
             }
-            saveDB();
-            document.getElementById('couponCodeNew').value = ''; document.getElementById('couponValueNew').value = ''; document.getElementById('couponAssignUser').value = '';
         }
 
         function renderAdminTables() {
