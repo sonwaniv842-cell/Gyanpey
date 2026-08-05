@@ -18,7 +18,6 @@
         .animate-pulse-fast { animation: pulse-fast 2s infinite; }
         .hide-scroll::-webkit-scrollbar { display: none; }
         
-        /* New Animated Notification Ticker */
         .marquee-container {
             width: 100%; overflow: hidden; white-space: nowrap; background: rgba(15, 23, 42, 0.9);
             border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 12px; padding: 8px 0;
@@ -76,7 +75,6 @@
                 <p class="text-[10px] text-slate-400 mt-1">₹20 की 1-Click एंट्री से बैटल खेलें और अनलिमिटेड इनाम जीतें!</p>
             </div>
 
-            <!-- THE MEGA SCROLLING NOTIFICATION TICKER -->
             <div class="marquee-container shadow-lg">
                 <div class="marquee-text">
                     🔥 <span class="text-white">MEGA PRIZE POOL:</span> गेम में जितने ज्यादा लोग जुड़ेंगे, आपका इनाम उतना ही बड़ा होगा! 💸 अगर <span class="text-emerald-400">100 लोग खेलते हैं</span> तो VIP-1 को <span class="text-emerald-400">₹1,000+</span> मिलेगा। 🚀 सोचिये! अगर <span class="text-cyan-400">1 लाख (1,00,000) लोग खेलते हैं</span>, तो VIP-1 का इनाम <span class="text-amber-500">₹10,000 से ₹50,000+</span> तक जा सकता है! 🏆 तुरंत एंट्री लें और अपना लक आज़माएं!
@@ -186,7 +184,9 @@
             <div class="bg-gradient-to-r from-slate-950/90 via-slate-900/90 to-slate-950/90 border border-amber-500/40 p-3.5 rounded-2xl text-left space-y-2 shadow-xl">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-2 text-amber-400 gaming-font font-bold text-xs"><i class="fas fa-gift"></i><span>स्पेशल कूपन 🎁</span></div>
-                    <button onclick="openMegaRewardsList()" class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-2 py-1 rounded-lg border border-amber-500/30 hover:bg-amber-500/40">More <i class="fas fa-chevron-right ml-1"></i></button>
+                    <button onclick="openMegaRewardsList()" class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-2 py-1 rounded-lg border border-amber-500/30 hover:bg-amber-500/40 transition">
+                        More <i class="fas fa-chevron-right ml-1"></i>
+                    </button>
                 </div>
                 <div class="pt-1 flex space-x-2">
                     <input type="text" id="couponInput" placeholder="कूपन कोड दर्ज करें" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-white uppercase focus:outline-none focus:border-amber-500 tracking-widest">
@@ -271,18 +271,31 @@
         </div>
     </main>
 
-    <!-- MEGA REWARDS LIST MODAL -->
+    <!-- EXPANDED MEGA REWARDS LIST MODAL (THE "MORE" POPUP) -->
     <div id="megaRewardsModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-[70] flex items-center justify-center p-4">
         <div class="glass-card neon-glow p-5 rounded-3xl max-w-sm w-full relative">
             <button onclick="closeMegaRewardsList()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg"><i class="fas fa-times"></i></button>
             <h4 class="gaming-font text-sm font-bold text-amber-400 mb-2 flex items-center border-b border-slate-700 pb-2"><i class="fas fa-box-open mr-2"></i> बंपर मेगा कूपन इनाम लिस्ट</h4>
-            <div class="max-h-60 overflow-y-auto hide-scroll space-y-2 pr-1 mt-3">
-                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-mobile-alt text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Apple iPhone 15 Pro / 5G</span></div>
+            <p class="text-[9px] text-slate-400 mb-2 leading-tight">यह सभी बंपर इनाम एडमिन के सीक्रेट कूपन कोड से जीते जा सकते हैं!</p>
+            
+            <div class="max-h-[55vh] overflow-y-auto hide-scroll space-y-2 pr-1 mt-3">
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-motorcycle text-amber-400 w-6 text-center text-lg"></i> <span class="text-xs text-amber-400 font-bold ml-2">Sports Bike (Bumper Prize)</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-mobile-alt text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Apple iPhone 15 Pro / 5G Mobile</span></div>
                 <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-tv text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">55-inch 4K Smart TV</span></div>
-                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-snowflake text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Double Door Fridge</span></div>
-                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-motorcycle text-amber-400 w-6 text-center"></i> <span class="text-xs text-amber-400 font-bold ml-2">Sports Bike (Bumper)</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-snowflake text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Double Door Fridge (फ्रिज)</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-sink text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Washing Machine (वाशिंग मशीन)</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-fan text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Air Cooler (कूलर)</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-clock text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Smartwatch & Premium Watch (घड़ी)</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-blender text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Juicer Mixer Grinder (मिक्सर मशीन)</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-fire text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Induction Cooktop (इंडक्शन)</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-temperature-high text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Room Heater (हीटर)</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-burn text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Gas Stove & Cylinder (गैस चूल्हा)</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-wind text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Air Pump Machine (हवा मशीन)</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-water text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Water Pump Machine (पंप मशीन)</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-plug text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Electronic Appliances (इलेक्ट्रॉनिक मशीन)</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg flex items-center border border-slate-800"><i class="fas fa-mobile text-cyan-400 w-6 text-center"></i> <span class="text-xs text-white font-medium ml-2">Mobile Cover & Accessories</span></div>
             </div>
-            <button onclick="closeMegaRewardsList()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl text-xs font-bold mt-4">बंद करें</button>
+            <button onclick="closeMegaRewardsList()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl text-xs font-bold mt-4 shadow-lg border border-slate-700">बंद करें</button>
         </div>
     </div>
 
@@ -369,7 +382,7 @@
                         <input type="text" id="couponCodeNew" placeholder="कूपन कोड (FREE20)" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white uppercase text-[10px]">
                         <select id="couponTypeNew" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px] outline-none">
                             <option value="money">कैश (Wallet Money)</option>
-                            <option value="mega">बंपर इनाम (TV/Fridge)</option>
+                            <option value="mega">बंपर इनाम (Bike/TV)</option>
                             <option value="empty">खाली (Better Luck)</option>
                         </select>
                         <input type="text" id="couponValueNew" placeholder="अमाउंट या इनाम का नाम" class="w-full col-span-2 bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
@@ -512,9 +525,7 @@
             } else { notice.classList.add('hidden'); }
         }
 
-        // ============================================
         // IN-APP WITHDRAWAL SYSTEM
-        // ============================================
         function requestWithdrawal() {
             let upiId = document.getElementById('userWithdrawUpi').value.trim();
             let amount = parseFloat(document.getElementById('userWithdrawAmount').value) || 0;
@@ -539,9 +550,7 @@
             document.getElementById('userWithdrawUpi').value = ''; document.getElementById('userWithdrawAmount').value = '';
         }
 
-        // ============================================
         // 1-CLICK PLAY GAME (WALLET TO WALLET)
-        // ============================================
         function clickPlayGame() {
             if(!db.quiz || db.quiz.length < 10) { autoFillGeminiAIQuestionsSilent(); }
 
@@ -668,9 +677,7 @@
             }
         }
 
-        // ============================================
         // MASTER ADMIN PANEL LOGIC
-        // ============================================
         function toggleAdminModal() { document.getElementById('adminModal').classList.toggle('hidden'); if(document.getElementById('adminModal').classList.contains('hidden')==false) renderAdminTables(); }
         function verifyAdminPin() {
             let pin = document.getElementById('adminPinInput').value.trim();
