@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="2ZbgudfG9eMURVyG1uOCnzjWCv8sKq898-uU1UIxtwY" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GyanPay - Final Pure Shudh Arena</title>
+    <title>GyanPay - Final Pure Shudh Arena with Support Chat</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -55,14 +55,14 @@
         <!-- HOME SCREEN -->
         <div id="homeScreen" class="glass-card neon-glow rounded-3xl p-4 shadow-2xl text-center space-y-4">
             <div class="w-16 h-16 bg-gradient-to-tr from-amber-500/20 to-orange-500/20 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-3xl neon-btn animate-pulse-fast border border-amber-500/40 mt-2"><i class="fas fa-gamepad"></i></div>
-            <div><h2 class="gaming-font text-xl font-black text-white tracking-wide">SECURE ESPORTS ARENA</h2><p class="text-[10px] text-slate-400 mt-1">₹20 की फिक्स एंट्री से खेलें, सुरक्षित मुकाबले का आनंद लें!</p></div>
+            <div><h2 class="gaming-font text-xl font-black text-white tracking-wide">SECURE ESPORTS ARENA</h2><p class="text-[10px] text-slate-400 mt-1">₹20 की फिक्स एंट्री से खेलें, 24/7 लाइव सपोर्ट और एआई चैट का आनंद लें!</p></div>
 
             <div class="note-paper p-4 text-left shadow-lg mt-3">
                 <div class="absolute top-2 right-3 opacity-20 text-4xl"><i class="fas fa-clipboard-list text-amber-500"></i></div>
                 <h3 class="gaming-font text-[13px] font-bold text-amber-400 mb-3 border-b border-slate-700 pb-2 relative z-10"><i class="fas fa-book-open mr-1"></i> शुद्ध और सुरक्षित नियम</h3>
                 <ul class="space-y-3 text-[11px] text-slate-300 relative z-10 font-medium leading-snug">
-                    <li class="flex items-start"><i class="fas fa-bolt text-red-400 mt-0.5 mr-2 text-sm"></i> <span><b>इमर्जेंसी किल स्विच:</b> एडमिन के पास किसी भी समय गेम रोककर सबका पैसा तुरंत ऑटो-रिफंड करने की शक्ति है।</span></li>
-                    <li class="flex items-start"><i class="fas fa-robot text-cyan-400 mt-0.5 mr-2 text-sm"></i> <span><b>स्मार्ट बॉट & फंड:</b> अकेले खेलने पर सिस्टम मुकाबला पूरा करता है और फंड से मेगा वाउचर बनते हैं।</span></li>
+                    <li class="flex items-start"><i class="fas fa-headset text-cyan-400 mt-0.5 mr-2 text-sm"></i> <span><b>24/7 लाइव सपोर्ट & AI:</b> एडमिन के ऑफलाइन होने पर हमारा स्मार्ट AI हिंदी में चैट और स्क्रीनशॉट संभालता है।</span></li>
+                    <li class="flex items-start"><i class="fas fa-bolt text-red-400 mt-0.5 mr-2 text-sm"></i> <span><b>इमर्जेंसी किल स्विच:</b> एडमिन किसी भी समय गेम रोककर सबका पैसा तुरंत ऑटो-रिफंड कर सकता है।</span></li>
                     <li class="flex items-start"><i class="fas fa-shield-alt text-amber-400 mt-0.5 mr-2 text-sm"></i> <span><b>गारंटीड विड्रॉल:</b> 15-20 मिनट के भीतर विड्रॉल ट्रांसफर की सुविधा।</span></li>
                 </ul>
             </div>
@@ -108,6 +108,11 @@
             </div>
 
             <div id="pendingTopUpNotice" class="hidden bg-amber-500/20 border border-amber-500/50 text-amber-400 text-[11px] p-2.5 rounded-xl font-bold text-left flex items-center shadow-lg"><i class="fas fa-spinner fa-spin mr-2 text-lg"></i> <span>आपका ₹<span id="pendingTopUpAmtDisplay"></span> का टॉप-अप अप्रूवल पेंडिंग है।<br><span class="text-[9px] text-amber-200/80 font-normal">सिस्टम 5 मिनट के भीतर इसे ऑटोमैटिक वेरीफाई कर देगा।</span></span></div>
+
+            <!-- LIVE SUPPORT CHAT TRIGGER BUTTON -->
+            <button onclick="openSupportChat()" class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:opacity-90 text-white font-bold p-3 rounded-xl text-xs shadow-lg flex items-center justify-center transition">
+                <i class="fas fa-headset mr-2 text-base"></i> 24/7 लाइव सपोर्ट & AI चैट खोलें
+            </button>
 
             <div class="bg-gradient-to-r from-slate-950/90 via-slate-900/90 to-slate-950/90 border border-amber-500/40 p-3.5 rounded-2xl text-left space-y-2 shadow-xl">
                 <div class="flex items-center justify-between">
@@ -209,6 +214,26 @@
         </div>
     </main>
 
+    <!-- LIVE SUPPORT CHAT MODAL (USER VIEW) -->
+    <div id="supportChatModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-[85] flex items-center justify-center p-3">
+        <div class="glass-card neon-glow w-full max-w-sm rounded-3xl p-4 shadow-2xl relative flex flex-col h-[500px]">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-2 mb-2">
+                <h4 class="gaming-font text-xs font-bold text-cyan-400"><i class="fas fa-headset mr-1"></i> GyanPay Support & AI Assistant</h4>
+                <button onclick="closeSupportChat()" class="text-slate-400 hover:text-white text-base"><i class="fas fa-times"></i></button>
+            </div>
+            <!-- Chat Messages Container -->
+            <div id="chatMessagesBox" class="flex-1 overflow-y-auto hide-scroll space-y-2 p-2 text-xs bg-slate-950/80 rounded-xl border border-slate-800"></div>
+            <!-- Chat Input & Screenshot Section -->
+            <div class="pt-2 border-t border-slate-800 space-y-2">
+                <div class="flex items-center space-x-1">
+                    <input type="text" id="chatInputText" placeholder="अपना संदेश हिंदी में लिखें..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-cyan-500">
+                    <label class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2.5 rounded-xl cursor-pointer text-xs"><i class="fas fa-image"></i><input type="file" id="chatImageInput" accept="image/*" class="hidden" onchange="sendChatImage(this)"></label>
+                </div>
+                <button onclick="sendUserChatMessage()" class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold py-2 rounded-xl text-xs shadow">संदेश भेजें</button>
+            </div>
+        </div>
+    </div>
+
     <!-- REFERRAL MODAL -->
     <div id="referralModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-[75] flex items-center justify-center p-4">
         <div class="glass-card neon-glow p-5 rounded-3xl max-w-sm w-full relative border border-indigo-500/50">
@@ -260,6 +285,13 @@
                         <p class="text-[10px] text-slate-400">ऑनलाइन & रजिस्टर्ड</p>
                         <p class="text-base font-black text-amber-400 gaming-font"><span id="adminOnlineUsers" class="text-emerald-400">0</span> / <span id="adminTotalUsers">0</span></p>
                     </div>
+                </div>
+
+                <!-- LIVE SUPPORT CHAT INBOX FOR ADMIN -->
+                <div class="bg-gradient-to-br from-indigo-950 to-slate-950 p-3.5 rounded-2xl border border-indigo-500/50 space-y-3">
+                    <h4 class="font-bold text-indigo-400"><i class="fas fa-comments mr-1"></i> कस्टमर लाइव चैट & सपोर्ट इनबॉक्स</h4>
+                    <p class="text-[8px] text-slate-400">कस्टमर द्वारा भेजे गए मैसेज और स्क्रीनशॉट यहाँ देखें और सीधे रिप्लाई करें।</p>
+                    <div id="adminSupportInbox" class="max-h-48 overflow-y-auto hide-scroll space-y-2 bg-slate-900/90 p-2.5 rounded-xl border border-slate-800"></div>
                 </div>
 
                 <!-- EMERGENCY KILL SWITCH & AUTO REFUND PANEL -->
@@ -339,10 +371,10 @@
                     <div id="adminCouponInventory" class="max-h-56 overflow-y-auto hide-scroll space-y-2"></div>
                 </div>
 
-                <!-- WITHDRAWAL & TOPUP TABLES -->
+                <!-- WITHDRAWAL & TOPUP TABLES WITH UPI COPY BUTTON -->
                 <div class="bg-slate-950 p-3.5 rounded-2xl border border-rose-500/30 space-y-2">
                     <h4 class="font-bold text-rose-400"><i class="fas fa-hand-holding-usd mr-1"></i> विड्रॉल रिक्वेस्ट्स (Helpline)</h4>
-                    <p class="text-[8px] text-slate-400">15-20 मिनट गारंटी विड्रॉल। यूजर का स्क्रीनशॉट यहाँ चेक करें।</p>
+                    <p class="text-[8px] text-slate-400">15-20 मिनट गारंटी विड्रॉल। यूजर का स्क्रीनशॉट यहाँ चेक करें और UPI कॉपी करें।</p>
                     <div class="overflow-x-auto hide-scroll"><table class="w-full text-left"><tbody id="adminWithdrawTable"></tbody></table></div>
                 </div>
             </div>
@@ -363,6 +395,7 @@
             users: [], quiz: [], actionLogs: [], adminWallet: 0, botProfitWallet: 0, withdrawals: [], 
             arena: { status: 'waiting', players: [] },
             activeMatchParticipants: [], 
+            chatThreads: {}, // SUPPORT CHAT THREADS BY USER PHONE
             coupons: { "WELCOME20": { type: 'money', val: 20, locked: false, img: '', link: '' } },
             settings: { adminPin: "admin123", autoBankVerify: true, isLive: false, liveSince: null }
         };
@@ -377,6 +410,7 @@
             if(!db.settings) db.settings = { adminPin: "admin123", autoBankVerify: true, isLive: false, liveSince: null };
             if(!db.arena) db.arena = { status: 'waiting', players: [] };
             if(!db.activeMatchParticipants) db.activeMatchParticipants = [];
+            if(!db.chatThreads) db.chatThreads = {};
             if(typeof db.botProfitWallet === 'undefined') db.botProfitWallet = 0;
             if(!db.quiz || db.quiz.length === 0) { db.quiz = [{question:"भारत की राजधानी?", options:["मुंबई","दिल्ली","चेन्नई","कोलकाता"], correct:1}, { question: "क्रिकेट का भगवान किसे कहते हैं?", options: ["विराट कोहली", "धोनी", "सचिन तेंदुलकर", "रोहित शर्मा"], correct: 2 }, { question: "राष्ट्रीय पक्षी कौन सा है?", options: ["कबूतर", "तोता", "मोर", "बाज़"], correct: 2 }, { question: "भारत का राष्ट्रीय खेल क्या है?", options: ["क्रिकेट", "हॉकी", "फुटबॉल", "कबड्डी"], correct: 1 }, { question: "सूर्य के सबसे पास ग्रह कौन सा है?", options: ["मंगल", "बुध", "शुक्र", "पृथ्वी"], correct: 1 }]; saveDB(); }
             
@@ -490,6 +524,99 @@
         }
         function closeFreeEntryPopup() { document.getElementById('freeEntryPopup').classList.add('hidden'); }
 
+        // ============================================
+        // LIVE SUPPORT & AUTO AI CHAT SYSTEM (NEW FEATURE)
+        // ============================================
+        function openSupportChat() {
+            if(!currentUser) return;
+            document.getElementById('supportChatModal').classList.remove('hidden');
+            renderUserChatMessages();
+        }
+        function closeSupportChat() {
+            document.getElementById('supportChatModal').classList.add('hidden');
+        }
+
+        function sendUserChatMessage() {
+            let txtBox = document.getElementById('chatInputText');
+            let text = txtBox.value.trim();
+            if(!text) return;
+            
+            if(!db.chatThreads[currentUser.phone]) db.chatThreads[currentUser.phone] = [];
+            db.chatThreads[currentUser.phone].push({ sender: 'user', text: text, time: Date.now(), img: '' });
+            txtBox.value = '';
+            
+            // Auto AI Response in Hindi if Admin is offline or general query
+            let aiReply = getAutoAiResponse(text);
+            db.chatThreads[currentUser.phone].push({ sender: 'ai', text: aiReply, time: Date.now() + 500, img: '' });
+            
+            saveDB();
+            renderUserChatMessages();
+            renderAdminTables();
+        }
+
+        function sendChatImage(inputElem) {
+            if(inputElem.files && inputElem.files[0]) {
+                let reader = new FileReader();
+                reader.readAsDataURL(inputElem.files[0]);
+                reader.onload = function(e) {
+                    let imgData = e.target.result;
+                    if(!db.chatThreads[currentUser.phone]) db.chatThreads[currentUser.phone] = [];
+                    db.chatThreads[currentUser.phone].push({ sender: 'user', text: '[स्क्रीनशॉट भेजा गया]', time: Date.now(), img: imgData });
+                    
+                    // AI acknowledgment for screenshot
+                    db.chatThreads[currentUser.phone].push({ sender: 'ai', text: 'आपका स्क्रीनशॉट मिल गया है जी! एडमिन जल्द इसे वेरिफाई कर देगा।', time: Date.now() + 500, img: '' });
+                    
+                    saveDB();
+                    renderUserChatMessages();
+                    renderAdminTables();
+                }
+            }
+        }
+
+        function getAutoAiResponse(msg) {
+            msg = msg.toLowerCase();
+            if(msg.includes('विड्रॉल') || msg.includes('withdraw') || msg.includes('paisa') || msg.includes('पैसे')) {
+                return 'आपके विड्रॉल की रिक्वेस्ट मिल गई है। 15 से 20 मिनट के भीतर आपके बैंक खाते में पैसे भेज दिए जाएंगे (गारंटी)!';
+            } else if(msg.includes('hello') || msg.includes('hi') || msg.includes('नमस्ते')) {
+                return 'नमस्ते! GyanPay सपोर्ट में आपका स्वागत है। बताइए आपकी क्या सहायता कर सकते हैं?';
+            } else {
+                return 'नमस्ते जी! आपका मैसेज मिल गया है। एडमिन अभी ऑफलाइन हैं, इसलिए मैंने आपका जवाब दे दिया है। एडमिन ऑनलाइन आते ही आपकी बात का समाधान कर देंगे।';
+            }
+        }
+
+        function renderUserChatMessages() {
+            let box = document.getElementById('chatMessagesBox');
+            if(!box || !currentUser) return;
+            let thread = db.chatThreads[currentUser.phone] || [];
+            if(thread.length === 0) {
+                box.innerHTML = `<div class="text-center text-slate-500 py-4 text-[10px]">यहाँ सपोर्ट टीम या AI से बात करें।</div>`;
+                return;
+            }
+            let html = '';
+            thread.forEach(m => {
+                let bg = m.sender === 'user' ? 'bg-indigo-600/80 ml-auto text-right' : (m.sender === 'admin' ? 'bg-emerald-600/80 mr-auto' : 'bg-cyan-700/80 mr-auto');
+                let senderLabel = m.sender === 'user' ? 'आप' : (m.sender === 'admin' ? 'एडमिन' : 'AI सहायक');
+                let imgTag = m.img ? `<br><img src="${m.img}" class="max-h-28 rounded-lg mt-1 object-contain mx-auto">` : '';
+                html += `<div class="p-2.5 rounded-xl max-w-[80%] ${bg} text-white shadow"><p class="text-[9px] text-amber-300 font-bold mb-0.5">${senderLabel}</p><p class="text-[11px] leading-snug">${m.text}${imgTag}</p></div>`;
+            });
+            box.innerHTML = html;
+            box.scrollTop = box.scrollHeight;
+        }
+
+        // Admin replying to user chat
+        function adminSendReply(userPhone) {
+            let replyText = prompt("कस्टमर को भेजने के लिए उत्तर (Reply) लिखें:");
+            if(!replyText) return;
+            if(!db.chatThreads[userPhone]) db.chatThreads[userPhone] = [];
+            db.chatThreads[userPhone].push({ sender: 'admin', text: replyText, time: Date.now(), img: '' });
+            saveDB();
+            renderAdminTables();
+            alert('रिप्लाई सफलताપूर्वक भेज दिया गया है!');
+        }
+
+        // ============================================
+        // GAME & OTHER FEATURES
+        // ============================================
         function clickPlayGame() {
             if(!db.settings.isLive) { alert('अभी एरीना गेम एडमिन द्वारा बंद (OFF) कर दिया गया है। कृपया थोड़ी देर बाद प्रयास करें।'); return; }
 
@@ -654,6 +781,14 @@
         }
         function approveWithdrawal(idx) { let w = db.withdrawals[idx]; db.withdrawals.splice(idx, 1); saveDB(); renderAdminTables(); alert('विड्रॉल अप्रूव हो गया!'); }
 
+        function copyAdminUpi(upiText) {
+            navigator.clipboard.writeText(upiText).then(() => {
+                alert(`UPI ID '${upiText}' कॉपी हो गया है! अब आप इसे पेमेंट ऐप में पेस्ट कर सकते हैं।`);
+            }).catch(err => {
+                alert('कॉपी करने में विफल!');
+            });
+        }
+
         function toggleAdminModal() { document.getElementById('adminModal').classList.toggle('hidden'); if(!document.getElementById('adminModal').classList.contains('hidden')) { renderAdminTables(); } }
         function verifyAdminPin() { if(document.getElementById('adminPinInput').value.trim() === (db.settings.adminPin || 'admin123') || document.getElementById('adminPinInput').value === 'admin') { document.getElementById('adminLoginView').classList.add('hidden'); document.getElementById('adminDashboardView').classList.remove('hidden'); } else alert('गलत पिन!'); }
         function logoutAdmin() { document.getElementById('adminLoginView').classList.remove('hidden'); document.getElementById('adminDashboardView').classList.add('hidden'); }
@@ -690,6 +825,26 @@
                 refTable.innerHTML = refHtml;
             }
 
+            // Render Admin Support Chat Inbox
+            let inboxDiv = document.getElementById('adminSupportInbox');
+            if(inboxDiv) {
+                let threads = db.chatThreads || {};
+                let phoneKeys = Object.keys(threads);
+                if(phoneKeys.length === 0) {
+                    inboxDiv.innerHTML = `<p class="text-[10px] text-slate-500 text-center py-2">कोई चैट या सपोर्ट मैसेज नहीं है।</p>`;
+                } else {
+                    let chatHtml = '';
+                    phoneKeys.forEach(phone => {
+                        let msgs = threads[phone];
+                        let lastMsg = msgs[msgs.length - 1];
+                        let uObj = db.users.find(u => u.phone === phone);
+                        let uName = uObj ? uObj.name : phone;
+                        chatHtml += `<div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex justify-between items-center"><div><p class="text-[11px] font-bold text-amber-400">${uName} (${phone})</p><p class="text-[10px] text-slate-300 truncate max-w-[200px]">${lastMsg.sender}: ${lastMsg.text}</p></div><button onclick="adminSendReply('${phone}')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-2.5 py-1.5 rounded-lg text-[9px] font-bold">रिप्लाई दें</button></div>`;
+                    });
+                    inboxDiv.innerHTML = chatHtml;
+                }
+            }
+
             let wBody = document.getElementById('adminWithdrawTable');
             if(wBody) {
                 if(!db.withdrawals || db.withdrawals.length === 0) wBody.innerHTML = `<tr><td class="py-2 text-center text-slate-500 text-[10px]">कोई रिक्वेस्ट नहीं</td></tr>`;
@@ -697,7 +852,7 @@
                     let wHtml = '';
                     db.withdrawals.forEach((w, i) => { 
                         let ssBtn = w.screenshot ? `<button onclick="viewUserSS('${w.screenshot}')" class="bg-indigo-600 text-white px-2 py-1 rounded text-[9px] mr-1">SS देखें</button>` : '';
-                        wHtml += `<tr class="border-b border-rose-900/30"><td class="py-1"><b>${w.name}</b> <span class="text-[8px] text-slate-400">(${w.phone})</span><br><span class="text-[9px] text-rose-400">UPI: ${w.upi}</span><br><span class="text-[9px] font-bold text-white">₹${w.amount}</span></td><td class="text-right align-middle">${ssBtn}<button onclick="approveWithdrawal(${i})" class="bg-emerald-600 text-white px-2 py-1 rounded text-[9px]">Paid</button></td></tr>`; 
+                        wHtml += `<tr class="border-b border-rose-900/30"><td class="py-1"><b>${w.name}</b> <span class="text-[8px] text-slate-400">(${w.phone})</span><br><span class="text-[9px] text-rose-400">UPI: <span id="upiText_${i}">${w.upi}</span></span> <button onclick="copyAdminUpi('${w.upi}')" class="bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 px-1.5 py-0.5 rounded text-[8px] font-bold ml-1"><i class="fas fa-copy"></i> Copy</button><br><span class="text-[9px] font-bold text-white">₹${w.amount}</span></td><td class="text-right align-middle">${ssBtn}<button onclick="approveWithdrawal(${i})" class="bg-emerald-600 text-white px-2 py-1 rounded text-[9px]">Paid</button></td></tr>`; 
                     });
                     wBody.innerHTML = wHtml;
                 }
