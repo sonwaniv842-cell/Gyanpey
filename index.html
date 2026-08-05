@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="2ZbgudfG9eMURVyG1uOCnzjWCv8sKq898-uU1UIxtwY" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GyanPay - Final Pure Shudh Arena with Support Chat</title>
+    <title>GyanPay - Final Pure Shudh Arena with Advanced Coupon Control</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -55,15 +55,15 @@
         <!-- HOME SCREEN -->
         <div id="homeScreen" class="glass-card neon-glow rounded-3xl p-4 shadow-2xl text-center space-y-4">
             <div class="w-16 h-16 bg-gradient-to-tr from-amber-500/20 to-orange-500/20 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-3xl neon-btn animate-pulse-fast border border-amber-500/40 mt-2"><i class="fas fa-gamepad"></i></div>
-            <div><h2 class="gaming-font text-xl font-black text-white tracking-wide">SECURE ESPORTS ARENA</h2><p class="text-[10px] text-slate-400 mt-1">₹20 की फिक्स एंट्री से खेलें, 24/7 लाइव सपोर्ट और एआई चैट का आनंद लें!</p></div>
+            <div><h2 class="gaming-font text-xl font-black text-white tracking-wide">SECURE ESPORTS ARENA</h2><p class="text-[10px] text-slate-400 mt-1">₹20 की फिक्स एंट्री से खेलें, सुरक्षित मुकाबले का आनंद लें!</p></div>
 
             <div class="note-paper p-4 text-left shadow-lg mt-3">
                 <div class="absolute top-2 right-3 opacity-20 text-4xl"><i class="fas fa-clipboard-list text-amber-500"></i></div>
                 <h3 class="gaming-font text-[13px] font-bold text-amber-400 mb-3 border-b border-slate-700 pb-2 relative z-10"><i class="fas fa-book-open mr-1"></i> शुद्ध और सुरक्षित नियम</h3>
                 <ul class="space-y-3 text-[11px] text-slate-300 relative z-10 font-medium leading-snug">
+                    <li class="flex items-start"><i class="fas fa-lock text-amber-400 mt-0.5 mr-2 text-sm"></i> <span><b>एडमिन कूपन कंट्रोल:</b> बाइक, कार, फ्रिज जैसे बड़े इनामों को एडमिन लॉक या अनलॉक कर सकता है।</span></li>
                     <li class="flex items-start"><i class="fas fa-headset text-cyan-400 mt-0.5 mr-2 text-sm"></i> <span><b>24/7 लाइव सपोर्ट & AI:</b> एडमिन के ऑफलाइन होने पर हमारा स्मार्ट AI हिंदी में चैट और स्क्रीनशॉट संभालता है।</span></li>
                     <li class="flex items-start"><i class="fas fa-bolt text-red-400 mt-0.5 mr-2 text-sm"></i> <span><b>इमर्जेंसी किल स्विच:</b> एडमिन किसी भी समय गेम रोककर सबका पैसा तुरंत ऑटो-रिफंड कर सकता है।</span></li>
-                    <li class="flex items-start"><i class="fas fa-shield-alt text-amber-400 mt-0.5 mr-2 text-sm"></i> <span><b>गारंटीड विड्रॉल:</b> 15-20 मिनट के भीतर विड्रॉल ट्रांसफर की सुविधा।</span></li>
                 </ul>
             </div>
             <button onclick="openAuth('login')" class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:opacity-95 text-slate-950 gaming-font font-black py-4 rounded-2xl transition shadow-lg neon-btn text-sm tracking-wider"><i class="fas fa-rocket mr-1"></i> ENTER ARENA (LOGIN)</button>
@@ -352,22 +352,26 @@
                     <div id="adminQuizList" class="max-h-40 overflow-y-auto hide-scroll"></div>
                 </div>
 
-                <!-- ADVANCED COUPON GENERATOR -->
+                <!-- ADVANCED COUPON GENERATOR (BIKE, CAR, INDUCTION, FRIDGE, ETC WITH LOCK/UNLOCK & MANUAL SEND) -->
                 <div class="bg-gradient-to-br from-indigo-950 to-slate-950 p-3.5 rounded-2xl border border-indigo-500/40 space-y-2">
-                    <h4 class="font-bold text-indigo-400"><i class="fas fa-ticket-alt mr-1"></i> नया कूपन जनरेट करें</h4>
+                    <h4 class="font-bold text-indigo-400"><i class="fas fa-ticket-alt mr-1"></i> नया कूपन जनरेट करें (महंगे इनाम/वाउचर)</h4>
                     <div class="grid grid-cols-2 gap-2 pt-1">
-                        <input type="text" id="couponCodeNew" placeholder="कूपन कोड (GIFT50)" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white uppercase text-[10px]">
-                        <select id="couponTypeNew" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px] outline-none"><option value="money">कैश (Wallet Money)</option><option value="mega">गैजेट/सामान (Photo/Link)</option><option value="empty">खाली (Better Luck)</option></select>
-                        <input type="text" id="couponValueNew" placeholder="अमाउंट या इनाम का नाम (Earbuds)" class="w-full col-span-2 bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
+                        <input type="text" id="couponCodeNew" placeholder="कूपन कोड (BIKE2026)" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white uppercase text-[10px]">
+                        <select id="couponTypeNew" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px] outline-none">
+                            <option value="mega">मेगा इनाम (Bike, Car, Fridge)</option>
+                            <option value="money">कैश (Wallet Money)</option>
+                            <option value="empty">खाली (Better Luck)</option>
+                        </select>
+                        <input type="text" id="couponValueNew" placeholder="इनाम का नाम (जैसे: Sports Bike / Fridge)" class="w-full col-span-2 bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
                         <input type="text" id="couponLinkNew" placeholder="प्रोडक्ट लिंक (URL) - Optional" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
                         <input type="file" id="couponImageNew" accept="image/*" class="w-full bg-slate-900 border border-indigo-500/50 p-1.5 rounded-xl text-white text-[10px] file:mr-2 file:py-0.5 file:px-2 file:rounded-lg file:border-0 file:bg-indigo-600 file:text-white cursor-pointer" title="इनाम की फोटो (Optional)">
                         <button onclick="createNewCouponAdvanced()" class="w-full col-span-2 bg-indigo-600 text-white font-bold py-2 rounded-xl shadow-lg mt-1">कूपन बनाकर इन्वेंटरी में डालें</button>
                     </div>
                 </div>
 
-                <!-- COUPON INVENTORY & SENDER -->
+                <!-- COUPON INVENTORY & SENDER (LOCK/UNLOCK, MANUAL SEND TO NUMBER, AUTO) -->
                 <div class="bg-slate-950 p-3.5 rounded-2xl border border-amber-500/40 space-y-2 mt-2">
-                    <h4 class="font-bold text-amber-400"><i class="fas fa-box-open mr-1"></i> कूपन इन्वेंटरी (Lock / Send / Auto)</h4>
+                    <h4 class="font-bold text-amber-400"><i class="fas fa-box-open mr-1"></i> कूपन इन्वेंटरी (Lock / Unlock & Manual Send)</h4>
                     <div id="adminCouponInventory" class="max-h-56 overflow-y-auto hide-scroll space-y-2"></div>
                 </div>
 
@@ -395,8 +399,8 @@
             users: [], quiz: [], actionLogs: [], adminWallet: 0, botProfitWallet: 0, withdrawals: [], 
             arena: { status: 'waiting', players: [] },
             activeMatchParticipants: [], 
-            chatThreads: {}, // SUPPORT CHAT THREADS BY USER PHONE
-            coupons: { "WELCOME20": { type: 'money', val: 20, locked: false, img: '', link: '' } },
+            chatThreads: {}, 
+            coupons: { "WELCOME20": { type: 'money', val: 20, locked: false, img: '', link: '' }, "BIKEWIN": { type: 'mega', val: 'Sports Bike', locked: true, img: '', link: '' } },
             settings: { adminPin: "admin123", autoBankVerify: true, isLive: false, liveSince: null }
         };
 
@@ -524,9 +528,7 @@
         }
         function closeFreeEntryPopup() { document.getElementById('freeEntryPopup').classList.add('hidden'); }
 
-        // ============================================
-        // LIVE SUPPORT & AUTO AI CHAT SYSTEM (NEW FEATURE)
-        // ============================================
+        // LIVE SUPPORT & AUTO AI CHAT SYSTEM
         function openSupportChat() {
             if(!currentUser) return;
             document.getElementById('supportChatModal').classList.remove('hidden');
@@ -545,7 +547,6 @@
             db.chatThreads[currentUser.phone].push({ sender: 'user', text: text, time: Date.now(), img: '' });
             txtBox.value = '';
             
-            // Auto AI Response in Hindi if Admin is offline or general query
             let aiReply = getAutoAiResponse(text);
             db.chatThreads[currentUser.phone].push({ sender: 'ai', text: aiReply, time: Date.now() + 500, img: '' });
             
@@ -563,7 +564,6 @@
                     if(!db.chatThreads[currentUser.phone]) db.chatThreads[currentUser.phone] = [];
                     db.chatThreads[currentUser.phone].push({ sender: 'user', text: '[स्क्रीनशॉट भेजा गया]', time: Date.now(), img: imgData });
                     
-                    // AI acknowledgment for screenshot
                     db.chatThreads[currentUser.phone].push({ sender: 'ai', text: 'आपका स्क्रीनशॉट मिल गया है जी! एडमिन जल्द इसे वेरिफाई कर देगा।', time: Date.now() + 500, img: '' });
                     
                     saveDB();
@@ -603,7 +603,6 @@
             box.scrollTop = box.scrollHeight;
         }
 
-        // Admin replying to user chat
         function adminSendReply(userPhone) {
             let replyText = prompt("कस्टमर को भेजने के लिए उत्तर (Reply) लिखें:");
             if(!replyText) return;
@@ -611,12 +610,9 @@
             db.chatThreads[userPhone].push({ sender: 'admin', text: replyText, time: Date.now(), img: '' });
             saveDB();
             renderAdminTables();
-            alert('रिप्लाई सफलताપूर्वक भेज दिया गया है!');
+            alert('रिप्लाई सफलतापूर्वक भेज दिया गया है!');
         }
 
-        // ============================================
-        // GAME & OTHER FEATURES
-        // ============================================
         function clickPlayGame() {
             if(!db.settings.isLive) { alert('अभी एरीना गेम एडमिन द्वारा बंद (OFF) कर दिया गया है। कृपया थोड़ी देर बाद प्रयास करें।'); return; }
 
@@ -746,10 +742,10 @@
             if(fund < 20) { alert('बॉट फंड में अभी पर्याप्त राशि नहीं है!'); return; }
             let voucherCode = "MEGAPRIZE" + Math.floor(Math.random() * 900 + 100);
             if(!db.coupons) db.coupons = {};
-            db.coupons[voucherCode] = { type: 'mega', val: 'Mega Gift Voucher (₹' + fund + ')', img: '', link: '', locked: false };
+            db.coupons[voucherCode] = { type: 'mega', val: 'Mega Gift Voucher (₹' + fund + ')', img: '', link: '', locked: true }; // Locked by default for safety
             db.botProfitWallet = 0; 
             saveDB(); renderAdminTables();
-            alert(`सफलता! बॉट फंड से '${voucherCode}' मेगा वाउचर जनरेट कर कूपन इन्वेंटरी में डाल दिया गया है!`);
+            alert(`सफलता! बॉट फंड से '${voucherCode}' मेगा वाउचर (लॉक स्थिति में) जनरेट कर इन्वेंटरी में डाल दिया गया है!`);
         }
 
         function requestWithdrawal() { 
@@ -809,6 +805,88 @@
             document.getElementById('newAdminPinInput').value = '';
         }
 
+        // ADVANCED COUPON INVENTORY & MANUAL SENDER FUNCTIONS
+        function createNewCouponAdvanced() {
+            let code = document.getElementById('couponCodeNew').value.trim().toUpperCase(); 
+            let type = document.getElementById('couponTypeNew').value; 
+            let val = document.getElementById('couponValueNew').value.trim(); 
+            let link = document.getElementById('couponLinkNew').value.trim(); 
+            let fileInput = document.getElementById('couponImageNew');
+            
+            if(!code || !val) { alert('कृपया कूपन कोड और इनाम का नाम/अमाउंट भरें!'); return; }
+            
+            let saveCouponData = (imgBase64) => { 
+                if(!db.coupons) db.coupons = {}; 
+                // Newly created mega items like Bike, Car, Fridge are LOCKED by default so they don't leak automatically!
+                db.coupons[code] = { type: type, val: (type==='money' ? parseFloat(val) : val), img: imgBase64, link: link, locked: true }; 
+                saveDB(); 
+                renderAdminTables(); 
+                alert(`कूपन '${code}' सफलतापूर्वक (Locked अवस्था में) इन्वेंटरी में जोड़ दिया गया है!`); 
+                document.getElementById('couponCodeNew').value=''; 
+                document.getElementById('couponValueNew').value=''; 
+                document.getElementById('couponLinkNew').value=''; 
+            };
+
+            if(fileInput.files.length > 0) { 
+                let reader = new FileReader(); 
+                reader.readAsDataURL(fileInput.files[0]); 
+                reader.onload = function(e) { 
+                    let img = new Image(); 
+                    img.src = e.target.result; 
+                    img.onload = function() { 
+                        let canvas = document.createElement('canvas'); 
+                        let ctx = canvas.getContext('2d'); 
+                        canvas.width = 300; 
+                        canvas.height = img.height * (300/img.width); 
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height); 
+                        saveCouponData(canvas.toDataURL('image/jpeg', 0.6)); 
+                    } 
+                } 
+            } else { 
+                saveCouponData(''); 
+            }
+        }
+
+        function toggleCouponLock(code) { 
+            if(db.coupons[code]) { 
+                db.coupons[code].locked = !db.coupons[code].locked; 
+                saveDB(); 
+                renderAdminTables(); 
+            } 
+        }
+
+        function sendCouponManual(code) { 
+            let phone = document.getElementById(`sendPhone_${code}`).value.trim(); 
+            if(!phone) { alert('कृपया यूजर का फोन नंबर दर्ज करें!'); return; } 
+            let uIdx = db.users.findIndex(u => u.phone === phone); 
+            if(uIdx === -1) { alert('यह मोबाइल नंबर रजिस्टर्ड नहीं है!'); return; } 
+            
+            if(!db.users[uIdx].myCoupons) db.users[uIdx].myCoupons = []; 
+            db.users[uIdx].myCoupons.unshift({ code: code, date: new Date().toLocaleDateString(), status: 'Available' }); 
+            
+            saveDB(); 
+            renderAdminTables(); 
+            alert(`सफलता! कूपन '${code}' उपयोगकर्ता (${phone}) को व्यक्तिगत रूप से भेज दिया गया है।`); 
+            document.getElementById(`sendPhone_${code}`).value = ''; 
+        }
+
+        function sendCouponAuto(code) { 
+            if(!db.coupons[code] || db.coupons[code].locked) {
+                alert('यह कूपन अभी LOCKED है! ऑटोमैटिक बांटने के पहले इसे Unlocked करें ताकि महंगे इनाम गलती से न निकलें।');
+                return;
+            }
+            if(!db.users || db.users.length === 0) { alert('कोई यूजर उपलब्ध नहीं है!'); return; } 
+            
+            let randomIdx = Math.floor(Math.random() * db.users.length); 
+            let luckyUser = db.users[randomIdx]; 
+            if(!luckyUser.myCoupons) luckyUser.myCoupons = []; 
+            luckyUser.myCoupons.unshift({ code: code, date: new Date().toLocaleDateString(), status: 'Available' }); 
+            
+            saveDB(); 
+            renderAdminTables(); 
+            alert(`🎉 ऑटोमैटिक ड्रा! कूपन '${code}' लकी यूजर '${luckyUser.name}' को सफलतापूर्वक अलॉट कर दिया गया है!`); 
+        }
+
         function renderAdminTables() { 
             let revLabel = document.getElementById('adminTotalRevenue'); if(revLabel) revLabel.innerText = `₹${db.adminWallet || 0}`;
             let usrLabel = document.getElementById('adminTotalUsers'); if(usrLabel) usrLabel.innerText = db.users.length;
@@ -825,7 +903,6 @@
                 refTable.innerHTML = refHtml;
             }
 
-            // Render Admin Support Chat Inbox
             let inboxDiv = document.getElementById('adminSupportInbox');
             if(inboxDiv) {
                 let threads = db.chatThreads || {};
@@ -875,9 +952,9 @@
                     let cHtml = '';
                     Object.keys(db.coupons).forEach(code => {
                         let c = db.coupons[code];
-                        let lockBtn = c.locked ? `<button onclick="toggleCouponLock('${code}')" class="bg-red-500/20 text-red-400 border border-red-500 px-2 py-1 rounded-lg text-[9px] font-bold"><i class="fas fa-lock mr-1"></i> Locked</button>` : `<button onclick="toggleCouponLock('${code}')" class="bg-emerald-500/20 text-emerald-400 border border-emerald-500 px-2 py-1 rounded-lg text-[9px] font-bold"><i class="fas fa-unlock mr-1"></i> Unlocked</button>`;
-                        let valDisplay = c.type === 'money' ? `₹${c.val} Cash` : `${c.val} (Gadget)`;
-                        cHtml += `<div class="bg-slate-900 p-2.5 rounded-xl border border-slate-700"><div class="flex justify-between items-center mb-2"><div><span class="text-[11px] font-bold text-amber-400 tracking-wider">${code}</span><br><span class="text-[9px] text-slate-400">${valDisplay}</span></div>${lockBtn}</div><div class="flex space-x-1.5 mt-1 border-t border-slate-800 pt-2"><input type="text" id="sendPhone_${code}" placeholder="नंबर" class="w-[45%] bg-slate-950 border border-slate-800 rounded-lg p-1.5 text-[9px] text-white focus:outline-none"><button onclick="sendCouponManual('${code}')" class="w-[25%] bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-[9px] font-bold transition"><i class="fas fa-paper-plane mr-1"></i> Send</button><button onclick="sendCouponAuto('${code}')" class="w-[30%] bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 rounded-lg text-[9px] font-black transition"><i class="fas fa-dice mr-1"></i> Auto</button></div></div>`;
+                        let lockBtn = c.locked ? `<button onclick="toggleCouponLock('${code}')" class="bg-red-500/20 text-red-400 border border-red-500 px-2.5 py-1 rounded-lg text-[9px] font-bold"><i class="fas fa-lock mr-1"></i> Locked (सुरक्षित)</button>` : `<button onclick="toggleCouponLock('${code}')" class="bg-emerald-500/20 text-emerald-400 border border-emerald-500 px-2.5 py-1 rounded-lg text-[9px] font-bold"><i class="fas fa-unlock mr-1"></i> Unlocked (वितरण योग्य)</button>`;
+                        let valDisplay = c.type === 'money' ? `₹${c.val} Cash` : `${c.val} (Mega Prize)`;
+                        cHtml += `<div class="bg-slate-900 p-3 rounded-xl border border-slate-700 space-y-2"><div class="flex justify-between items-center"><div><span class="text-xs font-bold text-amber-400 tracking-wider">${code}</span><br><span class="text-[9px] text-slate-400">${valDisplay}</span></div>${lockBtn}</div><div class="flex space-x-2 pt-1 border-t border-slate-800"><input type="text" id="sendPhone_${code}" placeholder="यूजर का मोबाइल नंबर" class="w-[50%] bg-slate-950 border border-slate-800 rounded-lg p-2 text-[10px] text-white focus:outline-none"><button onclick="sendCouponManual('${code}')" class="w-[25%] bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-[10px] font-bold transition"><i class="fas fa-paper-plane mr-1"></i> भेजें</button><button onclick="sendCouponAuto('${code}')" class="w-[25%] bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 rounded-lg text-[10px] font-black transition"><i class="fas fa-dice mr-1"></i> ऑटो ड्रा</button></div></div>`;
                     });
                     cBody.innerHTML = cHtml;
                 }
@@ -886,16 +963,6 @@
 
         function viewUserSS(base64str) { if(!base64str) return; document.getElementById('screenshotContainer').innerHTML = `<img src="${base64str}" class="max-h-[250px] rounded-xl object-contain mx-auto">`; document.getElementById('screenshotModal').classList.remove('hidden'); }
         function closeScreenshotModal() { document.getElementById('screenshotModal').classList.add('hidden'); }
-
-        function createNewCouponAdvanced() {
-            let code = document.getElementById('couponCodeNew').value.trim().toUpperCase(); let type = document.getElementById('couponTypeNew').value; let val = document.getElementById('couponValueNew').value.trim(); let link = document.getElementById('couponLinkNew').value.trim(); let fileInput = document.getElementById('couponImageNew');
-            if(!code) { alert('कूपन कोड लिखें!'); return; }
-            let saveCouponData = (imgBase64) => { if(!db.coupons) db.coupons = {}; db.coupons[code] = { type: type, val: (type==='money' ? parseFloat(val) : val), img: imgBase64, link: link, locked: false }; saveDB(); renderAdminTables(); alert(`कूपन '${code}' इन्वेंटरी में आ गया है!`); document.getElementById('couponCodeNew').value=''; document.getElementById('couponValueNew').value=''; document.getElementById('couponLinkNew').value=''; };
-            if(fileInput.files.length > 0) { let reader = new FileReader(); reader.readAsDataURL(fileInput.files[0]); reader.onload = function(e) { let img = new Image(); img.src = e.target.result; img.onload = function() { let canvas = document.createElement('canvas'); let ctx = canvas.getContext('2d'); canvas.width = 300; canvas.height = img.height * (300/img.width); ctx.drawImage(img, 0, 0, canvas.width, canvas.height); saveCouponData(canvas.toDataURL('image/jpeg', 0.6)); } } } else { saveCouponData(''); }
-        }
-        function toggleCouponLock(code) { if(db.coupons[code]) { db.coupons[code].locked = !db.coupons[code].locked; saveDB(); renderAdminTables(); } }
-        function sendCouponManual(code) { let phone = document.getElementById(`sendPhone_${code}`).value.trim(); if(!phone) return; let uIdx = db.users.findIndex(u => u.phone === phone); if(uIdx === -1) { alert('नंबर रजिस्टर्ड नहीं है!'); return; } if(!db.users[uIdx].myCoupons) db.users[uIdx].myCoupons = []; db.users[uIdx].myCoupons.unshift({ code: code, date: new Date().toLocaleDateString(), status: 'Available' }); if(db.coupons[code]) db.coupons[code].locked = false; saveDB(); renderAdminTables(); alert(`सक्सेस! कूपन भेजा गया।`); document.getElementById(`sendPhone_${code}`).value = ''; }
-        function sendCouponAuto(code) { if(!db.users || db.users.length === 0) return; let randomIdx = Math.floor(Math.random() * db.users.length); let luckyUser = db.users[randomIdx]; if(!luckyUser.myCoupons) luckyUser.myCoupons = []; luckyUser.myCoupons.unshift({ code: code, date: new Date().toLocaleDateString(), status: 'Available' }); if(db.coupons[code]) db.coupons[code].locked = false; saveDB(); renderAdminTables(); alert(`🎉 ऑटोमैटिक सरप्राइज! कूपन '${luckyUser.name}' को दे दिया गया है!`); }
 
         function openTopUpScreen() { hideAllScreens(); document.getElementById('topUpScreen').classList.remove('hidden'); setTopUpAmount(50); }
         function setTopUpAmount(amt) { document.getElementById('customTopUpAmt').value = amt; let el = document.getElementById('displayTopUpText'); if(el) el.innerText = `₹${document.getElementById('customTopUpAmt').value || 0}`; }
@@ -910,7 +977,20 @@
         function closeMyCoupons() { document.getElementById('myCouponsModal').classList.add('hidden'); }
         function openMegaRewardsList() { document.getElementById('megaRewardsModal').classList.remove('hidden'); }
         function closeMegaRewardsList() { document.getElementById('megaRewardsModal').classList.add('hidden'); }
-        function applyCoupon() { let code = document.getElementById('couponInput').value.trim().toUpperCase(); if(!code) return; if(db.coupons && db.coupons[code]) { let cp = db.coupons[code]; if(cp.locked) { alert('यह कूपन अभी एडमिन द्वारा लॉक है।'); return; } let idx = db.users.findIndex(x => x.phone === currentUser.phone); if(cp.type === 'empty') { alert('Better Luck Next Time!'); } else if(cp.type === 'mega') { showMegaWinPopup(cp.val, cp.img, cp.link); } else { db.users[idx].wallet = (db.users[idx].wallet || 0) + parseFloat(cp.val); alert(`कूपन सफल! ₹${cp.val} वॉलेट में जुड़ गए।`); } if(db.users[idx].myCoupons) { let myC = db.users[idx].myCoupons.find(c => c.code === code); if(myC) myC.status = 'Used'; } delete db.coupons[code]; currentUser = db.users[idx]; saveDB(); checkUserDashboardFlow(); document.getElementById('couponInput').value = ''; } else { alert('अमान्य कूपन!'); } }
+        function applyCoupon() { 
+            let code = document.getElementById('couponInput').value.trim().toUpperCase(); 
+            if(!code) return; 
+            if(db.coupons && db.coupons[code]) { 
+                let cp = db.coupons[code]; 
+                if(cp.locked) { alert('यह कूपन अभी एडमिन द्वारा LOCK किया गया है, इसलिए इसे रिडीम नहीं किया जा सकता!'); return; } 
+                let idx = db.users.findIndex(x => x.phone === currentUser.phone); 
+                if(cp.type === 'empty') { alert('Better Luck Next Time!'); } 
+                else if(cp.type === 'mega') { showMegaWinPopup(cp.val, cp.img, cp.link); } 
+                else { db.users[idx].wallet = (db.users[idx].wallet || 0) + parseFloat(cp.val); alert(`कूपन सफल! ₹${cp.val} वॉलेट में जुड़ गए।`); } 
+                if(db.users[idx].myCoupons) { let myC = db.users[idx].myCoupons.find(c => c.code === code); if(myC) myC.status = 'Used'; } 
+                delete db.coupons[code]; currentUser = db.users[idx]; saveDB(); checkUserDashboardFlow(); document.getElementById('couponInput').value = ''; 
+            } else { alert('अमान्य कूपन!'); } 
+        }
         function showMegaWinPopup(reward, imgStr, linkStr) { hideAllScreens(); let resScreen = document.getElementById('resultScreen'); resScreen.classList.remove('hidden'); let resIcon = document.getElementById('resIcon'); if(imgStr) { resIcon.innerHTML = `<img src="${imgStr}" class="w-full h-full object-cover rounded-full">`; resIcon.className = "w-28 h-28 rounded-full flex items-center justify-center mx-auto border-4 border-amber-400 neon-btn animate-bounce shadow-xl"; } else { resIcon.innerHTML = '<i class="fas fa-gift text-white"></i>'; resIcon.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto text-5xl bg-gradient-to-r from-amber-500 to-orange-600 border-4 border-amber-400 neon-btn animate-bounce"; } document.getElementById('resTitle').innerText = `BUMPER JACKPOT!`; document.getElementById('resTitle').className = "gaming-font text-3xl font-black text-amber-400"; let descHtml = `बधाई हो! आपने <b>${reward}</b> जीता है!<br>हमारी टीम डिलीवरी के लिए संपर्क करेगी।`; if(linkStr) { descHtml += `<br><a href="${linkStr}" target="_blank" class="inline-block mt-3 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-xs font-bold animate-pulse-fast border border-indigo-400 shadow-lg"><i class="fas fa-external-link-alt mr-1"></i> इनाम देखें</a>`; } document.getElementById('resDesc').innerHTML = descHtml; }
     </script>
 </body>
