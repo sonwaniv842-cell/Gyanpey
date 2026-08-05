@@ -16,6 +16,7 @@
         .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); }
         @keyframes pulse-fast { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
         .animate-pulse-fast { animation: pulse-fast 2s infinite; }
+        .hide-scroll::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between p-3">
@@ -26,15 +27,26 @@
             <div class="w-9 h-9 bg-gradient-to-tr from-amber-500 to-orange-600 rounded-xl flex items-center justify-center neon-btn text-slate-950 font-black text-lg">GP</div>
             <h1 class="gaming-font text-lg font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">GYANPAY</h1>
         </div>
+        
+        <!-- Logged Out Header -->
         <div id="headerAuthButtons" class="flex space-x-1.5">
             <button onclick="openAuth('login')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-xl border border-amber-500/30 font-semibold">Login</button>
             <button onclick="openAuth('register')" class="text-xs bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 px-3 py-1.5 rounded-xl font-extrabold neon-btn">Join</button>
             <button onclick="toggleAdminModal()" class="text-xs bg-red-600/80 hover:bg-red-600 text-white px-2.5 py-1.5 rounded-xl font-bold"><i class="fas fa-shield-alt"></i></button>
         </div>
+        
+        <!-- Logged In Header -->
         <div id="headerUserLogout" class="hidden flex items-center space-x-2">
-            <span id="topUserName" class="text-xs text-amber-400 font-bold gaming-font"></span>
-            <button onclick="logoutUser()" class="text-[10px] bg-slate-800 text-red-400 px-2 py-1 rounded-lg border border-red-500/30">लॉग आउट</button>
-            <button onclick="toggleAdminModal()" class="text-[10px] bg-red-600 text-white px-2 py-1 rounded-lg font-bold">Admin</button>
+            <div class="text-right">
+                <p class="text-[10px] text-slate-400 gaming-font flex items-center justify-end">
+                    <i class="fas fa-user-circle mr-1"></i> <span id="topUserName">Name</span>
+                </p>
+                <p class="text-xs font-bold text-emerald-400 gaming-font bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                    <i class="fas fa-wallet mr-1"></i>₹<span id="topUserWallet">0</span>
+                </p>
+            </div>
+            <button onclick="logoutUser()" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-red-400 px-2.5 py-2 rounded-xl border border-slate-700"><i class="fas fa-power-off"></i></button>
+            <button onclick="toggleAdminModal()" class="text-[10px] bg-red-600/80 hover:bg-red-600 text-white px-2.5 py-2 rounded-xl border border-red-500"><i class="fas fa-shield-alt"></i></button>
         </div>
     </header>
 
@@ -48,9 +60,8 @@
             </div>
             <div>
                 <h2 class="gaming-font text-xl font-black text-white tracking-wide">PRO ESPORTS QUIZ ARENA</h2>
-                <p class="text-xs text-slate-400 mt-1">₹20 का VIP मेंबरशिप पास लें, बैटल खेलें और लाखों के इनाम जीतें!</p>
+                <p class="text-xs text-slate-400 mt-1">₹20 की एंट्री फीस से बैटल खेलें और अनलिमिटेड इनाम जीतें!</p>
             </div>
-            
             <div class="bg-slate-950/70 border border-slate-800 p-3.5 rounded-2xl flex justify-between items-center">
                 <div class="text-left">
                     <p class="text-[10px] text-slate-400 gaming-font">ARENA STATUS</p>
@@ -58,12 +69,11 @@
                 </div>
                 <div class="text-right">
                     <p class="text-[10px] text-slate-400 gaming-font">ENTRY FEE</p>
-                    <p class="text-xs font-bold text-amber-400">₹20 Only</p>
+                    <p class="text-xs font-bold text-amber-400">₹20 / Round</p>
                 </div>
             </div>
-
             <button onclick="openAuth('login')" class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:opacity-95 text-slate-950 gaming-font font-black py-3.5 rounded-2xl transition shadow-lg neon-btn text-sm tracking-wider">
-                <i class="fas fa-bolt mr-1"></i> START GAMING NOW
+                <i class="fas fa-bolt mr-1"></i> ENTER ARENA (LOGIN)
             </button>
         </div>
 
@@ -93,86 +103,124 @@
             </div>
         </div>
 
-        <!-- USER DASHBOARD & COUPON / MEMBERSHIP HUB -->
-        <div id="userDashboard" class="hidden glass-card neon-glow rounded-3xl p-5 shadow-2xl text-center space-y-3.5">
-            <!-- Wallet Card -->
-            <div class="bg-gradient-to-r from-slate-950 to-slate-900 border border-amber-500/30 p-3.5 rounded-2xl flex justify-between items-center shadow-lg">
-                <div class="text-left">
-                    <p class="text-[10px] text-slate-400 gaming-font">WINNING WALLET</p>
-                    <p id="userWalletBalance" class="text-lg font-black text-emerald-400 gaming-font">₹0</p>
+        <!-- USER DASHBOARD / GAMING HUB -->
+        <div id="userDashboard" class="hidden glass-card neon-glow rounded-3xl p-5 shadow-2xl text-center space-y-4">
+            
+            <!-- GAMING PROFILE CARD -->
+            <div class="flex items-center space-x-3 bg-gradient-to-br from-slate-900 to-slate-950 p-3.5 rounded-2xl border border-slate-800 shadow-md relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-16 h-16 bg-amber-500/10 rounded-full blur-xl"></div>
+                <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-2xl border-2 border-indigo-400 shadow-lg relative z-10">
+                    <i class="fas fa-user-ninja text-white"></i>
                 </div>
-                <button onclick="clickJoinQuiz()" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:opacity-90 text-slate-950 gaming-font font-black px-3 py-2 rounded-xl text-xs shadow neon-btn">
-                    <i class="fas fa-ticket-alt mr-1"></i> VIP पास (₹20)
-                </button>
+                <div class="text-left relative z-10">
+                    <h3 class="font-bold text-white gaming-font text-sm" id="dashUserNameProfile">Gamer_Name</h3>
+                    <p class="text-[10px] text-slate-400 mt-0.5">
+                        <i class="fas fa-gamepad text-slate-500"></i> Matches: <span id="dashMatches" class="text-white font-bold">0</span> | 
+                        <i class="fas fa-trophy text-amber-500 ml-1"></i> Wins: <span id="dashWins" class="text-white font-bold">0</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Wallet & Quick Actions -->
+            <div class="grid grid-cols-2 gap-2">
+                <div class="bg-slate-900 border border-emerald-500/40 p-3 rounded-xl text-left shadow-lg">
+                    <p class="text-[10px] text-slate-400 gaming-font">WINNING WALLET</p>
+                    <p id="userWalletBalance" class="text-xl font-black text-emerald-400 gaming-font">₹0</p>
+                </div>
+                <div class="flex flex-col space-y-2">
+                    <button onclick="openTopUpScreen()" class="bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-400 font-bold py-2 rounded-lg text-xs transition">
+                        <i class="fas fa-coins mr-1"></i> वॉलेट टॉप-अप
+                    </button>
+                    <button onclick="openProfileScreen()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2 rounded-lg text-xs transition">
+                        <i class="fas fa-user-edit mr-1"></i> एडिट प्रोफाइल
+                    </button>
+                </div>
+            </div>
+
+            <div id="pendingTopUpNotice" class="hidden bg-amber-500/20 border border-amber-500/50 text-amber-400 text-[11px] p-2 rounded-lg font-bold text-left flex items-center">
+                <i class="fas fa-spinner fa-spin mr-2"></i> आपका ₹<span id="pendingTopUpAmtDisplay"></span> का टॉप-अप अप्रूवल के लिए पेंडिंग है।
             </div>
 
             <!-- COUPON & REWARDS SHOP / BANNER -->
-            <div class="bg-gradient-to-r from-slate-950/90 via-slate-900/90 to-slate-950/90 border border-amber-500/40 p-4 rounded-2xl text-left space-y-2.5 shadow-xl">
+            <div class="bg-gradient-to-r from-slate-950/90 via-slate-900/90 to-slate-950/90 border border-amber-500/40 p-3.5 rounded-2xl text-left space-y-2 shadow-xl">
                 <div class="flex items-center space-x-2 text-amber-400 gaming-font font-bold text-xs">
-                    <i class="fas fa-crown text-amber-400"></i>
-                    <span>ESPORTS REWARDS & COUPON HUB 🎁</span>
+                    <i class="fas fa-gift text-amber-400"></i><span>REWARDS & COUPONS 🎁</span>
                 </div>
                 <div class="space-y-1.5 text-[10px] font-semibold text-white">
-                    <div class="flex justify-between items-center bg-slate-950/80 px-2.5 py-1.5 rounded-xl border border-slate-800">
-                        <span>🎁 500 एक्टिव गेमर्स:</span> <span class="text-cyan-400 font-bold">स्मार्टवॉच / मिक्सर / फ्री कूपन</span>
+                    <div class="flex justify-between items-center bg-slate-950/80 px-2 py-1.5 rounded-xl border border-slate-800">
+                        <span>🎁 500+ गेमर्स:</span> <span class="text-cyan-400 font-bold">स्मार्टवॉच / मिक्सर</span>
                     </div>
-                    <div class="flex justify-between items-center bg-slate-950/80 px-2.5 py-1.5 rounded-xl border border-slate-800">
-                        <span>📱 1000 एक्टिव गेमर्स:</span> <span class="text-amber-400 font-bold">5G स्मार्टफोन / ब्रांडेड शर्ट-पैंट</span>
-                    </div>
-                    <div class="flex justify-between items-center bg-slate-950/80 px-2.5 py-1.5 rounded-xl border border-slate-800">
-                        <span>🏍️ 2000+ एक्टिव गेमर्स:</span> <span class="text-orange-400 font-bold">स्पोर्ट्स बाइक या कार</span>
+                    <div class="flex justify-between items-center bg-slate-950/80 px-2 py-1.5 rounded-xl border border-slate-800">
+                        <span>📱 1000+ गेमर्स:</span> <span class="text-amber-400 font-bold">5G स्मार्टफोन / शर्ट-पैंट</span>
                     </div>
                 </div>
-                <!-- COUPON REDEEM SECTION -->
                 <div class="pt-1 flex space-x-2">
-                    <input type="text" id="couponInput" placeholder="कूपन कोड दर्ज करें (जैसे: GYAN2026)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-white uppercase focus:outline-none focus:border-amber-500">
-                    <button onclick="applyCoupon()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-3 py-1.5 rounded-xl text-xs whitespace-nowrap">रिडीम</button>
+                    <input type="text" id="couponInput" placeholder="कूपन कोड दर्ज करें" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-white uppercase focus:outline-none focus:border-amber-500">
+                    <button onclick="applyCoupon()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-3 py-1.5 rounded-xl text-[10px] whitespace-nowrap">रिडीम</button>
                 </div>
             </div>
 
             <!-- WITHDRAWAL BOX -->
             <div class="bg-slate-950/80 border border-slate-800 p-3.5 rounded-2xl text-left space-y-2">
-                <p class="gaming-font font-bold text-white text-xs"><i class="fas fa-wallet text-amber-400 mr-1"></i> इंस्टेंट विड्रॉल (Instant Payout)</p>
-                <input type="text" id="userWithdrawUpi" placeholder="अपनी UPI ID दर्ज करें (जैसे: myupi@ybl)" class="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-xs focus:outline-none focus:border-amber-500">
-                <input type="number" id="userWithdrawAmount" placeholder="विड्रॉल अमाउंट (₹)" class="w-full bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-xs focus:outline-none focus:border-amber-500">
-                <button onclick="requestWithdrawal()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-90 text-white font-bold py-2.5 rounded-xl text-xs shadow">
-                    <i class="fab fa-telegram-plane mr-1"></i> टेलीग्राम हेल्पलाइन पर विड्रॉल भेजें
+                <p class="gaming-font font-bold text-white text-[11px]"><i class="fas fa-university text-amber-400 mr-1"></i> बैंक विड्रॉल (Instant Payout)</p>
+                <div class="flex space-x-2">
+                    <input type="text" id="userWithdrawUpi" placeholder="UPI ID (myupi@ybl)" class="w-3/5 bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-xs focus:outline-none focus:border-amber-500">
+                    <input type="number" id="userWithdrawAmount" placeholder="अमाउंट (₹)" class="w-2/5 bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-xs focus:outline-none focus:border-amber-500">
+                </div>
+                <button onclick="requestWithdrawal()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-90 text-white font-bold py-2 rounded-xl text-xs shadow">
+                    <i class="fab fa-telegram-plane mr-1"></i> विड्रॉल रिक्वेस्ट भेजें
                 </button>
             </div>
 
-            <button onclick="clickJoinQuiz()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:opacity-95 text-slate-950 gaming-font font-black py-3 rounded-2xl transition shadow-lg text-xs tracking-wider neon-btn">
-                <i class="fas fa-play-circle mr-1"></i> BATTLE ARENA (PLAY 10 Qs)
+            <!-- PLAY BUTTON (Auto Deducts ₹20) -->
+            <button onclick="clickPlayGame()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:opacity-95 text-slate-950 gaming-font font-black py-4 rounded-2xl transition shadow-lg text-sm tracking-wider neon-btn">
+                <i class="fas fa-play mr-2"></i> BATTLE ARENA (PAY ₹20)
             </button>
         </div>
 
-        <!-- PAYMENT SCREEN -->
-        <div id="paymentScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl text-center space-y-3">
-            <h3 class="gaming-font text-base font-bold text-amber-400"><i class="fas fa-ticket-alt mr-1"></i> VIP MEMBERSHIP PASS (₹20)</h3>
-            <p class="text-xs text-slate-400">10 प्रो सवालों के बैटल में उतरने के लिए ₹20 का पेमेंट करें:</p>
+        <!-- PROFILE EDIT SCREEN -->
+        <div id="profileScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                <h3 class="gaming-font text-base font-bold text-emerald-400"><i class="fas fa-user-edit mr-2"></i> EDIT GAMER PROFILE</h3>
+                <button onclick="checkUserDashboardFlow()" class="text-slate-400 hover:text-white text-sm"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="space-y-3">
+                <label class="block text-slate-300 text-xs font-medium">अपना नया गेमर नाम लिखें:</label>
+                <input type="text" id="editProfileName" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-sm focus:outline-none focus:border-emerald-500">
+                <button onclick="saveProfileData()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition text-xs shadow-lg">अपडेट प्रोफाइल</button>
+            </div>
+        </div>
+
+        <!-- TOP-UP SCREEN (ADD MONEY) -->
+        <div id="topUpScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl text-center space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                <h3 class="gaming-font text-sm font-bold text-amber-400"><i class="fas fa-coins mr-1"></i> WALLET TOP-UP</h3>
+                <button onclick="checkUserDashboardFlow()" class="text-slate-400 hover:text-white text-sm"><i class="fas fa-times"></i></button>
+            </div>
+            <p class="text-xs text-slate-400">एक बार में पैसा ऐड करें और बिना रुकावट गेम खेलें!</p>
             
+            <div class="grid grid-cols-4 gap-2">
+                <button onclick="setTopUpAmount(50)" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-1.5 rounded-lg text-xs border border-slate-700">₹50</button>
+                <button onclick="setTopUpAmount(100)" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-1.5 rounded-lg text-xs border border-slate-700">₹100</button>
+                <button onclick="setTopUpAmount(500)" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-1.5 rounded-lg text-xs border border-amber-500/50 text-amber-400">₹500</button>
+                <button onclick="setTopUpAmount(1000)" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-1.5 rounded-lg text-xs border border-amber-500/50 text-amber-400">₹1000</button>
+            </div>
+            
+            <input type="number" id="customTopUpAmt" placeholder="या खुद राशि डालें (₹)" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-center text-white text-sm focus:outline-none focus:border-amber-500" oninput="updateQRForTopup()">
+
             <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 inline-block w-full">
+                <p class="text-xs text-slate-400 mb-2">QR पर <span id="displayTopUpText" class="font-bold text-amber-400">₹0</span> भेजें</p>
                 <div class="bg-white p-2 rounded-xl inline-block mb-2 shadow">
-                    <img id="userQrImg" src="" alt="Admin QR" class="w-32 h-32 mx-auto object-contain">
+                    <img id="topUpQrImg" src="" alt="Admin QR" class="w-32 h-32 mx-auto object-contain">
                 </div>
-                <p id="adminUpiDisplay" class="text-xs text-emerald-400 font-mono font-bold">admin@upi</p>
+                <p id="topUpUpiDisplay" class="text-[11px] text-emerald-400 font-mono font-bold">admin@upi</p>
             </div>
 
             <div class="space-y-2 text-left">
                 <label class="block text-xs font-medium text-slate-300">पेमेंट स्क्रीनशॉट अपलोड करें:</label>
-                <input type="file" id="payScreenshot" accept="image/*" class="w-full text-xs text-slate-400 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-amber-500 file:text-slate-950">
-                <button onclick="sendPaymentProof()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-3 rounded-xl transition text-xs shadow">स्क्रीनशॉट एडमिन / AI को सबमिट करें</button>
+                <input type="file" id="topUpScreenshot" accept="image/*" class="w-full text-xs text-slate-400 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[10px] file:font-bold file:bg-amber-500 file:text-slate-950">
+                <button onclick="submitTopUpRequest()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-3 rounded-xl transition text-xs shadow">टॉप-अप रिक्वेस्ट सबमिट करें</button>
             </div>
-            <button onclick="backToDashboard()" class="mt-2 text-xs text-slate-400 hover:text-white"><i class="fas fa-arrow-left mr-1"></i> वापस डैशबोर्ड पर जाएं</button>
-        </div>
-
-        <!-- PENDING SCREEN -->
-        <div id="pendingScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl text-center space-y-4">
-            <div class="w-16 h-16 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto text-2xl animate-pulse">
-                <i class="fas fa-spinner fa-spin"></i>
-            </div>
-            <h3 class="gaming-font text-base font-bold text-white">वेरिफ़िकेशन प्रोसेस में है...</h3>
-            <p class="text-xs text-slate-400">स्क्रीनशॉट भेज दिया गया है। एडमिन या जेमिनी AI द्वारा अप्रूव होते ही बैटल शुरू हो जाएगी।</p>
-            <button onclick="location.reload()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl text-xs font-bold">स्टेटस रिफ्रेश करें</button>
         </div>
 
         <!-- BATTLE / QUIZ INTERFACE -->
@@ -187,37 +235,39 @@
 
         <!-- RESULT SCREEN -->
         <div id="resultScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl text-center space-y-4">
-            <div id="resIcon" class="w-16 h-16 rounded-full flex items-center justify-center mx-auto text-2xl"></div>
+            <div id="resIcon" class="w-16 h-16 rounded-full flex items-center justify-center mx-auto text-3xl"></div>
             <h3 id="resTitle" class="gaming-font text-lg font-bold text-white"></h3>
             <p id="resDesc" class="text-xs text-slate-400 leading-relaxed"></p>
-            <button onclick="location.reload()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:opacity-90 text-slate-950 gaming-font font-black py-3 rounded-xl text-xs shadow neon-btn">अगला बैटल खेलने के लिए ₹20 दें</button>
+            <button onclick="checkUserDashboardFlow()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:opacity-90 text-slate-950 gaming-font font-black py-3 rounded-xl text-xs shadow neon-btn">वापस लॉबी में जाएं</button>
         </div>
 
     </main>
 
     <!-- ADMIN MODAL PANEL -->
     <div id="adminModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-3 overflow-y-auto">
-        <div class="glass-card neon-glow w-full max-w-lg rounded-3xl p-6 shadow-2xl relative my-6">
+        <div class="glass-card neon-glow w-full max-w-lg rounded-3xl p-5 shadow-2xl relative my-6">
             <button onclick="toggleAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg"><i class="fas fa-times"></i></button>
             
+            <!-- Login -->
             <div id="adminLoginView">
-                <h3 class="gaming-font text-base font-bold text-white mb-4"><i class="fas fa-lock text-red-500 mr-2"></i> एडमिन मास्टर लॉगिन</h3>
+                <h3 class="gaming-font text-base font-bold text-white mb-4"><i class="fas fa-lock text-red-500 mr-2"></i> MASTER ADMIN</h3>
                 <input type="password" id="adminPinInput" placeholder="पिन दर्ज करें (admin123)" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white mb-4 focus:outline-none focus:border-red-500">
                 <button onclick="verifyAdminPin()" class="w-full bg-red-600 hover:bg-red-500 text-white gaming-font font-bold py-3 rounded-xl transition text-xs">लॉगिन करें</button>
             </div>
 
-            <div id="adminDashboardView" class="hidden space-y-5 text-xs max-h-[75vh] overflow-y-auto pr-1">
+            <!-- Admin Dashboard -->
+            <div id="adminDashboardView" class="hidden space-y-5 text-xs max-h-[75vh] overflow-y-auto pr-1 hide-scroll">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                    <h3 class="gaming-font text-sm font-bold text-amber-400">ESPORTS ADMIN DASHBOARD</h3>
+                    <h3 class="gaming-font text-sm font-bold text-amber-400">ESPORTS DASHBOARD</h3>
                     <button onclick="logoutAdmin()" class="bg-red-500/20 text-red-400 px-2.5 py-1 rounded-lg">लॉग आउट</button>
                 </div>
 
                 <!-- LIVE MODE SWITCHER -->
                 <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-2.5">
-                    <h4 class="font-bold text-white"><i class="fas fa-robot text-amber-400 mr-1"></i> गेम लाइव मोड (Manual vs Gemini AI)</h4>
+                    <h4 class="font-bold text-white"><i class="fas fa-robot text-amber-400 mr-1"></i> गेम लाइव मोड</h4>
                     <div class="grid grid-cols-2 gap-2">
-                        <button onclick="setLiveMode('manual')" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 rounded-xl text-xs">1. मैन्युअल लाइव</button>
-                        <button onclick="setLiveMode('auto')" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 rounded-xl text-xs">2. ऑटोमैटिक जेमिनी AI</button>
+                        <button onclick="setLiveMode('manual')" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 rounded-xl text-[10px]">1. मैन्युअल लाइव</button>
+                        <button onclick="setLiveMode('auto')" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 rounded-xl text-[10px]">2. ऑटो जेमिनी AI</button>
                     </div>
                     <p id="currentModeStatus" class="text-[10px] text-amber-400 font-semibold">मोड: मैन्युअल</p>
                 </div>
@@ -225,80 +275,72 @@
                 <!-- STATS -->
                 <div class="grid grid-cols-2 gap-2">
                     <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800">
-                        <p class="text-[10px] text-slate-400">कुल जमा रेवेन्यू</p>
+                        <p class="text-[10px] text-slate-400">एडमिन वॉलेट (Total Earned)</p>
                         <p id="adminTotalRevenue" class="text-base font-black text-emerald-400 gaming-font">₹0</p>
                     </div>
                     <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800">
-                        <p class="text-[10px] text-slate-400">कुल रजिस्टर्ड गेमर्स</p>
+                        <p class="text-[10px] text-slate-400">टोटल गेमर्स</p>
                         <p id="adminTotalUsers" class="text-base font-black text-amber-400 gaming-font">0</p>
                     </div>
                 </div>
 
-                <!-- SETTINGS & COUPON CREATOR -->
+                <!-- DETAILED TRANSACTION & PLAY HISTORY (NEW) -->
                 <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
-                    <h4 class="font-bold text-white"><i class="fas fa-cog text-amber-400 mr-1"></i> सेटिंग्स & कूपन जेनरेटर</h4>
-                    <div>
-                        <label class="block text-slate-400 mb-1">एडमिन UPI ID:</label>
-                        <input type="text" id="setUpi" value="admin@upi" class="w-full bg-slate-900 border border-slate-800 p-2.5 rounded-xl text-white">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">QR Code Image Link:</label>
-                        <input type="text" id="setQrImg" placeholder="https://..." class="w-full bg-slate-900 border border-slate-800 p-2.5 rounded-xl text-white">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">हेल्पलाइन टेलीग्राम लिंक:</label>
-                        <input type="text" id="setTelegram" placeholder="https://t.me/..." class="w-full bg-slate-900 border border-slate-800 p-2.5 rounded-xl text-white">
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 pt-1">
-                        <input type="text" id="newCouponCode" placeholder="नया कूपन (जैसे: FREE20)" class="bg-slate-900 border border-slate-800 p-2 rounded-xl text-white uppercase">
-                        <button onclick="createNewCoupon()" class="bg-indigo-600 text-white font-bold py-2 rounded-xl">कूपन बनाएं</button>
-                    </div>
-                    <button onclick="saveAdminSettings()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 gaming-font font-bold py-2.5 rounded-xl mt-1">सेटिंग्स सेव करें</button>
-                </div>
-
-                <!-- 10 QUESTIONS PREVIEW / BUILDER -->
-                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
-                    <div class="flex justify-between items-center">
-                        <h4 class="font-bold text-indigo-400"><i class="fas fa-edit mr-1"></i> 10 प्रश्न (एडमिन को पहले से ज्ञात हैं)</h4>
-                        <button onclick="autoFillGeminiAIQuestions()" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold px-2 py-1.5 rounded-xl text-[10px]">🤖 AI Auto-Fill</button>
-                    </div>
-                    <div id="adminBuilderBox" class="space-y-3 max-h-56 overflow-y-auto pr-1"></div>
-                    <button onclick="saveAdminQuiz()" class="w-full bg-emerald-600 text-white gaming-font font-bold py-2.5 rounded-xl">10 सवाल सेव और लाइव करें</button>
-                </div>
-
-                <!-- USER APPROVALS -->
-                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
-                    <h4 class="font-bold text-cyan-400"><i class="fas fa-users mr-1"></i> मेंबरशिप पेमेंट वेरिफिकेशन</h4>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left">
+                    <h4 class="font-bold text-cyan-400"><i class="fas fa-history mr-1"></i> फुल गेमिंग & ट्रांजैक्शन हिस्ट्री</h4>
+                    <p class="text-[9px] text-slate-500">एंट्री फीस और जीते हुए पैसे का पूरा रिकॉर्ड</p>
+                    <div class="overflow-x-auto hide-scroll max-h-48">
+                        <table class="w-full text-left text-[10px]">
                             <thead>
                                 <tr class="border-b border-slate-800 text-slate-400 pb-1">
-                                    <th class="pb-2">गेमर / मोबाइल</th>
-                                    <th class="pb-2">स्टेटस</th>
-                                    <th class="pb-2 text-right">कार्रवाई</th>
+                                    <th class="pb-1">समय & गेमर</th>
+                                    <th class="pb-1">एक्शन</th>
+                                    <th class="pb-1 text-right">अमाउंट</th>
                                 </tr>
                             </thead>
-                            <tbody id="adminUserTable">
-                                <tr><td colspan="3" class="py-2 text-center text-slate-500">कोई यूज़र नहीं</td></tr>
+                            <tbody id="adminActionHistoryTable">
+                                <tr><td colspan="3" class="py-2 text-center text-slate-500">कोई रिकॉर्ड नहीं</td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- VIP TIERS WINNERS HISTORY -->
+                <!-- SETTINGS & COUPONS -->
                 <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
-                    <h4 class="font-bold text-amber-400"><i class="fas fa-crown mr-1"></i> VIP 1, VIP 2, VIP 3 विनर्स हिस्ट्री</h4>
-                    <div class="overflow-x-auto">
+                    <h4 class="font-bold text-white"><i class="fas fa-cog text-amber-400 mr-1"></i> सेटिंग्स & कूपन</h4>
+                    <input type="text" id="setUpi" value="admin@upi" placeholder="Admin UPI ID" class="w-full bg-slate-900 border border-slate-800 p-2 rounded-xl text-white">
+                    <input type="text" id="setQrImg" placeholder="QR Code Image Link" class="w-full bg-slate-900 border border-slate-800 p-2 rounded-xl text-white">
+                    <input type="text" id="setTelegram" placeholder="Helpline Telegram Link" class="w-full bg-slate-900 border border-slate-800 p-2 rounded-xl text-white">
+                    <div class="grid grid-cols-2 gap-2 pt-1">
+                        <input type="text" id="newCouponCode" placeholder="नया कूपन" class="bg-slate-900 border border-slate-800 p-2 rounded-xl text-white uppercase">
+                        <button onclick="createNewCoupon()" class="bg-indigo-600 text-white font-bold py-2 rounded-xl">बनाएं</button>
+                    </div>
+                    <button onclick="saveAdminSettings()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-xl">सेव करें</button>
+                </div>
+
+                <!-- 10 QUESTIONS BUILDER -->
+                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-indigo-400"><i class="fas fa-edit mr-1"></i> 10 प्रश्न बनाएं</h4>
+                        <button onclick="autoFillGeminiAIQuestions()" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold px-2 py-1.5 rounded-xl text-[10px]">🤖 AI Auto-Fill</button>
+                    </div>
+                    <div id="adminBuilderBox" class="space-y-3 max-h-56 overflow-y-auto pr-1 hide-scroll"></div>
+                    <button onclick="saveAdminQuiz()" class="w-full bg-emerald-600 text-white font-bold py-2.5 rounded-xl">सेव और लाइव करें</button>
+                </div>
+
+                <!-- TOP-UP APPROVALS (WALLET RECHARGE) -->
+                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                    <h4 class="font-bold text-amber-400"><i class="fas fa-coins mr-1"></i> वॉलेट टॉप-अप रिक्वेस्ट्स</h4>
+                    <div class="overflow-x-auto hide-scroll">
                         <table class="w-full text-left">
                             <thead>
                                 <tr class="border-b border-slate-800 text-slate-400 pb-1">
-                                    <th class="pb-2">नाम / आईडी</th>
-                                    <th class="pb-2">VIP टियर</th>
-                                    <th class="pb-2 text-right">जीता हुआ इनाम</th>
+                                    <th class="pb-2">गेमर</th>
+                                    <th class="pb-2">अमाउंट</th>
+                                    <th class="pb-2 text-right">कार्रवाई</th>
                                 </tr>
                             </thead>
-                            <tbody id="adminHistoryTable">
-                                <tr><td colspan="3" class="py-2 text-center text-slate-500">कोई विनर हिस्ट्री नहीं</td></tr>
+                            <tbody id="adminTopUpTable">
+                                <tr><td colspan="3" class="py-2 text-center text-slate-500">कोई टॉप-अप पेंडिंग नहीं</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -317,17 +359,17 @@
         </div>
     </div>
 
-    <footer class="w-full text-center py-3 text-slate-500 text-xs border-t border-slate-800/50 gaming-font">
-        &copy; 2026 GyanPay Pro Gaming Arena. All rights reserved.
+    <footer class="w-full text-center py-3 text-slate-500 text-[10px] border-t border-slate-800/50 gaming-font">
+        &copy; 2026 GyanPay Esports Arena. All rights reserved.
     </footer>
 
     <script>
         let db = JSON.parse(localStorage.getItem('gyanpay_master_db')) || {
             users: [],
             quiz: [],
-            winners: [],
+            actionLogs: [], // New! Tracks all entry fees and winnings
             adminWallet: 0,
-            coupons: { "GYAN2026": 20, "PROFREE": 20 },
+            coupons: { "GYAN2026": 20, "PROFREE": 50 },
             settings: { upi: "admin@upi", qrImg: "", telegram: "https://t.me/", adminPin: "admin123", mode: "manual", isLive: false }
         };
 
@@ -361,14 +403,14 @@
         function updateLiveStatusDisplay() {
             let statusDiv = document.getElementById('homeGameStatus');
             if(db.settings.mode === 'auto') {
-                statusDiv.innerText = "🤖 GEMINI AI AUTO MODE ACTIVE";
-                statusDiv.className = "text-xs font-bold text-cyan-400";
+                statusDiv.innerText = "🤖 GEMINI AI AUTO MODE";
+                statusDiv.className = "text-[11px] font-bold text-cyan-400";
             } else if(db.settings.isLive) {
                 statusDiv.innerText = "🟢 LIVE BATTLE ACTIVE";
-                statusDiv.className = "text-xs font-bold text-emerald-400";
+                statusDiv.className = "text-[11px] font-bold text-emerald-400";
             } else {
-                statusDiv.innerText = "🔴 ARENA PAUSED / WAITING";
-                statusDiv.className = "text-xs font-bold text-red-400";
+                statusDiv.innerText = "🔴 ARENA PAUSED";
+                statusDiv.className = "text-[11px] font-bold text-red-400";
             }
         }
 
@@ -382,21 +424,21 @@
             }
             saveDB();
             updateLiveStatusDisplay();
-            alert(`मोड बदलकर '${mode === 'auto' ? 'ऑटोमैटिक जेमिनी AI' : 'मैन्युअल'}' कर दिया गया है!`);
+            alert(`मोड बदलकर '${mode === 'auto' ? 'जेमिनी AI' : 'मैन्युअल'}' कर दिया गया है!`);
         }
 
         function autoFillGeminiAIQuestionsSilent() {
             let sample = [
                 { question: "भारत की राजधानी क्या है?", options: ["मुंबई", "नई दिल्ली", "कोलकाता", "चेन्नई"], correct: 1 },
-                { question: "वर्तमान प्रधानमंत्री कौन हैं?", options: ["नरेन्द्र मोदी", "राहुल गांधी", "अमित शाह", "योगी आदित्यनाथ"], correct: 0 },
+                { question: "BGMI गेम किस कंपनी ने बनाया है?", options: ["Tencent", "Krafton", "EA Sports", "Garena"], correct: 1 },
                 { question: "क्रिकेट का भगवान किसे कहते हैं?", options: ["विराट कोहली", "धोनी", "सचिन तेंदुलकर", "रोहित शर्मा"], correct: 2 },
                 { question: "राष्ट्रीय पक्षी कौन सा है?", options: ["कबूतर", "तोता", "मोर", "बाज़"], correct: 2 },
-                { question: "पृथ्वी के नजदीक ग्रह कौन सा है?", options: ["बुध", "शुक्र", "मंगल", "बृहस्पति"], correct: 1 },
+                { question: "FreeFire में 'Booyah' का क्या मतलब है?", options: ["हारना", "जीतना", "मर जाना", "छिपना"], correct: 1 },
                 { question: "राष्ट्रगान किसने लिखा है?", options: ["बंकिम चंद्र", "रविंद्रनाथ टैगोर", "गांधीजी", "सुभाष चंद्र"], correct: 1 },
                 { question: "कंप्यूटर का दिमाग क्या है?", options: ["RAM", "CPU", "Hard Disk", "Monitor"], correct: 1 },
                 { question: "सबसे बड़ा ग्रह कौन सा है?", options: ["शनि", "पृथ्वी", "बृहस्पति", "यूरेनस"], correct: 2 },
-                { question: "राष्ट्रीय पशु क्या है?", options: ["शेर", "हाथी", "चीता", "बाघ"], correct: 3 },
-                { question: "एक वर्ष में कितने दिन होते हैं?", options: ["360", "365", "366", "364"], correct: 1 }
+                { question: "भारत का राष्ट्रीय पशु क्या है?", options: ["शेर", "हाथी", "चीता", "बाघ"], correct: 3 },
+                { question: "GTA V किस साल रिलीज हुआ था?", options: ["2011", "2013", "2015", "2018"], correct: 1 }
             ];
             db.quiz = sample;
             saveDB();
@@ -406,8 +448,8 @@
             document.getElementById('homeScreen').classList.add('hidden');
             document.getElementById('authScreen').classList.add('hidden');
             document.getElementById('userDashboard').classList.add('hidden');
-            document.getElementById('paymentScreen').classList.add('hidden');
-            document.getElementById('pendingScreen').classList.add('hidden');
+            document.getElementById('profileScreen').classList.add('hidden');
+            document.getElementById('topUpScreen').classList.add('hidden');
             document.getElementById('quizScreen').classList.add('hidden');
             document.getElementById('resultScreen').classList.add('hidden');
         }
@@ -422,7 +464,18 @@
         function renderUserNavigationState() {
             document.getElementById('headerAuthButtons').classList.add('hidden');
             document.getElementById('headerUserLogout').classList.remove('hidden');
-            document.getElementById('topUserName').innerText = currentUser.name;
+            
+            // Fix long names for header
+            let dName = currentUser.name;
+            if(dName.length > 8) dName = dName.substring(0,8) + '..';
+            document.getElementById('topUserName').innerText = dName;
+            
+            document.getElementById('topUserWallet').innerText = currentUser.wallet || 0;
+            
+            // Profile Card Details
+            document.getElementById('dashUserNameProfile').innerText = currentUser.name;
+            document.getElementById('dashMatches').innerText = currentUser.gamesPlayed || 0;
+            document.getElementById('dashWins').innerText = currentUser.gamesWon || 0;
         }
 
         function openAuth(mode) {
@@ -468,7 +521,7 @@
                     alert('यह मोबाइल नंबर पहले से रजिस्टर्ड है!');
                     return;
                 }
-                let newUser = { name, phone, pass, status: 'registered', screenshot: '', wallet: 0 };
+                let newUser = { name, phone, pass, status: 'active', screenshot: '', wallet: 0, pendingAmount: 0, gamesPlayed: 0, gamesWon: 0 };
                 db.users.push(newUser);
                 saveDB();
                 currentUser = newUser;
@@ -490,41 +543,68 @@
             let u = db.users.find(x => x.phone === currentUser.phone) || currentUser;
             currentUser = u;
             document.getElementById('userWalletBalance').innerText = `₹${currentUser.wallet || 0}`;
+            renderUserNavigationState();
 
-            if(currentUser.status === 'approved') {
-                if(db.settings.mode === 'manual' && !db.settings.isLive) {
-                    document.getElementById('userDashboard').classList.remove('hidden');
-                    document.getElementById('dashUserName').innerText = currentUser.name;
-                    alert('एडमिन द्वारा अभी बैटल लाइव नहीं किया गया है। कृपया प्रतीक्षा करें।');
-                    return;
-                }
-                startQuizGame();
-            } else if(currentUser.status === 'screenshot_sent') {
-                document.getElementById('pendingScreen').classList.remove('hidden');
+            document.getElementById('userDashboard').classList.remove('hidden');
+            
+            if(currentUser.pendingAmount && currentUser.pendingAmount > 0) {
+                document.getElementById('pendingTopUpNotice').classList.remove('hidden');
+                document.getElementById('pendingTopUpAmtDisplay').innerText = currentUser.pendingAmount;
             } else {
-                document.getElementById('userDashboard').classList.remove('hidden');
-                document.getElementById('dashUserName').innerText = currentUser.name;
+                document.getElementById('pendingTopUpNotice').classList.add('hidden');
             }
         }
 
-        function clickJoinQuiz() {
+        // PROFILE EDITING
+        function openProfileScreen() {
             hideAllScreens();
-            document.getElementById('paymentScreen').classList.remove('hidden');
-            document.getElementById('adminUpiDisplay').innerText = db.settings.upi;
-            let qrImgTag = document.getElementById('userQrImg');
-            if(db.settings.qrImg) {
+            document.getElementById('profileScreen').classList.remove('hidden');
+            document.getElementById('editProfileName').value = currentUser.name;
+        }
+
+        function saveProfileData() {
+            let newName = document.getElementById('editProfileName').value.trim();
+            if(!newName) { alert('नाम खाली नहीं हो सकता!'); return; }
+            let idx = db.users.findIndex(x => x.phone === currentUser.phone);
+            if(idx !== -1) {
+                db.users[idx].name = newName;
+                currentUser = db.users[idx];
+                saveDB();
+                renderUserNavigationState();
+                alert('प्रोफाइल नाम सफलतापुर्वक अपडेट हो गया!');
+                checkUserDashboardFlow();
+            }
+        }
+
+        // TOP-UP WALLET LOGIC
+        function openTopUpScreen() {
+            hideAllScreens();
+            document.getElementById('topUpScreen').classList.remove('hidden');
+            document.getElementById('topUpUpiDisplay').innerText = db.settings.upi;
+            setTopUpAmount(100); 
+        }
+
+        function setTopUpAmount(amt) {
+            document.getElementById('customTopUpAmt').value = amt;
+            updateQRForTopup();
+        }
+
+        function updateQRForTopup() {
+            let amt = document.getElementById('customTopUpAmt').value || 0;
+            document.getElementById('displayTopUpText').innerText = `₹${amt}`;
+            let qrImgTag = document.getElementById('topUpQrImg');
+            if(db.settings.qrImg && db.settings.qrImg.trim() !== "") {
                 qrImgTag.src = db.settings.qrImg;
             } else {
-                qrImgTag.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=${encodeURIComponent(db.settings.upi)}&pn=GyanPay&am=20&cu=INR`;
+                qrImgTag.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=${encodeURIComponent(db.settings.upi)}&pn=GyanPay&am=${amt}&cu=INR`;
             }
         }
 
-        function backToDashboard() {
-            checkUserDashboardFlow();
-        }
-
-        function sendPaymentProof() {
-            let fileInput = document.getElementById('payScreenshot');
+        function submitTopUpRequest() {
+            let amt = parseFloat(document.getElementById('customTopUpAmt').value);
+            if(!amt || amt <= 0) { alert('कृपया सही अमाउंट दर्ज करें!'); return; }
+            
+            let fileInput = document.getElementById('topUpScreenshot');
             if(fileInput.files.length === 0) {
                 alert('कृपया पेमेंट का स्क्रीनशॉट अपलोड करें!');
                 return;
@@ -533,23 +613,100 @@
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function (e) {
-                let idx = db.users.findIndex(x => x.phone === currentUser.phone);
-                if(idx !== -1) {
-                    db.users[idx].screenshot = e.target.result;
-                    db.users[idx].status = 'screenshot_sent';
-                    
-                    if(db.settings.mode === 'auto') {
-                        db.users[idx].status = 'approved';
-                        db.adminWallet = (db.adminWallet || 0) + 20;
-                    }
+                let img = new Image();
+                img.src = e.target.result;
+                img.onload = function () {
+                    let canvas = document.createElement('canvas');
+                    let ctx = canvas.getContext('2d');
+                    let width = 300;
+                    let height = (img.height * width) / img.width;
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+                    let compressedDataUrl = canvas.toDataURL('image/jpeg', 0.6);
 
-                    saveDB();
-                    currentUser = db.users[idx];
-                    alert(db.settings.mode === 'auto' ? '🤖 जेमिनी AI ने पेमेंट ऑटोमैटिक वेरीफाई कर दिया है!' : 'स्क्रीनशॉट सबमिट हो गया है!');
-                    checkUserDashboardFlow();
-                    renderAdminTables();
+                    let idx = db.users.findIndex(x => x.phone === currentUser.phone);
+                    if(idx !== -1) {
+                        db.users[idx].pendingAmount = amt;
+                        db.users[idx].screenshot = compressedDataUrl;
+                        
+                        if(db.settings.mode === 'auto') {
+                            db.users[idx].wallet = (db.users[idx].wallet || 0) + amt;
+                            // Add to Admin Wallet silently via AI approval
+                            db.adminWallet = (db.adminWallet || 0) + amt; 
+                            db.users[idx].pendingAmount = 0;
+                            db.users[idx].screenshot = '';
+                            
+                            // Log TopUp
+                            if(!db.actionLogs) db.actionLogs = [];
+                            db.actionLogs.unshift({
+                                time: new Date().toLocaleTimeString('hi-IN'),
+                                name: currentUser.name,
+                                action: 'Top-Up (AI Auto)',
+                                amount: `+₹${amt}`
+                            });
+                            
+                            alert(`🤖 AI द्वारा ₹${amt} तुरंत वॉलेट में जोड़ दिए गए!`);
+                        } else {
+                            alert('टॉप-अप रिक्वेस्ट एडमिन को भेज दी गई है!');
+                        }
+
+                        saveDB();
+                        currentUser = db.users[idx];
+                        checkUserDashboardFlow();
+                        renderAdminTables();
+                    }
                 }
             };
+        }
+
+        // ============================================
+        // CORE: DEDUCT ₹20 INSTANTLY AND START QUIZ
+        // ============================================
+        function clickPlayGame() {
+            if(db.settings.mode === 'manual' && !db.settings.isLive) {
+                alert('एडमिन द्वारा अभी गेम लाइव नहीं किया गया है!');
+                return;
+            }
+            if(!db.quiz || db.quiz.length < 10) {
+                alert('एडमिन द्वारा अभी सवाल तैयार नहीं किए गए हैं।');
+                return;
+            }
+
+            let uWallet = parseFloat(currentUser.wallet) || 0;
+            if(uWallet < 20) {
+                alert('वॉलेट में पर्याप्त बैलेंस नहीं है। कृपया टॉप-अप (Add Money) करें!');
+                openTopUpScreen();
+                return;
+            }
+
+            let idx = db.users.findIndex(x => x.phone === currentUser.phone);
+            if(idx !== -1) {
+                // Deduct 20 from user, add to admin
+                db.users[idx].wallet -= 20;
+                db.users[idx].gamesPlayed = (db.users[idx].gamesPlayed || 0) + 1;
+                db.adminWallet = (db.adminWallet || 0) + 20;
+                
+                // Track in Action Logs for Admin History
+                if(!db.actionLogs) db.actionLogs = [];
+                db.actionLogs.unshift({
+                    time: new Date().toLocaleTimeString('hi-IN'),
+                    name: db.users[idx].name,
+                    action: 'गेम एंट्री ली',
+                    amount: '+₹20 (Admin)'
+                });
+
+                currentUser = db.users[idx];
+                saveDB();
+                renderUserNavigationState();
+                renderAdminTables();
+            }
+
+            hideAllScreens();
+            document.getElementById('quizScreen').classList.remove('hidden');
+            qIndex = 0;
+            score = 0;
+            loadQuizQuestion();
         }
 
         function applyCoupon() {
@@ -561,7 +718,7 @@
                     db.users[idx].wallet = (db.users[idx].wallet || 0) + val;
                     currentUser = db.users[idx];
                     saveDB();
-                    document.getElementById('userWalletBalance').innerText = `₹${currentUser.wallet}`;
+                    checkUserDashboardFlow();
                     alert(`कूपन सफल! ₹${val} आपके वॉलेट में जोड़ दिए गए हैं।`);
                 }
             } else {
@@ -594,20 +751,7 @@
             let teleLink = db.settings.telegram || "https://t.me/";
             let msg = encodeURIComponent(`सर, मैं विड्रॉल करना चाहता हूँ।\nगेमर नाम: ${currentUser.name}\nमोबाइल: ${currentUser.phone}\nअमाउंट: ₹${amount}\nUPI ID: ${upiId}\nकृपया क्लियर कर दीजिए।`);
             window.open(`${teleLink}?text=${msg}`, '_blank');
-            alert('विड्रॉल अनुरोध टेलीग्राम हेल्पलाइन पर भेज दिया गया है!');
-        }
-
-        function startQuizGame() {
-            if(!db.quiz || db.quiz.length < 10) {
-                alert('एडमिन द्वारा सवाल अभी तैयार नहीं किए गए हैं।');
-                showHomeScreen();
-                return;
-            }
-            hideAllScreens();
-            document.getElementById('quizScreen').classList.remove('hidden');
-            qIndex = 0;
-            score = 0;
-            loadQuizQuestion();
+            alert('विड्रॉल रिक्वेस्ट टेलीग्राम पर भेज दी गई है!');
         }
 
         function loadQuizQuestion() {
@@ -660,19 +804,20 @@
 
             let idx = db.users.findIndex(x => x.phone === currentUser.phone);
             if(idx !== -1) {
-                db.users[idx].status = 'registered';
-                db.users[idx].screenshot = '';
                 if(rewardMoney > 0) {
                     db.users[idx].wallet = (db.users[idx].wallet || 0) + rewardMoney;
+                    db.users[idx].gamesWon = (db.users[idx].gamesWon || 0) + 1;
                 }
-                db.winners.push({
-                    name: currentUser.name,
-                    phone: currentUser.phone,
-                    tier: vipTier,
-                    score: score,
-                    wonAmount: rewardMoney,
-                    date: new Date().toLocaleDateString()
+                
+                // Track Result in Action Logs for Admin
+                if(!db.actionLogs) db.actionLogs = [];
+                db.actionLogs.unshift({
+                    time: new Date().toLocaleTimeString('hi-IN'),
+                    name: db.users[idx].name,
+                    action: rewardMoney > 0 ? `${vipTier} जीता (स्कोर: ${score})` : `हार गया (स्कोर: ${score})`,
+                    amount: rewardMoney > 0 ? `-₹${rewardMoney} (Admin)` : '₹0'
                 });
+
                 currentUser = db.users[idx];
                 saveDB();
                 renderAdminTables();
@@ -680,15 +825,24 @@
 
             let title = document.getElementById('resTitle');
             let desc = document.getElementById('resDesc');
+            
+            let resIcon = document.getElementById('resIcon');
             if(rewardMoney > 0) {
-                title.innerText = `VICTORY! ${vipTier} WINNER`;
-                desc.innerHTML = `स्कोर: <b>${score}/10</b><br>इनाम राशि वॉलेट में जुड़ गई: <span class="text-emerald-400 font-bold">+₹${rewardMoney}</span><br>अगला बैटल खेलने के लिए ₹20 दें।`;
+                resIcon.innerHTML = '<i class="fas fa-trophy"></i>';
+                resIcon.className = "w-20 h-20 rounded-full flex items-center justify-center mx-auto text-4xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 neon-btn";
+                title.innerText = `VICTORY! ${vipTier}`;
+                title.className = "gaming-font text-xl font-black text-emerald-400";
+                desc.innerHTML = `स्कोर: <b class="text-white">${score}/10</b><br>इनाम राशि वॉलेट में जुड़ गई: <span class="text-emerald-400 font-bold text-base">+₹${rewardMoney}</span>`;
             } else {
-                title.innerText = "BATTLE FINISHED";
-                desc.innerHTML = `स्कोर: <b>${score}/10</b><br>इनाम के लिए कम से कम 5 सही उत्तर चाहिए। अगला बैटल खेलने के लिए ₹20 दें।`;
+                resIcon.innerHTML = '<i class="fas fa-skull"></i>';
+                resIcon.className = "w-20 h-20 rounded-full flex items-center justify-center mx-auto text-4xl bg-red-500/20 text-red-400 border border-red-500/40";
+                title.innerText = "DEFEAT / GAME OVER";
+                title.className = "gaming-font text-xl font-black text-red-400";
+                desc.innerHTML = `स्कोर: <b class="text-white">${score}/10</b><br>इनाम के लिए कम से कम 5 सही उत्तर चाहिए। अगला बैटल खेलें!`;
             }
         }
 
+        // ADMIN FUNCTIONS
         function toggleAdminModal() {
             document.getElementById('adminModal').classList.toggle('hidden');
         }
@@ -717,26 +871,21 @@
             alert('सेटिंग्स सेव हो गई!');
         }
 
-        function autoFillGeminiAIQuestions() {
-            autoFillGeminiAIQuestionsSilent();
-            alert('🤖 जेमिनी AI ने 10 प्रो गेमिंग सवाल ऑटोमैटिक भर दिए हैं!');
-        }
-
         function buildAdminBuilderHTML() {
             let box = document.getElementById('adminBuilderBox');
             let html = '';
             for(let i=0; i<10; i++) {
                 html += `
-                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 space-y-2">
-                        <p class="font-bold text-slate-300">प्रश्न ${i+1}</p>
-                        <input type="text" id="adm_q_${i}" placeholder="सवाल..." class="w-full bg-slate-900 border border-slate-800 p-2 rounded-lg text-white">
+                    <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 space-y-2">
+                        <p class="font-bold text-slate-300 text-[10px]">प्रश्न ${i+1}</p>
+                        <input type="text" id="adm_q_${i}" placeholder="सवाल..." class="w-full bg-slate-950 border border-slate-800 p-2 rounded-lg text-white text-[10px]">
                         <div class="grid grid-cols-2 gap-2">
-                            <input type="text" id="adm_q_${i}_o0" placeholder="ऑप्शन 1" class="bg-slate-900 p-1.5 rounded-lg text-white">
-                            <input type="text" id="adm_q_${i}_o1" placeholder="ऑप्शन 2" class="bg-slate-900 p-1.5 rounded-lg text-white">
-                            <input type="text" id="adm_q_${i}_o2" placeholder="ऑप्शन 3" class="bg-slate-900 p-1.5 rounded-lg text-white">
-                            <input type="text" id="adm_q_${i}_o3" placeholder="ऑप्शन 4" class="bg-slate-900 p-1.5 rounded-lg text-white">
+                            <input type="text" id="adm_q_${i}_o0" placeholder="ऑप्शन 1" class="bg-slate-950 p-1.5 rounded-lg text-white text-[10px]">
+                            <input type="text" id="adm_q_${i}_o1" placeholder="ऑप्शन 2" class="bg-slate-950 p-1.5 rounded-lg text-white text-[10px]">
+                            <input type="text" id="adm_q_${i}_o2" placeholder="ऑप्शन 3" class="bg-slate-950 p-1.5 rounded-lg text-white text-[10px]">
+                            <input type="text" id="adm_q_${i}_o3" placeholder="ऑप्शन 4" class="bg-slate-950 p-1.5 rounded-lg text-white text-[10px]">
                         </div>
-                        <input type="number" min="0" max="3" id="adm_q_${i}_corr" placeholder="सही विकल्प (0-3)" class="w-full bg-slate-900 p-1.5 rounded-lg text-white">
+                        <input type="number" min="0" max="3" id="adm_q_${i}_corr" placeholder="सही विकल्प (0-3)" class="w-full bg-slate-950 p-1.5 rounded-lg text-white text-[10px]">
                     </div>
                 `;
             }
@@ -766,43 +915,49 @@
             document.getElementById('adminTotalRevenue').innerText = `₹${db.adminWallet || 0}`;
             document.getElementById('adminTotalUsers').innerText = db.users.length;
 
-            let uTBody = document.getElementById('adminUserTable');
-            if(db.users.length === 0) {
-                uTBody.innerHTML = `<tr><td colspan="3" class="py-2 text-center text-slate-500">कोई यूज़र नहीं</td></tr>`;
+            // Top Up Table
+            let topUpBody = document.getElementById('adminTopUpTable');
+            let pendingUsers = db.users.filter(u => u.pendingAmount && u.pendingAmount > 0);
+            if(pendingUsers.length === 0) {
+                topUpBody.innerHTML = `<tr><td colspan="3" class="py-2 text-center text-slate-500">कोई टॉप-अप पेंडिंग नहीं</td></tr>`;
             } else {
                 let html = '';
-                db.users.forEach((u, idx) => {
-                    let ssBtn = u.screenshot ? `<button onclick="viewUserSS(${idx})" class="bg-indigo-600 text-white px-2 py-1 rounded text-[10px] mr-1">SS</button>` : '';
-                    let action = u.status === 'approved' ? `<span class="text-emerald-400 font-bold">Approved</span>` : `
+                pendingUsers.forEach((u) => {
+                    let realIdx = db.users.findIndex(x => x.phone === u.phone);
+                    let ssBtn = u.screenshot ? `<button onclick="viewUserSS(${realIdx})" class="bg-indigo-600 text-white px-2 py-1 rounded text-[10px] mr-1 shadow"><i class="fas fa-image"></i></button>` : '';
+                    let action = `
                         ${ssBtn}
-                        <button onclick="approveUser(${idx})" class="bg-emerald-600 text-white px-2 py-1 rounded text-[10px]">अप्रूव</button>
+                        <button onclick="approveTopUp(${realIdx})" class="bg-emerald-600 text-white px-2 py-1 rounded text-[10px] shadow">अप्रूव</button>
                     `;
-                    html += `<tr class="border-b border-slate-800"><td class="py-2"><b>${u.name}</b><br>${u.phone}</td><td>${u.status}</td><td class="text-right">${action}</td></tr>`;
+                    html += `<tr class="border-b border-slate-800"><td class="py-2"><b>${u.name}</b><br><span class="text-[9px] text-slate-400">${u.phone}</span></td><td class="py-2 font-bold text-amber-400">₹${u.pendingAmount}</td><td class="text-right">${action}</td></tr>`;
                 });
-                uTBody.innerHTML = html;
+                topUpBody.innerHTML = html;
             }
 
-            let hTBody = document.getElementById('adminHistoryTable');
-            if(!db.winners || db.winners.length === 0) {
-                hTBody.innerHTML = `<tr><td colspan="3" class="py-2 text-center text-slate-500">कोई विनर हिस्ट्री नहीं</td></tr>`;
+            // UNIFIED TRANSACTION & PLAY HISTORY
+            let actTBody = document.getElementById('adminActionHistoryTable');
+            if(!db.actionLogs || db.actionLogs.length === 0) {
+                actTBody.innerHTML = `<tr><td colspan="3" class="py-2 text-center text-slate-500">कोई रिकॉर्ड नहीं</td></tr>`;
             } else {
                 let hHtml = '';
-                db.winners.forEach(w => {
+                // Show latest 20 logs max in UI so it doesn't freeze
+                db.actionLogs.slice(0, 20).forEach(log => {
+                    let amtColor = log.amount.includes('+') ? 'text-emerald-400' : (log.amount.includes('-') ? 'text-red-400' : 'text-slate-400');
                     hHtml += `
-                        <tr class="border-b border-slate-800">
-                            <td class="py-2"><b>${w.name}</b><br><span class="text-[10px] text-slate-400">${w.phone}</span></td>
-                            <td class="py-2 text-amber-400 font-bold">${w.tier}</td>
-                            <td class="py-2 text-right text-emerald-400 font-bold">+₹${w.wonAmount}</td>
+                        <tr class="border-b border-slate-800/60">
+                            <td class="py-2"><b>${log.name}</b><br><span class="text-[8px] text-slate-500">${log.time}</span></td>
+                            <td class="py-2 text-[9px] text-amber-200 leading-tight">${log.action}</td>
+                            <td class="py-2 text-right font-bold ${amtColor}">${log.amount}</td>
                         </tr>
                     `;
                 });
-                hTBody.innerHTML = hHtml;
+                actTBody.innerHTML = hHtml;
             }
         }
 
         function viewUserSS(idx) {
             let user = db.users[idx];
-            document.getElementById('screenshotContainer').innerHTML = `<img src="${user.screenshot}" class="max-h-[300px] rounded-xl">`;
+            document.getElementById('screenshotContainer').innerHTML = `<img src="${user.screenshot}" class="max-h-[250px] rounded-xl object-contain">`;
             document.getElementById('screenshotModal').classList.remove('hidden');
         }
 
@@ -810,12 +965,25 @@
             document.getElementById('screenshotModal').classList.add('hidden');
         }
 
-        function approveUser(idx) {
-            db.users[idx].status = 'approved';
-            db.adminWallet = (db.adminWallet || 0) + 20;
+        function approveTopUp(idx) {
+            let amt = db.users[idx].pendingAmount;
+            db.users[idx].wallet = (db.users[idx].wallet || 0) + amt;
+            db.users[idx].pendingAmount = 0;
+            db.users[idx].screenshot = '';
+            
+            db.adminWallet = (db.adminWallet || 0) + amt;
+            
+            if(!db.actionLogs) db.actionLogs = [];
+            db.actionLogs.unshift({
+                time: new Date().toLocaleTimeString('hi-IN'),
+                name: db.users[idx].name,
+                action: 'टॉप-अप अप्रूव किया',
+                amount: `+₹${amt} (Admin)`
+            });
+
             saveDB();
             renderAdminTables();
-            alert('अप्रूव हो गया! ₹20 एडमिन वॉलेट में जुड़ गए।');
+            alert(`टॉप-अप अप्रूव! ₹${amt} गेमर के वॉलेट में जोड़ दिए गए।`);
         }
     </script>
 </body>
