@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="2ZbgudfG9eMURVyG1uOCnzjWCv8sKq898-uU1UIxtwY" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GyanPay - Ultimate Secure Arena & Emergency Kill Switch</title>
+    <title>GyanPay - Final Pure Shudh Arena</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -55,15 +55,15 @@
         <!-- HOME SCREEN -->
         <div id="homeScreen" class="glass-card neon-glow rounded-3xl p-4 shadow-2xl text-center space-y-4">
             <div class="w-16 h-16 bg-gradient-to-tr from-amber-500/20 to-orange-500/20 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-3xl neon-btn animate-pulse-fast border border-amber-500/40 mt-2"><i class="fas fa-gamepad"></i></div>
-            <div><h2 class="gaming-font text-xl font-black text-white tracking-wide">SECURE ESPORTS ARENA</h2><p class="text-[10px] text-slate-400 mt-1">₹20 की एंट्री से खेलें, AI Bot मुकाबला जीतें और सुरक्षित इनाम पाएं!</p></div>
+            <div><h2 class="gaming-font text-xl font-black text-white tracking-wide">SECURE ESPORTS ARENA</h2><p class="text-[10px] text-slate-400 mt-1">₹20 की फिक्स एंट्री से खेलें, सुरक्षित मुकाबले का आनंद लें!</p></div>
 
             <div class="note-paper p-4 text-left shadow-lg mt-3">
                 <div class="absolute top-2 right-3 opacity-20 text-4xl"><i class="fas fa-clipboard-list text-amber-500"></i></div>
-                <h3 class="gaming-font text-[13px] font-bold text-amber-400 mb-3 border-b border-slate-700 pb-2 relative z-10"><i class="fas fa-book-open mr-1"></i> सुरक्षा और इमर्जेंसी नियम</h3>
+                <h3 class="gaming-font text-[13px] font-bold text-amber-400 mb-3 border-b border-slate-700 pb-2 relative z-10"><i class="fas fa-book-open mr-1"></i> शुद्ध और सुरक्षित नियम</h3>
                 <ul class="space-y-3 text-[11px] text-slate-300 relative z-10 font-medium leading-snug">
-                    <li class="flex items-start"><i class="fas fa-bolt text-red-400 mt-0.5 mr-2 text-sm"></i> <span><b>इमर्जेंसी किल स्विच:</b> एडमिन के पास पावर है कि वह किसी भी संदिग्ध गेम को तुरंत रोककर सबका पैसा एक क्लिक में ऑटो-रिफंड कर सके।</span></li>
-                    <li class="flex items-start"><i class="fas fa-robot text-cyan-400 mt-0.5 mr-2 text-sm"></i> <span><b>AI बॉट फंड:</b> बॉट द्वारा जीते गए पैसों से एडमिन मेगा वाउचर और गिफ्ट्स जनरेट कर सकता है।</span></li>
-                    <li class="flex items-start"><i class="fas fa-shield-alt text-amber-400 mt-0.5 mr-2 text-sm"></i> <span><b>गारंटीड विड्रॉल:</b> 15-20 मिनट के अंदर विड्रॉल ट्रांसफर की सुविधा।</span></li>
+                    <li class="flex items-start"><i class="fas fa-bolt text-red-400 mt-0.5 mr-2 text-sm"></i> <span><b>इमर्जेंसी किल स्विच:</b> एडमिन के पास किसी भी समय गेम रोककर सबका पैसा तुरंत ऑटो-रिफंड करने की शक्ति है।</span></li>
+                    <li class="flex items-start"><i class="fas fa-robot text-cyan-400 mt-0.5 mr-2 text-sm"></i> <span><b>स्मार्ट बॉट & फंड:</b> अकेले खेलने पर सिस्टम मुकाबला पूरा करता है और फंड से मेगा वाउचर बनते हैं।</span></li>
+                    <li class="flex items-start"><i class="fas fa-shield-alt text-amber-400 mt-0.5 mr-2 text-sm"></i> <span><b>गारंटीड विड्रॉल:</b> 15-20 मिनट के भीतर विड्रॉल ट्रांसफर की सुविधा।</span></li>
                 </ul>
             </div>
             <button onclick="openAuth('login')" class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:opacity-95 text-slate-950 gaming-font font-black py-4 rounded-2xl transition shadow-lg neon-btn text-sm tracking-wider"><i class="fas fa-rocket mr-1"></i> ENTER ARENA (LOGIN)</button>
@@ -154,7 +154,7 @@
             </div>
         </div>
 
-        <!-- WAITING LOBBY SCREEN (AI BOT MATCHMAKING) -->
+        <!-- WAITING LOBBY SCREEN -->
         <div id="waitingScreen" class="hidden glass-card neon-glow rounded-3xl p-8 shadow-2xl text-center space-y-6">
             <h3 class="gaming-font text-lg font-black text-amber-400 animate-pulse">MATCHMAKING WITH AI BOT...</h3>
             <div class="relative w-36 h-36 mx-auto flex items-center justify-center">
@@ -362,7 +362,7 @@
         let db = JSON.parse(localStorage.getItem('gyanpay_master_db')) || {
             users: [], quiz: [], actionLogs: [], adminWallet: 0, botProfitWallet: 0, withdrawals: [], 
             arena: { status: 'waiting', players: [] },
-            activeMatchParticipants: [], // Keeps track of players currently in a live match for refund safety
+            activeMatchParticipants: [], 
             coupons: { "WELCOME20": { type: 'money', val: 20, locked: false, img: '', link: '' } },
             settings: { adminPin: "admin123", autoBankVerify: true, isLive: false, liveSince: null }
         };
@@ -490,9 +490,6 @@
         }
         function closeFreeEntryPopup() { document.getElementById('freeEntryPopup').classList.add('hidden'); }
 
-        // ============================================
-        // AI BOT MATCHMAKING & VOUCHER CONVERTER LOGIC 🤖🎁
-        // ============================================
         function clickPlayGame() {
             if(!db.settings.isLive) { alert('अभी एरीना गेम एडमिन द्वारा बंद (OFF) कर दिया गया है। कृपया थोड़ी देर बाद प्रयास करें।'); return; }
 
@@ -504,7 +501,6 @@
             if(hasFreeEntry) { db.users[idx].freeEntries -= 1; } else { db.users[idx].wallet -= 20; db.adminWallet = (db.adminWallet || 0) + 20; }
             db.users[idx].gamesPlayed = (db.users[idx].gamesPlayed || 0) + 1; 
             
-            // Track active participant for Kill Switch / Auto Refund safety
             if(!db.activeMatchParticipants) db.activeMatchParticipants = [];
             if(!db.activeMatchParticipants.includes(currentUser.phone)) {
                 db.activeMatchParticipants.push(currentUser.phone);
@@ -573,7 +569,6 @@
                 db.botProfitWallet = (db.botProfitWallet || 0) + 20;
             }
 
-            // Remove from active match participants as game is finished normally
             if(db.activeMatchParticipants) {
                 db.activeMatchParticipants = db.activeMatchParticipants.filter(p => p !== currentUser.phone);
             }
@@ -591,9 +586,6 @@
             }
         }
 
-        // ============================================
-        // EMERGENCY KILL SWITCH & AUTO REFUND (NEW FEATURE)
-        // ============================================
         function adminEmergencyKillSwitchAndRefund() {
             if(!confirm("⚠️ क्या आप वाकई एरीना गेम को तुरंत रोकना चाहते हैं? इससे सभी लाइव गेमर्स को उनकी ₹20 एंट्री फीस ऑटोमैटिक रिफंड हो जाएगी!")) return;
 
@@ -602,14 +594,13 @@
                 db.activeMatchParticipants.forEach(phone => {
                     let uIdx = db.users.findIndex(u => u.phone === phone);
                     if(uIdx !== -1) {
-                        db.users[uIdx].wallet = (db.users[uIdx].wallet || 0) + 20; // Refund entry fee
+                        db.users[uIdx].wallet = (db.users[uIdx].wallet || 0) + 20; 
                         refundedCount++;
                     }
                 });
-                db.activeMatchParticipants = []; // Clear active participants queue
+                db.activeMatchParticipants = []; 
             }
 
-            // Also turn off live master switch for safety
             db.settings.isLive = false;
             let masterSwitch = document.getElementById('setArenaLive'); if(masterSwitch) masterSwitch.checked = false;
 
@@ -617,14 +608,12 @@
             renderAdminTables();
             alert(`🚨 इमर्जेंसी किल स्विच एक्टिव! ${refundedCount} खिलाड़ियों के खाते में ₹20 की एंट्री फीस सफलतापूर्वक रिफंड कर दी गई है और गेम बंद कर दिया गया है।`);
             
-            // If current logged-in user was affected, return to dashboard
             if(currentUser) {
                 currentUser = db.users.find(u => u.phone === currentUser.phone) || currentUser;
                 checkUserDashboardFlow();
             }
         }
 
-        // Admin converting Bot Profit Fund into Mega Vouchers
         function convertBotFundToVoucher() {
             let fund = db.botProfitWallet || 0;
             if(fund < 20) { alert('बॉट फंड में अभी पर्याप्त राशि नहीं है!'); return; }
@@ -636,9 +625,6 @@
             alert(`सफलता! बॉट फंड से '${voucherCode}' मेगा वाउचर जनरेट कर कूपन इन्वेंटरी में डाल दिया गया है!`);
         }
 
-        // ============================================
-        // WITHDRAWAL (WITH 15-20 MIN GUARANTEE & SCREENSHOT)
-        // ============================================
         function requestWithdrawal() { 
             let upiId = document.getElementById('userWithdrawUpi').value.trim(); 
             let amount = parseFloat(document.getElementById('userWithdrawAmount').value) || 0; 
@@ -668,9 +654,6 @@
         }
         function approveWithdrawal(idx) { let w = db.withdrawals[idx]; db.withdrawals.splice(idx, 1); saveDB(); renderAdminTables(); alert('विड्रॉल अप्रूव हो गया!'); }
 
-        // ============================================
-        // ADMIN PANEL
-        // ============================================
         function toggleAdminModal() { document.getElementById('adminModal').classList.toggle('hidden'); if(!document.getElementById('adminModal').classList.contains('hidden')) { renderAdminTables(); } }
         function verifyAdminPin() { if(document.getElementById('adminPinInput').value.trim() === (db.settings.adminPin || 'admin123') || document.getElementById('adminPinInput').value === 'admin') { document.getElementById('adminLoginView').classList.add('hidden'); document.getElementById('adminDashboardView').classList.remove('hidden'); } else alert('गलत पिन!'); }
         function logoutAdmin() { document.getElementById('adminLoginView').classList.remove('hidden'); document.getElementById('adminDashboardView').classList.add('hidden'); }
