@@ -9,7 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Poppins:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Poppins', sans-serif; background: radial-gradient(circle at center, #1e1b4b 0%, #090d16 100%); color: #f8fafc; min-height: 100vh; }
+        body { font-family: 'Poppins', sans-serif; background: radial-gradient(circle at center, #1e1b4b 0%, #090d16 100%); color: #f8fafc; min-height: 100vh; overflow-x: hidden; }
         .gaming-font { font-family: 'Orbitron', sans-serif; }
         .neon-glow { box-shadow: 0 0 25px rgba(245, 158, 11, 0.35); border: 1px solid rgba(245, 158, 11, 0.5); }
         .neon-btn { box-shadow: 0 0 15px rgba(234, 88, 12, 0.5); }
@@ -17,6 +17,19 @@
         @keyframes pulse-fast { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
         .animate-pulse-fast { animation: pulse-fast 2s infinite; }
         .hide-scroll::-webkit-scrollbar { display: none; }
+        
+        /* New Animated Notification Ticker */
+        .marquee-container {
+            width: 100%; overflow: hidden; white-space: nowrap; background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 12px; padding: 8px 0;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5); position: relative;
+        }
+        .marquee-text {
+            display: inline-block; padding-left: 100%;
+            animation: marquee 25s linear infinite; font-size: 11px;
+            color: #fbbf24; font-weight: 600; letter-spacing: 0.5px;
+        }
+        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between p-3">
@@ -53,61 +66,52 @@
     <!-- Main Game Container -->
     <main class="w-full max-w-md my-auto py-2 relative z-0">
 
-        <!-- HOME / GAMING LOBBY (PRE-LOGIN PLAN) -->
+        <!-- HOME / GAMING LOBBY (PRE-LOGIN PLAN WITH TICKER) -->
         <div id="homeScreen" class="glass-card neon-glow rounded-3xl p-5 shadow-2xl text-center space-y-4">
-            <div class="w-20 h-20 bg-gradient-to-tr from-amber-500/20 to-orange-500/20 text-amber-400 rounded-3xl flex items-center justify-center mx-auto text-3xl neon-btn animate-pulse-fast border border-amber-500/40">
+            <div class="w-16 h-16 bg-gradient-to-tr from-amber-500/20 to-orange-500/20 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-3xl neon-btn animate-pulse-fast border border-amber-500/40">
                 <i class="fas fa-gamepad"></i>
             </div>
             <div>
-                <h2 class="gaming-font text-xl font-black text-white tracking-wide">PRO ESPORTS QUIZ ARENA</h2>
-                <p class="text-[11px] text-slate-400 mt-1">₹20 की 1-Click एंट्री से बैटल खेलें और अनलिमिटेड इनाम जीतें!</p>
+                <h2 class="gaming-font text-xl font-black text-white tracking-wide">PRO ESPORTS ARENA</h2>
+                <p class="text-[10px] text-slate-400 mt-1">₹20 की 1-Click एंट्री से बैटल खेलें और अनलिमिटेड इनाम जीतें!</p>
             </div>
 
-            <!-- PUBLIC GAME PLAN (TRANSPARENCY UPDATED) -->
-            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-amber-500/30 rounded-2xl p-3 text-left shadow-lg">
-                <h3 class="gaming-font text-xs font-bold text-amber-400 mb-2 border-b border-amber-500/20 pb-1"><i class="fas fa-chart-line mr-1"></i> प्राइज पूल डिस्ट्रीब्यूशन प्लान</h3>
-                
-                <p class="text-[9px] text-slate-300 mb-3 leading-tight">
-                    हमारा सिस्टम पूरी तरह पारदर्शी है। गेम में <b>जितने ज्यादा लोग जुड़ेंगे, आपका इनाम उतना ही बड़ा होगा!</b> इनाम कुल जमा हुए पैसे (प्राइज पूल) के प्रतिशत (%) के आधार पर मिलता है:
-                </p>
+            <!-- THE MEGA SCROLLING NOTIFICATION TICKER -->
+            <div class="marquee-container shadow-lg">
+                <div class="marquee-text">
+                    🔥 <span class="text-white">MEGA PRIZE POOL:</span> गेम में जितने ज्यादा लोग जुड़ेंगे, आपका इनाम उतना ही बड़ा होगा! 💸 अगर <span class="text-emerald-400">100 लोग खेलते हैं</span> तो VIP-1 को <span class="text-emerald-400">₹1,000+</span> मिलेगा। 🚀 सोचिये! अगर <span class="text-cyan-400">1 लाख (1,00,000) लोग खेलते हैं</span>, तो VIP-1 का इनाम <span class="text-amber-500">₹10,000 से ₹50,000+</span> तक जा सकता है! 🏆 तुरंत एंट्री लें और अपना लक आज़माएं!
+                </div>
+            </div>
 
-                <div class="space-y-3">
-                    <!-- 10 Players Plan -->
-                    <div class="bg-slate-950 border border-slate-800 p-2 rounded-xl">
-                        <p class="text-[10px] text-cyan-400 font-bold mb-1">🎮 उदाहरण 1: अगर 10 गेमर्स खेलते हैं</p>
-                        <p class="text-[8px] text-slate-400 mb-1.5 text-center bg-slate-900 py-1 rounded">10 गेमर्स × ₹20 एंट्री फीस = <span class="text-white font-bold">₹200 (कुल प्राइज पूल)</span></p>
-                        
-                        <div class="flex justify-between text-[9px] text-white bg-slate-900/50 p-1.5 rounded">
-                            <span>🥇 VIP 1 (पूल का 50%)</span> <span class="font-bold text-emerald-400">₹100 मिलेगा</span>
+            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-amber-500/30 rounded-2xl p-3.5 text-left shadow-lg">
+                <h3 class="gaming-font text-[11px] font-bold text-amber-400 mb-2 border-b border-amber-500/20 pb-1.5"><i class="fas fa-bolt mr-1"></i> लाइव प्राइज पूल गणित</h3>
+                
+                <div class="space-y-2">
+                    <div class="bg-slate-950 border border-slate-800 p-2.5 rounded-xl flex items-center justify-between">
+                        <div>
+                            <p class="text-[10px] text-cyan-400 font-bold"><i class="fas fa-users mr-1"></i> 100 गेमर्स</p>
+                            <p class="text-[8px] text-slate-500">पूल: ₹2000</p>
                         </div>
-                        <div class="flex justify-between text-[9px] text-white bg-slate-900/50 p-1.5 rounded mt-1">
-                            <span>🥈 VIP 2 (पूल का 30%)</span> <span class="font-bold text-emerald-400">₹60 मिलेगा</span>
-                        </div>
-                        <div class="flex justify-between text-[9px] text-white bg-slate-900/50 p-1.5 rounded mt-1">
-                            <span>🥉 VIP 3 (पूल का 20%)</span> <span class="font-bold text-emerald-400">₹40 मिलेगा</span>
+                        <div class="text-right">
+                            <p class="text-[9px] text-white">VIP 1: <span class="font-bold text-emerald-400">₹1000</span></p>
                         </div>
                     </div>
 
-                    <!-- 100 Players Plan -->
-                    <div class="bg-slate-950 border border-slate-800 p-2 rounded-xl">
-                        <p class="text-[10px] text-amber-400 font-bold mb-1">🚀 उदाहरण 2: अगर 100 गेमर्स खेलते हैं</p>
-                        <p class="text-[8px] text-slate-400 mb-1.5 text-center bg-slate-900 py-1 rounded">100 गेमर्स × ₹20 एंट्री फीस = <span class="text-white font-bold">₹2000 (कुल प्राइज पूल)</span></p>
-
-                        <div class="flex justify-between text-[9px] text-white bg-slate-900/50 p-1.5 rounded">
-                            <span>🥇 VIP 1 (पूल का 50%)</span> <span class="font-bold text-emerald-400">₹1000 मिलेगा</span>
+                    <div class="bg-slate-950 border border-amber-500/40 p-2.5 rounded-xl flex items-center justify-between relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-8 h-8 bg-amber-500/20 rounded-full blur-xl"></div>
+                        <div>
+                            <p class="text-[10px] text-amber-400 font-bold"><i class="fas fa-globe mr-1"></i> 1,00,000 गेमर्स</p>
+                            <p class="text-[8px] text-slate-400">महा-पूल: ₹20,00,000+</p>
                         </div>
-                        <div class="flex justify-between text-[9px] text-white bg-slate-900/50 p-1.5 rounded mt-1">
-                            <span>🥈 VIP 2 (पूल का 30%)</span> <span class="font-bold text-emerald-400">₹600 मिलेगा</span>
-                        </div>
-                        <div class="flex justify-between text-[9px] text-white bg-slate-900/50 p-1.5 rounded mt-1">
-                            <span>🥉 VIP 3 (पूल का 20%)</span> <span class="font-bold text-emerald-400">₹400 मिलेगा</span>
+                        <div class="text-right relative z-10">
+                            <p class="text-[10px] text-white font-bold">VIP 1: <span class="text-amber-400 animate-pulse drop-shadow-[0_0_5px_rgba(245,158,11,0.8)]">₹10,000 - ₹50,000+</span></p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <button onclick="openAuth('login')" class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:opacity-95 text-slate-950 gaming-font font-black py-3.5 rounded-2xl transition shadow-lg neon-btn text-sm tracking-wider">
-                <i class="fas fa-bolt mr-1"></i> ENTER ARENA (LOGIN)
+            <button onclick="openAuth('login')" class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:opacity-95 text-slate-950 gaming-font font-black py-4 rounded-2xl transition shadow-lg neon-btn text-sm tracking-wider">
+                <i class="fas fa-rocket mr-1"></i> ENTER ARENA (LOGIN)
             </button>
         </div>
 
@@ -387,7 +391,7 @@
 
                 <!-- QUIZ BUILDER -->
                 <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-2 text-center">
-                    <button onclick="autoFillGeminiAIQuestionsSilent(); alert('AI सवाल लोड हो गए!'); updateLiveStatusDisplay();" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-2 rounded-xl text-xs">🤖 जेमिनी AI से 10 सवाल भरें & लाइव करें</button>
+                    <button onclick="autoFillGeminiAIQuestionsSilent(); alert('AI सवाल लोड हो गए!');" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-2 rounded-xl text-xs">🤖 जेमिनी AI से 10 सवाल भरें & लाइव करें</button>
                 </div>
             </div>
         </div>
@@ -405,8 +409,7 @@
 
     <script>
         let db = JSON.parse(localStorage.getItem('gyanpay_master_db')) || {
-            users: [], quiz: [], actionLogs: [], adminWallet: 0,
-            withdrawals: [], 
+            users: [], quiz: [], actionLogs: [], adminWallet: 0, withdrawals: [], 
             coupons: { "NORMAL20": { type: 'money', val: 20 }, "EMPTY1": { type: 'empty', val: 0 } },
             settings: { upi: "admin@upi", adminPin: "admin123", isLive: false, autoBankVerify: true }
         };
@@ -414,8 +417,7 @@
         function saveDB() { localStorage.setItem('gyanpay_master_db', JSON.stringify(db)); }
 
         let currentUser = JSON.parse(sessionStorage.getItem('gyanpay_curr_user')) || null;
-        let isLoginMode = true;
-        let qIndex = 0; let score = 0; let quizTimerInterval = null;
+        let isLoginMode = true; let qIndex = 0; let score = 0; let quizTimerInterval = null;
 
         window.onload = function() {
             renderAdminTables();
@@ -437,15 +439,11 @@
                         if(u.pendingAmount > 0 && u.pendingSince) {
                             let elapsedMinutes = (currentTime - u.pendingSince) / 1000 / 60;
                             if(elapsedMinutes >= 5) {
-                                let amt = u.pendingAmount;
-                                u.wallet = (u.wallet || 0) + amt;
-                                db.adminWallet = (db.adminWallet || 0) + amt;
-                                
+                                let amt = u.pendingAmount; u.wallet = (u.wallet || 0) + amt; db.adminWallet = (db.adminWallet || 0) + amt;
                                 if(!db.actionLogs) db.actionLogs = [];
                                 db.actionLogs.unshift({
                                     time: new Date().toLocaleTimeString('hi-IN'), name: u.name,
-                                    action: 'ऑटो बैंक अप्रूवल (स्क्रीनशॉट चेक्ड)', amount: `+₹${amt} (Admin)`,
-                                    ss: u.screenshot 
+                                    action: 'ऑटो बैंक अप्रूवल (स्क्रीनशॉट चेक्ड)', amount: `+₹${amt} (Admin)`, ss: u.screenshot 
                                 });
                                 u.pendingAmount = 0; u.screenshot = ''; u.pendingSince = null; madeChanges = true;
                             }
@@ -455,8 +453,6 @@
                 }
             }, 10000); 
         }
-
-        function updateLiveStatusDisplay() {} 
 
         function hideAllScreens() {
             ['homeScreen', 'authScreen', 'userDashboard', 'profileScreen', 'topUpScreen', 'quizScreen', 'resultScreen'].forEach(id => {
@@ -527,8 +523,7 @@
             if(amount > (currentUser.wallet || 0)) { alert('अपर्याप्त वॉलेट बैलेंस!'); return; }
 
             let idx = db.users.findIndex(x => x.phone === currentUser.phone);
-            db.users[idx].wallet -= amount;
-            currentUser = db.users[idx];
+            db.users[idx].wallet -= amount; currentUser = db.users[idx];
 
             if(!db.withdrawals) db.withdrawals = [];
             db.withdrawals.unshift({ phone: currentUser.phone, name: currentUser.name, upi: upiId, amount: amount, time: new Date().getTime() });
@@ -548,9 +543,7 @@
         // 1-CLICK PLAY GAME (WALLET TO WALLET)
         // ============================================
         function clickPlayGame() {
-            if(!db.quiz || db.quiz.length < 10) {
-                autoFillGeminiAIQuestionsSilent();
-            }
+            if(!db.quiz || db.quiz.length < 10) { autoFillGeminiAIQuestionsSilent(); }
 
             let uWallet = parseFloat(currentUser.wallet) || 0;
             if(uWallet < 20) {
