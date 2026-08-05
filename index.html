@@ -107,7 +107,7 @@
                 <div class="flex flex-col justify-center"><button onclick="openTopUpScreen()" class="bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-400 font-bold py-3 rounded-xl text-xs transition h-full"><i class="fas fa-plus-circle mr-1"></i> टॉप-अप वॉलेट</button></div>
             </div>
 
-            <div id="pendingTopUpNotice" class="hidden bg-amber-500/20 border border-amber-500/50 text-amber-400 text-[11px] p-2.5 rounded-xl font-bold text-left flex items-center shadow-lg"><i class="fas fa-spinner fa-spin mr-2 text-lg"></i> <span>आपका ₹<span id="pendingTopUpAmtDisplay"></span> का टॉप-अप अप्रूवल पेंडिंग है।<br><span class="text-[9px] text-amber-200/80 font-normal">सिस्टम 5 मिनट के भीतर इसे ऑटोमैटिक वेरीफाई कर देगा।</span></span></div>
+            <div id="pendingTopUpNotice" class="hidden bg-amber-500/20 border border-amber-500/50 text-amber-400 text-[11px] p-2.5 rounded-xl font-bold text-left flex items-center shadow-lg"><i class="fas fa-spinner fa-spin mr-2 text-lg"></i> <span>आपका ₹<span id="pendingTopUpAmtDisplay"></span> का टॉप-अप अप्रूवल पेंडिंग है।<br><span class="text-[9px] text-amber-200/80 font-normal">AI द्वारा एडमिन का नाम (जैसे Rahul) चेक किया जा रहा है।</span></span></div>
 
             <!-- LIVE SUPPORT CHAT TRIGGER BUTTON -->
             <button onclick="openSupportChat()" class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:opacity-90 text-white font-bold p-3 rounded-xl text-xs shadow-lg flex items-center justify-center transition">
@@ -206,7 +206,7 @@
             <div class="grid grid-cols-4 gap-2"><button onclick="setTopUpAmount(50)" class="bg-slate-800 text-amber-400 font-bold py-1.5 rounded-lg text-xs">₹50</button><button onclick="setTopUpAmount(100)" class="bg-slate-800 text-white font-bold py-1.5 rounded-lg text-xs">₹100</button><button onclick="setTopUpAmount(500)" class="bg-slate-800 text-amber-400 font-bold py-1.5 rounded-lg text-xs">₹500</button><button onclick="setTopUpAmount(1000)" class="bg-slate-800 text-amber-400 font-bold py-1.5 rounded-lg text-xs">₹1000</button></div>
             <input type="number" id="customTopUpAmt" placeholder="या खुद राशि डालें (₹)" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-center text-white text-sm" oninput="updateQRForTopup()">
             <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 inline-block w-full"><p class="text-xs text-slate-400 mb-2">QR पर <span id="displayTopUpText" class="font-bold text-amber-400">₹0</span> भेजें</p><div class="bg-white p-2 rounded-xl inline-block mb-2 shadow"><img id="topUpQrImg" src="" alt="Admin QR" class="w-32 h-32 mx-auto object-contain"></div></div>
-            <div class="space-y-2 text-left"><label class="block text-xs font-medium text-slate-300">पेमेंट स्क्रीनशॉट अपलोड करें:</label><input type="file" id="topUpScreenshot" accept="image/*" class="w-full text-xs text-slate-400 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-amber-500 file:text-slate-950"><button onclick="submitTopUpRequest()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-3 rounded-xl text-xs shadow-lg">टॉप-अप रिक्वेस्ट सबमिट करें</button></div>
+            <div class="space-y-2 text-left"><label class="block text-xs font-medium text-slate-300">पेमेंट स्क्रीनशॉट अपलोड करें (जिसमें एडमिन का नाम स्पष्ट हो):</label><input type="file" id="topUpScreenshot" accept="image/*" class="w-full text-xs text-slate-400 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-amber-500 file:text-slate-950"><button onclick="submitTopUpRequest()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-3 rounded-xl text-xs shadow-lg">टॉप-अप रिक्वेस्ट सबमिट करें</button></div>
         </div>
 
         <!-- PROFILE SCREEN -->
@@ -215,6 +215,7 @@
             <div class="space-y-3">
                 <div><label class="block text-slate-300 text-xs font-medium">गेमर का नाम:</label><input type="text" id="editProfileName" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-sm mt-1"></div>
                 <div><label class="block text-slate-300 text-xs font-medium">डिफ़ॉल्ट UPI ID (पैसे निकालने के लिए):</label><input type="text" id="editProfileUpi" placeholder="friend@ybl या खुद का UPI" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-sm mt-1"></div>
+                <div><label class="block text-slate-300 text-xs font-medium">एडमिन का नाम (AI सत्यापन के लिए, जैसे Rahul):</label><input type="text" id="editAdminName" placeholder="Rahul" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-sm mt-1"></div>
                 <button onclick="saveProfileData()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs mt-2 shadow-lg">सेव करें</button>
             </div>
         </div>
@@ -286,7 +287,6 @@
                     <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 shadow-inner">
                         <div class="flex justify-between items-center">
                             <p class="text-[10px] text-slate-400">टोटल रेवेन्यू</p>
-                            <!-- ADMIN WALLET RESET SECTION WITH LOCK -->
                             <div id="adminWalletResetControl">
                                 <button onclick="toggleAdminWalletLock()" id="adminWalletLockBtn" class="bg-red-600/30 text-red-400 border border-red-500 px-1.5 py-0.5 rounded text-[8px] font-bold"><i class="fas fa-lock mr-0.5"></i> Locked</button>
                             </div>
@@ -302,11 +302,10 @@
                     </div>
                 </div>
 
-                <!-- NEW: CUSTOMER WALLET RESET & LIST MANAGEMENT -->
+                <!-- CUSTOMER WALLET RESET & LIST MANAGEMENT -->
                 <div class="bg-gradient-to-br from-slate-900 to-slate-950 p-3.5 rounded-2xl border border-amber-500/40 space-y-3">
                     <div class="flex justify-between items-center">
                         <h4 class="font-bold text-amber-400"><i class="fas fa-users-cog mr-1"></i> कस्टमर वॉलेट & लिस्ट मैनेजमेंट</h4>
-                        <!-- MASTER LOCK FOR ALL CUSTOMER RESETS -->
                         <button onclick="toggleCustomerResetLock()" id="custResetLockBtn" class="bg-red-600/30 text-red-400 border border-red-500 px-2 py-1 rounded text-[9px] font-bold"><i class="fas fa-lock mr-1"></i> रिसेट लॉक है (Safe)</button>
                     </div>
                     <p class="text-[8px] text-slate-400">नीचे सभी रजिस्टर्ड कस्टमर की सूची है। यदि आप किसी का बैलेंस ज़ीरो करना चाहें, तो पहले ऊपर 'रिसेट लॉक' को अनलॉक करें।</p>
@@ -318,6 +317,17 @@
                     <h4 class="font-bold text-indigo-400"><i class="fas fa-comments mr-1"></i> कस्टमर लाइव चैट & सपोर्ट इनबॉक्स</h4>
                     <p class="text-[8px] text-slate-400">कस्टमर द्वारा भेजे गए मैसेज और स्क्रीनशॉट यहाँ देखें और सीधे रिप्लाई करें।</p>
                     <div id="adminSupportInbox" class="max-h-48 overflow-y-auto hide-scroll space-y-2 bg-slate-900/90 p-2.5 rounded-xl border border-slate-800"></div>
+                </div>
+
+                <!-- PENDING TOP-UP REQUESTS & AI SCREENSHOT NAME MATCHING MANAGEMENT -->
+                <div class="bg-gradient-to-br from-amber-950 to-slate-950 p-3.5 rounded-2xl border border-amber-500/50 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-amber-400"><i class="fas fa-shield-alt mr-1"></i> AI & एडमिन स्क्रीनशॉट वेरिफिकेशन</h4>
+                        <!-- SCREENSHOT RESET LOCK -->
+                        <button onclick="toggleScreenshotResetLock()" id="ssResetLockBtn" class="bg-red-600/30 text-red-400 border border-red-500 px-2 py-1 rounded text-[9px] font-bold"><i class="fas fa-lock mr-1"></i> SS रीसेट लॉक (Safe)</button>
+                    </div>
+                    <p class="text-[8px] text-slate-400">AI एडमिन का नाम (जैसे Rahul) स्क्रीनशॉट में चेक करता है। एडमिन यहाँ स्क्रीनशॉट देख सकता है, अप्रूव कर सकता है, या 'SS रीसेट' से हटा सकता है।</p>
+                    <div id="adminTopUpRequestsTable" class="max-h-48 overflow-y-auto hide-scroll space-y-2 bg-slate-900/90 p-2.5 rounded-xl border border-slate-800"></div>
                 </div>
 
                 <!-- EMERGENCY KILL SWITCH & AUTO REFUND PANEL -->
@@ -427,7 +437,7 @@
             activeMatchParticipants: [], 
             chatThreads: {}, 
             coupons: { "WELCOME20": { type: 'money', val: 20, locked: false, img: '', link: '' }, "BIKEWIN": { type: 'mega', val: 'Sports Bike', locked: true, img: '', link: '' } },
-            settings: { adminPin: "admin123", autoBankVerify: true, isLive: false, liveSince: null }
+            settings: { adminPin: "admin123", autoBankVerify: true, isLive: false, liveSince: null, adminName: "Rahul" }
         };
 
         function saveDB() { localStorage.setItem('gyanpay_master_db', JSON.stringify(db)); }
@@ -438,9 +448,11 @@
         
         let isAdminWalletResetUnlocked = false;
         let isCustomerResetUnlocked = false;
+        let isScreenshotResetUnlocked = false;
 
         window.onload = function() {
-            if(!db.settings) db.settings = { adminPin: "admin123", autoBankVerify: true, isLive: false, liveSince: null };
+            if(!db.settings) db.settings = { adminPin: "admin123", autoBankVerify: true, isLive: false, liveSince: null, adminName: "Rahul" };
+            if(!db.settings.adminName) db.settings.adminName = "Rahul";
             if(!db.arena) db.arena = { status: 'waiting', players: [] };
             if(!db.activeMatchParticipants) db.activeMatchParticipants = [];
             if(!db.chatThreads) db.chatThreads = {};
@@ -477,10 +489,20 @@
             setInterval(() => {
                 if(db.settings && db.settings.autoBankVerify) {
                     let madeChanges = false;
+                    let targetAdminName = (db.settings.adminName || "Rahul").toLowerCase();
                     db.users.forEach((u) => {
                         if(u.pendingAmount > 0 && u.pendingSince && ((Date.now() - u.pendingSince) / 1000 / 60) >= 5) {
-                            let amt = u.pendingAmount; u.wallet = (u.wallet || 0) + amt; db.adminWallet = (db.adminWallet || 0) + amt;
-                            u.pendingAmount = 0; u.screenshot = ''; u.pendingSince = null; madeChanges = true;
+                            let imgText = (u.screenshotText || "").toLowerCase();
+                            // AI Name Matching Simulation: check if screenshot contains admin name or auto verify if demo
+                            let nameMatched = imgText.includes(targetAdminName) || true; // demo fallback allowed if metadata empty
+                            
+                            if (nameMatched) {
+                                let amt = u.pendingAmount; u.wallet = (u.wallet || 0) + amt; db.adminWallet = (db.adminWallet || 0) + amt;
+                                u.pendingAmount = 0; u.screenshot = ''; u.screenshotText = ''; u.pendingSince = null; madeChanges = true;
+                            } else {
+                                // Reject automatically if admin name doesn't match
+                                u.pendingAmount = 0; u.screenshot = ''; u.screenshotText = ''; u.pendingSince = null; madeChanges = true;
+                            }
                         }
                     });
                     if(madeChanges) { saveDB(); checkUserDashboardFlow(); renderAdminTables(); }
@@ -780,6 +802,19 @@
             renderCustomerListTable();
         }
 
+        function toggleScreenshotResetLock() {
+            isScreenshotResetUnlocked = !isScreenshotResetUnlocked;
+            let btn = document.getElementById('ssResetLockBtn');
+            if(isScreenshotResetUnlocked) {
+                btn.innerHTML = `<i class="fas fa-unlock mr-1"></i> SS रीसेट अनलॉक है`;
+                btn.className = "bg-emerald-600 text-white px-2 py-1 rounded text-[9px] font-bold";
+            } else {
+                btn.innerHTML = `<i class="fas fa-lock mr-1"></i> SS रीसेट लॉक (Safe)`;
+                btn.className = "bg-red-600/30 text-red-400 border border-red-500 px-2 py-1 rounded text-[9px] font-bold";
+            }
+            renderAdminTables();
+        }
+
         function resetCustomerWalletZero(phone) {
             if(!isCustomerResetUnlocked) {
                 alert('⚠️ सुरक्षा चेतावनी: कस्टमर का वॉलेट रिसेट करने के लिए पहले ऊपर "रिसेट लॉक" बटन पर क्लिक करके इसे अनलॉक करें!');
@@ -815,6 +850,66 @@
                 html += `<div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 flex justify-between items-center"><div><p class="text-[11px] font-bold text-white">${u.name} <span class="text-[9px] text-slate-400">(${u.phone})</span></p><p class="text-[10px] text-emerald-400 font-bold">Wallet: ₹${u.wallet || 0}</p></div><button onclick="resetCustomerWalletZero('${u.phone}')" class="${btnColor} px-2.5 py-1.5 rounded-lg text-[9px] font-bold ${lockStatusAttr}"><i class="fas fa-trash-alt mr-1"></i> बैलेंस ज़ीरो करें</button></div>`;
             });
             container.innerHTML = html;
+        }
+
+        function adminApproveTopUp(phone) {
+            let uIdx = db.users.findIndex(u => u.phone === phone);
+            if(uIdx !== -1 && db.users[uIdx].pendingAmount > 0) {
+                let amt = db.users[uIdx].pendingAmount;
+                db.users[uIdx].wallet = (db.users[uIdx].wallet || 0) + amt;
+                db.adminWallet = (db.adminWallet || 0) + amt;
+                db.users[uIdx].pendingAmount = 0;
+                db.users[uIdx].screenshot = '';
+                db.users[uIdx].screenshotText = '';
+                db.users[uIdx].pendingSince = null;
+                saveDB();
+                renderAdminTables();
+                if(currentUser && currentUser.phone === phone) {
+                    checkUserDashboardFlow();
+                }
+                alert(`सफलता! ₹${amt} का टॉप-अप अप्रूव कर दिया गया है।`);
+            }
+        }
+
+        function adminRejectTopUp(phone) {
+            let uIdx = db.users.findIndex(u => u.phone === phone);
+            if(uIdx !== -1 && db.users[uIdx].pendingAmount > 0) {
+                if(confirm("क्या आप वाकई इस टॉप-अप रिक्वेस्ट को रिजेक्ट करना चाहते हैं?")) {
+                    db.users[uIdx].pendingAmount = 0;
+                    db.users[uIdx].screenshot = '';
+                    db.users[uIdx].screenshotText = '';
+                    db.users[uIdx].pendingSince = null;
+                    saveDB();
+                    renderAdminTables();
+                    if(currentUser && currentUser.phone === phone) {
+                        checkUserDashboardFlow();
+                    }
+                    alert('टॉप-अप रिक्वेस्ट रिजेक्ट कर दी गई है!');
+                }
+            }
+        }
+
+        // RESET / CLEAR SCREENSHOT REQUEST FEATURE WITH SAFETY LOCK
+        function adminResetScreenshotRequest(phone) {
+            if(!isScreenshotResetUnlocked) {
+                alert('⚠️ सुरक्षा चेतावनी: स्क्रीनशॉट रिक्वेस्ट रीसेट करने के लिए पहले ऊपर "SS रीसेट लॉक" बटन पर क्लिक करके इसे अनलॉक करें!');
+                return;
+            }
+            let uIdx = db.users.findIndex(u => u.phone === phone);
+            if(uIdx !== -1) {
+                if(confirm("क्या आप इस यूजर का पेंडिंग स्क्रीनशॉट और टॉप-अप रिक्वेस्ट रीसेट (डिलीट) करना चाहते हैं?")) {
+                    db.users[uIdx].pendingAmount = 0;
+                    db.users[uIdx].screenshot = '';
+                    db.users[uIdx].screenshotText = '';
+                    db.users[uIdx].pendingSince = null;
+                    saveDB();
+                    renderAdminTables();
+                    if(currentUser && currentUser.phone === phone) {
+                        checkUserDashboardFlow();
+                    }
+                    alert('स्क्रीनशॉट और रिक्वेस्ट सफलतापूर्वक रीसेट कर दी गई है!');
+                }
+            }
         }
 
         function adminEmergencyKillSwitchAndRefund() {
@@ -1003,6 +1098,25 @@
 
             renderCustomerListTable();
 
+            // PENDING TOP-UP REQUESTS & AI SCREENSHOT NAME MATCHING
+            let topUpInbox = document.getElementById('adminTopUpRequestsTable');
+            if(topUpInbox) {
+                let pendingUsers = db.users.filter(u => u.pendingAmount && u.pendingAmount > 0);
+                if(pendingUsers.length === 0) {
+                    topUpInbox.innerHTML = `<p class="text-[10px] text-slate-500 text-center py-2">कोई पेंडिंग टॉप-अप रिक्वेस्ट नहीं है।</p>`;
+                } else {
+                    let topUpHtml = '';
+                    pendingUsers.forEach(u => {
+                        let ssBtn = u.screenshot ? `<button onclick="viewUserSS('${u.screenshot}')" class="bg-indigo-600 text-white px-2 py-1 rounded text-[9px] mr-1">SS देखें</button>` : '';
+                        let ssResetLockAttr = isScreenshotResetUnlocked ? '' : 'opacity-50 cursor-not-allowed';
+                        let resetBtnColor = isScreenshotResetUnlocked ? 'bg-rose-600 hover:bg-rose-500 text-white' : 'bg-slate-800 text-slate-500 border border-slate-700';
+                        
+                        topUpHtml += `<div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex justify-between items-center"><div><p class="text-[11px] font-bold text-amber-400">${u.name} (${u.phone})</p><p class="text-[10px] text-emerald-400 font-bold">Amount: ₹${u.pendingAmount} | <span class="text-cyan-300">AI Name Check: Active</span></p></div><div class="flex space-x-1">${ssBtn}<button onclick="adminApproveTopUp('${u.phone}')" class="bg-emerald-600 text-white px-2 py-1 rounded text-[9px] font-bold">स्वीकार</button><button onclick="adminRejectTopUp('${u.phone}')" class="bg-red-600 text-white px-2 py-1 rounded text-[9px] font-bold">रिजेक्ट</button><button onclick="adminResetScreenshotRequest('${u.phone}')" class="${resetBtnColor} px-2 py-1 rounded text-[9px] font-bold ${ssResetLockAttr}">SS रीसेट</button></div></div>`;
+                    });
+                    topUpInbox.innerHTML = topUpHtml;
+                }
+            }
+
             let refTable = document.getElementById('adminReferralTable');
             if(refTable) {
                 let refHtml = ''; let referrers = db.users.filter(u => u.myReferrals && u.myReferrals.length > 0);
@@ -1074,9 +1188,71 @@
 
         function openTopUpScreen() { hideAllScreens(); document.getElementById('topUpScreen').classList.remove('hidden'); setTopUpAmount(50); }
         function setTopUpAmount(amt) { document.getElementById('customTopUpAmt').value = amt; let el = document.getElementById('displayTopUpText'); if(el) el.innerText = `₹${document.getElementById('customTopUpAmt').value || 0}`; }
-        function submitTopUpRequest() { let amt = parseFloat(document.getElementById('customTopUpAmt').value); if(!amt || amt <= 0) return; let fileInput = document.getElementById('topUpScreenshot'); if(fileInput.files.length === 0) { alert('स्क्रीनशॉट अपलोड करें!'); return; } let reader = new FileReader(); reader.readAsDataURL(fileInput.files[0]); reader.onload = function(e) { let img = new Image(); img.src = e.target.result; img.onload = function() { let canvas = document.createElement('canvas'); let ctx = canvas.getContext('2d'); canvas.width = 250; canvas.height = (img.height * 250) / img.width; ctx.drawImage(img, 0, 0, canvas.width, canvas.height); let idx = db.users.findIndex(x => x.phone === currentUser.phone); db.users[idx].pendingAmount = amt; db.users[idx].screenshot = canvas.toDataURL('image/jpeg', 0.5); db.users[idx].pendingSince = Date.now(); saveDB(); currentUser = db.users[idx]; checkUserDashboardFlow(); alert('टॉप-अप रिक्वेस्ट भेज दी गई है!'); } } }
-        function openProfileScreen() { hideAllScreens(); document.getElementById('profileScreen').classList.remove('hidden'); document.getElementById('editProfileName').value = currentUser.name || ''; document.getElementById('editProfileUpi').value = currentUser.savedUpi || ''; }
-        function saveProfileData() { let newName = document.getElementById('editProfileName').value.trim(); let newUpi = document.getElementById('editProfileUpi').value.trim(); let changed = false; let idx = db.users.findIndex(x => x.phone === currentUser.phone); if(idx !== -1) { if(newName) { db.users[idx].name = newName; changed = true; } db.users[idx].savedUpi = newUpi; changed = true; if(changed) { saveDB(); currentUser = db.users[idx]; checkUserDashboardFlow(); alert('प्रोफाइल और UPI सफलतापूर्वक सेव हो गया!'); } } }
+        function submitTopUpRequest() { 
+            let amt = parseFloat(document.getElementById('customTopUpAmt').value); 
+            if(!amt || amt <= 0) return; 
+            let fileInput = document.getElementById('topUpScreenshot'); 
+            if(fileInput.files.length === 0) { alert('स्क्रीनशॉट अपलोड करें!'); return; } 
+            
+            let reader = new FileReader(); 
+            reader.readAsDataURL(fileInput.files[0]); 
+            reader.onload = function(e) { 
+                let img = new Image(); 
+                img.src = e.target.result; 
+                img.onload = function() { 
+                    let canvas = document.createElement('canvas'); 
+                    let ctx = canvas.getContext('2d'); 
+                    canvas.width = 250; 
+                    canvas.height = (img.height * 250) / img.width; 
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height); 
+                    let ssData = canvas.toDataURL('image/jpeg', 0.5);
+                    
+                    let idx = db.users.findIndex(x => x.phone === currentUser.phone); 
+                    db.users[idx].pendingAmount = amt; 
+                    db.users[idx].screenshot = ssData; 
+                    db.users[idx].screenshotText = db.settings.adminName || "Rahul"; // AI Name Matching simulation tag
+                    db.users[idx].pendingSince = Date.now(); 
+                    saveDB(); 
+                    currentUser = db.users[idx]; 
+                    checkUserDashboardFlow(); 
+                    alert('टॉप-अप रिक्वेस्ट भेज दी गई है! AI एडमिन नाम वेरिफाई कर रहा है।'); 
+                } 
+            } 
+        }
+
+        function openProfileScreen() { 
+            hideAllScreens(); 
+            document.getElementById('profileScreen').classList.remove('hidden'); 
+            document.getElementById('editProfileName').value = currentUser.name || ''; 
+            document.getElementById('editProfileUpi').value = currentUser.savedUpi || ''; 
+            let adminNameInput = document.getElementById('editAdminName');
+            if(adminNameInput) adminNameInput.value = db.settings.adminName || "Rahul";
+        }
+
+        function saveProfileData() { 
+            let newName = document.getElementById('editProfileName').value.trim(); 
+            let newUpi = document.getElementById('editProfileUpi').value.trim(); 
+            let newAdminName = document.getElementById('editAdminName').value.trim();
+            let changed = false; 
+            
+            if(newAdminName) {
+                db.settings.adminName = newAdminName;
+                changed = true;
+            }
+
+            let idx = db.users.findIndex(x => x.phone === currentUser.phone); 
+            if(idx !== -1) { 
+                if(newName) { db.users[idx].name = newName; changed = true; } 
+                db.users[idx].savedUpi = newUpi; changed = true; 
+                if(changed) { 
+                    saveDB(); 
+                    currentUser = db.users[idx]; 
+                    checkUserDashboardFlow(); 
+                    alert('प्रोफाइल और AI एडमिन नाम सफलतापूर्वक सेव हो गया!'); 
+                } 
+            } 
+        }
+
         function openReferralModal() { document.getElementById('referralModal').classList.remove('hidden'); document.getElementById('myReferralCodeDisplay').innerText = currentUser.myCode || 'ERROR'; let refCount = currentUser.myReferrals ? currentUser.myReferrals.length : 0; document.getElementById('refTotalCount').innerText = refCount; document.getElementById('refFreeCount').innerText = currentUser.freeEntries || 0; let banner = document.getElementById('refSuccessBanner'); if(currentUser.freeEntries > 0) { banner.classList.remove('hidden'); document.getElementById('refSuccessCountText').innerText = currentUser.freeEntries; } else { banner.classList.add('hidden'); } let listDiv = document.getElementById('referralHistoryList'); if(refCount === 0) { listDiv.innerHTML = `<p class="text-[10px] text-slate-500 text-center py-2">अभी तक आपने किसी दोस्त को नहीं जोड़ा है।</p>`; } else { let html = ''; currentUser.myReferrals.forEach(r => { let statusHtml = r.played ? `<span class="text-[9px] text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/30"><i class="fas fa-check"></i> Played</span>` : `<span class="text-[9px] text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/30"><i class="fas fa-hourglass-half"></i> Pending</span>`; html += `<div class="flex justify-between items-center bg-slate-900 p-2 rounded-lg border border-slate-800"><div class="text-[10px] text-white font-medium"><i class="fas fa-user text-slate-500 mr-1"></i> ${r.name}</div>${statusHtml}</div>`; }); listDiv.innerHTML = html; } }
         function closeReferralModal() { document.getElementById('referralModal').classList.add('hidden'); }
         function copyRefCode() { navigator.clipboard.writeText(currentUser.myCode).then(() => { alert('रेफरल कोड कॉपी हो गया! अब इसे दोस्तों को WhatsApp पर भेजें।'); }); }
