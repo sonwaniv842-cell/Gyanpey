@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="2ZbgudfG9eMURVyG1uOCnzjWCv8sKq898-uU1UIxtwY" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GyanPay - Final Pure Shudh Arena with Advanced Coupon Control</title>
+    <title>GyanPay - Final Pure Shudh Arena with 8s Timer & Anti-Cheat Warning</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -55,15 +55,15 @@
         <!-- HOME SCREEN -->
         <div id="homeScreen" class="glass-card neon-glow rounded-3xl p-4 shadow-2xl text-center space-y-4">
             <div class="w-16 h-16 bg-gradient-to-tr from-amber-500/20 to-orange-500/20 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-3xl neon-btn animate-pulse-fast border border-amber-500/40 mt-2"><i class="fas fa-gamepad"></i></div>
-            <div><h2 class="gaming-font text-xl font-black text-white tracking-wide">SECURE ESPORTS ARENA</h2><p class="text-[10px] text-slate-400 mt-1">₹20 की फिक्स एंट्री से खेलें, सुरक्षित मुकाबले का आनंद लें!</p></div>
+            <div><h2 class="gaming-font text-xl font-black text-white tracking-wide">SECURE ESPORTS ARENA</h2><p class="text-[10px] text-slate-400 mt-1">₹20 की फिक्स एंट्री से खेलें, शुद्ध जनरल नॉलेज का आनंद लें!</p></div>
 
             <div class="note-paper p-4 text-left shadow-lg mt-3">
                 <div class="absolute top-2 right-3 opacity-20 text-4xl"><i class="fas fa-clipboard-list text-amber-500"></i></div>
                 <h3 class="gaming-font text-[13px] font-bold text-amber-400 mb-3 border-b border-slate-700 pb-2 relative z-10"><i class="fas fa-book-open mr-1"></i> शुद्ध और सुरक्षित नियम</h3>
                 <ul class="space-y-3 text-[11px] text-slate-300 relative z-10 font-medium leading-snug">
-                    <li class="flex items-start"><i class="fas fa-lock text-amber-400 mt-0.5 mr-2 text-sm"></i> <span><b>एडमिन कूपन कंट्रोल:</b> बाइक, कार, फ्रिज जैसे बड़े इनामों को एडमिन लॉक या अनलॉक कर सकता है।</span></li>
-                    <li class="flex items-start"><i class="fas fa-headset text-cyan-400 mt-0.5 mr-2 text-sm"></i> <span><b>24/7 लाइव सपोर्ट & AI:</b> एडमिन के ऑफलाइन होने पर हमारा स्मार्ट AI हिंदी में चैट और स्क्रीनशॉट संभालता है।</span></li>
-                    <li class="flex items-start"><i class="fas fa-bolt text-red-400 mt-0.5 mr-2 text-sm"></i> <span><b>इमर्जेंसी किल स्विच:</b> एडमिन किसी भी समय गेम रोककर सबका पैसा तुरंत ऑटो-रिफंड कर सकता है।</span></li>
+                    <li class="flex items-start"><i class="fas fa-shield-alt text-amber-400 mt-0.5 mr-2 text-sm"></i> <span><b>जीके आधारित गेम:</b> यह विशुद्ध रूप से जनरल नॉलेज (GK) पर आधारित है। कृपया वही एंट्री लें जिन्हें GK का ज्ञान हो।</span></li>
+                    <li class="flex items-start"><i class="fas fa-ban text-red-400 mt-0.5 mr-2 text-sm"></i> <span><b>चीटिंग चेतावनी:</b> गूगल से सर्च करके चीटिंग करने पर एडमिन द्वारा अकाउंट फ्रीज और पैसे रोके जा सकते हैं।</span></li>
+                    <li class="flex items-start"><i class="fas fa-headset text-cyan-400 mt-0.5 mr-2 text-sm"></i> <span><b>24/7 लाइव सपोर्ट:</b> विड्रॉल और सहायता के लिए AI सपोर्ट चैट हमेशा उपलब्ध है।</span></li>
                 </ul>
             </div>
             <button onclick="openAuth('login')" class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:opacity-95 text-slate-950 gaming-font font-black py-4 rounded-2xl transition shadow-lg neon-btn text-sm tracking-wider"><i class="fas fa-rocket mr-1"></i> ENTER ARENA (LOGIN)</button>
@@ -161,7 +161,7 @@
 
         <!-- WAITING LOBBY SCREEN -->
         <div id="waitingScreen" class="hidden glass-card neon-glow rounded-3xl p-8 shadow-2xl text-center space-y-6">
-            <h3 class="gaming-font text-lg font-black text-amber-400 animate-pulse">MATCHMAKING WITH AI BOT...</h3>
+            <h3 class="gaming-font text-lg font-black text-amber-400 animate-pulse">MATCHMAKING WITH OPPONENT...</h3>
             <div class="relative w-36 h-36 mx-auto flex items-center justify-center">
                 <div class="absolute inset-0 radar-sweep opacity-50"></div>
                 <div class="absolute inset-0 border border-indigo-500/30 rounded-full"></div>
@@ -169,21 +169,27 @@
                 <div class="absolute inset-8 border border-indigo-500/70 rounded-full"></div>
                 <div class="bg-slate-900 rounded-full w-16 h-16 border-2 border-indigo-400 flex items-center justify-center relative z-10 shadow-[0_0_15px_rgba(99,102,241,0.5)]"><i class="fas fa-robot text-2xl text-indigo-400 animate-pulse"></i></div>
             </div>
-            <p id="waitMsgText" class="text-[11px] text-slate-300 leading-relaxed">खिलाड़ी की तलाश की जा रही है...<br><span class="text-cyan-400 font-bold">अकेले होने पर 3 सेकंड में AI Bot मुकाबला शुरू कर देगा!</span></p>
+            <p id="waitMsgText" class="text-[11px] text-slate-300 leading-relaxed">खिलाड़ी की तलाश की जा रही है...<br><span class="text-cyan-400 font-bold">मैच जल्द शुरू हो रहा है!</span></p>
             <div class="bg-slate-900 border border-slate-700 p-3.5 rounded-xl shadow-inner inline-block min-w-[120px]">
                 <p class="text-[10px] text-slate-400">लॉबी स्टेटस</p>
-                <p class="text-xl gaming-font font-bold text-cyan-400 mt-1">AI BOT READY</p>
+                <p class="text-xl gaming-font font-bold text-cyan-400 mt-1">READY</p>
             </div>
         </div>
 
-        <!-- QUIZ INTERFACE -->
-        <div id="quizScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl">
-            <div class="flex justify-between items-center mb-4">
-                <span id="qCounter" class="gaming-font text-xs font-bold text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">ROUND 1/5</span>
-                <span class="gaming-font text-xs font-bold text-red-400 bg-red-500/10 px-3 py-1 rounded-full border border-red-500/30"><i class="fas fa-stopwatch mr-1"></i> <span id="qTimer">15</span>s</span>
+        <!-- QUIZ INTERFACE WITH 8s TIMER & ANTI-CHEAT WARNING -->
+        <div id="quizScreen" class="hidden glass-card neon-glow rounded-3xl p-5 shadow-2xl space-y-3">
+            
+            <!-- Anti-Cheating Warning Notification Ad Banner -->
+            <div class="bg-red-950/90 border border-red-500 p-2.5 rounded-xl text-[10px] text-red-200 text-center font-semibold shadow-[0_0_12px_rgba(239,68,68,0.4)] animate-pulse">
+                <i class="fas fa-exclamation-triangle text-amber-400 mr-1"></i> <b>चेतावनी:</b> कृपया गूगल से सर्च करके चीटिंग न करें! डाउट होने पर अकाउंट फ्रीज व पैसे रोक दिए जाएंगे। यह गेम सिर्फ जनरल नॉलेज (GK) पर आधारित है।
             </div>
-            <h3 id="qText" class="text-sm font-bold text-white mb-4 min-h-[45px] leading-relaxed">सवाल यहाँ लोड हो रहा है...</h3>
-            <div id="optionsList" class="space-y-2.5"></div>
+
+            <div class="flex justify-between items-center">
+                <span id="qCounter" class="gaming-font text-xs font-bold text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">ROUND 1/5</span>
+                <span class="gaming-font text-xs font-bold text-red-400 bg-red-500/10 px-3 py-1 rounded-full border border-red-500/30"><i class="fas fa-stopwatch mr-1"></i> <span id="qTimer">8</span>s</span>
+            </div>
+            <h3 id="qText" class="text-sm font-bold text-white mb-2 min-h-[45px] leading-relaxed">सवाल यहाँ लोड हो रहा है...</h3>
+            <div id="optionsList" class="space-y-2"></div>
         </div>
 
         <!-- RESULT SCREEN -->
@@ -352,7 +358,7 @@
                     <div id="adminQuizList" class="max-h-40 overflow-y-auto hide-scroll"></div>
                 </div>
 
-                <!-- ADVANCED COUPON GENERATOR (BIKE, CAR, INDUCTION, FRIDGE, ETC WITH LOCK/UNLOCK & MANUAL SEND) -->
+                <!-- ADVANCED COUPON GENERATOR -->
                 <div class="bg-gradient-to-br from-indigo-950 to-slate-950 p-3.5 rounded-2xl border border-indigo-500/40 space-y-2">
                     <h4 class="font-bold text-indigo-400"><i class="fas fa-ticket-alt mr-1"></i> नया कूपन जनरेट करें (महंगे इनाम/वाउचर)</h4>
                     <div class="grid grid-cols-2 gap-2 pt-1">
@@ -369,13 +375,13 @@
                     </div>
                 </div>
 
-                <!-- COUPON INVENTORY & SENDER (LOCK/UNLOCK, MANUAL SEND TO NUMBER, AUTO) -->
+                <!-- COUPON INVENTORY & SENDER -->
                 <div class="bg-slate-950 p-3.5 rounded-2xl border border-amber-500/40 space-y-2 mt-2">
                     <h4 class="font-bold text-amber-400"><i class="fas fa-box-open mr-1"></i> कूपन इन्वेंटरी (Lock / Unlock & Manual Send)</h4>
                     <div id="adminCouponInventory" class="max-h-56 overflow-y-auto hide-scroll space-y-2"></div>
                 </div>
 
-                <!-- WITHDRAWAL & TOPUP TABLES WITH UPI COPY BUTTON -->
+                <!-- WITHDRAWAL & TOPUP TABLES -->
                 <div class="bg-slate-950 p-3.5 rounded-2xl border border-rose-500/30 space-y-2">
                     <h4 class="font-bold text-rose-400"><i class="fas fa-hand-holding-usd mr-1"></i> विड्रॉल रिक्वेस्ट्स (Helpline)</h4>
                     <p class="text-[8px] text-slate-400">15-20 मिनट गारंटी विड्रॉल। यूजर का स्क्रीनशॉट यहाँ चेक करें और UPI कॉपी करें।</p>
@@ -648,13 +654,16 @@
             }, 3000); 
         }
 
+        // 8 SECONDS TIMER FUNCTION
         function loadQuizQuestion() {
             if(qIndex >= 5 || qIndex >= db.quiz.length) { finishQuizGame(); return; }
             let q = db.quiz[qIndex];
             document.getElementById('qCounter').innerText = `ROUND ${qIndex + 1}/5`; document.getElementById('qText').innerText = q.question;
             let html = ''; q.options.forEach((opt, idx) => { html += `<button onclick="answerClicked(${idx}, ${q.correct})" class="w-full text-left bg-slate-900/90 hover:bg-slate-800 text-white p-3.5 rounded-2xl border border-slate-700/80 text-xs">${String.fromCharCode(65 + idx)}. ${opt}</button>`; });
             document.getElementById('optionsList').innerHTML = html;
-            let sec = 15; document.getElementById('qTimer').innerText = sec;
+            
+            let sec = 8; // Set to 8 seconds as requested
+            document.getElementById('qTimer').innerText = sec;
             clearInterval(quizTimerInterval);
             quizTimerInterval = setInterval(() => { 
                 sec--; 
@@ -700,12 +709,12 @@
             let resIcon = document.getElementById('resIcon');
             if(userWon) {
                 resIcon.innerHTML = '<i class="fas fa-trophy"></i>'; resIcon.className = "w-20 h-20 rounded-full flex items-center justify-center mx-auto text-4xl bg-emerald-500/20 text-emerald-400";
-                document.getElementById('resTitle').innerText = `VICTORY! (VS AI BOT)`; document.getElementById('resTitle').className = "gaming-font text-xl font-black text-emerald-400";
-                document.getElementById('resDesc').innerHTML = `आपका स्कोर: <b>${score}/5</b> (बॉट स्कोर: ${botScore}/5)<br>+₹${rewardMoney} आपके वॉलेट में जुड़े!`;
+                document.getElementById('resTitle').innerText = `VICTORY! (VS OPPONENT)`; document.getElementById('resTitle').className = "gaming-font text-xl font-black text-emerald-400";
+                document.getElementById('resDesc').innerHTML = `आपका स्कोर: <b>${score}/5</b><br>+₹${rewardMoney} आपके वॉलेट में जुड़े!`;
             } else {
-                resIcon.innerHTML = '<i class="fas fa-robot"></i>'; resIcon.className = "w-20 h-20 rounded-full flex items-center justify-center mx-auto text-4xl bg-cyan-500/20 text-cyan-400";
-                document.getElementById('resTitle').innerText = "DEFEAT BY AI BOT"; document.getElementById('resTitle').className = "gaming-font text-xl font-black text-cyan-400";
-                document.getElementById('resDesc').innerHTML = `आपका स्कोर: <b>${score}/5</b> (बॉट स्कोर: ${botScore}/5)<br>₹20 राशि बॉट प्रॉफिट फंड में जमा हुई।`;
+                resIcon.innerHTML = '<i class="fas fa-shield-alt"></i>'; resIcon.className = "w-20 h-20 rounded-full flex items-center justify-center mx-auto text-4xl bg-cyan-500/20 text-cyan-400";
+                document.getElementById('resTitle').innerText = "MATCH COMPLETED"; document.getElementById('resTitle').className = "gaming-font text-xl font-black text-cyan-400";
+                document.getElementById('resDesc').innerHTML = `आपका स्कोर: <b>${score}/5</b><br>अगली बार और बेहतर प्रदर्शन करें!`;
             }
         }
 
@@ -742,7 +751,7 @@
             if(fund < 20) { alert('बॉट फंड में अभी पर्याप्त राशि नहीं है!'); return; }
             let voucherCode = "MEGAPRIZE" + Math.floor(Math.random() * 900 + 100);
             if(!db.coupons) db.coupons = {};
-            db.coupons[voucherCode] = { type: 'mega', val: 'Mega Gift Voucher (₹' + fund + ')', img: '', link: '', locked: true }; // Locked by default for safety
+            db.coupons[voucherCode] = { type: 'mega', val: 'Mega Gift Voucher (₹' + fund + ')', img: '', link: '', locked: true };
             db.botProfitWallet = 0; 
             saveDB(); renderAdminTables();
             alert(`सफलता! बॉट फंड से '${voucherCode}' मेगा वाउचर (लॉक स्थिति में) जनरेट कर इन्वेंटरी में डाल दिया गया है!`);
@@ -805,7 +814,6 @@
             document.getElementById('newAdminPinInput').value = '';
         }
 
-        // ADVANCED COUPON INVENTORY & MANUAL SENDER FUNCTIONS
         function createNewCouponAdvanced() {
             let code = document.getElementById('couponCodeNew').value.trim().toUpperCase(); 
             let type = document.getElementById('couponTypeNew').value; 
@@ -817,7 +825,6 @@
             
             let saveCouponData = (imgBase64) => { 
                 if(!db.coupons) db.coupons = {}; 
-                // Newly created mega items like Bike, Car, Fridge are LOCKED by default so they don't leak automatically!
                 db.coupons[code] = { type: type, val: (type==='money' ? parseFloat(val) : val), img: imgBase64, link: link, locked: true }; 
                 saveDB(); 
                 renderAdminTables(); 
@@ -872,7 +879,7 @@
 
         function sendCouponAuto(code) { 
             if(!db.coupons[code] || db.coupons[code].locked) {
-                alert('यह कूपन अभी LOCKED है! ऑटोमैटिक बांटने के पहले इसे Unlocked करें ताकि महंगे इनाम गलती से न निकलें।');
+                alert('यह कूपन अभी LOCKED है! ऑटोमैटिक बांटने के पहले इसे Unlocked करें।');
                 return;
             }
             if(!db.users || db.users.length === 0) { alert('कोई यूजर उपलब्ध नहीं है!'); return; } 
