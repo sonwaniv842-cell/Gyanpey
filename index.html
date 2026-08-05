@@ -46,10 +46,10 @@
                 <i class="fas fa-trophy"></i>
             </div>
             <h2 class="text-2xl font-bold text-white mb-2">Play Quiz & Win Real Rewards</h2>
-            <p class="text-xs text-slate-400 mb-6">विशिष्ट क्विज़ खेलें, वॉलेट बैलेंस बढ़ाएं और शानदार इनाम जीतें।</p>
+            <p class="text-xs text-slate-400 mb-6">₹20 की मेंबरशिप से एंट्री लें, क्विज़ खेलें और शानदार इनाम जीतें।</p>
             
             <div class="bg-slate-800/80 border border-slate-700 p-4 rounded-xl mb-6">
-                <p class="text-xs text-slate-300 mb-1"><i class="fas fa-clock text-amber-400 mr-1"></i> गेम स्टेटस:</p>
+                <p class="text-xs text-slate-300 mb-1"><i class="fas fa-signal text-amber-400 mr-1"></i> कॉन्टेस्ट स्टेटस:</p>
                 <div id="homeGameStatus" class="text-lg font-bold text-emerald-400">🟢 लाइव चालू है</div>
             </div>
 
@@ -84,36 +84,47 @@
             </div>
         </div>
 
-        <!-- USER DASHBOARD & WITHDRAWAL SYSTEM -->
+        <!-- USER DASHBOARD & REWARDS BANNER -->
         <div id="userDashboard" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl text-center space-y-3.5">
             <div class="bg-gradient-to-r from-slate-800 to-slate-900 border border-slate-700 p-3 rounded-xl flex justify-between items-center shadow">
                 <div class="text-left">
-                    <p class="text-[10px] text-slate-400">मेरा वॉलेट बैलेंस (Winning)</p>
+                    <p class="text-[10px] text-slate-400">मेरा वॉलेट बैलेंस</p>
                     <p id="userWalletBalance" class="text-lg font-bold text-emerald-400">₹0</p>
                 </div>
                 <button onclick="clickJoinQuiz()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-2 rounded-lg text-xs shadow">
-                    <i class="fas fa-play mr-1"></i> ₹20 एंट्री दें
+                    <i class="fas fa-wallet mr-1"></i> ₹20 मेंबरशिप दें
                 </button>
+            </div>
+
+            <!-- CLEAN AND ATTRACTIVE REWARDS BANNER -->
+            <div class="reward-banner bg-gradient-to-r from-amber-500/15 via-orange-500/15 to-amber-600/15 border border-amber-500/40 p-3.5 rounded-xl text-left space-y-2 shadow-md">
+                <div class="flex items-center space-x-2 text-amber-400 font-bold text-xs">
+                    <i class="fas fa-gift text-sm"></i>
+                    <span>मेगा लकी ड्रा & स्पेशल रिवॉर्ड्स बोनान्ज़ा 🚀</span>
+                </div>
+                <div class="space-y-1.5 text-[10px] font-semibold text-white">
+                    <div class="flex justify-between bg-slate-900/60 px-2.5 py-1.5 rounded border border-slate-700/60">
+                        <span>🎁 500 एक्टिव यूज़र:</span> <span class="text-cyan-400">स्मार्टवॉच / मिक्सर / कूपन</span>
+                    </div>
+                    <div class="flex justify-between bg-slate-900/60 px-2.5 py-1.5 rounded border border-slate-700/60">
+                        <span>📱 1000 एक्टिव यूज़र:</span> <span class="text-amber-400">5G स्मार्टफोन / शर्ट-पैंट सेट</span>
+                    </div>
+                    <div class="flex justify-between bg-slate-900/60 px-2.5 py-1.5 rounded border border-slate-700/60">
+                        <span>🏍️ 2000+ एक्टिव यूज़र:</span> <span class="text-orange-400">स्पोर्ट्स बाइक या कार</span>
+                    </div>
+                </div>
             </div>
 
             <!-- WITHDRAWAL SECTION -->
             <div class="bg-slate-800/80 border border-slate-700 p-3 rounded-xl text-left space-y-2">
-                <p class="font-bold text-white text-xs"><i class="fas fa-university text-amber-400 mr-1"></i> पैसे विड्रॉल (Withdrawal) करें</p>
+                <p class="font-bold text-white text-xs"><i class="fas fa-university text-amber-400 mr-1"></i> विड्रॉल (Withdrawal) करें</p>
                 <input type="text" id="userWithdrawUpi" placeholder="अपनी UPI ID दर्ज करें (जैसे: myupi@ybl)" class="w-full bg-slate-900 border border-slate-700 p-2 rounded text-white text-xs">
                 <input type="number" id="userWithdrawAmount" placeholder="विड्रॉल राशि (₹)" class="w-full bg-slate-900 border border-slate-700 p-2 rounded text-white text-xs">
                 <button onclick="requestWithdrawal()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-lg text-xs">
-                    <i class="fab fa-telegram-plane mr-1"></i> टेलीग्राम / व्हाट्सएप पर विड्रॉल भेजें
+                    <i class="fab fa-telegram-plane mr-1"></i> हेल्पलाइन पर विड्रॉल भेजें
                 </button>
             </div>
 
-            <div class="w-12 h-12 bg-gradient-to-tr from-amber-500 to-orange-500 text-slate-950 rounded-full flex items-center justify-center mx-auto text-xl shadow-lg">
-                <i class="fas fa-gamepad"></i>
-            </div>
-            <div>
-                <h3 class="text-base font-bold text-white mb-0.5">स्वागत है, <span id="dashUserName" class="text-amber-400"></span>!</h3>
-                <p class="text-[11px] text-slate-400">10 सवाल पूरे होने के बाद नया राउंड खेलें।</p>
-            </div>
-            
             <button onclick="clickJoinQuiz()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg text-xs">
                 <i class="fas fa-play-circle mr-1"></i> Play Next 10 Questions (₹20 Fee)
             </button>
@@ -121,7 +132,7 @@
 
         <!-- PAYMENT SCREEN -->
         <div id="paymentScreen" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl text-center">
-            <h3 class="text-base font-bold text-white mb-2"><i class="fas fa-wallet text-amber-400 mr-1"></i> Pay ₹20 Entry Fee</h3>
+            <h3 class="text-base font-bold text-white mb-2"><i class="fas fa-wallet text-amber-400 mr-1"></i> ₹20 मेंबरशिप एंट्री</h3>
             <p class="text-xs text-slate-400 mb-4">क्विज़ खेलने के लिए ₹20 का भुगतान करें:</p>
             
             <div class="bg-slate-800 p-4 rounded-xl mb-4 border border-slate-700 inline-block w-full">
@@ -145,7 +156,7 @@
                 <i class="fas fa-spinner fa-spin"></i>
             </div>
             <h3 class="text-lg font-bold text-white mb-2">पेमेंट अप्रूवल की प्रतीक्षा है!</h3>
-            <p class="text-xs text-slate-400 mb-4">स्क्रीनशॉट भेज दिया गया है। एडमिन द्वारा अप्रूव होते ही गेम शुरू होगा।</p>
+            <p class="text-xs text-slate-400 mb-4">स्क्रीनशॉट भेज दिया गया है। एडमिन या जेमिनी AI द्वारा अप्रूव होते ही गेम शुरू होगा।</p>
             <button onclick="location.reload()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl text-xs">स्टेटस रिफ्रेश करें</button>
         </div>
 
@@ -169,7 +180,7 @@
 
     </main>
 
-    <!-- ADMIN MODAL PANEL WITH FULL CONTROLS & VIP TIERS -->
+    <!-- ADMIN MODAL PANEL -->
     <div id="adminModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl p-6 shadow-2xl relative my-8">
             <button onclick="toggleAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg"><i class="fas fa-times"></i></button>
@@ -182,23 +193,24 @@
 
             <div id="adminDashboardView" class="hidden space-y-6 text-xs max-h-[75vh] overflow-y-auto pr-1">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                    <h3 class="text-base font-bold text-amber-400">एडमिन कण्ट्रोल & VIP हिस्ट्री पैनल</h3>
+                    <h3 class="text-base font-bold text-amber-400">एडमिन कण्ट्रोल & जेमिनी AI पैनल</h3>
                     <button onclick="logoutAdmin()" class="bg-red-500/20 text-red-400 px-2.5 py-1 rounded-lg">लॉग आउट</button>
                 </div>
 
-                <!-- GAME PAUSE / RESUME CONTROL -->
-                <div class="bg-red-950/40 p-3 rounded-xl border border-red-500/40 flex justify-between items-center">
-                    <div>
-                        <p class="font-bold text-white">गेम लाइव कंट्रोल (Pause/Resume)</p>
-                        <p class="text-[10px] text-slate-400">चलते गेम को तुरंत रोकें या चालू करें</p>
+                <!-- LIVE MODE SWITCHER (Manual vs Automatic Gemini AI) -->
+                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 space-y-3">
+                    <h4 class="font-bold text-white"><i class="fas fa-robot text-amber-400 mr-1"></i> गेम लाइव और ऑटोमैटिक मोड</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button id="manualLiveBtn" onclick="setLiveMode('manual')" class="bg-slate-700 text-white font-bold py-2 rounded-lg text-xs">1. मैन्युअल लाइव करें</button>
+                        <button id="autoLiveBtn" onclick="setLiveMode('auto')" class="bg-slate-700 text-white font-bold py-2 rounded-lg text-xs">2. ऑटोमैटिक जेमिनी AI</button>
                     </div>
-                    <button id="pauseGameBtn" onclick="togglePauseGame()" class="bg-red-600 hover:bg-red-500 text-white font-bold px-3 py-2 rounded-lg">गेम रोकें (Pause)</button>
+                    <p id="currentModeStatus" class="text-[10px] text-amber-400 font-medium">वर्तमान मोड: मैन्युअल</p>
                 </div>
 
                 <!-- STATS CARDS -->
                 <div class="grid grid-cols-2 gap-2">
                     <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
-                        <p class="text-[10px] text-slate-400">कुल जमा अमाउंट (Total)</p>
+                        <p class="text-[10px] text-slate-400">कुल जमा अमाउंट</p>
                         <p id="adminTotalRevenue" class="text-base font-bold text-emerald-400">₹0</p>
                     </div>
                     <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
@@ -209,7 +221,7 @@
 
                 <!-- SETTINGS -->
                 <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-800 space-y-3">
-                    <h4 class="font-bold text-white"><i class="fas fa-shield-alt text-amber-400 mr-1"></i> सेटिंग्स, UPI और लिंक्स</h4>
+                    <h4 class="font-bold text-white"><i class="fas fa-shield-alt text-amber-400 mr-1"></i> सेटिंग्स, UPI और टेलीग्राम</h4>
                     <div>
                         <label class="block text-slate-400 mb-1">एडमिन UPI ID:</label>
                         <input type="text" id="setUpi" value="admin@upi" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
@@ -219,13 +231,13 @@
                         <input type="text" id="setQrImg" placeholder="https://..." class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
                     </div>
                     <div>
-                        <label class="block text-slate-400 mb-1">टेलीग्राम / हेल्पलाइन लिंक (Withdrawal के लिए):</label>
+                        <label class="block text-slate-400 mb-1">हेल्पलाइन टेलीग्राम / व्हाट्सएप लिंक:</label>
                         <input type="text" id="setTelegram" placeholder="https://t.me/your_channel" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-lg text-white">
                     </div>
                     <button onclick="saveAdminSettings()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2 rounded-lg">सेटिंग्स सेव करें</button>
                 </div>
 
-                <!-- 10 QUESTIONS BUILDER (Admin can see exact questions in advance) -->
+                <!-- 10 QUESTIONS BUILDER (Admin Preview) -->
                 <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-800 space-y-3">
                     <div class="flex justify-between items-center">
                         <h4 class="font-bold text-indigo-400"><i class="fas fa-edit mr-1"></i> 10 प्रश्न (एडमिन को पहले से पता हैं)</h4>
@@ -296,7 +308,7 @@
             quiz: [],
             winners: [],
             adminWallet: 0,
-            settings: { upi: "admin@upi", qrImg: "", telegram: "https://t.me/", adminPin: "admin123", isPaused: false }
+            settings: { upi: "admin@upi", qrImg: "", telegram: "https://t.me/", adminPin: "admin123", mode: "manual", isLive: false }
         };
 
         function saveDB() {
@@ -316,10 +328,7 @@
             document.getElementById('setQrImg').value = db.settings.qrImg || "";
             document.getElementById('setTelegram').value = db.settings.telegram || "https://t.me/";
 
-            if(db.settings.isPaused) {
-                document.getElementById('homeGameStatus').innerText = "⏸️ गेम एडमिन द्वारा रोका गया है";
-                document.getElementById('homeGameStatus').className = "text-lg font-bold text-red-400";
-            }
+            updateLiveStatusDisplay();
 
             if(currentUser) {
                 renderUserNavigationState();
@@ -327,6 +336,50 @@
             } else {
                 showHomeScreen();
             }
+        }
+
+        function updateLiveStatusDisplay() {
+            let statusDiv = document.getElementById('homeGameStatus');
+            if(db.settings.mode === 'auto') {
+                statusDiv.innerText = "🤖 जेमिनी AI ऑटोमैटिक मोड एक्टिव";
+                statusDiv.className = "text-lg font-bold text-cyan-400";
+            } else if(db.settings.isLive) {
+                statusDiv.innerText = "🟢 एडमिन द्वारा लाइव किया गया";
+                statusDiv.className = "text-lg font-bold text-emerald-400";
+            } else {
+                statusDiv.innerText = "🔴 गेम अभी रोका गया है / लाइव नहीं है";
+                statusDiv.className = "text-lg font-bold text-red-400";
+            }
+        }
+
+        function setLiveMode(mode) {
+            db.settings.mode = mode;
+            if(mode === 'auto') {
+                db.settings.isLive = true;
+                autoFillGeminiAIQuestionsSilent();
+            } else {
+                db.settings.isLive = false;
+            }
+            saveDB();
+            updateLiveStatusDisplay();
+            alert(`मोड बदलकर '${mode === 'auto' ? 'ऑटोमैटिक जेमिनी AI' : 'मैन्युअल'}' कर दिया गया है!`);
+        }
+
+        function autoFillGeminiAIQuestionsSilent() {
+            let sample = [
+                { question: "भारत की राजधानी क्या है?", options: ["मुंबई", "नई दिल्ली", "कोलकाता", "चेन्नई"], correct: 1 },
+                { question: "वर्तमान प्रधानमंत्री कौन हैं?", options: ["नरेन्द्र मोदी", "राहुल गांधी", "अमित शाह", "योगी आदित्यनाथ"], correct: 0 },
+                { question: "क्रिकेट का भगवान किसे कहते हैं?", options: ["विराट कोहली", "धोनी", "सचिन तेंदुलकर", "रोहित शर्मा"], correct: 2 },
+                { question: "राष्ट्रीय पक्षी कौन सा है?", options: ["कबूतर", "तोता", "मोर", "बाज़"], correct: 2 },
+                { question: "पृथ्वी के नजदीक ग्रह कौन सा है?", options: ["बुध", "शुक्र", "मंगल", "बृहस्पति"], correct: 1 },
+                { question: "राष्ट्रगान किसने लिखा है?", options: ["बंकिम चंद्र", "रविंद्रनाथ टैगोर", "गांधीजी", "सुभाष चंद्र"], correct: 1 },
+                { question: "कंप्यूटर का दिमाग क्या है?", options: ["RAM", "CPU", "Hard Disk", "Monitor"], correct: 1 },
+                { question: "सबसे बड़ा ग्रह कौन सा है?", options: ["शनि", "पृथ्वी", "बृहस्पति", "यूरेनस"], correct: 2 },
+                { question: "राष्ट्रीय पशु क्या है?", options: ["शेर", "हाथी", "चीता", "बाघ"], correct: 3 },
+                { question: "एक वर्ष में कितने दिन होते हैं?", options: ["360", "365", "366", "364"], correct: 1 }
+            ];
+            db.quiz = sample;
+            saveDB();
         }
 
         function hideAllScreens() {
@@ -413,15 +466,18 @@
         }
 
         function checkUserDashboardFlow() {
-            if(db.settings.isPaused) {
-                alert('⚠️ एडमिन द्वारा वर्तमान में गेम रोक दिया गया है!');
-            }
             hideAllScreens();
             let u = db.users.find(x => x.phone === currentUser.phone) || currentUser;
             currentUser = u;
             document.getElementById('userWalletBalance').innerText = `₹${currentUser.wallet || 0}`;
 
             if(currentUser.status === 'approved') {
+                if(db.settings.mode === 'manual' && !db.settings.isLive) {
+                    document.getElementById('userDashboard').classList.remove('hidden');
+                    document.getElementById('dashUserName').innerText = currentUser.name;
+                    alert('एडमिन द्वारा अभी गेम लाइव नहीं किया गया है। कृपया प्रतीक्षा करें।');
+                    return;
+                }
                 startQuizGame();
             } else if(currentUser.status === 'screenshot_sent') {
                 document.getElementById('pendingScreen').classList.remove('hidden');
@@ -432,10 +488,6 @@
         }
 
         function clickJoinQuiz() {
-            if(db.settings.isPaused) {
-                alert('गेम अभी बंद है!');
-                return;
-            }
             hideAllScreens();
             document.getElementById('paymentScreen').classList.remove('hidden');
             document.getElementById('adminUpiDisplay').innerText = db.settings.upi;
@@ -465,46 +517,44 @@
                 if(idx !== -1) {
                     db.users[idx].screenshot = e.target.result;
                     db.users[idx].status = 'screenshot_sent';
+                    
+                    // IF AUTO MODE, GEMINI AI AUTOMATICALLY APPROVES PAYMENT
+                    if(db.settings.mode === 'auto') {
+                        db.users[idx].status = 'approved';
+                        db.adminWallet = (db.adminWallet || 0) + 20;
+                    }
+
                     saveDB();
                     currentUser = db.users[idx];
-                    alert('स्क्रीनशॉट सबमिट हो गया है!');
+                    alert(db.settings.mode === 'auto' ? '🤖 जेमिनी AI ने पेमेंट ऑटोमैटिक वेरीफाई कर दिया है!' : 'स्क्रीनशॉट सबमिट हो गया है!');
                     checkUserDashboardFlow();
                     renderAdminTables();
                 }
             };
         }
 
-        // WITHDRAWAL FUNCTIONALITY TO TELEGRAM / HELPLINE
         function requestWithdrawal() {
             let upiId = document.getElementById('userWithdrawUpi').value.trim();
             let amount = parseFloat(document.getElementById('userWithdrawAmount').value) || 0;
 
             if(!upiId || amount <= 0) {
-                alert('कृपया अपनी सही UPI ID और विड्रॉल अमाउंट दर्ज करें!');
+                alert('कृपया अपनी सही UPI ID और राशि दर्ज करें!');
                 return;
             }
-
             if(amount > (currentUser.wallet || 0)) {
-                alert('आपके वॉलेट में पर्याप्त बैलेंस नहीं है!');
+                alert('पर्याप्त वॉलेट बैलेंस नहीं है!');
                 return;
             }
 
-            // Deduct from wallet temporarily or notify admin via Telegram
             let teleLink = db.settings.telegram || "https://t.me/";
-            let msg = encodeURIComponent(`सर, मैं विड्रॉल करना चाहता हूँ।\nनाम: ${currentUser.name}\nमोबाइल/आईडी: ${currentUser.phone}\nअमाउंट: ₹${amount}\nमेरी UPI ID: ${upiId}\nकृपया विड्रॉल क्लियर कर दीजिए।`);
-            
+            let msg = encodeURIComponent(`सर, मैं विड्रॉल करना चाहता हूँ।\nनाम: ${currentUser.name}\nआईडी: ${currentUser.phone}\nअमाउंट: ₹${amount}\nUPI ID: ${upiId}\nकृपया विड्रॉल क्लियर कर दीजिए।`);
             window.open(`${teleLink}?text=${msg}`, '_blank');
-            alert('विड्रॉल अनुरोध टेलीग्राम/हेल्पलाइन पर भेज दिया गया है!');
+            alert('विड्रॉल अनुरोध हेल्पलाइन पर भेज दिया गया है!');
         }
 
         function startQuizGame() {
-            if(db.settings.isPaused) {
-                alert('गेम रोका गया है!');
-                showHomeScreen();
-                return;
-            }
             if(!db.quiz || db.quiz.length < 10) {
-                alert('एडमिन द्वारा अभी सवाल तैयार नहीं किए गए हैं।');
+                alert('सवाल अभी तैयार नहीं हैं।');
                 showHomeScreen();
                 return;
             }
@@ -516,11 +566,6 @@
         }
 
         function loadQuizQuestion() {
-            if(db.settings.isPaused) {
-                alert('एडमिन ने गेम रोक दिया है!');
-                showHomeScreen();
-                return;
-            }
             if(qIndex >= 10 || qIndex >= db.quiz.length) {
                 finishQuizGame();
                 return;
@@ -539,10 +584,6 @@
             document.getElementById('qTimer').innerText = sec;
             clearInterval(quizTimerInterval);
             quizTimerInterval = setInterval(() => {
-                if(db.settings.isPaused) {
-                    clearInterval(quizTimerInterval);
-                    return;
-                }
                 sec--;
                 document.getElementById('qTimer').innerText = sec;
                 if(sec <= 0) {
@@ -568,26 +609,17 @@
             let rewardMoney = 0;
             let vipTier = "कोई टियर नहीं";
 
-            if(score >= 9) {
-                vipTier = "VIP 1 (Gold)";
-                rewardMoney = 50;
-            } else if(score >= 7) {
-                vipTier = "VIP 2 (Silver)";
-                rewardMoney = 35;
-            } else if(score >= 5) {
-                vipTier = "VIP 3 (Bronze)";
-                rewardMoney = 20;
-            }
+            if(score >= 9) { vipTier = "VIP 1 (Gold)"; rewardMoney = 50; }
+            else if(score >= 7) { vipTier = "VIP 2 (Silver)"; rewardMoney = 35; }
+            else if(score >= 5) { vipTier = "VIP 3 (Bronze)"; rewardMoney = 20; }
 
             let idx = db.users.findIndex(x => x.phone === currentUser.phone);
-            
             if(idx !== -1) {
                 db.users[idx].status = 'registered';
                 db.users[idx].screenshot = '';
                 if(rewardMoney > 0) {
                     db.users[idx].wallet = (db.users[idx].wallet || 0) + rewardMoney;
                 }
-                
                 db.winners.push({
                     name: currentUser.name,
                     phone: currentUser.phone,
@@ -596,7 +628,6 @@
                     wonAmount: rewardMoney,
                     date: new Date().toLocaleDateString()
                 });
-
                 currentUser = db.users[idx];
                 saveDB();
                 renderAdminTables();
@@ -606,10 +637,10 @@
             let desc = document.getElementById('resDesc');
             if(rewardMoney > 0) {
                 title.innerText = `बधाई हो! आप ${vipTier} विजेता बने`;
-                desc.innerHTML = `स्कोर: <b>${score}/10</b><br>इनाम राशि वॉलेट में जुड़ गई: <span class="text-emerald-400 font-bold">+₹${rewardMoney}</span><br>अगले 10 सवाल खेलने के लिए दोबारा ₹20 दें।`;
+                desc.innerHTML = `स्कोर: <b>${score}/10</b><br>इनाम राशि वॉलेट में जुड़ गई: <span class="text-emerald-400 font-bold">+₹${rewardMoney}</span><br>अगले 10 सवाल के लिए दोबारा ₹20 दें।`;
             } else {
                 title.innerText = "10 सवाल पूरे हुए";
-                desc.innerHTML = `स्कोर: <b>${score}/10</b><br>इनाम के लिए कम से कम 5 सही उत्तर चाहिए। अगला राउंड खेलने के लिए ₹20 दें।`;
+                desc.innerHTML = `स्कोर: <b>${score}/10</b><br>अगला राउंड खेलने के लिए ₹20 जमा करें।`;
             }
         }
 
@@ -633,21 +664,6 @@
             document.getElementById('adminPinInput').value = '';
         }
 
-        function togglePauseGame() {
-            db.settings.isPaused = !db.settings.isPaused;
-            saveDB();
-            let btn = document.getElementById('pauseGameBtn');
-            if(db.settings.isPaused) {
-                btn.innerText = "गेम चालू करें (Resume)";
-                btn.className = "bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-2 rounded-lg";
-                alert('⚠️ गेम एडमिन द्वारा रोक दिया गया है!');
-            } else {
-                btn.innerText = "गेम रोकें (Pause)";
-                btn.className = "bg-red-600 hover:bg-red-500 text-white font-bold px-3 py-2 rounded-lg";
-                alert('✅ गेम फिर से चालू कर दिया गया है!');
-            }
-        }
-
         function saveAdminSettings() {
             db.settings.upi = document.getElementById('setUpi').value.trim();
             db.settings.qrImg = document.getElementById('setQrImg').value.trim();
@@ -657,28 +673,8 @@
         }
 
         function autoFillGeminiAIQuestions() {
-            let sample = [
-                { question: "भारत की राजधानी क्या है?", options: ["मुंबई", "नई दिल्ली", "कोलकाता", "चेन्नई"], correct: 1 },
-                { question: "वर्तमान प्रधानमंत्री कौन हैं?", options: ["नरेन्द्र मोदी", "राहुल गांधी", "अमित शाह", "योगी आदित्यनाथ"], correct: 0 },
-                { question: "क्रिकेट का भगवान किसे कहते हैं?", options: ["विराट कोहली", "धोनी", "सचिन तेंदुलकर", "रोहित शर्मा"], correct: 2 },
-                { question: "राष्ट्रीय पक्षी कौन सा है?", options: ["कबूतर", "तोता", "मोर", "बाज़"], correct: 2 },
-                { question: "पृथ्वी के नजदीक ग्रह कौन सा है?", options: ["बुध", "शुक्र", "मंगल", "बृहस्पति"], correct: 1 },
-                { question: "राष्ट्रगान किसने लिखा है?", options: ["बंकिम चंद्र", "रविंद्रनाथ टैगोर", "गांधीजी", "सुभाष चंद्र"], correct: 1 },
-                { question: "कंप्यूटर का दिमाग क्या है?", options: ["RAM", "CPU", "Hard Disk", "Monitor"], correct: 1 },
-                { question: "सबसे बड़ा ग्रह कौन सा है?", options: ["शनि", "पृथ्वी", "बृहस्पति", "यूरेनस"], correct: 2 },
-                { question: "राष्ट्रीय पशु क्या है?", options: ["शेर", "हाथी", "चीता", "बाघ"], correct: 3 },
-                { question: "एक वर्ष में कितने दिन होते हैं?", options: ["360", "365", "366", "364"], correct: 1 }
-            ];
-            for(let i=0; i<10; i++) {
-                let q = sample[i];
-                document.getElementById(`adm_q_${i}`).value = q.question;
-                document.getElementById(`adm_q_${i}_o0`).value = q.options[0];
-                document.getElementById(`adm_q_${i}_o1`).value = q.options[1];
-                document.getElementById(`adm_q_${i}_o2`).value = q.options[2];
-                document.getElementById(`adm_q_${i}_o3`).value = q.options[3];
-                document.getElementById(`adm_q_${i}_corr`).value = q.correct;
-            }
-            alert('AI सवाल भर दिए गए हैं!');
+            autoFillGeminiAIQuestionsSilent();
+            alert('🤖 जेमिनी AI ने 10 नए सवाल ऑटोमैटिक भर दिए हैं!');
         }
 
         function buildAdminBuilderHTML() {
@@ -715,8 +711,10 @@
                 quizList.push({ question: qText, options: [o0, o1, o2, o3], correct: corr });
             }
             db.quiz = quizList;
+            db.settings.isLive = true; // Make live when admin saves and activates
             saveDB();
-            alert('क्विज़ सवाल सेव हो गए!');
+            updateLiveStatusDisplay();
+            alert('10 प्रश्न सेव और लाइव कर दिए गए हैं!');
         }
 
         function renderAdminTables() {
@@ -739,7 +737,6 @@
                 uTBody.innerHTML = html;
             }
 
-            // VIP Tiers History Table
             let hTBody = document.getElementById('adminHistoryTable');
             if(!db.winners || db.winners.length === 0) {
                 hTBody.innerHTML = `<tr><td colspan="3" class="py-2 text-center text-slate-500">कोई विनर हिस्ट्री नहीं</td></tr>`;
