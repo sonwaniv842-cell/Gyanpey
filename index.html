@@ -29,8 +29,10 @@
             <h1 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">GyanPey</h1>
         </div>
         <div id="headerAuthButtons" class="flex space-x-2">
-            <button onclick="openAuth('login')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-lg font-medium border border-slate-700">Login</button>
-            <button onclick="openAuth('register')" class="text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-lg font-medium">Register</button>
+            <!-- Admin / Login Buttons -->
+            <button onclick="openAuth('admin')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-2.5 py-1.5 rounded-lg font-medium border border-slate-700">Admin</button>
+            <button onclick="openAuth('login')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-2.5 py-1.5 rounded-lg font-medium border border-slate-700">Login</button>
+            <button onclick="openAuth('register')" class="text-xs bg-red-600 hover:bg-red-700 text-white px-2.5 py-1.5 rounded-lg font-medium">Register</button>
         </div>
         <div id="headerUserLogout" class="hidden flex items-center space-x-2">
             <span id="topUserName" class="text-xs text-amber-400 font-bold"></span>
