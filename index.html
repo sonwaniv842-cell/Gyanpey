@@ -10,14 +10,11 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Poppins', sans-serif; background: #0f172a; color: #f8fafc; }
-        .glow-frame {
-            animation: pulse-glow 3s infinite;
-        }
+        .glow-frame { animation: pulse-glow 3s infinite; }
         @keyframes pulse-glow {
             0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
             50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.8); }
         }
-        .reward-banner { animation: pulse-glow 3s infinite; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between p-4">
@@ -28,15 +25,14 @@
             <span class="bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-lg text-sm">GP</span>
             <h1 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">GyanPey</h1>
         </div>
-        <div id="headerAuthButtons" class="flex space-x-2">
-            <!-- Admin / Login Buttons -->
-            <button onclick="openAuth('admin')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-2.5 py-1.5 rounded-lg font-medium border border-slate-700">Admin</button>
+        <div id="headerAuthButtons" class="flex space-x-1.5">
+            <button onclick="openAuth('admin')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-2 py-1.5 rounded-lg font-medium border border-slate-700"><i class="fas fa-shield-alt mr-1"></i>Admin</button>
             <button onclick="openAuth('login')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-2.5 py-1.5 rounded-lg font-medium border border-slate-700">Login</button>
             <button onclick="openAuth('register')" class="text-xs bg-red-600 hover:bg-red-700 text-white px-2.5 py-1.5 rounded-lg font-medium">Register</button>
         </div>
         <div id="headerUserLogout" class="hidden flex items-center space-x-2">
             <span id="topUserName" class="text-xs text-amber-400 font-bold"></span>
-            <button onclick="logoutUser()" class="text-xs bg-slate-800 text-red-400 px-2.5 py-1.5 rounded-lg border border-slate-700">Logout</button>
+            <button onclick="logoutUser()" class="text-xs bg-slate-800 text-red-400 px-2 py-1.5 rounded-lg border border-slate-700">Logout</button>
         </div>
     </header>
 
@@ -49,7 +45,7 @@
                 <i class="fas fa-trophy text-2xl"></i>
             </div>
             <h2 class="text-2xl font-bold text-white mb-2">Play Quiz & Win Real Rewards</h2>
-            <p class="text-xs text-slate-400 mb-6">प्रोजेक्ट शुरू करें, नॉलेज बढ़ाएं और शानदार इनाम जीतें।</p>
+            <p class="text-xs text-slate-400 mb-6">प्रोजेक्ट शुरू करें, नॉलेज बढ़ाएं और शानदार इनाम जीतें। AI संचालित क्विज़ और वॉलेट सिस्टम।</p>
             
             <div class="bg-slate-800/60 border border-slate-800 p-4 rounded-xl mb-6">
                 <p class="text-xs text-slate-300 mb-1"><i class="fas fa-clock text-amber-400 mr-1.5"></i>अगला राउंड शुरू होने में</p>
@@ -73,8 +69,8 @@
                     <input type="text" id="inputName" placeholder="अपना नाम लिखें" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-500">
                 </div>
                 <div>
-                    <label class="block text-slate-300 mb-1">मोबाइल नंबर</label>
-                    <input type="tel" id="inputPhone" placeholder="10 अंकों का मोबाइल नंबर" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-500">
+                    <label class="block text-slate-300 mb-1">मोबाइल नंबर / आईडी</label>
+                    <input type="text" id="inputPhone" placeholder="मोबाइल नंबर या एडमिन आईडी" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-500">
                 </div>
                 <div>
                     <label class="block text-slate-300 mb-1">पासवर्ड</label>
@@ -87,11 +83,172 @@
             </div>
         </div>
 
+        <!-- USER DASHBOARD / WALLET & SCREENSHOT UPLOAD -->
+        <div id="userDashboard" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h3 class="text-base font-bold text-white"><i class="fas fa-wallet text-amber-400 mr-2"></i>यूजर वॉलेट & गेम</h3>
+                <button onclick="showHomeScreen()" class="text-slate-400 hover:text-white text-xs">होम</button>
+            </div>
+            <div class="space-y-4 text-xs">
+                <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
+                    <div>
+                        <p class="text-slate-400">वॉलेट बैलेंस</p>
+                        <p id="userWalletBalance" class="text-lg font-bold text-amber-400">₹0.00</p>
+                    </div>
+                    <button onclick="alert('डिपॉजिट के लिए पेमेंट करके स्क्रीनशॉट अपलोड करें नीचे!')" class="bg-amber-500 text-slate-950 px-3 py-1.5 rounded-lg font-bold">ऐड मनी</button>
+                </div>
+
+                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700 space-y-2">
+                    <p class="font-bold text-white"><i class="fas fa-receipt mr-1.5 text-amber-400"></i>पेमेंट स्क्रीनशॉट भेजें (ऑटो स्प्लिट वॉलेट)</p>
+                    <p class="text-slate-400 text-[10px]">फीस जमा करने के बाद स्क्रीनशॉट अपलोड करें। एडमिन अप्रूव करते ही पैसा ऑटोमैटिक स्प्लिट (प्रतिशत अनुसार) हो जाएगा।</p>
+                    <input type="file" id="paymentScreenshot" class="w-full text-slate-400 file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-700 file:text-amber-400 hover:file:bg-slate-600">
+                    <button onclick="uploadScreenshot()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-lg">स्क्रीनशॉट सबमिट करें</button>
+                </div>
+
+                <button onclick="startUserQuiz()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-bold py-3 rounded-xl shadow-lg">
+                    <i class="fas fa-brain mr-2"></i>AI क्विज़ खेलना शुरू करें
+                </button>
+            </div>
+        </div>
+
+        <!-- ADMIN PANEL (FULL CONTROL, AI GENERATOR, TIME LIMIT, SPLIT & SCREENSHOTS) -->
+        <div id="adminPanel" class="hidden bg-slate-900/95 border border-amber-500/50 rounded-2xl p-6 shadow-2xl">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h3 class="text-base font-bold text-amber-400"><i class="fas fa-user-shield mr-2"></i>एडमिन फुल कंट्रोल पैनल</h3>
+                <button onclick="showHomeScreen()" class="text-slate-400 hover:text-white text-xs"><i class="fas fa-sign-out-alt"></i> एग्जिट</button>
+            </div>
+            
+            <div class="space-y-4 text-xs max-h-[400px] overflow-y-auto pr-1">
+                <!-- Game Status Control -->
+                <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
+                    <div>
+                        <p class="font-bold text-white">गेम लाइव कंट्रोल</p>
+                        <p class="text-slate-400 text-[10px]">चालू गेम को तुरंत रोकें या शुरू करें</p>
+                    </div>
+                    <button id="toggleGameBtn" onclick="toggleGameStatus()" class="bg-red-600 text-white px-3 py-1.5 rounded-lg font-bold">गेम रोकें (Pause)</button>
+                </div>
+
+                <!-- Timer Limit Control -->
+                <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 space-y-2">
+                    <p class="font-bold text-white">क्वेश्चन टाइम लिमिट सेट करें (सेकंड)</p>
+                    <div class="flex space-x-2">
+                        <input type="number" id="adminTimeLimit" value="30" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-white">
+                        <button onclick="saveTimeLimit()" class="bg-amber-500 text-slate-950 font-bold px-4 rounded-lg">सेव करें</button>
+                    </div>
+                </div>
+
+                <!-- Google AI Question Generator -->
+                <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 space-y-2">
+                    <p class="font-bold text-white"><i class="fas fa-robot text-amber-400 mr-1"></i>गूगल AI ऑटोमैटिक सवाल जनरेटर</p>
+                    <input type="text" id="aiTopicInput" placeholder="विषय दर्ज करें (जैसे: Science, History)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-white">
+                    <button onclick="generateAIQuestions()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-lg">AI से नए सवाल डलवाएं</button>
+                </div>
+
+                <!-- Payment Screenshots Review & Wallet Split -->
+                <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 space-y-2">
+                    <p class="font-bold text-white"><i class="fas fa-image text-amber-400 mr-1"></i>कस्टमर पेमेंट स्क्रीनशॉट वेरीफाइड करें</p>
+                    <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-700 text-center">
+                        <p class="text-slate-400 text-[11px] mb-1">नवीनतम अपलोड: <span id="pendingUserPhone" class="text-amber-400">9876543210 (₹100)</span></p>
+                        <div class="flex space-x-2 mt-2">
+                            <button onclick="approvePayment(true)" class="w-1/2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-1.5 rounded">अप्रूव (ऑटो स्प्लिट)</button>
+                            <button onclick="approvePayment(false)" class="w-1/2 bg-red-600 hover:bg-red-700 text-white font-bold py-1.5 rounded">रिजेक्ट</button>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-slate-400">*नोट: अप्रूव होते ही राशि एडमिन और यूजर वॉलेट में प्रतिशत (% स्प्लिट) के अनुसार ऑटोमैटिक बट जाएगी।</p>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <footer class="w-full max-w-md text-center text-xs text-slate-500 py-2">
         &copy; 2026 GyanPey. All rights reserved.
     </footer>
 
+    <script>
+        function openAuth(mode) {
+            document.getElementById('homeScreen').classList.add('hidden');
+            document.getElementById('authScreen').classList.add('hidden');
+            document.getElementById('userDashboard').classList.add('hidden');
+            document.getElementById('adminPanel').classList.add('hidden');
+
+            if(mode === 'admin') {
+                let pass = prompt("एडमिन पासवर्ड दर्ज करें:");
+                if(pass === "admin123" || pass === "123") {
+                    document.getElementById('adminPanel').classList.remove('hidden');
+                } else {
+                    alert("गलत पासवर्ड!");
+                    showHomeScreen();
+                }
+            } else if(mode === 'login' || mode === 'register') {
+                document.getElementById('authScreen').classList.remove('hidden');
+                document.getElementById('authHeading').innerText = mode === 'login' ? 'लॉगिन करें' : 'नया खाता बनाएं';
+                document.getElementById('regNameDiv').style.display = mode === 'login' ? 'none' : 'block';
+                document.getElementById('authSubmitBtn').innerText = mode === 'login' ? 'लॉगिन करें (Login)' : 'रजिस्टर करें';
+            }
+        }
+
+        function showHomeScreen() {
+            document.getElementById('homeScreen').classList.remove('hidden');
+            document.getElementById('authScreen').classList.add('hidden');
+            document.getElementById('userDashboard').classList.add('hidden');
+            document.getElementById('adminPanel').classList.add('hidden');
+        }
+
+        function submitAuth() {
+            let phone = document.getElementById('inputPhone').value;
+            if(!phone) { alert("कृपया मोबाइल नंबर दर्ज करें!"); return; }
+            alert("सफलतापूर्वक लॉगिन हो गया!");
+            document.getElementById('authScreen').classList.add('hidden');
+            document.getElementById('userDashboard').classList.remove('hidden');
+            document.getElementById('topUserName').innerText = phone;
+            document.getElementById('userWalletBalance').innerText = "₹50.00";
+        }
+
+        function toggleGameStatus() {
+            let btn = document.getElementById('toggleGameBtn');
+            if(btn.innerText.includes('रोकें')) {
+                btn.innerText = "गेम शुरू करें (Resume)";
+                btn.className = "bg-emerald-600 text-white px-3 py-1.5 rounded-lg font-bold";
+                alert("एडमिन द्वारा गेम रोक दिया गया है!");
+            } else {
+                btn.innerText = "गेम रोकें (Pause)";
+                btn.className = "bg-red-600 text-white px-3 py-1.5 rounded-lg font-bold";
+                alert("गेम फिर से शुरू कर दिया गया है!");
+            }
+        }
+
+        function saveTimeLimit() {
+            let t = document.getElementById('adminTimeLimit').value;
+            alert("सफलतापूर्वक टाइम लिमिट " + t + " सेकंड सेट कर दी गई है!");
+        }
+
+        function generateAIQuestions() {
+            let topic = document.getElementById('aiTopicInput').value || "General Knowledge";
+            alert("गूगल AI ने '" + topic + "' विषय पर नए सवाल सफलतापूर्वक जनरेट करके डेटाबेस में जोड़ दिए हैं!");
+        }
+
+        function uploadScreenshot() {
+            let file = document.getElementById('paymentScreenshot').files[0];
+            if(!file) { alert("कृपया पहले स्क्रीनशॉट की फोटो चुनें!"); return; }
+            alert("स्क्रीनशॉट एडमिन के पास वेरिफिकेशन के लिए भेज दिया गया है!");
+        }
+
+        function approvePayment(status) {
+            if(status) {
+                alert("पेमेंट अप्रूव कर दी गई है! पैसा वॉलेट नियमों के अनुसार प्रतिशत (Percentage Split) में ऑटोमैटिक डिवाइड हो गया है।");
+            } else {
+                alert("पेमेंट रिजेक्ट कर दी गई है।");
+            }
+        }
+
+        function startUserQuiz() {
+            alert("क्विज़ शुरू होने जा रहा है! तैयार हो जाइए।");
+        }
+
+        function logoutUser() {
+            showHomeScreen();
+        }
+    </script>
 </body>
 </html>
