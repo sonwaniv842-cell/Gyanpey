@@ -436,7 +436,6 @@
         let isLoginMode = true; let qIndex = 0; let score = 0; let quizTimerInterval = null;
         let isPlayingAgainstBot = false;
         
-        // Safety lock states for admin demo resets
         let isAdminWalletResetUnlocked = false;
         let isCustomerResetUnlocked = false;
 
@@ -558,7 +557,6 @@
         }
         function closeFreeEntryPopup() { document.getElementById('freeEntryPopup').classList.add('hidden'); }
 
-        // LIVE SUPPORT & AUTO AI CHAT SYSTEM
         function openSupportChat() {
             if(!currentUser) return;
             document.getElementById('supportChatModal').classList.remove('hidden');
@@ -678,7 +676,6 @@
             }, 3000); 
         }
 
-        // 8 SECONDS TIMER FUNCTION
         function loadQuizQuestion() {
             if(qIndex >= 5 || qIndex >= db.quiz.length) { finishQuizGame(); return; }
             let q = db.quiz[qIndex];
@@ -742,7 +739,6 @@
             }
         }
 
-        // ADMIN WALLET & CUSTOMER WALLET RESET FUNCTIONS WITH SAFETY LOCK
         function toggleAdminWalletLock() {
             isAdminWalletResetUnlocked = !isAdminWalletResetUnlocked;
             let btn = document.getElementById('adminWalletLockBtn');
