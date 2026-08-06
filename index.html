@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GyanPay - Pro Casino Live Arena</title>
+    <title>GyanPay - Pro Casino Live Arena with Tick Sound & 4x Lucky</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -52,12 +52,13 @@
         <!-- HOME / DASHBOARD -->
         <div id="homeScreen" class="glass-card neon-glow rounded-3xl p-4 shadow-2xl text-center space-y-4">
             <div class="w-16 h-16 bg-gradient-to-tr from-amber-500/20 to-orange-500/20 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-3xl neon-btn animate-pulse-fast border border-amber-500/40 mt-2"><i class="fas fa-dice"></i></div>
-            <div><h2 class="gaming-font text-xl font-black text-white tracking-wide">LIVE TABLE ARENA</h2><p class="text-[10px] text-slate-400 mt-1">मोस्ट कैसिनो स्टाइल नॉन-स्टॉप लाइव गेमिंग अनुभव!</p></div>
+            <div><h2 class="gaming-font text-xl font-black text-white tracking-wide">LIVE TABLE ARENA</h2><p class="text-[10px] text-slate-400 mt-1">टिक-टिक साउंड इफ़ेक्ट और 4x लकी जैकपॉट के साथ!</p></div>
 
             <div class="bg-slate-900 border border-slate-800 p-3.5 rounded-2xl text-left space-y-2">
-                <p class="text-[11px] font-bold text-amber-400"><i class="fas fa-info-circle mr-1"></i> मुख्य नियम:</p>
+                <p class="text-[11px] font-bold text-amber-400"><i class="fas fa-info-circle mr-1"></i> मुख्य विशेषताएँ:</p>
                 <ul class="space-y-1.5 text-[10px] text-slate-300">
-                    <li>• हर राउंड <b>15 सेकंड</b> का होता है।</li>
+                    <li>• हर राउंड <b>15 सेकंड</b> का, आखिरी 5 सेकंड में टिक-टिक साउंड!</li>
+                    <li>• <b>LUCKY (Tie)</b> जीतने पर <b>4x रिटर्न (₹10 का ₹40)</b> मिलेगा।</li>
                     <li>• न्यूनतम बैंक विड्रॉल सीमा: <b>₹100</b></li>
                 </ul>
             </div>
@@ -118,7 +119,7 @@
             </button>
         </div>
 
-        <!-- CONTINUOUS LIVE CASINO TABLE SCREEN (MOST STYLE) -->
+        <!-- CONTINUOUS LIVE CASINO TABLE SCREEN (TICK SOUND & 4X LUCKY) -->
         <div id="gameScreen" class="hidden glass-card neon-glow rounded-3xl p-4 shadow-2xl space-y-3 text-center relative overflow-hidden border border-amber-500/30">
             
             <!-- TOP BAR WITH BACK & 15s TIMER -->
@@ -130,7 +131,7 @@
                 <span class="gaming-font text-xs font-bold text-red-400"><i class="fas fa-stopwatch mr-1"></i> <span id="gameTimer">15</span>s</span>
             </div>
 
-            <!-- SLICK TOP BANNER (WAITING FOR THE NEXT ROUND STYLE) -->
+            <!-- SLICK TOP BANNER -->
             <div id="roundResultBanner" class="hidden absolute inset-x-2 top-14 bg-gradient-to-r from-rose-950 via-slate-950 to-rose-950 border border-amber-500/80 py-2 px-3 rounded-xl z-20 shadow-2xl text-center">
                 <p id="bannerText" class="gaming-font text-xs font-bold text-amber-300 tracking-wider animate-pulse">Waiting for the next round...</p>
             </div>
@@ -147,7 +148,7 @@
                 </div>
             </div>
 
-            <!-- THREE MAIN OPTIONS WITH ICONS & STARS -->
+            <!-- THREE MAIN OPTIONS (LUCKY PAYS 4X) -->
             <div class="grid grid-cols-3 gap-2">
                 <button onclick="placeBet('BIG')" class="bg-gradient-to-br from-red-600 to-rose-700 hover:opacity-90 text-white p-3 rounded-2xl border border-red-400 shadow-lg transition flex flex-col items-center justify-center space-y-0.5">
                     <i class="fas fa-arrow-up text-base text-white"></i>
@@ -157,7 +158,7 @@
 
                 <button onclick="placeBet('LUCKY')" class="bg-gradient-to-br from-amber-500 to-yellow-600 hover:opacity-90 text-slate-950 p-3 rounded-2xl border border-amber-300 shadow-lg transition flex flex-col items-center justify-center space-y-0.5 animate-pulse">
                     <i class="fas fa-star text-base text-slate-950"></i>
-                    <span class="gaming-font font-black text-xs">LUCKY</span>
+                    <span class="gaming-font font-black text-xs">LUCKY (4x)</span>
                     <span class="text-[9px] text-slate-950 font-bold">Bet: ₹<span id="betLuckyAmt">0</span></span>
                 </button>
 
@@ -183,7 +184,7 @@
         <!-- TOP-UP SCREEN -->
         <div id="topUpScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl text-center space-y-4">
             <div class="flex justify-between items-center border-b border-slate-800 pb-2"><h3 class="gaming-font text-sm font-bold text-amber-400"><i class="fas fa-coins mr-1"></i> WALLET TOP-UP</h3><button onclick="checkUserDashboardFlow()" class="text-slate-400 hover:text-white text-sm"><i class="fas fa-times"></i></button></div>
-            <div class="grid grid-cols-4 gap-2"><button onclick="setTopUpAmount(50)" class="bg-slate-800 text-amber-400 font-bold py-1.5 rounded-lg text-xs">₹50</button><button onclick="setTopUpAmount(100)" class="bg-slate-800 text-white font-bold py-1.5 rounded-lg text-xs">₹100</button><button onclick="setTopUpAmount(500)" class="bg-slate-800 text-amber-400 font-bold py-1.5 rounded-lg text-xs">₹500</button><button onclick="setTopUpAmount(1000)" class="bg-slate-800 text-amber-400 font-bold py-1.5 rounded-lg text-xs">₹1000</button></div>
+            <div class="grid grid-cols-4 gap-2"><button onclick="setTopUpAmount(50)" class="bg-slate-800 text-amber-400 font-bold py-1.5 rounded-lg text-xs">₹50</button><button onclick="setTopUpAmount(100)" class="bg-slate-800 text-white font-bold py-1.5 rounded-lg text-xs">₹100</button><button onclick="setTopUpAmount(500)" class="bg-slate-800 text-amber-400 font-bold py-1.5 rounded-lg text-xs">₹500</button><button onclick="setTopUpAmount(1000)" class="bg-slate-800 text-white font-bold py-1.5 rounded-lg text-xs">₹1000</button></div>
             <input type="number" id="customTopUpAmt" placeholder="या खुद राशि डालें (₹)" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-center text-white text-sm">
             <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 inline-block w-full">
                 <p class="text-xs text-slate-400 mb-2">QR पर <span id="displayTopUpText" class="font-bold text-amber-400">₹0</span> भेजें</p>
@@ -255,7 +256,7 @@
                     <h4 class="font-bold text-amber-400"><i class="fas fa-sliders-h mr-1"></i> अगले राउंड का रिजल्ट तय करें (Admin Control)</h4>
                     <div class="grid grid-cols-3 gap-2 mt-2">
                         <button onclick="setAdminRiggedOutcome('BIG')" class="bg-slate-900 border border-slate-700 hover:border-amber-400 p-2 rounded-xl text-center font-bold text-red-400 text-xs">BIG जिताएं</button>
-                        <button onclick="setAdminRiggedOutcome('LUCKY')" class="bg-slate-900 border border-slate-700 hover:border-amber-400 p-2 rounded-xl text-center font-bold text-amber-400 text-xs">LUCKY जिताएं</button>
+                        <button onclick="setAdminRiggedOutcome('LUCKY')" class="bg-slate-900 border border-slate-700 hover:border-amber-400 p-2 rounded-xl text-center font-bold text-amber-400 text-xs">LUCKY (4x) जिताएं</button>
                         <button onclick="setAdminRiggedOutcome('SMALL')" class="bg-slate-900 border border-slate-700 hover:border-amber-400 p-2 rounded-xl text-center font-bold text-emerald-400 text-xs">SMALL जिताएं</button>
                     </div>
                     <p class="text-[10px] text-cyan-300 mt-1">वर्तमान फिक्स सेट: <b id="currentRiggedDisplay" class="text-white">AUTO / RANDOM</b></p>
@@ -301,22 +302,39 @@
     </div>
 
     <script>
-        let db = JSON.parse(localStorage.getItem('gyanpay_pro_most_db')) || {
+        let db = JSON.parse(localStorage.getItem('gyanpay_pro_tick_db')) || {
             users: [], adminWallet: 0, withdrawals: [], chatThreads: {}, history: ['BIG', 'SMALL', 'BIG', 'SMALL', 'LUCKY'],
             settings: { adminPin: "admin123", riggedOutcome: "AUTO" }
         };
 
-        function saveDB() { localStorage.setItem('gyanpay_pro_most_db', JSON.stringify(db)); }
-        let currentUser = JSON.parse(sessionStorage.getItem('gyanpay_pro_most_user')) || null;
+        function saveDB() { localStorage.setItem('gyanpay_pro_tick_db', JSON.stringify(db)); }
+        let currentUser = JSON.parse(sessionStorage.getItem('gyanpay_pro_tick_user')) || null;
         let isLoginMode = true; let liveTableInterval = null; 
         let selectedChipVal = 10;
         let currentBets = { BIG: 0, LUCKY: 0, SMALL: 0 };
         let gameTimerSec = 15;
 
+        // Web Audio API for Real-time Tick Sound Effect (Last 5 seconds)
+        function playTickSound() {
+            try {
+                let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                let osc = audioCtx.createOscillator();
+                let gainNode = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime); // High pitch tick
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.08);
+            } catch(e) { console.log("Audio context blocked"); }
+        }
+
         window.onload = function() {
             if(currentUser) { 
                 currentUser = db.users.find(x => x.phone === currentUser.phone) || currentUser;
-                sessionStorage.setItem('gyanpay_pro_most_user', JSON.stringify(currentUser));
+                sessionStorage.setItem('gyanpay_pro_tick_user', JSON.stringify(currentUser));
                 checkUserDashboardFlow(); 
             } else { showHomeScreen(); }
         }
@@ -339,16 +357,16 @@
             if(!phone || !pass || (!isLoginMode && !name)) { alert('कृपया सभी फील्ड भरें!'); return; }
             if(isLoginMode) {
                 let found = db.users.find(u => u.phone === phone && u.pass === pass);
-                if(found) { currentUser = found; sessionStorage.setItem('gyanpay_pro_most_user', JSON.stringify(currentUser)); checkUserDashboardFlow(); } else { alert('गलत फोन नंबर या पासवर्ड!'); }
+                if(found) { currentUser = found; sessionStorage.setItem('gyanpay_pro_tick_user', JSON.stringify(currentUser)); checkUserDashboardFlow(); } else { alert('गलत फोन नंबर या पासवर्ड!'); }
             } else {
                 if(db.users.some(u => u.phone === phone)) { alert('यह नंबर पहले से रजिस्टर्ड है!'); return; }
                 let newUser = { name, phone, pass, wallet: 200, gamesPlayed: 0, gamesWon: 0 };
-                db.users.push(newUser); saveDB(); currentUser = newUser; sessionStorage.setItem('gyanpay_pro_most_user', JSON.stringify(currentUser)); checkUserDashboardFlow();
+                db.users.push(newUser); saveDB(); currentUser = newUser; sessionStorage.setItem('gyanpay_pro_tick_user', JSON.stringify(currentUser)); checkUserDashboardFlow();
             }
         }
         function logoutUser() { 
             currentUser = null; 
-            sessionStorage.removeItem('gyanpay_pro_most_user'); 
+            sessionStorage.removeItem('gyanpay_pro_tick_user'); 
             clearInterval(liveTableInterval);
             showHomeScreen(); 
         }
@@ -428,7 +446,7 @@
         }
         function closeLongHistoryModal() { document.getElementById('longHistoryModal').classList.add('hidden'); }
 
-        // CONTINUOUS LIVE CASINO TABLE LOOP (15s TIMER)
+        // CONTINUOUS LIVE CASINO TABLE LOOP (15s TIMER + TICK SOUND)
         function selectChip(val) {
             selectedChipVal = val;
             [10, 50, 100, 500, 1000].forEach(v => {
@@ -451,9 +469,14 @@
                 gameTimerSec--;
                 document.getElementById('gameTimer').innerText = gameTimerSec;
 
+                // Play Tick Sound for last 5 seconds
+                if(gameTimerSec <= 5 && gameTimerSec > 0) {
+                    playTickSound();
+                }
+
                 if(gameTimerSec <= 0) {
                     evaluateContinuousRound();
-                    gameTimerSec = 15; // Reset for next continuous round
+                    gameTimerSec = 15; // Reset for next round
                 }
             }, 1000);
         }
@@ -506,7 +529,7 @@
             let userWonAmt = 0;
             if(winningOutcome === 'BIG' && currentBets.BIG > 0) userWonAmt += currentBets.BIG * 2;
             if(winningOutcome === 'SMALL' && currentBets.SMALL > 0) userWonAmt += currentBets.SMALL * 2;
-            if(winningOutcome === 'LUCKY' && currentBets.LUCKY > 0) userWonAmt += currentBets.LUCKY * 5;
+            if(winningOutcome === 'LUCKY' && currentBets.LUCKY > 0) userWonAmt += currentBets.LUCKY * 4; // 4x for Lucky (Tie)
 
             currentUser.gamesPlayed = (currentUser.gamesPlayed || 0) + 1;
 
