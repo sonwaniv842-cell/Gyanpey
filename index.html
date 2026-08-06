@@ -1,196 +1,201 @@
-‎<!DOCTYPE html>
-‎<html lang="hi">
-‎<head>
-‎    <meta charset="UTF-8">
-‎    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-‎    <title>GyanPay - A vs B Battle Arena</title>
-‎    <script src="https://cdn.tailwindcss.com"></script>
-‎    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-‎    <style>
-‎        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Poppins:wght@300;400;500;600;700&display=swap');
-‎        body { font-family: 'Poppins', sans-serif; background: radial-gradient(circle at center, #1e1b4b 0%, #090d16 100%); color: #f8fafc; min-height: 100vh; overflow-x: hidden; }
-‎        .gaming-font { font-family: 'Orbitron', sans-serif; }
-‎        .neon-glow { box-shadow: 0 0 25px rgba(245, 158, 11, 0.35); border: 1px solid rgba(245, 158, 11, 0.5); }
-‎        .neon-btn { box-shadow: 0 0 15px rgba(234, 88, 12, 0.5); }
-‎        .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); }
-‎        .hide-scroll::-webkit-scrollbar { display: none; }
-‎    </style>
-‎</head>
-‎<body class="min-h-screen flex flex-col items-center justify-between p-3">
-‎
-‎    <!-- Top Header -->
-‎    <header class="w-full max-w-md flex justify-between items-center py-3 px-3 glass-card rounded-2xl border border-slate-800 shadow-xl my-2 relative z-10">
-‎        <div class="flex items-center space-x-2">
-‎            <div class="w-9 h-9 bg-gradient-to-tr from-amber-500 to-orange-600 rounded-xl flex items-center justify-center neon-btn text-slate-950 font-black text-lg">GP</div>
-‎            <h1 class="gaming-font text-lg font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">GYANPAY BATTLE</h1>
-‎        </div>
-‎        <div id="headerAuthButtons" class="flex space-x-1.5">
-‎            <button onclick="openAuth('login')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-xl border border-amber-500/30 font-semibold">Login</button>
-‎            <button onclick="openAuth('register')" class="text-xs bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 px-3 py-1.5 rounded-xl font-extrabold neon-btn">Join</button>
-‎        </div>
-‎        <div id="headerUserLogout" class="hidden flex items-center space-x-2">
-‎            <div class="text-right">
-‎                <p class="text-[10px] text-slate-400 gaming-font"><span id="topUserName">Name</span></p>
-‎                <p class="text-xs font-bold text-emerald-400 gaming-font">₹<span id="topUserWallet">0</span></p>
-‎            </div>
-‎            <button onclick="logoutUser()" class="text-[10px] bg-slate-800 text-red-400 px-2 py-2 rounded-xl"><i class="fas fa-power-off"></i></button>
-‎        </div>
-‎    </header>
-‎
-‎    <main class="w-full max-w-md my-auto py-2 relative z-0">
-‎
-‎        <!-- HOME / DASHBOARD -->
-‎        <div id="homeScreen" class="glass-card neon-glow rounded-3xl p-5 shadow-2xl text-center space-y-4">
-‎            <h2 class="gaming-font text-xl font-black text-white">A vs B BATTLE ARENA</h2>
-‎            <p class="text-[11px] text-slate-400">दो टीमों के बीच मुकाबला, सही जवाब दें और जीतें!</p>
-‎            <button onclick="clickPlayGame()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 gaming-font font-black py-4 rounded-2xl shadow-lg neon-btn text-sm">
-‎                <i class="fas fa-play mr-2"></i> ENTER BATTLE (PAY ₹20)
-‎            </button>
-‎        </div>
-‎
-‎        <!-- AUTH SCREEN -->
-‎        <div id="authScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl space-y-4">
-‎            <h3 id="authHeading" class="gaming-font text-base font-bold text-amber-400">LOGIN</h3>
-‎            <input type="text" id="inputName" placeholder="नाम" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-xs">
-‎            <input type="tel" id="inputPhone" placeholder="मोबाइल नंबर" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-xs">
-‎            <input type="password" id="inputPass" placeholder="पासवर्ड" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-xs">
-‎            <button onclick="submitAuth()" class="w-full bg-amber-500 text-slate-950 gaming-font font-bold py-3 rounded-xl text-xs">सबमिट करें</button>
-‎            <button onclick="showHomeScreen()" class="w-full text-slate-400 text-xs">वापस जाएं</button>
-‎        </div>
-‎
-‎        <!-- A vs B LIVE BATTLE QUIZ SCREEN -->
-‎        <div id="quizScreen" class="hidden space-y-3">
-‎            <!-- Top Teams Overview Header -->
-‎            <div class="grid grid-cols-2 gap-2 text-center">
-‎                <div class="bg-indigo-950/80 border border-indigo-500/50 p-2.5 rounded-2xl shadow">
-‎                    <p class="text-[10px] text-indigo-300 font-bold gaming-font">🔵 TEAM A (पार्टी A)</p>
-‎                    <div id="teamAList" class="max-h-16 overflow-y-auto hide-scroll text-[9px] text-slate-300 mt-1 space-y-0.5"></div>
-‎                </div>
-‎                <div class="bg-rose-950/80 border border-rose-500/50 p-2.5 rounded-2xl shadow">
-‎                    <p class="text-[10px] text-rose-300 font-bold gaming-font">🔴 TEAM B (पार्टी B)</p>
-‎                    <div id="teamBList" class="max-h-16 overflow-y-auto hide-scroll text-[9px] text-slate-300 mt-1 space-y-0.5"></div>
-‎                </div>
-‎            </div>
-‎
-‎            <!-- Central Question Box -->
-‎            <div class="glass-card neon-glow rounded-3xl p-4 shadow-2xl space-y-3 text-center">
-‎                <div class="flex justify-between items-center text-xs">
-‎                    <span id="qCounter" class="gaming-font font-bold text-amber-400">ROUND 1/5</span>
-‎                    <span class="gaming-font font-bold text-red-400"><i class="fas fa-stopwatch"></i> <span id="qTimer">8</span>s</span>
-‎                </div>
-‎                <h3 id="qText" class="text-sm font-bold text-white min-h-[45px] leading-relaxed">सवाल लोड हो रहा है...</h3>
-‎                <div id="optionsList" class="space-y-2"></div>
-‎            </div>
-‎        </div>
-‎
-‎        <!-- RESULT SCREEN -->
-‎        <div id="resultScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl text-center space-y-4">
-‎            <h3 id="resTitle" class="gaming-font text-lg font-bold text-white"></h3>
-‎            <p id="resDesc" class="text-xs text-slate-400"></p>
-‎            <button onclick="showHomeScreen()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-xs">लॉबी में लौटें</button>
-‎        </div>
-‎
-‎    </main>
-‎
-‎    <script>
-‎        let db = JSON.parse(localStorage.getItem('gyanpay_avsb_db')) || {
-‎            users: [], adminWallet: 0,
-‎            quiz: [
-‎                {question:"भारत की राजधानी कहाँ है?", options:["मुंबई","दिल्ली","चेन्नई","कोलकाता"], correct:1},
-‎                {question:"क्रिकेट का भगवान किसे कहते हैं?", options:["विराट","धोनी","सचिन","रोहित"], correct:2},
-‎                {question:"राष्ट्रीय पक्षी कौन सा है?", options:["कबूतर","तोता","मोर","बाज़"], correct:2}
-‎            ]
-‎        };
-‎        function saveDB() { localStorage.setItem('gyanpay_avsb_db', JSON.stringify(db)); }
-‎        let currentUser = JSON.parse(sessionStorage.getItem('gyanpay_avsb_user')) || null;
-‎        let qIndex = 0, score = 0, quizTimerInterval = null, activeQuestions = [];
-‎        let teamAMembers = [], teamBMembers = [];
-‎
-‎        window.onload = function() {
-‎            if(currentUser) { renderUser(); } else { showHomeScreen(); }
-‎        }
-‎
-‎        function hideAll() { ['homeScreen', 'authScreen', 'quizScreen', 'resultScreen'].forEach(id => document.getElementById(id).classList.add('hidden')); }
-‎        function showHomeScreen() { hideAll(); document.getElementById('homeScreen').classList.remove('hidden'); if(currentUser) { document.getElementById('headerAuthButtons').classList.add('hidden'); document.getElementById('headerUserLogout').classList.remove('hidden'); } else { document.getElementById('headerAuthButtons').classList.remove('hidden'); document.getElementById('headerUserLogout').classList.add('hidden'); } }
-‎
-‎        function openAuth(m) { hideAll(); document.getElementById('authScreen').classList.remove('hidden'); }
-‎        function submitAuth() {
-‎            let name = document.getElementById('inputName').value.trim();
-‎            let phone = document.getElementById('inputPhone').value.trim();
-‎            let pass = document.getElementById('inputPass').value.trim();
-‎            if(!name || !phone) { alert('डेटा भरें'); return; }
-‎            currentUser = { name, phone, wallet: 100 };
-‎            sessionStorage.setItem('gyanpay_avsb_user', JSON.stringify(currentUser));
-‎            renderUser(); showHomeScreen();
-‎        }
-‎        function logoutUser() { currentUser = null; sessionStorage.removeItem('gyanpay_avsb_user'); showHomeScreen(); }
-‎        function renderUser() {
-‎            document.getElementById('topUserName').innerText = currentUser.name;
-‎            document.getElementById('topUserWallet').innerText = currentUser.wallet;
-‎        }
-‎
-‎        function clickPlayGame() {
-‎            if(!currentUser) { openAuth('login'); return; }
-‎            if(currentUser.wallet < 20) { alert('वॉलेट में बैलेंस कम है!'); return; }
-‎            currentUser.wallet -= 20; saveDB(); renderUser();
-‎
-‎            // Setup A vs B Teams simulation
-‎            teamAMembers = [currentUser.name, "Rohan_Bot", "Amit_99", "Pooja_X"];
-‎            teamBMembers = ["King_99", "Vikram_Bot", "Deepak_X", "Neha_Bot"];
-‎
-‎            activeQuestions = [...db.quiz].sort(() => 0.5 - Math.random()).slice(0, 5);
-‎            hideAll(); document.getElementById('quizScreen').classList.remove('hidden');
-‎            qIndex = 0; score = 0; loadQuestion();
-‎        }
-‎
-‎        function loadQuestion() {
-‎            if(qIndex >= 5 || qIndex >= activeQuestions.length) { finishGame(); return; }
-‎            let q = activeQuestions[qIndex];
-‎            document.getElementById('qCounter').innerText = `ROUND ${qIndex + 1}/5`;
-‎            document.getElementById('qText').innerText = q.question;
-‎
-‎            // Render Teams List dynamically
-‎            document.getElementById('teamAList').innerHTML = teamAMembers.map(m => `<div>🟢 ${m}</div>`).join('');
-‎            document.getElementById('teamBList').innerHTML = teamBMembers.map(m => `<div>🔴 ${m}</div>`).join('');
-‎
-‎            let html = '';
-‎            q.options.forEach((opt, idx) => {
-‎                html += `<button onclick="answerClicked(${idx}, ${q.correct})" class="w-full bg-slate-900 hover:bg-slate-800 text-white p-3 rounded-xl border border-slate-700 text-xs">${opt}</button>`;
-‎            });
-‎            document.getElementById('optionsList').innerHTML = html;
-‎
-‎            let sec = 8;
-‎            document.getElementById('qTimer').innerText = sec;
-‎            clearInterval(quizTimerInterval);
-‎            quizTimerInterval = setInterval(() => {
-‎                sec--;
-‎                document.getElementById('qTimer').innerText = sec;
-‎                if(sec <= 0) { clearInterval(quizTimerInterval); qIndex++; loadQuestion(); }
-‎            }, 1000);
-‎        }
-‎
-‎        function answerClicked(sel, cor) {
-‎            clearInterval(quizTimerInterval);
-‎            if(sel === cor) score++;
-‎            qIndex++;
-‎            loadQuestion();
-‎        }
-‎
-‎        function finishGame() {
-‎            hideAll(); document.getElementById('resultScreen').classList.remove('hidden');
-‎            // 60% Bot / Loss control logic vs 40% User Win
-‎            let isUserWin = (Math.random() > 0.6 && score >= 2); 
-‎            if(isUserWin) {
-‎                currentUser.wallet += 35; // Winning prize pool
-‎                document.getElementById('resTitle').innerText = "VICTORY! (TEAM A WIN)";
-‎                document.getElementById('resDesc').innerHTML = `आपका स्कोर: ${score}/5<br>+₹35 आपके वॉलेट में जुड़े!`;
-‎            } else {
-‎                document.getElementById('resTitle').innerText = "DEFEAT (TEAM B WIN)";
-‎                document.getElementById('resDesc').innerHTML = `आपका स्कोर: ${score}/5<br>अगली बार कोशिश करें!`;
-‎            }
-‎            saveDB(); renderUser();
-‎        }
-‎    </script>
-‎</body>
-‎</html>
-‎
+<!DOCTYPE html>
+<html lang="hi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GyanPay - A vs B Battle Arena</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        /* Force Stable Dark Theme to Prevent Any White Screen Issue */
+        html, body {
+            background-color: #090d16 !important;
+            color: #f8fafc !important;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .gaming-font { font-family: 'Orbitron', sans-serif; }
+        .neon-glow { box-shadow: 0 0 25px rgba(245, 158, 11, 0.35); border: 1px solid rgba(245, 158, 11, 0.5); }
+        .neon-btn { box-shadow: 0 0 15px rgba(234, 88, 12, 0.5); }
+        .glass-card { background: rgba(15, 23, 42, 0.92) !important; backdrop-filter: blur(12px); color: #f8fafc !important; }
+        .hide-scroll::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-between p-3 bg-slate-950 text-slate-100">
+
+    <!-- Top Header -->
+    <header class="w-full max-w-md flex justify-between items-center py-3 px-3 glass-card rounded-2xl border border-slate-800 shadow-xl my-2 relative z-10">
+        <div class="flex items-center space-x-2">
+            <div class="w-9 h-9 bg-gradient-to-tr from-amber-500 to-orange-600 rounded-xl flex items-center justify-center neon-btn text-slate-950 font-black text-lg">GP</div>
+            <h1 class="gaming-font text-lg font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">GYANPAY BATTLE</h1>
+        </div>
+        <div id="headerAuthButtons" class="flex space-x-1.5">
+            <button onclick="openAuth('login')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-xl border border-amber-500/30 font-semibold">Login</button>
+            <button onclick="openAuth('register')" class="text-xs bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 px-3 py-1.5 rounded-xl font-extrabold neon-btn">Join</button>
+        </div>
+        <div id="headerUserLogout" class="hidden flex items-center space-x-2">
+            <div class="text-right">
+                <p class="text-[10px] text-slate-400 gaming-font"><span id="topUserName">Name</span></p>
+                <p class="text-xs font-bold text-emerald-400 gaming-font">₹<span id="topUserWallet">0</span></p>
+            </div>
+            <button onclick="logoutUser()" class="text-[10px] bg-slate-800 text-red-400 px-2 py-2 rounded-xl"><i class="fas fa-power-off"></i></button>
+        </div>
+    </header>
+
+    <main class="w-full max-w-md my-auto py-2 relative z-0">
+
+        <!-- HOME / DASHBOARD -->
+        <div id="homeScreen" class="glass-card neon-glow rounded-3xl p-5 shadow-2xl text-center space-y-4">
+            <h2 class="gaming-font text-xl font-black text-white">A vs B BATTLE ARENA</h2>
+            <p class="text-[11px] text-slate-400">दो टीमों के बीच मुकाबला, सही जवाब दें और जीतें!</p>
+            <button onclick="clickPlayGame()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 gaming-font font-black py-4 rounded-2xl shadow-lg neon-btn text-sm">
+                <i class="fas fa-play mr-2"></i> ENTER BATTLE (PAY ₹20)
+            </button>
+        </div>
+
+        <!-- AUTH SCREEN -->
+        <div id="authScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl space-y-4">
+            <h3 id="authHeading" class="gaming-font text-base font-bold text-amber-400">LOGIN</h3>
+            <input type="text" id="inputName" placeholder="नाम" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-xs focus:outline-none focus:border-amber-500">
+            <input type="tel" id="inputPhone" placeholder="मोबाइल नंबर" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-xs focus:outline-none focus:border-amber-500">
+            <input type="password" id="inputPass" placeholder="पासवर्ड" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white text-xs focus:outline-none focus:border-amber-500">
+            <button onclick="submitAuth()" class="w-full bg-amber-500 text-slate-950 gaming-font font-bold py-3 rounded-xl text-xs">सबमिट करें</button>
+            <button onclick="showHomeScreen()" class="w-full text-slate-400 text-xs">वापस जाएं</button>
+        </div>
+
+        <!-- A vs B LIVE BATTLE QUIZ SCREEN -->
+        <div id="quizScreen" class="hidden space-y-3">
+            <!-- Top Teams Overview Header -->
+            <div class="grid grid-cols-2 gap-2 text-center">
+                <div class="bg-indigo-950/80 border border-indigo-500/50 p-2.5 rounded-2xl shadow">
+                    <p class="text-[10px] text-indigo-300 font-bold gaming-font">🔵 TEAM A (पार्टी A)</p>
+                    <div id="teamAList" class="max-h-16 overflow-y-auto hide-scroll text-[9px] text-slate-300 mt-1 space-y-0.5"></div>
+                </div>
+                <div class="bg-rose-950/80 border border-rose-500/50 p-2.5 rounded-2xl shadow">
+                    <p class="text-[10px] text-rose-300 font-bold gaming-font">🔴 TEAM B (पार्टी B)</p>
+                    <div id="teamBList" class="max-h-16 overflow-y-auto hide-scroll text-[9px] text-slate-300 mt-1 space-y-0.5"></div>
+                </div>
+            </div>
+
+            <!-- Central Question Box -->
+            <div class="glass-card neon-glow rounded-3xl p-4 shadow-2xl space-y-3 text-center">
+                <div class="flex justify-between items-center text-xs">
+                    <span id="qCounter" class="gaming-font font-bold text-amber-400">ROUND 1/5</span>
+                    <span class="gaming-font font-bold text-red-400"><i class="fas fa-stopwatch"></i> <span id="qTimer">8</span>s</span>
+                </div>
+                <h3 id="qText" class="text-sm font-bold text-white min-h-[45px] leading-relaxed">सवाल लोड हो रहा है...</h3>
+                <div id="optionsList" class="space-y-2"></div>
+            </div>
+        </div>
+
+        <!-- RESULT SCREEN -->
+        <div id="resultScreen" class="hidden glass-card neon-glow rounded-3xl p-6 shadow-2xl text-center space-y-4">
+            <h3 id="resTitle" class="gaming-font text-lg font-bold text-white"></h3>
+            <p id="resDesc" class="text-xs text-slate-400"></p>
+            <button onclick="showHomeScreen()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-xs">लॉबी में लौटें</button>
+        </div>
+
+    </main>
+
+    <script>
+        let db = JSON.parse(localStorage.getItem('gyanpay_avsb_db')) || {
+            users: [], adminWallet: 0,
+            quiz: [
+                {question:"भारत की राजधानी कहाँ है?", options:["मुंबई","दिल्ली","चेन्नई","कोलकाता"], correct:1},
+                {question:"क्रिकेट का भगवान किसे कहते हैं?", options:["विराट","धोनी","सचिन","रोहित"], correct:2},
+                {question:"राष्ट्रीय पक्षी कौन सा है?", options:["कबूतर","तोता","मोर","बाज़"], correct:2}
+            ]
+        };
+        function saveDB() { localStorage.setItem('gyanpay_avsb_db', JSON.stringify(db)); }
+        let currentUser = JSON.parse(sessionStorage.getItem('gyanpay_avsb_user')) || null;
+        let qIndex = 0, score = 0, quizTimerInterval = null, activeQuestions = [];
+        let teamAMembers = [], teamBMembers = [];
+
+        window.onload = function() {
+            if(currentUser) { renderUser(); } else { showHomeScreen(); }
+        }
+
+        function hideAll() { ['homeScreen', 'authScreen', 'quizScreen', 'resultScreen'].forEach(id => document.getElementById(id).classList.add('hidden')); }
+        function showHomeScreen() { hideAll(); document.getElementById('homeScreen').classList.remove('hidden'); if(currentUser) { document.getElementById('headerAuthButtons').classList.add('hidden'); document.getElementById('headerUserLogout').classList.remove('hidden'); } else { document.getElementById('headerAuthButtons').classList.remove('hidden'); document.getElementById('headerUserLogout').classList.add('hidden'); } }
+
+        function openAuth(m) { hideAll(); document.getElementById('authScreen').classList.remove('hidden'); }
+        function submitAuth() {
+            let name = document.getElementById('inputName').value.trim();
+            let phone = document.getElementById('inputPhone').value.trim();
+            let pass = document.getElementById('inputPass').value.trim();
+            if(!name || !phone) { alert('डेटा भरें'); return; }
+            currentUser = { name, phone, wallet: 100 };
+            sessionStorage.setItem('gyanpay_avsb_user', JSON.stringify(currentUser));
+            renderUser(); showHomeScreen();
+        }
+        function logoutUser() { currentUser = null; sessionStorage.removeItem('gyanpay_avsb_user'); showHomeScreen(); }
+        function renderUser() {
+            document.getElementById('topUserName').innerText = currentUser.name;
+            document.getElementById('topUserWallet').innerText = currentUser.wallet;
+        }
+
+        function clickPlayGame() {
+            if(!currentUser) { openAuth('login'); return; }
+            if(currentUser.wallet < 20) { alert('वॉलेट में बैलेंस कम है!'); return; }
+            currentUser.wallet -= 20; saveDB(); renderUser();
+
+            teamAMembers = [currentUser.name, "Rohan_Bot", "Amit_99", "Pooja_X"];
+            teamBMembers = ["King_99", "Vikram_Bot", "Deepak_X", "Neha_Bot"];
+
+            activeQuestions = [...db.quiz].sort(() => 0.5 - Math.random()).slice(0, 5);
+            hideAll(); document.getElementById('quizScreen').classList.remove('hidden');
+            qIndex = 0; score = 0; loadQuestion();
+        }
+
+        function loadQuestion() {
+            if(qIndex >= 5 || qIndex >= activeQuestions.length) { finishGame(); return; }
+            let q = activeQuestions[qIndex];
+            document.getElementById('qCounter').innerText = `ROUND ${qIndex + 1}/5`;
+            document.getElementById('qText').innerText = q.question;
+
+            document.getElementById('teamAList').innerHTML = teamAMembers.map(m => `<div>🟢 ${m}</div>`).join('');
+            document.getElementById('teamBList').innerHTML = teamBMembers.map(m => `<div>🔴 ${m}</div>`).join('');
+
+            let html = '';
+            q.options.forEach((opt, idx) => {
+                html += `<button onclick="answerClicked(${idx}, ${q.correct})" class="w-full bg-slate-900 hover:bg-slate-800 text-white p-3 rounded-xl border border-slate-700 text-xs">${opt}</button>`;
+            });
+            document.getElementById('optionsList').innerHTML = html;
+
+            let sec = 8;
+            document.getElementById('qTimer').innerText = sec;
+            clearInterval(quizTimerInterval);
+            quizTimerInterval = setInterval(() => {
+                sec--;
+                document.getElementById('qTimer').innerText = sec;
+                if(sec <= 0) { clearInterval(quizTimerInterval); qIndex++; loadQuestion(); }
+            }, 1000);
+        }
+
+        function answerClicked(sel, cor) {
+            clearInterval(quizTimerInterval);
+            if(sel === cor) score++;
+            qIndex++;
+            loadQuestion();
+        }
+
+        function finishGame() {
+            hideAll(); document.getElementById('resultScreen').classList.remove('hidden');
+            let isUserWin = (Math.random() > 0.6 && score >= 2); 
+            if(isUserWin) {
+                currentUser.wallet += 35;
+                document.getElementById('resTitle').innerText = "VICTORY! (TEAM A WIN)";
+                document.getElementById('resDesc').innerHTML = `आपका स्कोर: ${score}/5<br>+₹35 आपके वॉलेट में जुड़े!`;
+            } else {
+                document.getElementById('resTitle').innerText = "DEFEAT (TEAM B WIN)";
+                document.getElementById('resDesc').innerHTML = `आपका स्कोर: ${score}/5<br>अगली बार कोशिश करें!`;
+            }
+            saveDB(); renderUser();
+        }
+    </script>
+</body>
+</html>
