@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GyanPay - Continuous Live Casino Arena</title>
+    <title>GyanPay - Pro Casino Live Arena</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Poppins:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Poppins', sans-serif; background: radial-gradient(circle at center, #1e1b4b 0%, #090d16 100%); color: #f8fafc; min-height: 100vh; overflow-x: hidden; }
+        body { font-family: 'Poppins', sans-serif; background: radial-gradient(circle at center, #0f172a 0%, #020617 100%); color: #f8fafc; min-height: 100vh; overflow-x: hidden; }
         .gaming-font { font-family: 'Orbitron', sans-serif; }
-        .neon-glow { box-shadow: 0 0 25px rgba(245, 158, 11, 0.35); border: 1px solid rgba(245, 158, 11, 0.5); }
+        .neon-glow { box-shadow: 0 0 25px rgba(245, 158, 11, 0.3); border: 1px solid rgba(245, 158, 11, 0.4); }
         .neon-btn { box-shadow: 0 0 15px rgba(234, 88, 12, 0.5); }
-        .glass-card { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(12px); }
+        .glass-card { background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(14px); }
         .hide-scroll::-webkit-scrollbar { display: none; }
         @keyframes pulse-fast { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
         .animate-pulse-fast { animation: pulse-fast 2s infinite; }
         .chip-btn { transition: transform 0.1s, border-color 0.2s; }
-        .chip-btn.active-chip { transform: scale(1.1); border: 2px solid #f59e0b; box-shadow: 0 0 12px #f59e0b; }
+        .chip-btn.active-chip { transform: scale(1.12); border: 2px solid #f59e0b; box-shadow: 0 0 15px #f59e0b; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between p-3">
@@ -26,7 +26,7 @@
     <header class="w-full max-w-md flex justify-between items-center py-3 px-3 glass-card rounded-2xl border border-slate-800 shadow-xl my-2 relative z-10">
         <div class="flex items-center space-x-2">
             <div class="w-9 h-9 bg-gradient-to-tr from-amber-500 to-orange-600 rounded-xl flex items-center justify-center neon-btn text-slate-950 font-black text-lg">GP</div>
-            <h1 class="gaming-font text-lg font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">LIVE CASINO</h1>
+            <h1 class="gaming-font text-lg font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">PRO CASINO</h1>
         </div>
         
         <div id="headerAuthButtons" class="flex space-x-1.5">
@@ -52,12 +52,12 @@
         <!-- HOME / DASHBOARD -->
         <div id="homeScreen" class="glass-card neon-glow rounded-3xl p-4 shadow-2xl text-center space-y-4">
             <div class="w-16 h-16 bg-gradient-to-tr from-amber-500/20 to-orange-500/20 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-3xl neon-btn animate-pulse-fast border border-amber-500/40 mt-2"><i class="fas fa-dice"></i></div>
-            <div><h2 class="gaming-font text-xl font-black text-white tracking-wide">BIG vs SMALL LIVE</h2><p class="text-[10px] text-slate-400 mt-1">लगातार चलने वाला प्रो कैसीनो गेम अनुभव!</p></div>
+            <div><h2 class="gaming-font text-xl font-black text-white tracking-wide">LIVE TABLE ARENA</h2><p class="text-[10px] text-slate-400 mt-1">मोस्ट कैसिनो स्टाइल नॉन-स्टॉप लाइव गेमिंग अनुभव!</p></div>
 
             <div class="bg-slate-900 border border-slate-800 p-3.5 rounded-2xl text-left space-y-2">
-                <p class="text-[11px] font-bold text-amber-400"><i class="fas fa-info-circle mr-1"></i> मुख्य विशेषताएँ:</p>
+                <p class="text-[11px] font-bold text-amber-400"><i class="fas fa-info-circle mr-1"></i> मुख्य नियम:</p>
                 <ul class="space-y-1.5 text-[10px] text-slate-300">
-                    <li>• गेम कभी बंद नहीं होता, लगातार राउंड चलते हैं।</li>
+                    <li>• हर राउंड <b>15 सेकंड</b> का होता है।</li>
                     <li>• न्यूनतम बैंक विड्रॉल सीमा: <b>₹100</b></li>
                 </ul>
             </div>
@@ -118,32 +118,32 @@
             </button>
         </div>
 
-        <!-- CONTINUOUS LIVE CASINO TABLE SCREEN (NEVER EXITS) -->
-        <div id="gameScreen" class="hidden glass-card neon-glow rounded-3xl p-4 shadow-2xl space-y-3 text-center relative">
+        <!-- CONTINUOUS LIVE CASINO TABLE SCREEN (MOST STYLE) -->
+        <div id="gameScreen" class="hidden glass-card neon-glow rounded-3xl p-4 shadow-2xl space-y-3 text-center relative overflow-hidden border border-amber-500/30">
+            
+            <!-- TOP BAR WITH BACK & 15s TIMER -->
             <div class="flex justify-between items-center bg-slate-900/90 p-2 rounded-2xl border border-slate-800">
                 <div class="flex items-center space-x-1">
                     <button onclick="checkUserDashboardFlow()" class="text-slate-400 hover:text-white text-xs px-2 py-1 bg-slate-800 rounded-lg"><i class="fas fa-arrow-left"></i></button>
                     <span class="gaming-font text-[10px] font-bold text-emerald-400 animate-pulse"><i class="fas fa-circle text-[8px] mr-0.5"></i> LIVE TABLE</span>
                 </div>
-                <span class="gaming-font text-xs font-bold text-red-400"><i class="fas fa-stopwatch mr-1"></i> <span id="gameTimer">10</span>s</span>
+                <span class="gaming-font text-xs font-bold text-red-400"><i class="fas fa-stopwatch mr-1"></i> <span id="gameTimer">15</span>s</span>
             </div>
 
-            <!-- ROUND RESULT POPUP OVERLAY (AUTO DISSOLVES, DOES NOT EXIT) -->
-            <div id="roundResultBanner" class="hidden absolute inset-x-4 top-16 bg-slate-950/95 border-2 border-amber-500 p-4 rounded-2xl z-20 shadow-2xl text-center space-y-1">
-                <div id="bannerIcon" class="text-3xl"></div>
-                <h4 id="bannerTitle" class="gaming-font text-sm font-bold text-white"></h4>
-                <p id="bannerDesc" class="text-[10px] text-slate-300"></p>
+            <!-- SLICK TOP BANNER (WAITING FOR THE NEXT ROUND STYLE) -->
+            <div id="roundResultBanner" class="hidden absolute inset-x-2 top-14 bg-gradient-to-r from-rose-950 via-slate-950 to-rose-950 border border-amber-500/80 py-2 px-3 rounded-xl z-20 shadow-2xl text-center">
+                <p id="bannerText" class="gaming-font text-xs font-bold text-amber-300 tracking-wider animate-pulse">Waiting for the next round...</p>
             </div>
 
             <!-- CHIPS DENOMINATIONS -->
-            <div class="bg-slate-950 p-2.5 rounded-2xl border border-slate-800">
-                <p class="text-[9px] text-slate-400 mb-1.5 gaming-font">चिप (Coin) चुनें:</p>
+            <div class="bg-slate-950 p-2 rounded-2xl border border-slate-800">
+                <p class="text-[9px] text-slate-400 mb-1 gaming-font">चिप (Coin) चुनें:</p>
                 <div class="flex justify-center space-x-2">
-                    <button onclick="selectChip(10)" id="chip10" class="chip-btn active-chip w-9 h-9 rounded-full bg-rose-600 text-white font-bold text-[10px] shadow border border-rose-400 flex items-center justify-center">10</button>
-                    <button onclick="selectChip(50)" id="chip50" class="chip-btn w-9 h-9 rounded-full bg-amber-600 text-white font-bold text-[10px] shadow border border-amber-400 flex items-center justify-center">50</button>
-                    <button onclick="selectChip(100)" id="chip100" class="chip-btn w-9 h-9 rounded-full bg-blue-600 text-white font-bold text-[10px] shadow border border-blue-400 flex items-center justify-center">100</button>
-                    <button onclick="selectChip(500)" id="chip500" class="chip-btn w-9 h-9 rounded-full bg-purple-600 text-white font-bold text-[10px] shadow border border-purple-400 flex items-center justify-center">500</button>
-                    <button onclick="selectChip(1000)" id="chip1000" class="chip-btn w-9 h-9 rounded-full bg-emerald-600 text-white font-bold text-[10px] shadow border border-emerald-400 flex items-center justify-center">1K</button>
+                    <button onclick="selectChip(10)" id="chip10" class="chip-btn active-chip w-8 h-8 rounded-full bg-rose-600 text-white font-bold text-[9px] shadow flex items-center justify-center">10</button>
+                    <button onclick="selectChip(50)" id="chip50" class="chip-btn w-8 h-8 rounded-full bg-amber-600 text-white font-bold text-[9px] shadow flex items-center justify-center">50</button>
+                    <button onclick="selectChip(100)" id="chip100" class="chip-btn w-8 h-8 rounded-full bg-blue-600 text-white font-bold text-[9px] shadow flex items-center justify-center">100</button>
+                    <button onclick="selectChip(500)" id="chip500" class="chip-btn w-8 h-8 rounded-full bg-purple-600 text-white font-bold text-[9px] shadow flex items-center justify-center">500</button>
+                    <button onclick="selectChip(1000)" id="chip1000" class="chip-btn w-8 h-8 rounded-full bg-emerald-600 text-white font-bold text-[9px] shadow flex items-center justify-center">1K</button>
                 </div>
             </div>
 
@@ -168,10 +168,15 @@
                 </button>
             </div>
 
-            <!-- TREND HISTORY -->
-            <div class="bg-slate-950 p-2 rounded-2xl border border-slate-800 text-left">
-                <p class="text-[9px] text-slate-400 gaming-font mb-1"><i class="fas fa-history mr-1 text-amber-400"></i> लाइव ट्रेंड हिस्ट्री:</p>
-                <div id="trendHistoryContainer" class="flex space-x-1.5 overflow-x-auto hide-scroll py-1"></div>
+            <!-- TREND HISTORY WITH LONG HISTORY CHART BUTTON (📈) -->
+            <div class="bg-slate-950 p-2 rounded-2xl border border-slate-800 text-left flex items-center justify-between">
+                <div class="flex-1 overflow-hidden">
+                    <p class="text-[9px] text-slate-400 gaming-font mb-1"><i class="fas fa-history mr-1 text-amber-400"></i> लाइव ट्रेंड:</p>
+                    <div id="trendHistoryContainer" class="flex space-x-1 overflow-x-auto hide-scroll py-0.5"></div>
+                </div>
+                <button onclick="openLongHistoryModal()" class="ml-2 bg-gradient-to-tr from-indigo-600 to-blue-600 hover:opacity-90 text-white px-2.5 py-2 rounded-xl text-xs shadow flex items-center justify-center shrink-0 border border-indigo-400/50" title="Long History Chart">
+                    <i class="fas fa-chart-line text-sm"></i>
+                </button>
             </div>
         </div>
         
@@ -187,6 +192,17 @@
             <div class="space-y-2 text-left"><label class="block text-xs font-medium text-slate-300">पेमेंट स्क्रीनशॉट अपलोड करें:</label><input type="file" id="topUpScreenshot" accept="image/*" class="w-full text-xs text-slate-400 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-amber-500 file:text-slate-950"><button onclick="submitTopUpRequest()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-3 rounded-xl text-xs shadow-lg">टॉप-अप रिक्वेस्ट सबमिट करें</button></div>
         </div>
     </main>
+
+    <!-- LONG HISTORY CHART MODAL -->
+    <div id="longHistoryModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-[95] flex items-center justify-center p-3">
+        <div class="glass-card neon-glow w-full max-w-sm rounded-3xl p-4 shadow-2xl relative flex flex-col max-h-[80vh]">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-2 mb-2">
+                <h4 class="gaming-font text-xs font-bold text-amber-400"><i class="fas fa-chart-line mr-1"></i> लॉन्ग ट्रेंड हिस्ट्री (Long History)</h4>
+                <button onclick="closeLongHistoryModal()" class="text-slate-400 hover:text-white text-base"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="longHistoryList" class="flex-1 overflow-y-auto hide-scroll space-y-2 p-2 text-xs bg-slate-950/90 rounded-xl border border-slate-800"></div>
+        </div>
+    </div>
 
     <!-- LIVE SUPPORT CHAT MODAL -->
     <div id="supportChatModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-[85] flex items-center justify-center p-3">
@@ -206,7 +222,7 @@
         </div>
     </div>
 
-    <!-- MASTER ADMIN PANEL WITH ADMIN WALLET & RESULT CONTROL -->
+    <!-- MASTER ADMIN PANEL -->
     <div id="adminModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-2 overflow-y-auto">
         <div class="glass-card neon-glow w-full max-w-lg rounded-3xl p-5 shadow-2xl relative my-6 border border-slate-700">
             <button onclick="toggleAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg"><i class="fas fa-times"></i></button>
@@ -237,7 +253,6 @@
                 <!-- NEXT ROUND RESULT CONTROL -->
                 <div class="bg-gradient-to-br from-amber-950/80 to-slate-950 p-3.5 rounded-2xl border border-amber-500/50 space-y-2">
                     <h4 class="font-bold text-amber-400"><i class="fas fa-sliders-h mr-1"></i> अगले राउंड का रिजल्ट तय करें (Admin Control)</h4>
-                    <p class="text-[9px] text-slate-300">मालिक यहाँ से तय कर सकता है कि अगला विनर कौन होगा:</p>
                     <div class="grid grid-cols-3 gap-2 mt-2">
                         <button onclick="setAdminRiggedOutcome('BIG')" class="bg-slate-900 border border-slate-700 hover:border-amber-400 p-2 rounded-xl text-center font-bold text-red-400 text-xs">BIG जिताएं</button>
                         <button onclick="setAdminRiggedOutcome('LUCKY')" class="bg-slate-900 border border-slate-700 hover:border-amber-400 p-2 rounded-xl text-center font-bold text-amber-400 text-xs">LUCKY जिताएं</button>
@@ -248,16 +263,10 @@
 
                 <!-- LIVE CCTV -->
                 <div class="bg-gradient-to-br from-red-950/80 to-slate-950 p-3.5 rounded-2xl border border-red-500/50 space-y-2">
-                    <h4 class="font-bold text-red-400 flex items-center justify-between"><span><i class="fas fa-video mr-1"></i> लाइव एरिना CCTV मॉनिटर</span> <span class="bg-red-600 text-white px-2 py-0.5 rounded text-[9px] animate-pulse">LIVE CCTV</span></h4>
+                    <h4 class="font-bold text-red-400 flex items-center justify-between"><span><i class="fas fa-video mr-1"></i> लाइव एरिना CCTV</span> <span class="bg-red-600 text-white px-2 py-0.5 rounded text-[9px] animate-pulse">LIVE</span></h4>
                     <div class="grid grid-cols-2 gap-2 mt-2">
-                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 text-center">
-                            <p class="text-[9px] text-slate-400">ऑनलाइन रियल प्लेयर्स</p>
-                            <p id="adminRealPlayersCount" class="text-sm font-bold text-cyan-400 gaming-font">0</p>
-                        </div>
-                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 text-center">
-                            <p class="text-[9px] text-slate-400">एक्टिव AI बॉट्स</p>
-                            <p id="adminBotCount" class="text-sm font-bold text-amber-400 gaming-font">4</p>
-                        </div>
+                        <div class="bg-slate-900 p-2 rounded-xl border border-slate-800 text-center"><p class="text-[9px] text-slate-400">ऑनलाइन रियल प्लेयर्स</p><p id="adminRealPlayersCount" class="text-sm font-bold text-cyan-400 gaming-font">0</p></div>
+                        <div class="bg-slate-900 p-2 rounded-xl border border-slate-800 text-center"><p class="text-[9px] text-slate-400">एक्टिव AI बॉट्स</p><p id="adminBotCount" class="text-sm font-bold text-amber-400 gaming-font">4</p></div>
                     </div>
                 </div>
 
@@ -292,22 +301,22 @@
     </div>
 
     <script>
-        let db = JSON.parse(localStorage.getItem('gyanpay_continuous_db')) || {
-            users: [], adminWallet: 0, withdrawals: [], chatThreads: {}, history: ['BIG', 'SMALL', 'BIG', 'SMALL'],
+        let db = JSON.parse(localStorage.getItem('gyanpay_pro_most_db')) || {
+            users: [], adminWallet: 0, withdrawals: [], chatThreads: {}, history: ['BIG', 'SMALL', 'BIG', 'SMALL', 'LUCKY'],
             settings: { adminPin: "admin123", riggedOutcome: "AUTO" }
         };
 
-        function saveDB() { localStorage.setItem('gyanpay_continuous_db', JSON.stringify(db)); }
-        let currentUser = JSON.parse(sessionStorage.getItem('gyanpay_continuous_user')) || null;
+        function saveDB() { localStorage.setItem('gyanpay_pro_most_db', JSON.stringify(db)); }
+        let currentUser = JSON.parse(sessionStorage.getItem('gyanpay_pro_most_user')) || null;
         let isLoginMode = true; let liveTableInterval = null; 
         let selectedChipVal = 10;
         let currentBets = { BIG: 0, LUCKY: 0, SMALL: 0 };
-        let gameTimerSec = 10;
+        let gameTimerSec = 15;
 
         window.onload = function() {
             if(currentUser) { 
                 currentUser = db.users.find(x => x.phone === currentUser.phone) || currentUser;
-                sessionStorage.setItem('gyanpay_continuous_user', JSON.stringify(currentUser));
+                sessionStorage.setItem('gyanpay_pro_most_user', JSON.stringify(currentUser));
                 checkUserDashboardFlow(); 
             } else { showHomeScreen(); }
         }
@@ -330,16 +339,16 @@
             if(!phone || !pass || (!isLoginMode && !name)) { alert('कृपया सभी फील्ड भरें!'); return; }
             if(isLoginMode) {
                 let found = db.users.find(u => u.phone === phone && u.pass === pass);
-                if(found) { currentUser = found; sessionStorage.setItem('gyanpay_continuous_user', JSON.stringify(currentUser)); checkUserDashboardFlow(); } else { alert('गलत फोन नंबर या पासवर्ड!'); }
+                if(found) { currentUser = found; sessionStorage.setItem('gyanpay_pro_most_user', JSON.stringify(currentUser)); checkUserDashboardFlow(); } else { alert('गलत फोन नंबर या पासवर्ड!'); }
             } else {
                 if(db.users.some(u => u.phone === phone)) { alert('यह नंबर पहले से रजिस्टर्ड है!'); return; }
                 let newUser = { name, phone, pass, wallet: 200, gamesPlayed: 0, gamesWon: 0 };
-                db.users.push(newUser); saveDB(); currentUser = newUser; sessionStorage.setItem('gyanpay_continuous_user', JSON.stringify(currentUser)); checkUserDashboardFlow();
+                db.users.push(newUser); saveDB(); currentUser = newUser; sessionStorage.setItem('gyanpay_pro_most_user', JSON.stringify(currentUser)); checkUserDashboardFlow();
             }
         }
         function logoutUser() { 
             currentUser = null; 
-            sessionStorage.removeItem('gyanpay_continuous_user'); 
+            sessionStorage.removeItem('gyanpay_pro_most_user'); 
             clearInterval(liveTableInterval);
             showHomeScreen(); 
         }
@@ -407,7 +416,19 @@
         }
         function closeScreenshotModal() { document.getElementById('screenshotModal').classList.add('hidden'); }
 
-        // NON-STOP CONTINUOUS CASINO TABLE LOOP
+        // LONG HISTORY MODAL FUNCTIONS
+        function openLongHistoryModal() {
+            document.getElementById('longHistoryModal').classList.remove('hidden');
+            let list = document.getElementById('longHistoryList');
+            let historyArr = db.history || [];
+            list.innerHTML = historyArr.length === 0 ? '<p class="text-center text-slate-500 py-3 text-[10px]">कोई इतिहास उपलब्ध नहीं है</p>' : historyArr.slice().reverse().map((h, index) => {
+                let color = h === 'BIG' ? 'text-red-400 bg-red-500/10 border-red-500/30' : (h === 'SMALL' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30' : 'text-amber-400 bg-amber-500/10 border-amber-500/30');
+                return `<div class="flex justify-between items-center p-2 rounded-xl border ${color} text-xs font-bold"><span>Round #${historyArr.length - index}</span><span>${h}</span></div>`;
+            }).join('');
+        }
+        function closeLongHistoryModal() { document.getElementById('longHistoryModal').classList.add('hidden'); }
+
+        // CONTINUOUS LIVE CASINO TABLE LOOP (15s TIMER)
         function selectChip(val) {
             selectedChipVal = val;
             [10, 50, 100, 500, 1000].forEach(v => {
@@ -424,7 +445,7 @@
             updateBetDisplay();
             renderTrendHistory();
 
-            gameTimerSec = 10;
+            gameTimerSec = 15;
             clearInterval(liveTableInterval);
             liveTableInterval = setInterval(() => {
                 gameTimerSec--;
@@ -432,7 +453,7 @@
 
                 if(gameTimerSec <= 0) {
                     evaluateContinuousRound();
-                    gameTimerSec = 10; // Reset for next continuous round without exiting
+                    gameTimerSec = 15; // Reset for next continuous round
                 }
             }, 1000);
         }
@@ -442,7 +463,7 @@
             currentUser.wallet -= selectedChipVal;
             currentBets[type] += selectedChipVal;
             
-            // 5% Commission
+            // 5% Commission to Admin Wallet
             let commission = selectedChipVal * 0.05;
             db.adminWallet = (db.adminWallet || 0) + commission;
 
@@ -461,7 +482,7 @@
         function renderTrendHistory() {
             let container = document.getElementById('trendHistoryContainer');
             if(!db.history) db.history = ['BIG', 'SMALL', 'BIG', 'SMALL'];
-            container.innerHTML = db.history.slice(-10).reverse().map(h => {
+            container.innerHTML = db.history.slice(-8).reverse().map(h => {
                 let bg = h === 'BIG' ? 'bg-red-600 text-white' : (h === 'SMALL' ? 'bg-emerald-600 text-white' : 'bg-amber-500 text-slate-950 font-bold');
                 let label = h === 'BIG' ? 'B' : (h === 'SMALL' ? 'S' : 'L');
                 return `<div class="w-6 h-6 rounded-full ${bg} flex items-center justify-center text-[9px] font-bold shadow shrink-0">${label}</div>`;
@@ -469,7 +490,6 @@
         }
 
         function evaluateContinuousRound() {
-            // Determine winner
             let winningOutcome = "";
             if(db.settings.riggedOutcome && db.settings.riggedOutcome !== "AUTO") {
                 winningOutcome = db.settings.riggedOutcome;
@@ -491,26 +511,19 @@
             currentUser.gamesPlayed = (currentUser.gamesPlayed || 0) + 1;
 
             let banner = document.getElementById('roundResultBanner');
-            let bannerIcon = document.getElementById('bannerIcon');
-            let bannerTitle = document.getElementById('bannerTitle');
-            let bannerDesc = document.getElementById('bannerDesc');
+            let bannerText = document.getElementById('bannerText');
 
             if(userWonAmt > 0) {
                 currentUser.wallet += userWonAmt;
                 currentUser.gamesWon = (currentUser.gamesWon || 0) + 1;
-                bannerIcon.innerHTML = '🎉';
-                bannerTitle.innerText = "आप जीत गए!";
-                bannerDesc.innerHTML = `परिणाम: <b>${winningOutcome}</b> | +₹${userWonAmt} आपके वॉलेट में जुड़े!`;
+                bannerText.innerHTML = `🎉 WIN! Result: <b>${winningOutcome}</b> (+₹${userWonAmt})`;
             } else {
-                bannerIcon.innerHTML = '🛡️';
-                bannerTitle.innerText = `परिणाम: ${winningOutcome}`;
-                bannerDesc.innerHTML = `इस राउंड में हार हुई। अगला राउंड शुरू हो रहा है!`;
+                bannerText.innerHTML = `⏳ Waiting for the next round... (Result: ${winningOutcome})`;
             }
             saveDB();
             document.getElementById('topUserWallet').innerText = currentUser.wallet;
             document.getElementById('userWalletBalance').innerText = `₹${currentUser.wallet}`;
 
-            // Show banner for 3.5 seconds, then auto hide (Game continues non-stop)
             banner.classList.remove('hidden');
             setTimeout(() => {
                 banner.classList.add('hidden');
