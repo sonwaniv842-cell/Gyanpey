@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="2ZbgudfG9eMURVyG1uOCnzjWCv8sKq898-uU1UIxtwY" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GyanPay - Final Pure Shudh Arena with 8s Timer & Anti-Cheat Warning</title>
+    <title>GyanPay - Final Pure Shudh Arena with 8s Timer & Random Quiz</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -176,10 +176,8 @@
             </div>
         </div>
 
-        <!-- QUIZ INTERFACE WITH 8s TIMER & ANTI-CHEAT WARNING -->
+        <!-- QUIZ INTERFACE WITH 8s TIMER & RANDOM QUESTIONS -->
         <div id="quizScreen" class="hidden glass-card neon-glow rounded-3xl p-5 shadow-2xl space-y-3">
-            
-            <!-- Anti-Cheating Warning Notification Ad Banner -->
             <div class="bg-red-950/90 border border-red-500 p-2.5 rounded-xl text-[10px] text-red-200 text-center font-semibold shadow-[0_0_12px_rgba(239,68,68,0.4)] animate-pulse">
                 <i class="fas fa-exclamation-triangle text-amber-400 mr-1"></i> <b>चेतावनी:</b> कृपया गूगल से सर्च करके चीटिंग न करें! डाउट होने पर अकाउंट फ्रीज व पैसे रोक दिए जाएंगे। यह गेम सिर्फ जनरल नॉलेज (GK) पर आधारित है।
             </div>
@@ -220,16 +218,14 @@
         </div>
     </main>
 
-    <!-- LIVE SUPPORT CHAT MODAL (USER VIEW) -->
+    <!-- LIVE SUPPORT CHAT MODAL -->
     <div id="supportChatModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-[85] flex items-center justify-center p-3">
         <div class="glass-card neon-glow w-full max-w-sm rounded-3xl p-4 shadow-2xl relative flex flex-col h-[500px]">
             <div class="flex justify-between items-center border-b border-slate-800 pb-2 mb-2">
                 <h4 class="gaming-font text-xs font-bold text-cyan-400"><i class="fas fa-headset mr-1"></i> GyanPay Support & AI Assistant</h4>
                 <button onclick="closeSupportChat()" class="text-slate-400 hover:text-white text-base"><i class="fas fa-times"></i></button>
             </div>
-            <!-- Chat Messages Container -->
             <div id="chatMessagesBox" class="flex-1 overflow-y-auto hide-scroll space-y-2 p-2 text-xs bg-slate-950/80 rounded-xl border border-slate-800"></div>
-            <!-- Chat Input & Screenshot Section -->
             <div class="pt-2 border-t border-slate-800 space-y-2">
                 <div class="flex items-center space-x-1">
                     <input type="text" id="chatInputText" placeholder="अपना संदेश हिंदी में लिखें..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-cyan-500">
@@ -293,42 +289,35 @@
                     </div>
                 </div>
 
-                <!-- LIVE SUPPORT CHAT INBOX FOR ADMIN -->
                 <div class="bg-gradient-to-br from-indigo-950 to-slate-950 p-3.5 rounded-2xl border border-indigo-500/50 space-y-3">
                     <h4 class="font-bold text-indigo-400"><i class="fas fa-comments mr-1"></i> कस्टमर लाइव चैट & सपोर्ट इनबॉक्स</h4>
                     <p class="text-[8px] text-slate-400">कस्टमर द्वारा भेजे गए मैसेज और स्क्रीनशॉट यहाँ देखें और सीधे रिप्लाई करें।</p>
                     <div id="adminSupportInbox" class="max-h-48 overflow-y-auto hide-scroll space-y-2 bg-slate-900/90 p-2.5 rounded-xl border border-slate-800"></div>
                 </div>
 
-                <!-- EMERGENCY KILL SWITCH & AUTO REFUND PANEL -->
                 <div class="bg-gradient-to-br from-red-950 to-slate-950 p-3.5 rounded-2xl border border-red-500/50 space-y-3">
                     <h4 class="font-bold text-red-400"><i class="fas fa-radiation mr-1"></i> इमर्जेंसी किल स्विच (Kill Switch & Refund)</h4>
-                    <p class="text-[8px] text-slate-400 leading-tight">यदि गेम में कोई भी गड़बड़ी या संदिग्ध स्थिति दिखती है, तो एडमिन तुरंत इस बटन को दबाकर मैच रोक सकता है और सभी खिलाड़ियों की ₹20 एंट्री फीस उनके वॉलेट में ऑटोमैटिक रिफंड हो जाएगी!</p>
-                    <button onclick="adminEmergencyKillSwitchAndRefund()" class="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:opacity-90 text-white font-extrabold py-3 rounded-xl text-xs shadow-[0_0_15px_rgba(239,68,68,0.5)] transition"><i class="fas fa-ban mr-1"></i> गेम तुरंत रोकें और ₹20 ऑटो-रिफंड करें</button>
+                    <p class="text-[8px] text-slate-400 leading-tight">यदि गेम में कोई भी गड़बड़ी दिखती है, तो एडमिन तुरंत मैच रोक सकता है और सभी खिलाड़ियों की ₹20 एंट्री फीस उनके वॉलेट में ऑटोमैटिक रिफंड हो जाएगी!</p>
+                    <button onclick="adminEmergencyKillSwitchAndRefund()" class="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:opacity-90 text-white font-extrabold py-3 rounded-xl text-xs shadow-lg transition"><i class="fas fa-ban mr-1"></i> गेम तुरंत रोकें और ₹20 ऑटो-रिफंड करें</button>
                 </div>
 
-                <!-- AI BOT PROFIT FUND & MEGA VOUCHER CONVERTER -->
                 <div class="bg-gradient-to-br from-cyan-950 to-slate-950 p-3.5 rounded-2xl border border-cyan-500/40 space-y-3">
                     <div class="flex justify-between items-center">
                         <h4 class="font-bold text-cyan-400"><i class="fas fa-robot mr-1"></i> AI बॉट प्रॉफिट फंड</h4>
                         <span class="text-xs font-black text-emerald-400 gaming-font" id="adminBotProfitDisplay">₹0</span>
                     </div>
-                    <p class="text-[8px] text-slate-400 leading-tight">बॉट की जीत से जमा राशि से एडमिन मेगा वाउचर और गिफ्ट्स जनरेट कर सकता है।</p>
                     <button onclick="convertBotFundToVoucher()" class="w-full bg-gradient-to-r from-cyan-600 to-indigo-600 hover:opacity-90 text-white font-bold py-2 rounded-xl text-xs shadow-lg transition"><i class="fas fa-gift mr-1"></i> बॉट फंड से मेगा वाउचर जनरेट करें</button>
                 </div>
 
-                <!-- ADMIN REFERRAL HISTORY TABLE -->
                 <div class="bg-slate-950 p-3.5 rounded-2xl border border-purple-500/40 space-y-2">
                     <h4 class="font-bold text-purple-400"><i class="fas fa-network-wired mr-1"></i> रेफरल नेटवर्क हिस्ट्री</h4>
-                    <p class="text-[8px] text-slate-400">किस गेमर ने कितने लोगों को जोड़ा है और कितनी फ्री एंट्री कमाई है।</p>
                     <div class="max-h-40 overflow-y-auto hide-scroll"><table class="w-full text-left"><tbody id="adminReferralTable"></tbody></table></div>
                 </div>
 
-                <!-- ADMIN SETTINGS -->
                 <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-3">
                     <h4 class="font-bold text-white border-b border-slate-800 pb-1"><i class="fas fa-cog text-amber-400 mr-1"></i> सेटिंग्स & सुरक्षा</h4>
                     <div class="flex items-center justify-between bg-slate-900 border border-slate-700 p-2 rounded-xl">
-                        <div><span class="text-white font-medium text-[10px]">एरीना मास्टर स्विच (ऑन करें)</span><br><span class="text-[8px] text-slate-400">12 घंटे बाद ऑटोमैटिक ऑफ हो जाएगा।</span></div>
+                        <div><span class="text-white font-medium text-[10px]">एरीना मास्टर स्विच (ऑन करें)</span></div>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" id="setArenaLive" class="sr-only peer">
                             <div class="w-8 h-4 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-emerald-500"></div>
@@ -351,16 +340,31 @@
                     <button onclick="saveAdminSettings()" class="w-full bg-amber-500 text-slate-950 font-bold py-2 rounded-xl shadow-lg mt-1">सेटिंग्स सेव करें</button>
                 </div>
 
-                <!-- ADMIN QUIZ VIEWER -->
                 <div class="bg-slate-950 p-3.5 rounded-2xl border border-cyan-500/30 space-y-2">
-                    <h4 class="font-bold text-cyan-400"><i class="fas fa-question-circle mr-1"></i> प्रश्नोत्तरी (Quiz) मैनेजमेंट</h4>
-                    <p class="text-[8px] text-slate-400">गेम में पूछे जाने वाले सवाल और उनके सही जवाब।</p>
-                    <div id="adminQuizList" class="max-h-40 overflow-y-auto hide-scroll"></div>
+                    <h4 class="font-bold text-cyan-400"><i class="fas fa-question-circle mr-1"></i> प्रश्नोत्तरी (Quiz) मैनेजमेंट & नए सवाल जोड़ें</h4>
+                    <p class="text-[8px] text-slate-400">यहाँ नए सवाल जोड़ सकते हैं ताकि गेम में हमेशा रैंडम सवाल आएं।</p>
+                    
+                    <!-- Add Custom Question Form inside Admin -->
+                    <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 space-y-2 mt-2">
+                        <input type="text" id="newQuizQ" placeholder="नया सवाल लिखें (जैसे: भारत का राष्ट्रीय फूल?)" class="w-full bg-slate-950 border border-slate-700 p-2 rounded text-white text-[10px] outline-none">
+                        <div class="grid grid-cols-2 gap-1.5">
+                            <input type="text" id="newOpt0" placeholder="विकल्प A" class="bg-slate-950 border border-slate-700 p-1.5 rounded text-white text-[10px]">
+                            <input type="text" id="newOpt1" placeholder="विकल्प B" class="bg-slate-950 border border-slate-700 p-1.5 rounded text-white text-[10px]">
+                            <input type="text" id="newOpt2" placeholder="विकल्प C" class="bg-slate-950 border border-slate-700 p-1.5 rounded text-white text-[10px]">
+                            <input type="text" id="newOpt3" placeholder="विकल्प D" class="bg-slate-950 border border-slate-700 p-1.5 rounded text-white text-[10px]">
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-[9px] text-slate-300">सही उत्तर (0 से 3):</span>
+                            <input type="number" id="newCorrectIdx" min="0" max="3" value="0" class="w-12 bg-slate-950 border border-slate-700 p-1 rounded text-white text-[10px] text-center">
+                            <button onclick="addNewAdminQuiz()" class="flex-1 bg-cyan-600 text-white font-bold py-1.5 rounded text-[10px]">सवाल जोड़ें</button>
+                        </div>
+                    </div>
+                    
+                    <div id="adminQuizList" class="max-h-40 overflow-y-auto hide-scroll mt-2"></div>
                 </div>
 
-                <!-- ADVANCED COUPON GENERATOR -->
                 <div class="bg-gradient-to-br from-indigo-950 to-slate-950 p-3.5 rounded-2xl border border-indigo-500/40 space-y-2">
-                    <h4 class="font-bold text-indigo-400"><i class="fas fa-ticket-alt mr-1"></i> नया कूपन जनरेट करें (महंगे इनाम/वाउचर)</h4>
+                    <h4 class="font-bold text-indigo-400"><i class="fas fa-ticket-alt mr-1"></i> नया कूपन जनरेट करें</h4>
                     <div class="grid grid-cols-2 gap-2 pt-1">
                         <input type="text" id="couponCodeNew" placeholder="कूपन कोड (BIKE2026)" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white uppercase text-[10px]">
                         <select id="couponTypeNew" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px] outline-none">
@@ -368,23 +372,20 @@
                             <option value="money">कैश (Wallet Money)</option>
                             <option value="empty">खाली (Better Luck)</option>
                         </select>
-                        <input type="text" id="couponValueNew" placeholder="इनाम का नाम (जैसे: Sports Bike / Fridge)" class="w-full col-span-2 bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
+                        <input type="text" id="couponValueNew" placeholder="इनाम का नाम" class="w-full col-span-2 bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
                         <input type="text" id="couponLinkNew" placeholder="प्रोडक्ट लिंक (URL) - Optional" class="w-full bg-slate-900 border border-indigo-500/50 p-2 rounded-xl text-white text-[10px]">
-                        <input type="file" id="couponImageNew" accept="image/*" class="w-full bg-slate-900 border border-indigo-500/50 p-1.5 rounded-xl text-white text-[10px] file:mr-2 file:py-0.5 file:px-2 file:rounded-lg file:border-0 file:bg-indigo-600 file:text-white cursor-pointer" title="इनाम की फोटो (Optional)">
+                        <input type="file" id="couponImageNew" accept="image/*" class="w-full bg-slate-900 border border-indigo-500/50 p-1.5 rounded-xl text-white text-[10px] file:mr-2 file:py-0.5 file:px-2 file:rounded-lg file:border-0 file:bg-indigo-600 file:text-white cursor-pointer">
                         <button onclick="createNewCouponAdvanced()" class="w-full col-span-2 bg-indigo-600 text-white font-bold py-2 rounded-xl shadow-lg mt-1">कूपन बनाकर इन्वेंटरी में डालें</button>
                     </div>
                 </div>
 
-                <!-- COUPON INVENTORY & SENDER -->
                 <div class="bg-slate-950 p-3.5 rounded-2xl border border-amber-500/40 space-y-2 mt-2">
-                    <h4 class="font-bold text-amber-400"><i class="fas fa-box-open mr-1"></i> कूपन इन्वेंटरी (Lock / Unlock & Manual Send)</h4>
+                    <h4 class="font-bold text-amber-400"><i class="fas fa-box-open mr-1"></i> कूपन इन्वेंटरी</h4>
                     <div id="adminCouponInventory" class="max-h-56 overflow-y-auto hide-scroll space-y-2"></div>
                 </div>
 
-                <!-- WITHDRAWAL & TOPUP TABLES -->
                 <div class="bg-slate-950 p-3.5 rounded-2xl border border-rose-500/30 space-y-2">
-                    <h4 class="font-bold text-rose-400"><i class="fas fa-hand-holding-usd mr-1"></i> विड्रॉल रिक्वेस्ट्स (Helpline)</h4>
-                    <p class="text-[8px] text-slate-400">15-20 मिनट गारंटी विड्रॉल। यूजर का स्क्रीनशॉट यहाँ चेक करें और UPI कॉपी करें।</p>
+                    <h4 class="font-bold text-rose-400"><i class="fas fa-hand-holding-usd mr-1"></i> विड्रॉल रिक्वेस्ट्स</h4>
                     <div class="overflow-x-auto hide-scroll"><table class="w-full text-left"><tbody id="adminWithdrawTable"></tbody></table></div>
                 </div>
             </div>
@@ -414,7 +415,7 @@
 
         let currentUser = JSON.parse(sessionStorage.getItem('gyanpay_curr_user')) || null;
         let isLoginMode = true; let qIndex = 0; let score = 0; let quizTimerInterval = null;
-        let isPlayingAgainstBot = false;
+        let activeGameQuestions = []; // Stores random shuffled questions for current match
 
         window.onload = function() {
             if(!db.settings) db.settings = { adminPin: "admin123", autoBankVerify: true, isLive: false, liveSince: null };
@@ -422,7 +423,21 @@
             if(!db.activeMatchParticipants) db.activeMatchParticipants = [];
             if(!db.chatThreads) db.chatThreads = {};
             if(typeof db.botProfitWallet === 'undefined') db.botProfitWallet = 0;
-            if(!db.quiz || db.quiz.length === 0) { db.quiz = [{question:"भारत की राजधानी?", options:["मुंबई","दिल्ली","चेन्नई","कोलकाता"], correct:1}, { question: "क्रिकेट का भगवान किसे कहते हैं?", options: ["विराट कोहली", "धोनी", "सचिन तेंदुलकर", "रोहित शर्मा"], correct: 2 }, { question: "राष्ट्रीय पक्षी कौन सा है?", options: ["कबूतर", "तोता", "मोर", "बाज़"], correct: 2 }, { question: "भारत का राष्ट्रीय खेल क्या है?", options: ["क्रिकेट", "हॉकी", "फुटबॉल", "कबड्डी"], correct: 1 }, { question: "सूर्य के सबसे पास ग्रह कौन सा है?", options: ["मंगल", "बुध", "शुक्र", "पृथ्वी"], correct: 1 }]; saveDB(); }
+            
+            // Default Rich GK Quiz Bank
+            if(!db.quiz || db.quiz.length === 0) { 
+                db.quiz = [
+                    {question:"भारत की राजधानी कहाँ है?", options:["मुंबई","दिल्ली","चेन्नई","कोलकाता"], correct:1}, 
+                    {question: "क्रिकेट का भगवान किसे कहते हैं?", options: ["विराट कोहली", "धोनी", "सचिन तेंदुलकर", "रोहित शर्मा"], correct: 2 }, 
+                    {question: "भारत का राष्ट्रीय पक्षी कौन सा है?", options: ["कबूतर", "तोता", "मोर", "बाज़"], correct: 2 }, 
+                    {question: "भारत का राष्ट्रीय खेल क्या है?", options: ["क्रिकेट", "हॉकी", "फुटबॉल", "कबड्डी"], correct: 1 }, 
+                    {question: "सूर्य के सबसे पास ग्रह कौन सा है?", options: ["मंगल", "बुध", "शुक्र", "पृथ्वी"], correct: 1 },
+                    {question: "भारत के वर्तमान प्रधानमंत्री कौन हैं?", options: ["राहुल गांधी", "नरेंद्र मोदी", "अमित शाह", "योगी आदित्यनाथ"], correct: 1 },
+                    {question: "कंप्यूटर का फुल फॉर्म क्या है?", options: ["Common Operating Machine", "Common Oriented Machine", "Computer Only", "None"], correct: 0 },
+                    {question: "ताजमहल किस नदी के किनारे स्थित है?", options: ["गंगा", "यमुना", "ब्रह्मपुत्र", "गोदावरी"], correct: 1 }
+                ]; 
+                saveDB(); 
+            }
             
             if(db.settings.isLive && db.settings.liveSince) {
                 let hoursPassed = (Date.now() - db.settings.liveSince) / (1000 * 60 * 60);
@@ -534,31 +549,21 @@
         }
         function closeFreeEntryPopup() { document.getElementById('freeEntryPopup').classList.add('hidden'); }
 
-        // LIVE SUPPORT & AUTO AI CHAT SYSTEM (UPDATED SMART RESPONSES)
-        function openSupportChat() {
-            if(!currentUser) return;
-            document.getElementById('supportChatModal').classList.remove('hidden');
-            renderUserChatMessages();
-        }
-        function closeSupportChat() {
-            document.getElementById('supportChatModal').classList.add('hidden');
-        }
+        // LIVE SUPPORT & AUTO AI CHAT SYSTEM
+        function openSupportChat() { if(!currentUser) return; document.getElementById('supportChatModal').classList.remove('hidden'); renderUserChatMessages(); }
+        function closeSupportChat() { document.getElementById('supportChatModal').classList.add('hidden'); }
 
         function sendUserChatMessage() {
             let txtBox = document.getElementById('chatInputText');
             let text = txtBox.value.trim();
             if(!text) return;
-            
             if(!db.chatThreads[currentUser.phone]) db.chatThreads[currentUser.phone] = [];
             db.chatThreads[currentUser.phone].push({ sender: 'user', text: text, time: Date.now(), img: '' });
             txtBox.value = '';
             
             let aiReply = getAutoAiResponse(text);
             db.chatThreads[currentUser.phone].push({ sender: 'ai', text: aiReply, time: Date.now() + 500, img: '' });
-            
-            saveDB();
-            renderUserChatMessages();
-            renderAdminTables();
+            saveDB(); renderUserChatMessages(); renderAdminTables();
         }
 
         function sendChatImage(inputElem) {
@@ -569,28 +574,24 @@
                     let imgData = e.target.result;
                     if(!db.chatThreads[currentUser.phone]) db.chatThreads[currentUser.phone] = [];
                     db.chatThreads[currentUser.phone].push({ sender: 'user', text: '[स्क्रीनशॉट भेजा गया]', time: Date.now(), img: imgData });
-                    
                     db.chatThreads[currentUser.phone].push({ sender: 'ai', text: 'आपका स्क्रीनशॉट मिल गया है जी! एडमिन जल्द इसे वेरिफाई कर देगा।', time: Date.now() + 500, img: '' });
-                    
-                    saveDB();
-                    renderUserChatMessages();
-                    renderAdminTables();
+                    saveDB(); renderUserChatMessages(); renderAdminTables();
                 }
             }
         }
 
         function getAutoAiResponse(msg) {
             msg = msg.toLowerCase();
-            if(msg.includes('deposit') || msg.includes('depoist') || msg.includes('jama') || msg.includes('paisa') || msg.includes('नही आया') || msg.includes('nahi aaya')) {
-                return 'अगर आपने डिपॉजिट किया है और पैसे अभी वॉलेट में नहीं आए हैं, तो कृपया पेमेंट का स्क्रीनशॉट (Screenshot) अपलोड करें। सिस्टम 5 मिनट के भीतर इसे वेरीफाई कर देगा या एडमिन इसे चेक कर रहा है!';
-            } else if(msg.includes('विड्रॉल') || msg.includes('withdraw') || msg.includes('nikalna') || msg.includes('transfer')) {
-                return 'विड्रॉल रिक्वेस्ट मिलने के बाद 15 से 20 मिनट के भीतर आपके UPI या बैंक खाते में पैसे भेज दिए जाते हैं। कृपया सुनिश्चित करें कि आपने सही UPI ID डाली है।';
-            } else if(msg.includes('game') || msg.includes('quiz') || msg.includes('khel') || msg.includes('timer')) {
-                return 'गेम में 8 सेकंड का टाइमर होता है। सही जवाब देने पर आप जीत सकते हैं। चीटिंग करने पर अकाउंट फ्रीज किया जा सकता है, इसलिए शुद्ध जनरल नॉलेज से खेलें!';
-            } else if(msg.includes('hello') || msg.includes('hi') || msg.includes('नमस्ते') || msg.includes('hey')) {
-                return 'नमस्ते! GyanPay सपोर्ट में आपका स्वागत है। बताइए, डिपॉजिट, विड्रॉल या गेम से जुड़ी किस सहायता की आवश्यकता है?';
+            if(msg.includes('deposit') || msg.includes('jama') || msg.includes('paisa') || msg.includes('नही आया') || msg.includes('nahi aaya')) {
+                return 'अगर आपने डिपॉजिट किया है और पैसे अभी वॉलेट में नहीं आए हैं, तो कृपया पेमेंट का स्क्रीनशॉट अपलोड करें। सिस्टम 5 मिनट के भीतर इसे वेरीफाई कर देगा!';
+            } else if(msg.includes('विड्रॉल') || msg.includes('withdraw') || msg.includes('nikalna')) {
+                return 'विड्रॉल रिक्वेस्ट मिलने के बाद 15 से 20 मिनट के भीतर आपके UPI या बैंक खाते में पैसे भेज दिए जाते हैं।';
+            } else if(msg.includes('game') || msg.includes('quiz') || msg.includes('timer')) {
+                return 'गेम में 8 सेकंड का टाइमर होता है। सही जवाब देने पर आप जीत सकते हैं।';
+            } else if(msg.includes('hello') || msg.includes('hi') || msg.includes('नमस्ते')) {
+                return 'नमस्ते! GyanPay सपोर्ट में आपका स्वागत है। बताइए, आपकी क्या सहायता कर सकते हैं?';
             } else {
-                return `नमस्ते जी! आपका संदेश ("${msg}") मिल गया है। यह एक ऑटोमैटिक एआई रिप्लाई है। एडमिन जल्द ही ऑनलाइन आकर आपके इस सवाल की जाँच करेंगे और आपकी सहायता करेंगे।`;
+                return `नमस्ते जी! आपका संदेश मिल गया है। एडमिन जल्द ही इसकी जाँच करेंगे।`;
             }
         }
 
@@ -598,10 +599,7 @@
             let box = document.getElementById('chatMessagesBox');
             if(!box || !currentUser) return;
             let thread = db.chatThreads[currentUser.phone] || [];
-            if(thread.length === 0) {
-                box.innerHTML = `<div class="text-center text-slate-500 py-4 text-[10px]">यहाँ सपोर्ट टीम या AI से बात करें।</div>`;
-                return;
-            }
+            if(thread.length === 0) { box.innerHTML = `<div class="text-center text-slate-500 py-4 text-[10px]">यहाँ सपोर्ट टीम या AI से बात करें।</div>`; return; }
             let html = '';
             thread.forEach(m => {
                 let bg = m.sender === 'user' ? 'bg-indigo-600/80 ml-auto text-right' : (m.sender === 'admin' ? 'bg-emerald-600/80 mr-auto' : 'bg-cyan-700/80 mr-auto');
@@ -609,8 +607,7 @@
                 let imgTag = m.img ? `<br><img src="${m.img}" class="max-h-28 rounded-lg mt-1 object-contain mx-auto">` : '';
                 html += `<div class="p-2.5 rounded-xl max-w-[80%] ${bg} text-white shadow"><p class="text-[9px] text-amber-300 font-bold mb-0.5">${senderLabel}</p><p class="text-[11px] leading-snug">${m.text}${imgTag}</p></div>`;
             });
-            box.innerHTML = html;
-            box.scrollTop = box.scrollHeight;
+            box.innerHTML = html; box.scrollTop = box.scrollHeight;
         }
 
         function adminSendReply(userPhone) {
@@ -618,50 +615,40 @@
             if(!replyText) return;
             if(!db.chatThreads[userPhone]) db.chatThreads[userPhone] = [];
             db.chatThreads[userPhone].push({ sender: 'admin', text: replyText, time: Date.now(), img: '' });
-            saveDB();
-            renderAdminTables();
-            alert('रिप्लाई सफलतापूर्वक भेज दिया गया है!');
+            saveDB(); renderAdminTables(); alert('रिप्लाई भेज दिया गया है!');
         }
 
         function clickPlayGame() {
-            if(!db.settings.isLive) { alert('अभी एरीना गेम एडमिन द्वारा बंद (OFF) कर दिया गया है। कृपया थोड़ी देर बाद प्रयास करें।'); return; }
+            if(!db.settings.isLive) { alert('अभी एरीना गेम एडमिन द्वारा बंद (OFF) कर दिया गया है।'); return; }
 
             let hasFreeEntry = (currentUser.freeEntries && currentUser.freeEntries > 0);
             let uWallet = parseFloat(currentUser.wallet) || 0;
-            if(!hasFreeEntry && uWallet < 20) { alert('वॉलेट में ₹20 नहीं हैं। कृपया टॉप-अप (Add Money) करें या दोस्तों को रेफर करके फ्री एंट्री पाएं!'); openTopUpScreen(); return; }
+            if(!hasFreeEntry && uWallet < 20) { alert('वॉलेट में ₹20 नहीं हैं। कृपया टॉप-अप करें!'); openTopUpScreen(); return; }
             
             let idx = db.users.findIndex(x => x.phone === currentUser.phone);
             if(hasFreeEntry) { db.users[idx].freeEntries -= 1; } else { db.users[idx].wallet -= 20; db.adminWallet = (db.adminWallet || 0) + 20; }
             db.users[idx].gamesPlayed = (db.users[idx].gamesPlayed || 0) + 1; 
             
             if(!db.activeMatchParticipants) db.activeMatchParticipants = [];
-            if(!db.activeMatchParticipants.includes(currentUser.phone)) {
-                db.activeMatchParticipants.push(currentUser.phone);
-            }
+            if(!db.activeMatchParticipants.includes(currentUser.phone)) db.activeMatchParticipants.push(currentUser.phone);
 
-            if(db.users[idx].gamesPlayed === 1 && db.users[idx].referredBy) {
-                let refCode = db.users[idx].referredBy; let rIdx = db.users.findIndex(u => u.myCode === refCode);
-                if(rIdx !== -1) {
-                    let myRec = db.users[rIdx].myReferrals.find(r => r.phone === currentUser.phone); if(myRec) myRec.played = true;
-                    let playedCount = db.users[rIdx].myReferrals.filter(r => r.played).length; let claimed = db.users[rIdx].refClaimed || 0;
-                    if(Math.floor(playedCount / 3) > claimed) { db.users[rIdx].freeEntries = (db.users[rIdx].freeEntries || 0) + 1; db.users[rIdx].refClaimed = claimed + 1; }
-                }
-            }
             currentUser = db.users[idx]; saveDB(); renderUserNavigationState();
+
+            // 🚀 RANDOM QUIZ GENERATOR: Shuffles and picks 5 random questions every single match!
+            activeGameQuestions = [...db.quiz].sort(() => 0.5 - Math.random()).slice(0, 5);
 
             hideAllScreens(); document.getElementById('waitingScreen').classList.remove('hidden');
 
             setTimeout(() => {
-                isPlayingAgainstBot = true;
                 hideAllScreens(); document.getElementById('quizScreen').classList.remove('hidden');
                 qIndex = 0; score = 0; loadQuizQuestion();
             }, 3000); 
         }
 
-        // 8 SECONDS TIMER FUNCTION
+        // 8 SECONDS TIMER & DYNAMIC RANDOM QUESTIONS
         function loadQuizQuestion() {
-            if(qIndex >= 5 || qIndex >= db.quiz.length) { finishQuizGame(); return; }
-            let q = db.quiz[qIndex];
+            if(qIndex >= 5 || qIndex >= activeGameQuestions.length) { finishQuizGame(); return; }
+            let q = activeGameQuestions[qIndex];
             document.getElementById('qCounter').innerText = `ROUND ${qIndex + 1}/5`; document.getElementById('qText').innerText = q.question;
             let html = ''; q.options.forEach((opt, idx) => { html += `<button onclick="answerClicked(${idx}, ${q.correct})" class="w-full text-left bg-slate-900/90 hover:bg-slate-800 text-white p-3.5 rounded-2xl border border-slate-700/80 text-xs">${String.fromCharCode(65 + idx)}. ${opt}</button>`; });
             document.getElementById('optionsList').innerHTML = html;
@@ -689,13 +676,11 @@
         
         function finishQuizGame() {
             hideAllScreens(); document.getElementById('resultScreen').classList.remove('hidden');
-            let rewardMoney = 0; let vipTier = "कोई टियर नहीं";
-
+            let rewardMoney = 0; 
             let botScore = Math.floor(Math.random() * 3) + 2;
             let userWon = score >= botScore;
 
             if (userWon) {
-                vipTier = "VIP 1"; 
                 rewardMoney = 50; 
                 let idx = db.users.findIndex(x => x.phone === currentUser.phone);
                 db.users[idx].wallet = (db.users[idx].wallet || 0) + rewardMoney; 
@@ -705,15 +690,13 @@
                 db.botProfitWallet = (db.botProfitWallet || 0) + 20;
             }
 
-            if(db.activeMatchParticipants) {
-                db.activeMatchParticipants = db.activeMatchParticipants.filter(p => p !== currentUser.phone);
-            }
+            if(db.activeMatchParticipants) db.activeMatchParticipants = db.activeMatchParticipants.filter(p => p !== currentUser.phone);
             saveDB();
             
             let resIcon = document.getElementById('resIcon');
             if(userWon) {
                 resIcon.innerHTML = '<i class="fas fa-trophy"></i>'; resIcon.className = "w-20 h-20 rounded-full flex items-center justify-center mx-auto text-4xl bg-emerald-500/20 text-emerald-400";
-                document.getElementById('resTitle').innerText = `VICTORY! (VS OPPONENT)`; document.getElementById('resTitle').className = "gaming-font text-xl font-black text-emerald-400";
+                document.getElementById('resTitle').innerText = `VICTORY!`; document.getElementById('resTitle').className = "gaming-font text-xl font-black text-emerald-400";
                 document.getElementById('resDesc').innerHTML = `आपका स्कोर: <b>${score}/5</b><br>+₹${rewardMoney} आपके वॉलेट में जुड़े!`;
             } else {
                 resIcon.innerHTML = '<i class="fas fa-shield-alt"></i>'; resIcon.className = "w-20 h-20 rounded-full flex items-center justify-center mx-auto text-4xl bg-cyan-500/20 text-cyan-400";
@@ -723,31 +706,39 @@
         }
 
         function adminEmergencyKillSwitchAndRefund() {
-            if(!confirm("⚠️ क्या आप वाकई एरीना गेम को तुरंत रोकना चाहते हैं? इससे सभी लाइव गेमर्स को उनकी ₹20 एंट्री फीस ऑटोमैटिक रिफंड हो जाएगी!")) return;
-
+            if(!confirm("⚠️ क्या आप वाकई एरीना गेम रोकना चाहते हैं? इससे सभी लाइव गेमर्स को उनकी ₹20 एंट्री फीस रिफंड हो जाएगी!")) return;
             let refundedCount = 0;
             if(db.activeMatchParticipants && db.activeMatchParticipants.length > 0) {
                 db.activeMatchParticipants.forEach(phone => {
                     let uIdx = db.users.findIndex(u => u.phone === phone);
-                    if(uIdx !== -1) {
-                        db.users[uIdx].wallet = (db.users[uIdx].wallet || 0) + 20; 
-                        refundedCount++;
-                    }
+                    if(uIdx !== -1) { db.users[uIdx].wallet = (db.users[uIdx].wallet || 0) + 20; refundedCount++; }
                 });
                 db.activeMatchParticipants = []; 
             }
-
             db.settings.isLive = false;
-            let masterSwitch = document.getElementById('setArenaLive'); if(masterSwitch) masterSwitch.checked = false;
+            saveDB(); renderAdminTables();
+            alert(`🚨 किल स्विच एक्टिव! ${refundedCount} खिलाड़ियों के खाते में ₹20 रिफंड कर दिए गए हैं।`);
+            if(currentUser) { currentUser = db.users.find(u => u.phone === currentUser.phone) || currentUser; checkUserDashboardFlow(); }
+        }
 
-            saveDB();
-            renderAdminTables();
-            alert(`🚨 इमर्जेंसी किल स्विच एक्टिव! ${refundedCount} खिलाड़ियों के खाते में ₹20 की एंट्री फीस सफलतापूर्वक रिफंड कर दी गई है और गेम बंद कर दिया गया है।`);
-            
-            if(currentUser) {
-                currentUser = db.users.find(u => u.phone === currentUser.phone) || currentUser;
-                checkUserDashboardFlow();
-            }
+        function addNewAdminQuiz() {
+            let qText = document.getElementById('newQuizQ').value.trim();
+            let optA = document.getElementById('newOpt0').value.trim();
+            let optB = document.getElementById('newOpt1').value.trim();
+            let optC = document.getElementById('newOpt2').value.trim();
+            let optD = document.getElementById('newOpt3').value.trim();
+            let correct = parseInt(document.getElementById('newCorrectIdx').value);
+
+            if(!qText || !optA || !optB || !optC || !optD) { alert('कृपया सभी विकल्प और सवाल भरें!'); return; }
+            if(!db.quiz) db.quiz = [];
+            db.quiz.push({ question: qText, options: [optA, optB, optC, optD], correct: correct });
+            saveDB(); renderAdminTables();
+            alert('नया सवाल सफलतापूर्वक जोड़ दिया गया है!');
+            document.getElementById('newQuizQ').value = '';
+            document.getElementById('newOpt0').value = '';
+            document.getElementById('newOpt1').value = '';
+            document.getElementById('newOpt2').value = '';
+            document.getElementById('newOpt3').value = '';
         }
 
         function convertBotFundToVoucher() {
@@ -756,9 +747,8 @@
             let voucherCode = "MEGAPRIZE" + Math.floor(Math.random() * 900 + 100);
             if(!db.coupons) db.coupons = {};
             db.coupons[voucherCode] = { type: 'mega', val: 'Mega Gift Voucher (₹' + fund + ')', img: '', link: '', locked: true };
-            db.botProfitWallet = 0; 
-            saveDB(); renderAdminTables();
-            alert(`सफलता! बॉट फंड से '${voucherCode}' मेगा वाउचर (लॉक स्थिति में) जनरेट कर इन्वेंटरी में डाल दिया गया है!`);
+            db.botProfitWallet = 0; saveDB(); renderAdminTables();
+            alert(`सफलता! बॉट फंड से '${voucherCode}' मेगा वाउचर जनरेट कर दिया गया है!`);
         }
 
         function requestWithdrawal() { 
@@ -768,7 +758,7 @@
 
             if(!upiId || amount <= 0) { alert('कृपया सही अमाउंट दर्ज करें!'); return; } 
             if(amount > (currentUser.wallet || 0)) { alert('अपर्याप्त वॉलेट बैलेंस!'); return; } 
-            if(fileInput.files.length === 0) { alert('सिक्योरिटी के लिए कृपया अपने QR या प्रोफाइल का स्क्रीनशॉट अपलोड करें!'); return; }
+            if(fileInput.files.length === 0) { alert('सिक्योरिटी के लिए स्क्रीनशॉट अपलोड करें!'); return; }
 
             let reader = new FileReader();
             reader.readAsDataURL(fileInput.files[0]);
@@ -783,20 +773,12 @@
                     db.users[idx].wallet -= amount; currentUser = db.users[idx]; 
                     if(!db.withdrawals) db.withdrawals = []; 
                     db.withdrawals.unshift({ phone: currentUser.phone, name: currentUser.name, upi: upiId, amount: amount, time: new Date().getTime(), screenshot: ssData }); 
-                    
-                    saveDB(); checkUserDashboardFlow(); alert('विड्रॉल रिक्वेस्ट भेज दी गई है! 15 से 20 मिनट के भीतर आपके खाते में भेज दी जाएगी (गारंटी).'); 
+                    saveDB(); checkUserDashboardFlow(); alert('विड्रॉल रिक्वेस्ट भेज दी गई है!'); 
                 }
             }
         }
-        function approveWithdrawal(idx) { let w = db.withdrawals[idx]; db.withdrawals.splice(idx, 1); saveDB(); renderAdminTables(); alert('विड्रॉल अप्रूव हो गया!'); }
-
-        function copyAdminUpi(upiText) {
-            navigator.clipboard.writeText(upiText).then(() => {
-                alert(`UPI ID '${upiText}' कॉपी हो गया है! अब आप इसे पेमेंट ऐप में पेस्ट कर सकते हैं।`);
-            }).catch(err => {
-                alert('कॉपी करने में विफल!');
-            });
-        }
+        function approveWithdrawal(idx) { db.withdrawals.splice(idx, 1); saveDB(); renderAdminTables(); alert('विड्रॉल अप्रूव हो गया!'); }
+        function copyAdminUpi(upi) { navigator.clipboard.writeText(upi); alert('UPI कॉपी हो गया!'); }
 
         function toggleAdminModal() { document.getElementById('adminModal').classList.toggle('hidden'); if(!document.getElementById('adminModal').classList.contains('hidden')) { renderAdminTables(); } }
         function verifyAdminPin() { if(document.getElementById('adminPinInput').value.trim() === (db.settings.adminPin || 'admin123') || document.getElementById('adminPinInput').value === 'admin') { document.getElementById('adminLoginView').classList.add('hidden'); document.getElementById('adminDashboardView').classList.remove('hidden'); } else alert('गलत पिन!'); }
@@ -804,9 +786,7 @@
         
         function saveAdminSettings() { 
             db.settings.autoBankVerify = document.getElementById('setAutoVerify').checked; 
-            let isLiveNow = document.getElementById('setArenaLive').checked;
-            db.settings.isLive = isLiveNow;
-            if(isLiveNow) { db.settings.liveSince = Date.now(); } else { db.settings.liveSince = null; }
+            db.settings.isLive = document.getElementById('setArenaLive').checked;
             saveDB(); alert('सेटिंग्स सेव हो गई!'); 
         }
 
@@ -814,8 +794,7 @@
             let newPin = document.getElementById('newAdminPinInput').value.trim();
             if(newPin.length < 4) { alert('पिन कम से कम 4 अंकों का होना चाहिए!'); return; }
             db.settings.adminPin = newPin; saveDB();
-            alert('एडमिन पिन सफलतापूर्वक बदल गया है!');
-            document.getElementById('newAdminPinInput').value = '';
+            alert('एडमिन पिन बदल गया है!');
         }
 
         function createNewCouponAdvanced() {
@@ -825,184 +804,115 @@
             let link = document.getElementById('couponLinkNew').value.trim(); 
             let fileInput = document.getElementById('couponImageNew');
             
-            if(!code || !val) { alert('कृपया कूपन कोड और इनाम का नाम/अमाउंट भरें!'); return; }
-            
-            let saveCouponData = (imgBase64) => { 
+            if(!code || !val) { alert('कृपया कोड और नाम भरें!'); return; }
+            let saveCouponData = (imgB64) => { 
                 if(!db.coupons) db.coupons = {}; 
-                db.coupons[code] = { type: type, val: (type==='money' ? parseFloat(val) : val), img: imgBase64, link: link, locked: true }; 
-                saveDB(); 
-                renderAdminTables(); 
-                alert(`कूपन '${code}' सफलतापूर्वक (Locked अवस्था में) इन्वेंटरी में जोड़ दिया गया है!`); 
-                document.getElementById('couponCodeNew').value=''; 
-                document.getElementById('couponValueNew').value=''; 
-                document.getElementById('couponLinkNew').value=''; 
+                db.coupons[code] = { type: type, val: (type==='money' ? parseFloat(val) : val), img: imgB64, link: link, locked: true }; 
+                saveDB(); renderAdminTables(); alert('कूपन जुड़ गया!'); 
             };
-
             if(fileInput.files.length > 0) { 
-                let reader = new FileReader(); 
-                reader.readAsDataURL(fileInput.files[0]); 
-                reader.onload = function(e) { 
-                    let img = new Image(); 
-                    img.src = e.target.result; 
-                    img.onload = function() { 
-                        let canvas = document.createElement('canvas'); 
-                        let ctx = canvas.getContext('2d'); 
-                        canvas.width = 300; 
-                        canvas.height = img.height * (300/img.width); 
-                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height); 
-                        saveCouponData(canvas.toDataURL('image/jpeg', 0.6)); 
-                    } 
-                } 
-            } else { 
-                saveCouponData(''); 
-            }
+                let reader = new FileReader(); reader.readAsDataURL(fileInput.files[0]); 
+                reader.onload = function(e) { saveCouponData(e.target.result); } 
+            } else { saveCouponData(''); }
         }
 
-        function toggleCouponLock(code) { 
-            if(db.coupons[code]) { 
-                db.coupons[code].locked = !db.coupons[code].locked; 
-                saveDB(); 
-                renderAdminTables(); 
-            } 
-        }
-
+        function toggleCouponLock(code) { if(db.coupons[code]) { db.coupons[code].locked = !db.coupons[code].locked; saveDB(); renderAdminTables(); } }
         function sendCouponManual(code) { 
             let phone = document.getElementById(`sendPhone_${code}`).value.trim(); 
-            if(!phone) { alert('कृपया यूजर का फोन नंबर दर्ज करें!'); return; } 
             let uIdx = db.users.findIndex(u => u.phone === phone); 
-            if(uIdx === -1) { alert('यह मोबाइल नंबर रजिस्टर्ड नहीं है!'); return; } 
-            
+            if(uIdx === -1) { alert('यूजर नहीं मिला!'); return; } 
             if(!db.users[uIdx].myCoupons) db.users[uIdx].myCoupons = []; 
             db.users[uIdx].myCoupons.unshift({ code: code, date: new Date().toLocaleDateString(), status: 'Available' }); 
-            
-            saveDB(); 
-            renderAdminTables(); 
-            alert(`सफलता! कूपन '${code}' उपयोगकर्ता (${phone}) को व्यक्तिगत रूप से भेज दिया गया है।`); 
-            document.getElementById(`sendPhone_${code}`).value = ''; 
-        }
-
-        function sendCouponAuto(code) { 
-            if(!db.coupons[code] || db.coupons[code].locked) {
-                alert('यह कूपन अभी LOCKED है! ऑटोमैटिक बांटने के पहले इसे Unlocked करें।');
-                return;
-            }
-            if(!db.users || db.users.length === 0) { alert('कोई यूजर उपलब्ध नहीं है!'); return; } 
-            
-            let randomIdx = Math.floor(Math.random() * db.users.length); 
-            let luckyUser = db.users[randomIdx]; 
-            if(!luckyUser.myCoupons) luckyUser.myCoupons = []; 
-            luckyUser.myCoupons.unshift({ code: code, date: new Date().toLocaleDateString(), status: 'Available' }); 
-            
-            saveDB(); 
-            renderAdminTables(); 
-            alert(`🎉 ऑटोमैटिक ड्रा! कूपन '${code}' लकी यूजर '${luckyUser.name}' को सफलतापूर्वक अलॉट कर दिया गया है!`); 
+            saveDB(); renderAdminTables(); alert('कूपन भेज दिया गया!'); 
         }
 
         function renderAdminTables() { 
-            let revLabel = document.getElementById('adminTotalRevenue'); if(revLabel) revLabel.innerText = `₹${db.adminWallet || 0}`;
-            let usrLabel = document.getElementById('adminTotalUsers'); if(usrLabel) usrLabel.innerText = db.users.length;
-            let onlLabel = document.getElementById('adminOnlineUsers'); if(onlLabel) onlLabel.innerText = db.users.filter(u => u.lastLogin && (Date.now() - u.lastLogin) < 15*60*1000).length || 1;
-
-            let botProfitDisplay = document.getElementById('adminBotProfitDisplay');
-            if(botProfitDisplay) botProfitDisplay.innerText = `₹${db.botProfitWallet || 0}`;
+            document.getElementById('adminTotalRevenue').innerText = `₹${db.adminWallet || 0}`;
+            document.getElementById('adminTotalUsers').innerText = db.users.length;
+            document.getElementById('adminOnlineUsers').innerText = db.users.filter(u => u.lastLogin && (Date.now() - u.lastLogin) < 15*60*1000).length || 1;
+            document.getElementById('adminBotProfitDisplay').innerText = `₹${db.botProfitWallet || 0}`;
 
             let refTable = document.getElementById('adminReferralTable');
             if(refTable) {
-                let refHtml = ''; let referrers = db.users.filter(u => u.myReferrals && u.myReferrals.length > 0);
-                if(referrers.length === 0) { refHtml = `<tr><td class="text-[10px] text-slate-500 text-center py-2">अभी तक किसी ने रेफरल नहीं किया है।</td></tr>`; } 
-                else { referrers.forEach(u => { let played = u.myReferrals.filter(r => r.played).length; refHtml += `<tr class="border-b border-slate-800 text-[10px] text-slate-300"><td class="py-2"><b>${u.name}</b> <span class="text-[8px] text-purple-400">(${u.myCode})</span><br>Total Refer: ${u.myReferrals.length} | <span class="text-emerald-400">Played: ${played}</span></td><td class="text-right text-amber-400 font-bold">Free: ${u.freeEntries || 0}</td></tr>`; }); }
-                refTable.innerHTML = refHtml;
+                let referrers = db.users.filter(u => u.myReferrals && u.myReferrals.length > 0);
+                refTable.innerHTML = referrers.length === 0 ? `<tr><td class="text-[10px] text-slate-500 text-center py-2">कोई रेफरल नहीं</td></tr>` : referrers.map(u => `<tr class="border-b border-slate-800 text-[10px] text-slate-300"><td class="py-2"><b>${u.name}</b> (${u.myCode})</td><td class="text-right text-amber-400 font-bold">Free: ${u.freeEntries || 0}</td></tr>`).join('');
             }
 
             let inboxDiv = document.getElementById('adminSupportInbox');
             if(inboxDiv) {
-                let threads = db.chatThreads || {};
-                let phoneKeys = Object.keys(threads);
-                if(phoneKeys.length === 0) {
-                    inboxDiv.innerHTML = `<p class="text-[10px] text-slate-500 text-center py-2">कोई चैट या सपोर्ट मैसेज नहीं है।</p>`;
-                } else {
-                    let chatHtml = '';
-                    phoneKeys.forEach(phone => {
-                        let msgs = threads[phone];
-                        let lastMsg = msgs[msgs.length - 1];
-                        let uObj = db.users.find(u => u.phone === phone);
-                        let uName = uObj ? uObj.name : phone;
-                        chatHtml += `<div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex justify-between items-center"><div><p class="text-[11px] font-bold text-amber-400">${uName} (${phone})</p><p class="text-[10px] text-slate-300 truncate max-w-[200px]">${lastMsg.sender}: ${lastMsg.text}</p></div><button onclick="adminSendReply('${phone}')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-2.5 py-1.5 rounded-lg text-[9px] font-bold">रिप्लाई दें</button></div>`;
-                    });
-                    inboxDiv.innerHTML = chatHtml;
-                }
+                let phoneKeys = Object.keys(db.chatThreads || {});
+                inboxDiv.innerHTML = phoneKeys.length === 0 ? `<p class="text-[10px] text-slate-500 text-center py-2">कोई चैट नहीं</p>` : phoneKeys.map(phone => {
+                    let msgs = db.chatThreads[phone]; let last = msgs[msgs.length - 1]; let u = db.users.find(x => x.phone === phone);
+                    return `<div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex justify-between items-center"><div><p class="text-[11px] font-bold text-amber-400">${u ? u.name : phone}</p><p class="text-[10px] text-slate-300 truncate max-w-[200px]">${last.text}</p></div><button onclick="adminSendReply('${phone}')" class="bg-indigo-600 text-white px-2.5 py-1.5 rounded-lg text-[9px] font-bold">रिप्लाई</button></div>`;
+                }).join('');
             }
 
             let wBody = document.getElementById('adminWithdrawTable');
             if(wBody) {
-                if(!db.withdrawals || db.withdrawals.length === 0) wBody.innerHTML = `<tr><td class="py-2 text-center text-slate-500 text-[10px]">कोई रिक्वेस्ट नहीं</td></tr>`;
-                else {
-                    let wHtml = '';
-                    db.withdrawals.forEach((w, i) => { 
-                        let ssBtn = w.screenshot ? `<button onclick="viewUserSS('${w.screenshot}')" class="bg-indigo-600 text-white px-2 py-1 rounded text-[9px] mr-1">SS देखें</button>` : '';
-                        wHtml += `<tr class="border-b border-rose-900/30"><td class="py-1"><b>${w.name}</b> <span class="text-[8px] text-slate-400">(${w.phone})</span><br><span class="text-[9px] text-rose-400">UPI: <span id="upiText_${i}">${w.upi}</span></span> <button onclick="copyAdminUpi('${w.upi}')" class="bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 px-1.5 py-0.5 rounded text-[8px] font-bold ml-1"><i class="fas fa-copy"></i> Copy</button><br><span class="text-[9px] font-bold text-white">₹${w.amount}</span></td><td class="text-right align-middle">${ssBtn}<button onclick="approveWithdrawal(${i})" class="bg-emerald-600 text-white px-2 py-1 rounded text-[9px]">Paid</button></td></tr>`; 
-                    });
-                    wBody.innerHTML = wHtml;
-                }
+                wBody.innerHTML = (!db.withdrawals || db.withdrawals.length === 0) ? `<tr><td class="py-2 text-center text-slate-500 text-[10px]">कोई रिक्वेस्ट नहीं</td></tr>` : db.withdrawals.map((w, i) => `<tr class="border-b border-rose-900/30"><td class="py-1"><b>${w.name}</b> (${w.phone})<br><span class="text-rose-400 text-[9px]">UPI: ${w.upi}</span> <button onclick="copyAdminUpi('${w.upi}')" class="bg-slate-800 text-amber-400 px-1 rounded text-[8px]">Copy</button><br><b>₹${w.amount}</b></td><td class="text-right align-middle"><button onclick="approveWithdrawal(${i})" class="bg-emerald-600 text-white px-2 py-1 rounded text-[9px]">Paid</button></td></tr>`).join('');
             }
-            renderAdminQuizViewer(); renderAdminCouponInv();
-        }
 
-        function renderAdminQuizViewer() {
-            let qBody = document.getElementById('adminQuizList'); if(!qBody) return;
-            if(!db.quiz || db.quiz.length === 0) { qBody.innerHTML = '<p class="text-xs text-slate-500">अभी कोई सवाल नहीं है।</p>'; return; }
-            let html = ''; db.quiz.forEach((q, i) => { html += `<div class="bg-slate-900 p-2 rounded-xl border border-cyan-500/20 mb-2"><p class="text-[10px] text-white font-bold mb-1">Q${i+1}: ${q.question}</p><p class="text-[9px] text-emerald-400"><i class="fas fa-check-circle mr-1"></i> Ans: ${q.options[q.correct]}</p></div>`; });
-            qBody.innerHTML = html;
-        }
+            // Quiz Admin Viewer & Manager
+            let qBody = document.getElementById('adminQuizList');
+            if(qBody) {
+                qBody.innerHTML = (!db.quiz || db.quiz.length === 0) ? '<p class="text-xs text-slate-500">सवाल उपलब्ध नहीं</p>' : db.quiz.map((q, i) => `<div class="bg-slate-900 p-2 rounded-xl border border-cyan-500/20 mb-2 flex justify-between items-center"><div class="text-[10px] text-white"><b>Q${i+1}:</b> ${q.question}<br><span class="text-emerald-400 text-[9px]">Ans: ${q.options[q.correct]}</span></div><button onclick="deleteQuiz(${i})" class="text-red-400 text-xs px-2"><i class="fas fa-trash"></i></button></div>`).join('');
+            }
 
-        function renderAdminCouponInv() {
             let cBody = document.getElementById('adminCouponInventory');
             if(cBody) {
-                if(!db.coupons || Object.keys(db.coupons).length === 0) { cBody.innerHTML = `<p class="text-xs text-slate-500 text-center py-2">इन्वेंटरी में कोई कूपन नहीं है। नया बनाएं!</p>`; } 
-                else {
-                    let cHtml = '';
-                    Object.keys(db.coupons).forEach(code => {
-                        let c = db.coupons[code];
-                        let lockBtn = c.locked ? `<button onclick="toggleCouponLock('${code}')" class="bg-red-500/20 text-red-400 border border-red-500 px-2.5 py-1 rounded-lg text-[9px] font-bold"><i class="fas fa-lock mr-1"></i> Locked (सुरक्षित)</button>` : `<button onclick="toggleCouponLock('${code}')" class="bg-emerald-500/20 text-emerald-400 border border-emerald-500 px-2.5 py-1 rounded-lg text-[9px] font-bold"><i class="fas fa-unlock mr-1"></i> Unlocked (वितरण योग्य)</button>`;
-                        let valDisplay = c.type === 'money' ? `₹${c.val} Cash` : `${c.val} (Mega Prize)`;
-                        cHtml += `<div class="bg-slate-900 p-3 rounded-xl border border-slate-700 space-y-2"><div class="flex justify-between items-center"><div><span class="text-xs font-bold text-amber-400 tracking-wider">${code}</span><br><span class="text-[9px] text-slate-400">${valDisplay}</span></div>${lockBtn}</div><div class="flex space-x-2 pt-1 border-t border-slate-800"><input type="text" id="sendPhone_${code}" placeholder="यूजर का मोबाइल नंबर" class="w-[50%] bg-slate-950 border border-slate-800 rounded-lg p-2 text-[10px] text-white focus:outline-none"><button onclick="sendCouponManual('${code}')" class="w-[25%] bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-[10px] font-bold transition"><i class="fas fa-paper-plane mr-1"></i> भेजें</button><button onclick="sendCouponAuto('${code}')" class="w-[25%] bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 rounded-lg text-[10px] font-black transition"><i class="fas fa-dice mr-1"></i> ऑटो ड्रा</button></div></div>`;
-                    });
-                    cBody.innerHTML = cHtml;
-                }
+                cBody.innerHTML = (!db.coupons || Object.keys(db.coupons).length === 0) ? `<p class="text-xs text-slate-500 text-center py-2">कोई कूपन नहीं</p>` : Object.keys(db.coupons).map(code => {
+                    let c = db.coupons[code];
+                    return `<div class="bg-slate-900 p-3 rounded-xl border border-slate-700 space-y-2"><div class="flex justify-between items-center"><div><span class="text-xs font-bold text-amber-400">${code}</span><br><span class="text-[9px] text-slate-400">${c.val}</span></div><button onclick="toggleCouponLock('${code}')" class="${c.locked ? 'bg-red-500/20 text-red-400 border-red-500' : 'bg-emerald-500/20 text-emerald-400 border-emerald-500'} border px-2 py-1 rounded-lg text-[9px] font-bold">${c.locked ? 'Locked' : 'Unlocked'}</button></div><div class="flex space-x-2 pt-1 border-t border-slate-800"><input type="text" id="sendPhone_${code}" placeholder="मोबाइल नंबर" class="w-[60%] bg-slate-950 border border-slate-800 rounded-lg p-1.5 text-[10px] text-white"><button onclick="sendCouponManual('${code}')" class="w-[40%] bg-indigo-600 text-white rounded-lg text-[10px] font-bold">भेजें</button></div></div>`;
+                }).join('');
             }
         }
 
-        function viewUserSS(base64str) { if(!base64str) return; document.getElementById('screenshotContainer').innerHTML = `<img src="${base64str}" class="max-h-[250px] rounded-xl object-contain mx-auto">`; document.getElementById('screenshotModal').classList.remove('hidden'); }
-        function closeScreenshotModal() { document.getElementById('screenshotModal').classList.add('hidden'); }
+        function deleteQuiz(idx) {
+            if(confirm("क्या आप इस सवाल को डिलीट करना चाहते हैं?")) {
+                db.quiz.splice(idx, 1);
+                saveDB();
+                renderAdminTables();
+            }
+        }
 
         function openTopUpScreen() { hideAllScreens(); document.getElementById('topUpScreen').classList.remove('hidden'); setTopUpAmount(50); }
-        function setTopUpAmount(amt) { document.getElementById('customTopUpAmt').value = amt; let el = document.getElementById('displayTopUpText'); if(el) el.innerText = `₹${document.getElementById('customTopUpAmt').value || 0}`; }
-        function submitTopUpRequest() { let amt = parseFloat(document.getElementById('customTopUpAmt').value); if(!amt || amt <= 0) return; let fileInput = document.getElementById('topUpScreenshot'); if(fileInput.files.length === 0) { alert('स्क्रीनशॉट अपलोड करें!'); return; } let reader = new FileReader(); reader.readAsDataURL(fileInput.files[0]); reader.onload = function(e) { let img = new Image(); img.src = e.target.result; img.onload = function() { let canvas = document.createElement('canvas'); let ctx = canvas.getContext('2d'); canvas.width = 250; canvas.height = (img.height * 250) / img.width; ctx.drawImage(img, 0, 0, canvas.width, canvas.height); let idx = db.users.findIndex(x => x.phone === currentUser.phone); db.users[idx].pendingAmount = amt; db.users[idx].screenshot = canvas.toDataURL('image/jpeg', 0.5); db.users[idx].pendingSince = Date.now(); saveDB(); currentUser = db.users[idx]; checkUserDashboardFlow(); alert('टॉप-अप रिक्वेस्ट भेज दी गई है!'); } } }
-        function openProfileScreen() { hideAllScreens(); document.getElementById('profileScreen').classList.remove('hidden'); document.getElementById('editProfileName').value = currentUser.name || ''; document.getElementById('editProfileUpi').value = currentUser.savedUpi || ''; }
-        function saveProfileData() { let newName = document.getElementById('editProfileName').value.trim(); let newUpi = document.getElementById('editProfileUpi').value.trim(); let changed = false; let idx = db.users.findIndex(x => x.phone === currentUser.phone); if(idx !== -1) { if(newName) { db.users[idx].name = newName; changed = true; } db.users[idx].savedUpi = newUpi; changed = true; if(changed) { saveDB(); currentUser = db.users[idx]; checkUserDashboardFlow(); alert('प्रोफाइल और UPI सफलतापूर्वक सेव हो गया!'); } } }
-        function openReferralModal() { document.getElementById('referralModal').classList.remove('hidden'); document.getElementById('myReferralCodeDisplay').innerText = currentUser.myCode || 'ERROR'; let refCount = currentUser.myReferrals ? currentUser.myReferrals.length : 0; document.getElementById('refTotalCount').innerText = refCount; document.getElementById('refFreeCount').innerText = currentUser.freeEntries || 0; let banner = document.getElementById('refSuccessBanner'); if(currentUser.freeEntries > 0) { banner.classList.remove('hidden'); document.getElementById('refSuccessCountText').innerText = currentUser.freeEntries; } else { banner.classList.add('hidden'); } let listDiv = document.getElementById('referralHistoryList'); if(refCount === 0) { listDiv.innerHTML = `<p class="text-[10px] text-slate-500 text-center py-2">अभी तक आपने किसी दोस्त को नहीं जोड़ा है।</p>`; } else { let html = ''; currentUser.myReferrals.forEach(r => { let statusHtml = r.played ? `<span class="text-[9px] text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/30"><i class="fas fa-check"></i> Played</span>` : `<span class="text-[9px] text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/30"><i class="fas fa-hourglass-half"></i> Pending</span>`; html += `<div class="flex justify-between items-center bg-slate-900 p-2 rounded-lg border border-slate-800"><div class="text-[10px] text-white font-medium"><i class="fas fa-user text-slate-500 mr-1"></i> ${r.name}</div>${statusHtml}</div>`; }); listDiv.innerHTML = html; } }
+        function setTopUpAmount(amt) { document.getElementById('customTopUpAmt').value = amt; document.getElementById('displayTopUpText').innerText = `₹${amt}`; }
+        function submitTopUpRequest() {
+            let amt = parseFloat(document.getElementById('customTopUpAmt').value);
+            let fileInput = document.getElementById('topUpScreenshot');
+            if(!amt || amt <= 0 || fileInput.files.length === 0) { alert('अमाउंट और स्क्रीनशॉट दें!'); return; }
+            let reader = new FileReader();
+            reader.readAsDataURL(fileInput.files[0]);
+            reader.onload = function(e) {
+                let idx = db.users.findIndex(x => x.phone === currentUser.phone);
+                db.users[idx].pendingAmount = amt; db.users[idx].screenshot = e.target.result; db.users[idx].pendingSince = Date.now();
+                saveDB(); currentUser = db.users[idx]; checkUserDashboardFlow(); alert('टॉप-अप रिक्वेस्ट भेज दी गई है!');
+            }
+        }
+        function openProfileScreen() { hideAllScreens(); document.getElementById('profileScreen').classList.remove('hidden'); document.getElementById('editProfileName').value = currentUser.name; document.getElementById('editProfileUpi').value = currentUser.savedUpi || ''; }
+        function saveProfileData() {
+            let idx = db.users.findIndex(x => x.phone === currentUser.phone);
+            db.users[idx].name = document.getElementById('editProfileName').value.trim();
+            db.users[idx].savedUpi = document.getElementById('editProfileUpi').value.trim();
+            saveDB(); currentUser = db.users[idx]; checkUserDashboardFlow(); alert('प्रोफाइल सेव हो गई!');
+        }
+        function openReferralModal() { document.getElementById('referralModal').classList.remove('hidden'); document.getElementById('myReferralCodeDisplay').innerText = currentUser.myCode; document.getElementById('refTotalCount').innerText = currentUser.myReferrals.length; document.getElementById('refFreeCount').innerText = currentUser.freeEntries; }
         function closeReferralModal() { document.getElementById('referralModal').classList.add('hidden'); }
-        function copyRefCode() { navigator.clipboard.writeText(currentUser.myCode).then(() => { alert('रेफरल कोड कॉपी हो गया! अब इसे दोस्तों को WhatsApp पर भेजें।'); }); }
-        function openMyCoupons() { document.getElementById('myCouponsModal').classList.remove('hidden'); let listDiv = document.getElementById('myCouponsList'); if(!currentUser.myCoupons || currentUser.myCoupons.length === 0) { listDiv.innerHTML = `<div class="bg-slate-900 p-3 rounded-lg text-center border border-slate-800"><p class="text-[10px] text-slate-500">अभी आपको कोई कूपन नहीं मिला है।</p></div>`; } else { let html = ''; currentUser.myCoupons.forEach((c) => { let statusColor = c.status === 'Used' ? 'text-slate-500 line-through' : 'text-emerald-400 font-bold'; let clickAct = c.status !== 'Used' ? `onclick="fillCoupon('${c.code}')"` : ''; let pointerCls = c.status !== 'Used' ? 'cursor-pointer hover:bg-slate-800' : 'opacity-60'; html += `<div ${clickAct} class="bg-slate-900 p-2.5 rounded-lg flex justify-between items-center border border-slate-800 ${pointerCls} transition"><div><p class="text-xs text-white gaming-font tracking-widest ${statusColor}">${c.code}</p><p class="text-[8px] text-slate-400">Date: ${c.date}</p></div><div class="text-[10px]">${c.status === 'Used' ? '<span class="text-red-400">Used</span>' : '<span class="text-indigo-400"><i class="fas fa-hand-pointer"></i> Use</span>'}</div></div>`; }); listDiv.innerHTML = html; } }
-        function fillCoupon(code) { document.getElementById('couponInput').value = code; closeMyCoupons(); }
+        function copyRefCode() { navigator.clipboard.writeText(currentUser.myCode); alert('रेफरल कोड कॉपी हो गया!'); }
+        function openMyCoupons() { document.getElementById('myCouponsModal').classList.remove('hidden'); }
         function closeMyCoupons() { document.getElementById('myCouponsModal').classList.add('hidden'); }
         function openMegaRewardsList() { document.getElementById('megaRewardsModal').classList.remove('hidden'); }
         function closeMegaRewardsList() { document.getElementById('megaRewardsModal').classList.add('hidden'); }
-        function applyCoupon() { 
-            let code = document.getElementById('couponInput').value.trim().toUpperCase(); 
-            if(!code) return; 
-            if(db.coupons && db.coupons[code]) { 
-                let cp = db.coupons[code]; 
-                if(cp.locked) { alert('यह कूपन अभी एडमिन द्वारा LOCK किया गया है, इसलिए इसे रिडीम नहीं किया जा सकता!'); return; } 
-                let idx = db.users.findIndex(x => x.phone === currentUser.phone); 
-                if(cp.type === 'empty') { alert('Better Luck Next Time!'); } 
-                else if(cp.type === 'mega') { showMegaWinPopup(cp.val, cp.img, cp.link); } 
-                else { db.users[idx].wallet = (db.users[idx].wallet || 0) + parseFloat(cp.val); alert(`कूपन सफल! ₹${cp.val} वॉलेट में जुड़ गए।`); } 
-                if(db.users[idx].myCoupons) { let myC = db.users[idx].myCoupons.find(c => c.code === code); if(myC) myC.status = 'Used'; } 
-                delete db.coupons[code]; currentUser = db.users[idx]; saveDB(); checkUserDashboardFlow(); document.getElementById('couponInput').value = ''; 
-            } else { alert('अमान्य कूपन!'); } 
+        function applyCoupon() {
+            let code = document.getElementById('couponInput').value.trim().toUpperCase();
+            if(!code || !db.coupons[code]) { alert('अमान्य कूपन!'); return; }
+            let cp = db.coupons[code];
+            if(cp.locked) { alert('यह कूपन अभी लॉक है!'); return; }
+            let idx = db.users.findIndex(x => x.phone === currentUser.phone);
+            if(cp.type === 'money') { db.users[idx].wallet += cp.val; alert(`₹${cp.val} आपके वॉलेट में जुड़ गए!`); }
+            else if(cp.type === 'mega') { alert(`बधाई हो! ${cp.val} जीता है!`); }
+            delete db.coupons[code]; currentUser = db.users[idx]; saveDB(); checkUserDashboardFlow();
         }
-        function showMegaWinPopup(reward, imgStr, linkStr) { hideAllScreens(); let resScreen = document.getElementById('resultScreen'); resScreen.classList.remove('hidden'); let resIcon = document.getElementById('resIcon'); if(imgStr) { resIcon.innerHTML = `<img src="${imgStr}" class="w-full h-full object-cover rounded-full">`; resIcon.className = "w-28 h-28 rounded-full flex items-center justify-center mx-auto border-4 border-amber-400 neon-btn animate-bounce shadow-xl"; } else { resIcon.innerHTML = '<i class="fas fa-gift text-white"></i>'; resIcon.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto text-5xl bg-gradient-to-r from-amber-500 to-orange-600 border-4 border-amber-400 neon-btn animate-bounce"; } document.getElementById('resTitle').innerText = `BUMPER JACKPOT!`; document.getElementById('resTitle').className = "gaming-font text-3xl font-black text-amber-400"; let descHtml = `बधाई हो! आपने <b>${reward}</b> जीता है!<br>हमारी टीम डिलीवरी के लिए संपर्क करेगी।`; if(linkStr) { descHtml += `<br><a href="${linkStr}" target="_blank" class="inline-block mt-3 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-xs font-bold animate-pulse-fast border border-indigo-400 shadow-lg"><i class="fas fa-external-link-alt mr-1"></i> इनाम देखें</a>`; } document.getElementById('resDesc').innerHTML = descHtml; }
     </script>
 </body>
 </html>
